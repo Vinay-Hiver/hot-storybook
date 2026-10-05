@@ -1,0 +1,38 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as TagStories from './Tag.stories'
+
+<Meta of={TagStories} />
+
+# Chip / Tag
+
+A small label that marks something with a category or status. "Chip" and "Tag" are the same component and the two names are used equally: Figma calls it Chip, and in code you can import it as either `Chip` or `Tag`. It does not do anything when clicked, unless it is removable.
+
+## Basic
+
+<Canvas of={TagStories.Basic} />
+
+## With icons
+
+Icons are 14px and can sit before or after the text.
+
+<Canvas of={TagStories.WithIcons} />
+
+## Colours
+
+The `color` option has seven pastel colours besides the default grey: yellow, light blue, green, purple, orange, red and violet. Each takes its background, text and close-icon colour from that colour's tokens. A coloured chip keeps the same 22px size as the grey one.
+
+<Canvas of={TagStories.Colours} />
+
+## Removable
+
+Pass `onRemove` to add a border and a close button. Use it for things people add themselves, such as tags on a conversation or recipients in a field. Give the button a useful `removeLabel`.
+
+<Canvas of={TagStories.Removable} />
+
+## Playground
+
+<Canvas of={TagStories.Playground} />
+
+<Controls of={TagStories.Playground} />
+
+See every kind of tag together on the **All Variants** page.

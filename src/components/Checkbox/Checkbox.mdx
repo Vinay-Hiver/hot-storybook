@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as CheckboxStories from './Checkbox.stories'
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+Lets people turn one option on or off, or pick several options from a list. Use **Radio** when only one option can be chosen, and **Switch** for settings that take effect straight away.
+
+## Selection
+
+A checkbox can be unchecked, checked or indeterminate. Indeterminate shows that only some of a group's options are selected. Without a label, give the box an `aria-label`.
+
+<Canvas of={CheckboxStories.Selection} />
+
+## States
+
+Use `invalid` with a message elsewhere that says what to fix, and `required` to add the red asterisk.
+
+<Canvas of={CheckboxStories.States} />
+
+## Playground
+
+<Canvas of={CheckboxStories.Playground} />
+
+<Controls of={CheckboxStories.Playground} />
+
+See every selection in every state together on the **All Variants** page.

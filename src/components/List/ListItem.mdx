@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as ListItemStories from './ListItem.stories'
+
+<Meta of={ListItemStories} />
+
+# List item
+
+One row in a list or menu. It is the building block of **Dropdown**, and is called "Lists" in the Figma file. A row can have a left element, a right element (a blue check, or a chevron when there is a description), and a line of smaller description text.
+
+## Left elements
+
+A row can start with an avatar (with an online or offline dot), an icon, a radio or a checkbox. The radio and checkbox here are only visuals, because the whole row is the button.
+
+<Canvas of={ListItemStories.LeftElements} />
+
+## With description
+
+<Canvas of={ListItemStories.WithDescription} />
+
+## States
+
+Hover is grey and pressed is pale blue.
+
+<Canvas of={ListItemStories.States} />
+
+## Playground
+
+<Canvas of={ListItemStories.Playground} />
+
+<Controls of={ListItemStories.Playground} />
+
+See every combination together on the **All Variants** page.

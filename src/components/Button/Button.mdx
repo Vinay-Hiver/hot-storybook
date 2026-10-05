@@ -1,0 +1,39 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as ButtonStories from './Button.stories'
+
+<Meta of={ButtonStories} />
+
+# Button
+
+The main action control. Use one **Primary** button per view for the main action, and Secondary, Filled or Ghost for the rest.
+
+## Types
+
+<Canvas of={ButtonStories.Types} />
+
+- **Primary**: the main action on a page.
+- **Secondary**: outlined, for supporting actions.
+- **Filled**: soft grey fill, for low-emphasis actions.
+- **Ghost**: no fill until hovered, for toolbars and dense areas.
+- **Error**: destructive actions such as delete.
+- **Neutral**: dark, for strong actions that aren't the brand action.
+
+## Sizes
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Icons
+
+Icons are 16px and sit before or after the label. An icon-only button is square and must have an `aria-label`.
+
+<Canvas of={ButtonStories.WithIcons} />
+
+## States
+
+Hover, pressed and disabled are built in. See every type, size and state together on the **All Variants** page.
+
+## Playground
+
+<Canvas of={ButtonStories.Playground} />
+
+<Controls of={ButtonStories.Playground} />

@@ -1,0 +1,22 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as BadgeStories from './Badge.stories'
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+A small pill that shows a count, such as unread messages. It is used inside **Tabs** to show how many items a tab holds.
+
+## Types
+
+Default is grey. Primary is blue, for a count that needs attention. Important is red, for a count that needs action now.
+
+<Canvas of={BadgeStories.Types} />
+
+## Playground
+
+<Canvas of={BadgeStories.Playground} />
+
+<Controls of={BadgeStories.Playground} />
+
+See short and long content together on the **All Variants** page.
