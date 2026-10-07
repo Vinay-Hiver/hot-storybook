@@ -1,21 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MainNav } from './MainNav'
-import type { MainNavItem } from './MainNav'
-
-const items: MainNavItem[] = [
-  { id: 'conversations', label: 'Conversations', icon: 'inbox' },
-  { id: 'notifications', label: 'Notifications', icon: 'notification' },
-  { id: 'templates', label: 'Templates', icon: 'movetofolder' },
-  { id: 'customers', label: 'Customers', icon: 'contact' },
-  { id: 'analytics', label: 'Analytics', icon: 'analytics' },
-  { id: 'admin', label: 'Admin panel', icon: 'setting' },
-]
-const footerItems: MainNavItem[] = [
-  { id: 'help', label: 'Help Center', icon: 'helpchat' },
-  { id: 'chat', label: 'Instant Chat Support (24x7)', icon: 'chatsupport' },
-]
-const ids = items.map((i) => i.id)
+import { navSampleFooterItems as footerItems, navSampleIds as ids, navSampleItems as items } from './sampleData'
 
 const meta = {
   title: 'Patterns/Main nav',

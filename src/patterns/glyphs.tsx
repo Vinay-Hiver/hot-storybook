@@ -30,6 +30,25 @@ export const patternGlyphs = {
     box: '0 0 16 16',
     paths: ['M7.99984 2.41406V13.5856M2.41406 7.99984H13.5856'],
   },
+  // A person with a small question mark. The two parts sit at different spots inside the 16px box.
+  unassigned: {
+    box: '0 0 16 16',
+    paths: [
+      { d: 'M7.88816 8.98333H4.31672C3.38635 8.98333 2.92115 8.98333 2.54263 9.09813C1.69035 9.35667 1.02341 10.0237 0.764879 10.8759C0.650052 11.2545 0.650052 11.7196 0.650052 12.65M8.98338 3.65C8.98338 5.30685 7.64025 6.65 5.98339 6.65C4.32653 6.65 2.98339 5.30685 2.98339 3.65C2.98339 1.99315 4.32653 0.65 5.98339 0.65C7.64025 0.65 8.98338 1.99315 8.98338 3.65Z', at: [0.683, 1.35] },
+      { d: 'M0.650177 1.65146C0.767644 1.3176 0.999511 1.036 1.30464 0.856664C1.60984 0.677264 1.96864 0.611729 2.31751 0.671596C2.66638 0.731396 2.98284 0.912796 3.21078 1.1836C3.43878 1.4544 3.56351 1.79713 3.56298 2.15113C3.56298 3.1504 2.06411 3.65 2.06411 3.65M2.08351 5.65H2.09018', at: [10.779, 7.35] },
+    ],
+  },
+  // A robot head.
+  bot: {
+    box: '0 0 16 16',
+    paths: [
+      { d: 'M11.3209 0.65H1.596V4.17406C1.596 5.77464 2.89352 7.07216 4.49409 7.07216H8.42284C10.0234 7.07216 11.3209 5.77464 11.3209 4.17407V0.65Z', at: [1.54, 1.35] },
+      { d: 'M12.2643 2.17065V4.31333', at: [1.54, 1.35] },
+      { d: 'M0.65 2.17065V4.31333', at: [1.54, 1.35] },
+      { d: 'M1.26069 12.4907V11.4719C1.26069 9.8713 2.55822 8.57378 4.15879 8.57378H8.70157C10.3021 8.57378 11.5997 9.8713 11.5997 11.4719V12.6501', at: [1.54, 1.35] },
+    ],
+    dots: [[5.80491, 4.69733], [10.20633, 4.69733]],
+  },
 } as const
 
 export type PatternGlyphName = keyof typeof patternGlyphs
@@ -41,9 +60,13 @@ export function isPatternGlyph(name: string): name is PatternGlyphName {
 /** Draws one of the glyphs at 16px, in the current text colour. */
 export function PatternGlyph({ name }: { name: PatternGlyphName }): ReactNode {
   const g = patternGlyphs[name]
+  const dots: readonly (readonly [number, number])[] = 'dots' in g ? g.dots : []
   return (
     <svg width={16} height={16} viewBox={g.box} fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {g.paths.map((d) => <path key={d.slice(0, 24)} d={d} />)}
+      {(g.paths as readonly (string | { d: string; at: readonly [number, number] })[]).map((p) =>
+        typeof p === 'string' ? <path key={p.slice(0, 24)} d={p} /> : <path key={p.d.slice(0, 24)} d={p.d} transform={`translate(${p.at[0]} ${p.at[1]})`} />,
+      )}
+      {dots.map(([cx, cy]) => <circle key={cx} cx={cx} cy={cy} r={0.6} fill="currentColor" strokeWidth={0.732} />)}
     </svg>
   )
 }

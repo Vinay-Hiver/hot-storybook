@@ -25,11 +25,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   border: 0;
   background: transparent;
   color: var(--slateTextBody);
   cursor: pointer;
 }
+.hot-conv-sidebar__search svg,
+.hot-conv-sidebar__create svg,
+.hot-conv-sidebar__menu svg { flex: none; }
 .hot-conv-sidebar__search { width: 24px; height: 24px; padding: 4px; border-radius: 6px; }
 .hot-conv-sidebar__search:hover { background: var(--slateSurfaceSubtle100Hover); }
 
@@ -73,3 +77,43 @@
 .hot-conv-sidebar__item:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle100Hover); }
 .hot-conv-sidebar__item[aria-current='page'] { background: var(--primarySurfaceSubtle); color: var(--primarySurfaceDefault); }
 .hot-conv-sidebar__item[aria-current='page'] .hot-conv-sidebar__count { color: var(--primarySurfaceDefault); }
+
+/* Inbox rows: the total on the right, an arrow in its place on hover */
+.hot-conv-sidebar__slot { position: relative; display: inline-flex; align-items: center; justify-content: flex-end; flex: none; min-width: 16px; min-height: 18px; }
+.hot-conv-sidebar__chevron { position: absolute; right: 6px; display: inline-flex; opacity: 0; transition: transform 250ms ease-in-out; }
+.hot-conv-sidebar__chevron svg { flex: none; }
+.hot-conv-sidebar__inbox:is(:hover, [data-force-state='hover']) .hot-conv-sidebar__chevron,
+.hot-conv-sidebar__inbox:focus-visible .hot-conv-sidebar__chevron { opacity: 1; }
+.hot-conv-sidebar__inbox:is(:hover, [data-force-state='hover']) .hot-conv-sidebar__slot .hot-conv-sidebar__count,
+.hot-conv-sidebar__inbox:focus-visible .hot-conv-sidebar__slot .hot-conv-sidebar__count { visibility: hidden; }
+.hot-conv-sidebar__inbox[data-expanded='true'] .hot-conv-sidebar__chevron { transform: rotate(90deg); }
+
+/* Views: indented under the inbox, with a thin line down the left */
+/* Opening and closing slides over 250ms, ease in and out. The views stay in the page but are hidden (and skipped by Tab) while closed. */
+.hot-conv-sidebar__views-wrap { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 250ms ease-in-out, visibility 0s linear 250ms; }
+.hot-conv-sidebar__views-wrap[data-open='true'] { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows 250ms ease-in-out, visibility 0s; }
+.hot-conv-sidebar__views-wrap > .hot-conv-sidebar__views { min-height: 0; overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .hot-conv-sidebar__views-wrap, .hot-conv-sidebar__chevron { transition: none; } }
+.hot-conv-sidebar__views { position: relative; list-style: none; margin: 0; padding: 0 0 0 34px; }
+.hot-conv-sidebar__views::before { content: ''; position: absolute; left: 17px; top: 0; height: calc(100% - 14px); width: 1px; background: var(--slateBorderLight); }
+.hot-conv-sidebar__view {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 34px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--slateTextTitle);
+  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
+  text-align: left;
+  cursor: pointer;
+}
+.hot-conv-sidebar__view svg { flex: none; }
+.hot-conv-sidebar__view .hot-conv-sidebar__label { flex: 1; min-width: 0; }
+.hot-conv-sidebar__view-count { flex: none; font: var(--fontWeightRegular) 14px/20px var(--fontFamily); text-align: right; }
+.hot-conv-sidebar__view:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle100Hover); }
+.hot-conv-sidebar__view[aria-current='page'] { background: var(--primarySurfaceSubtle); color: var(--primarySurfaceDefault); font-weight: var(--fontWeightMedium); }

@@ -1,8 +1,18 @@
+import { useState } from 'react'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { isPatternGlyph, PatternGlyph } from '../glyphs'
 import type { PatternGlyphName } from '../glyphs'
 import './ConversationsSidebar.css'
+
+export type ConversationsSidebarView = {
+  /** Unique id, also the value passed to `onChange` when the view is chosen. */
+  id: string
+  label: string
+  icon: IconName | PatternGlyphName
+  /** How many conversations are in the view. Leave out for a view without a count, such as Tags or Closed. */
+  count?: number
+}
 
 export type ConversationsSidebarItem = {
   /** Unique id, also the value passed to `onChange`. */
@@ -10,8 +20,12 @@ export type ConversationsSidebarItem = {
   label: string
   /** An icon name from the HOT icon set, or one of the pattern glyphs (`inbox`, `voice`, `spam`). */
   icon: IconName | PatternGlyphName
-  /** The unread count shown on the right, for example `99+`. Leave out for no count. */
+  /** The unread count shown on the right, for example `99+`. Leave out for no count. For an inbox with `views`, the total of the views is shown instead. */
   count?: string
+  /** Makes this row an inbox that opens to show its views. */
+  views?: ConversationsSidebarView[]
+  /** An inbox starts open when this is set. */
+  defaultExpanded?: boolean
 }
 
 export type ConversationsSidebarSection = {
@@ -24,7 +38,7 @@ export type ConversationsSidebarProps = {
   /** The heading at the top. */
   title?: string
   sections: ConversationsSidebarSection[]
-  /** The `id` of the selected item. */
+  /** The `id` of the selected item or view. */
   value?: string
   onChange?: (id: string) => void
   /** Called when the search button is pressed. */
@@ -33,7 +47,9 @@ export type ConversationsSidebarProps = {
   onCreate?: () => void
   /** Called when the arrow next to the plus is pressed, for example to open a menu of things to create. */
   onCreateMenu?: () => void
-  /** Storybook only: pins the hover look on one item, by `id`. */
+  /** Called when an inbox opens or closes. */
+  onExpandedChange?: (id: string, expanded: boolean) => void
+  /** Storybook only: pins the hover look on one item or view, by `id`. */
   forceHoverId?: string
   className?: string
 }
@@ -42,7 +58,16 @@ function ItemIcon({ icon }: { icon: IconName | PatternGlyphName }) {
   return isPatternGlyph(icon) ? <PatternGlyph name={icon} /> : <Icon name={icon} size={16} />
 }
 
-export function ConversationsSidebar({ title = 'Conversations', sections, value, onChange, onSearch, onCreate, onCreateMenu, forceHoverId, className }: ConversationsSidebarProps) {
+export function ConversationsSidebar({ title = 'Conversations', sections, value, onChange, onSearch, onCreate, onCreateMenu, onExpandedChange, forceHoverId, className }: ConversationsSidebarProps) {
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set(sections.flatMap((sec) => sec.items.filter((i) => i.defaultExpanded).map((i) => i.id))))
+  const toggle = (id: string) => {
+    const next = new Set(expanded)
+    const open = !next.has(id)
+    if (open) next.add(id)
+    else next.delete(id)
+    setExpanded(next)
+    onExpandedChange?.(id, open)
+  }
   return (
     <nav className={['hot-conv-sidebar', className].filter(Boolean).join(' ')} aria-label={title}>
       <div className="hot-conv-sidebar__header">
@@ -66,23 +91,74 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
           <div key={section.title ?? si} className="hot-conv-sidebar__section">
             {section.title && <div className="hot-conv-sidebar__section-title">{section.title}</div>}
             <ul className="hot-conv-sidebar__list">
-              {section.items.map((item) => (
-                <li key={item.id}>
-                  <button
-                    type="button"
-                    className={`hot-conv-sidebar__item${section.title ? ' hot-conv-sidebar__item--grouped' : ''}`}
-                    aria-current={item.id === value ? 'page' : undefined}
-                    data-force-state={item.id === forceHoverId && item.id !== value ? 'hover' : undefined}
-                    onClick={() => onChange?.(item.id)}
-                  >
-                    <span className="hot-conv-sidebar__item-main">
-                      <ItemIcon icon={item.icon} />
-                      <span className="hot-conv-sidebar__label">{item.label}</span>
-                    </span>
-                    {item.count && <span className="hot-conv-sidebar__count">{item.count}</span>}
-                  </button>
-                </li>
-              ))}
+              {section.items.map((item) => {
+                const hover = item.id === forceHoverId && item.id !== value ? 'hover' : undefined
+                if (!item.views) {
+                  return (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        className={`hot-conv-sidebar__item${section.title ? ' hot-conv-sidebar__item--grouped' : ''}`}
+                        aria-current={item.id === value ? 'page' : undefined}
+                        data-force-state={hover}
+                        onClick={() => onChange?.(item.id)}
+                      >
+                        <span className="hot-conv-sidebar__item-main">
+                          <ItemIcon icon={item.icon} />
+                          <span className="hot-conv-sidebar__label">{item.label}</span>
+                        </span>
+                        {item.count && <span className="hot-conv-sidebar__count">{item.count}</span>}
+                      </button>
+                    </li>
+                  )
+                }
+                const open = expanded.has(item.id)
+                const total = item.views.reduce((sum, v) => sum + (v.count ?? 0), 0)
+                const shown = item.count ?? (total > 0 ? (total > 99 ? '99+' : String(total)) : undefined)
+                const panelId = `${item.id}-views`
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      className="hot-conv-sidebar__item hot-conv-sidebar__item--grouped hot-conv-sidebar__inbox"
+                      aria-expanded={open}
+                      aria-controls={panelId}
+                      data-expanded={open}
+                      data-force-state={item.id === forceHoverId ? 'hover' : undefined}
+                      onClick={() => toggle(item.id)}
+                    >
+                      <span className="hot-conv-sidebar__item-main">
+                        <ItemIcon icon={item.icon} />
+                        <span className="hot-conv-sidebar__label">{item.label}</span>
+                      </span>
+                      {/* Closed: the total, and an arrow in its place on hover. Open: nothing, and a downward arrow on hover. */}
+                      <span className="hot-conv-sidebar__slot">
+                        {!open && shown && <span className="hot-conv-sidebar__count">{shown}</span>}
+                        <span className="hot-conv-sidebar__chevron" aria-hidden="true"><Icon name="chevronright" size={16} /></span>
+                      </span>
+                    </button>
+                    <div className="hot-conv-sidebar__views-wrap" data-open={open}>
+                      <ul className="hot-conv-sidebar__views" id={panelId}>
+                        {item.views.map((view) => (
+                          <li key={view.id}>
+                            <button
+                              type="button"
+                              className="hot-conv-sidebar__view"
+                              aria-current={view.id === value ? 'page' : undefined}
+                              data-force-state={view.id === forceHoverId && view.id !== value ? 'hover' : undefined}
+                              onClick={() => onChange?.(view.id)}
+                            >
+                              <ItemIcon icon={view.icon} />
+                              <span className="hot-conv-sidebar__label">{view.label}</span>
+                              {view.count !== undefined && <span className="hot-conv-sidebar__view-count">{view.count > 99 ? '99+' : view.count}</span>}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         ))}
