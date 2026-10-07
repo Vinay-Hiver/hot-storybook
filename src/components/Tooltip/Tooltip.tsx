@@ -1,4 +1,4 @@
-import { cloneElement, useId, useState } from 'react'
+import { cloneElement, useEffect, useId, useRef, useState } from 'react'
 import type { ReactElement, ReactNode } from 'react'
 import './Tooltip.css'
 
@@ -23,18 +23,32 @@ export type TooltipProps = {
   open?: boolean
 }
 
+/** How long the pointer or focus must stay before the tooltip appears, in milliseconds. */
+const SHOW_DELAY = 300
+
 export function Tooltip({ content, children, placement = 'top', open }: TooltipProps) {
   const id = useId()
   const [hovered, setHovered] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
   const visible = open ?? hovered
+
+  const show = () => {
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => setHovered(true), SHOW_DELAY)
+  }
+  const hide = () => {
+    clearTimeout(timer.current)
+    setHovered(false)
+  }
+  useEffect(() => () => clearTimeout(timer.current), [])
 
   return (
     <span
       className="hot-tooltip-wrap"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onFocus={show}
+      onBlur={hide}
     >
       {cloneElement(children, { 'aria-describedby': visible ? id : undefined })}
       {visible && (

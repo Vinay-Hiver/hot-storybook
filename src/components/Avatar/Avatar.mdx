@@ -1,11 +1,11 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as AvatarStories from './Avatar.stories'
 
 <Meta of={AvatarStories} />
 
 # Avatar
 
-A round badge with a person's first letter and a small dot that shows whether they are online. It is also used inside **List item** and **Dropdown**.
+A round badge with a person's first letter and a small dot that shows whether they are online.
 
 ## Sizes
 
@@ -15,14 +15,6 @@ Default is 24px and small is 18px.
 
 ## Status
 
-A green dot means online and a grey dot means offline. The dot is always shown.
+A green dot means online and a grey dot means offline.
 
 <Canvas of={AvatarStories.Statuses} />
-
-## Playground
-
-<Canvas of={AvatarStories.Playground} />
-
-<Controls of={AvatarStories.Playground} />
-
-See all four variants together on the **All Variants** page.

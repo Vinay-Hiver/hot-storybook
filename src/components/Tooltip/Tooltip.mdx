@@ -1,22 +1,14 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as TooltipStories from './Tooltip.stories'
 
 <Meta of={TooltipStories} />
 
 # Tooltip
 
-A short label that appears when someone hovers or focuses an element, to explain what it does. Keep it to a few words. Do not put anything the person must read in a tooltip, because it is not shown on touch screens.
+A short label that appears when someone hovers or focuses an element, to explain what it does. It appears after a short pause of 300ms, so it does not flash while the pointer is just passing by. Keep it to a few words.
 
 ## Placement
 
-The tooltip can appear on any side of the element. It shows on hover and on keyboard focus.
+It can appear above, below, left or right of the element.
 
 <Canvas of={TooltipStories.Placements} />
-
-## Playground
-
-<Canvas of={TooltipStories.Playground} />
-
-<Controls of={TooltipStories.Playground} />
-
-See all four sides together on the **All Variants** page.

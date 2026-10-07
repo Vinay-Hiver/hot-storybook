@@ -1,28 +1,20 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as TabsStories from './Tabs.stories'
 
 <Meta of={TabsStories} />
 
 # Tabs
 
-The row of tabs that switches between views of the same content. It is the row only. Show the matching content yourself, using the selected value.
+The row of tabs that switches between views of the same content.
 
 ## Outlined
 
-Underline tabs on a thin line. The selected tab is bold with a dark underline. Each tab can show a count in a **Badge**.
+Underline tabs on a thin line. The selected tab is bold with a dark underline. Each tab can show a count.
 
 <Canvas of={TabsStories.Outlined} />
 
 ## Filled
 
-A pill selector for two or three options. The selected tab is a white pill on a grey track. It is called "Filled" and "Type3" in the Figma file, which differ only in the number of tabs.
+A pill selector for two or three options. The selected tab is a white pill on a grey track.
 
 <Canvas of={TabsStories.Filled} />
-
-## Playground
-
-<Canvas of={TabsStories.Playground} />
-
-<Controls of={TabsStories.Playground} />
-
-Tabs work with the keyboard too. The left and right arrow keys move between tabs, and Home and End jump to the first and last. See every state together on the **All Variants** page.

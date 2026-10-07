@@ -1,20 +1,14 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as LoaderStories from './Loader.stories'
 
 <Meta of={LoaderStories} />
 
 # Loader
 
-A spinner that shows something is loading and the person should wait. It is 48px wide, with a ring that fades from light grey to dark slate, and it turns clockwise. Use it for content that takes more than a moment to arrive.
+A spinner that shows something is loading and the person should wait.
 
 ## Basic
 
+A 48px ring that fades from light grey to dark slate and turns clockwise.
+
 <Canvas of={LoaderStories.Basic} />
-
-## Playground
-
-<Canvas of={LoaderStories.Playground} />
-
-<Controls of={LoaderStories.Playground} />
-
-The **All Variants** page shows the four fixed positions the spinner passes through, as they appear in Figma.

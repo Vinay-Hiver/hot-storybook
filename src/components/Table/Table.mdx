@@ -1,34 +1,26 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as TableStories from './Table.stories'
 
 <Meta of={TableStories} />
 
 # Table
 
-Shows rows of information in columns. It has a header row and one row per item. Rows are 64px tall and the header is 48px. A thin border runs around the table, with rounded 12px corners, and the table fills the width of its container.
+Shows rows of information in columns, with a header row and a thin rounded border. It fills the width of its container.
 
 ## Basic
 
-Give it `columns` and `rows`. A column can set a `width` as a percentage of the table (`'50%'`) or a fixed size (`'80px'`). Columns without a width share the space that is left equally. For example, a first column of `'50%'`, a second of `'10%'` and two columns with no width gives 50% / 10% / 20% / 20%. To put something other than text in a cell, such as a **Switch**, give the column a `render` function.
+Rows are 64px tall and the header is 48px. A cell can hold text or other components, such as a Switch. Columns can have a width in percent or pixels, and columns without one share the rest equally.
 
 <Canvas of={TableStories.Basic} />
 
 ## Hover
 
-Pointing at a row turns the whole row light grey. The row below is pinned to show it.
+Pointing at a row turns it light grey.
 
 <Canvas of={TableStories.Hover} />
 
 ## Row actions
 
-Give the table `rowActions` (1 to 4 icon buttons) and they appear at the right end of a row when it is hovered or has keyboard focus. Each action has an `icon`, a `label` (shown as a tooltip) and an `onClick`. Set `divided` on an action to set it apart with a thin line, as Delete is in Figma. The rows below are pinned to show 1, 2, 3 and 4 actions.
+On hover, 1 to 4 icon buttons appear at the right end of the row. A divider can set one apart, such as Delete. The tables below show 1, 2, 3 and 4 actions.
 
 <Canvas of={TableStories.RowActions} />
-
-## Playground
-
-<Canvas of={TableStories.Playground} />
-
-<Controls of={TableStories.Playground} />
-
-The **All Variants** page shows the table as drawn in Figma.

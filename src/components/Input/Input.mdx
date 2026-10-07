@@ -1,50 +1,44 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as InputStories from './Input.stories'
 
 <Meta of={InputStories} />
 
 # Input
 
-A single-line text field with an optional label, helper text, prefix, counter and action. For longer text, use **Textarea**.
+A single-line text field with an optional label and helper text. For longer text, use Textarea.
 
 ## Sizes
 
-Medium is 40px tall and is the default. Small is 32px tall, for dense forms and toolbars.
+Medium is 40px tall and the default. Small is 32px tall, for dense forms.
 
 <Canvas of={InputStories.Sizes} />
 
 ## Prefix, counter and action
 
-A prefix can be a 14px icon or a short string such as `https://`. The counter needs `maxLength`. The action sits on the right edge, divided from the text.
+A prefix can be an icon or short text such as https://. A counter shows the length against a limit. An action sits on the right edge.
 
 <Canvas of={InputStories.Affixes} />
 
 ## Tags
 
-Add `tags` (or `defaultTags`) to turn the field into a tags input. Typing and pressing Enter or comma adds a **Chip / Tag**. Backspace on an empty box removes the last one, and each tag has its own remove button. In Input the tags stay on one line. In **Textarea** they wrap onto more lines.
+Typing and pressing Enter adds a tag. Each tag can be removed.
 
 <Canvas of={InputStories.Tags} />
 
 ## Phone
 
-Add a `country` to show the country button before the number: a flag, the dial code and a chevron. The number box accepts only digits, spaces, hyphens and brackets, so letters and symbols are removed as they are typed or pasted. Only the United States is designed in Figma, so it is the only built-in country (`unitedStates`).
-
-Give it a `countries` list and pressing the button opens the **country list**. It is built from the product code, not from Figma: a search box ("Search countries..."), then a row per country with its flag, name and dial code, a blue tick on the selected one, and "No results found" when nothing matches. Import the product's full list of 242 countries as `countries`. Picking a country closes the list, shows that country's flag and dial code on the button, and calls `onCountryChange`.
-
-<Canvas of={InputStories.CountryListOpen} />
+A phone field with a country button (flag, dial code and arrow). The number box only accepts digits, spaces, hyphens and brackets.
 
 <Canvas of={InputStories.Phone} />
 
+## Country list
+
+The country button opens a searchable list of countries. Picking one updates the flag and dial code.
+
+<Canvas of={InputStories.CountryListOpen} />
+
 ## States
 
-Hover and focus are built in. Set `error` with helper text that says what to fix. A disabled field keeps its label.
+Hover, focus, error (with a message saying what to fix) and disabled.
 
 <Canvas of={InputStories.States} />
-
-## Playground
-
-<Canvas of={InputStories.Playground} />
-
-<Controls of={InputStories.Playground} />
-
-See every state in both sizes together on the **All Variants** page.

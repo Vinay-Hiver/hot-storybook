@@ -1,28 +1,20 @@
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
 import * as EmptyStateStories from './EmptyState.stories'
 
 <Meta of={EmptyStateStories} />
 
 # Empty state
 
-What a screen shows when there is nothing to list yet. It is centred in whatever space it is given and reads, from top to bottom: an icon in a light grey circle, a title, a line of text, and sometimes a button.
+What a screen shows when there is nothing to list yet: an icon in a light grey circle, a title, a line of text, and sometimes a button.
 
 ## Basic
 
-Give it an `icon`, a `title` and a `description`. The description is always there. The icon is a name from the empty-state icon set: signature, templates, chat, email, slack, voice, tags, businesshours, api, sharedinbox, aiagent, accounts, contacts, conversations, select, note, search or notification. These are 24px icons with a 2px outline, drawn separately from the 14 and 16px HOT icons. You can also pass your own element as the icon.
+Icon, title and description, centred in the space it is given.
 
 <Canvas of={EmptyStateStories.Basic} />
 
 ## With a button
 
-Pass the main action as `action`, for example a primary **Button**. Only some empty states have one, such as a screen where the person can create the first item.
+Some empty states have a main action, such as creating the first item.
 
 <Canvas of={EmptyStateStories.WithAction} />
-
-## Playground
-
-<Canvas of={EmptyStateStories.Playground} />
-
-<Controls of={EmptyStateStories.Playground} />
-
-The **All Variants** page shows every empty state from Figma.
