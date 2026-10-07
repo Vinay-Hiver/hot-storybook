@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as NavStories from './MainNav.stories'
+
+<Meta of={NavStories} />
+
+# Main nav
+
+The thin dark bar down the far left of the app. It is 44px wide and fills the height of its container. It has the Hiver logo, a column of icons, and at the bottom a couple of small icons and the person's avatar.
+
+## Default
+
+Give it `items` (each with an `id`, a `label` and an `icon`). Set `value` to the `id` of the selected one and listen to `onChange` to switch areas. The selected icon sits on a lighter slate square. Pointing at an icon shows its `label` in a tooltip. `footerItems` are the small icons above the avatar, and `user` sets the avatar's letter and online status.
+
+<Canvas of={NavStories.Default} />
+
+## Hover
+
+Pointing at an icon darkens its square slightly. The Customers icon below is pinned to show it.
+
+<Canvas of={NavStories.Hover} />
+
+## Playground
+
+<Canvas of={NavStories.Playground} />
+
+<Controls of={NavStories.Playground} />
+
+The **All Variants** page shows one nav for each selected icon, as in Figma.

@@ -7,6 +7,8 @@ Items that were found or discussed and deliberately left for later. Newest first
 Goal: no component uses a color or a font value that is not a defined token.
 
 **Colors.** Every `var(--...)` reference resolves to a real token (353 tokens, none undefined). Hard-coded color values remaining:
+- `MainNav.tsx` Hiver logo yellow `#FDB022` (no token in Figma). Added 2026-10-07.
+- `src/index.css`, `App.css` (leftover Vite starter styles, unused by components) and `.storybook/hotTheme.ts` (Storybook UI theme) also hold raw colors. Not part of the design system; delete or leave.
 - `Radio.css:4` `#6b778c` (group label). Not bound to a variable in Figma.
 - `Radio.css:61` and `ListItem.css:56` `#fafbfc` (inner dot of a selected radio). Raw in Figma.
 - `Loader.css:10-11` `#000`. Only used as a mask, never visible, but still a literal.
@@ -15,10 +17,22 @@ Goal: no component uses a color or a font value that is not a defined token.
 
 **Typography.** The 12 Figma text styles exist only as CSS classes (`.text-label-small` and so on), and there are no CSS variables for them. No component uses those classes. Every component writes its font as literals (`font: weight size/line-height family`).
 - 44 `font:` declarations across component and story files. 34 equal one of the Figma text styles but are written as literals. 10 match no text style (all are the 12px/16px medium helper label in the stories).
+- Added 2026-10-07: the Admin sidebar section headings use 13px/18px medium (`AdminSidebar.css`), which is not one of the 12 text styles. Story-page labels use 12px/16px medium, which also matches no style (the Figma 12px styles use an 18px line height).
 - `Avatar.css:18` uses 9px/13.5px for the small avatar. It is in Figma, but there is no text style for it.
 - `Tabs.css` sets `font-weight` on its own in 3 places.
 
 **Proposed fix (needs a yes):** add one CSS variable per text style, replace every literal font declaration with it, and decide the colors above (map each to the nearest token, or ask for tokens in Figma).
+
+## 0a. Molecules (Patterns) and Table: open points (2026-10-07)
+
+Check these when we go through each component.
+- **Hover states are my own.** Figma draws no hover for the Admin sidebar, the Main nav or the Table row action buttons. Chosen: sidebar items `slateSurfaceSubtle100Hover`; nav icons `slateSurfaceDark600`; row action buttons `slateSurfaceSubtle100Hover`. Row action icon colour (`slateIconsActive`) and divider colour (`slateBorderLight`) are also assumed.
+- **Admin sidebar spacing.** In Figma the AI group sits 4px further left than the other groups (heading at 8px, items without the 4px inset). I aligned all groups. Decide whether to match Figma exactly or fix Figma.
+- **Main nav icons not in the icon set.** The Conversations inbox glyph and the help-in-chat glyph are drawn inside `MainNav.tsx` from Figma's shapes. They do not appear on the Icons page. Decide whether to add them to the Figma icon set.
+- **Main nav avatar colour.** Figma shows a red avatar (Pastel Red). The Avatar component has only the light blue, so the nav uses the plain Avatar. Add a `color` prop to Avatar if red is wanted.
+- **Table status toggle.** Uses our Switch, while Figma draws a lighter plain toggle.
+- **Pill bolt icon.** The lightning bolt in the RT/FRT Pill is not in the HOT icon set, so it is drawn inside `Pill.tsx` from the Figma shape (12px, from the original HOT Design System file). Decide whether to add it to the icon set. Overdue uses `errorSurfaceDisabled` as Figma binds it, an odd name for an active red.
+- **Admin sidebar icon choices.** Icons were matched by shape (for example Knowledge Hub = `file`, Apps = `apps1`). Confirm against the Figma icon names.
 
 ## 1. List item: standalone rows that are not in Figma
 

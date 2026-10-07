@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks'
+import * as SidebarStories from './AdminSidebar.stories'
+
+<Meta of={SidebarStories} />
+
+# Admin sidebar
+
+The menu down the left of the admin panel. It is 240px wide and fills the height of its container. It has a heading, a first item on its own, then groups of items under small titles.
+
+## Default
+
+Give it `sections`. Each section has an optional `title` and a list of `items`, and each item has an `id`, a `label` and an `icon` from the HOT icon set. Set `value` to the `id` of the selected item and listen to `onChange` to switch pages. The selected item has a light blue background and blue text.
+
+<Canvas of={SidebarStories.Default} />
+
+## Hover
+
+Pointing at an item turns it light grey. The Apps item below is pinned to show it.
+
+<Canvas of={SidebarStories.Hover} />
+
+## Playground
+
+<Canvas of={SidebarStories.Playground} />
+
+<Controls of={SidebarStories.Playground} />
+
+The **All Variants** page shows the sidebar as drawn in Figma.
