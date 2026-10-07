@@ -12,8 +12,8 @@ const items: MainNavItem[] = [
   { id: 'admin', label: 'Admin panel', icon: 'setting' },
 ]
 const footerItems: MainNavItem[] = [
-  { id: 'help', label: 'Help', icon: 'helpchat' },
-  { id: 'chat', label: 'Chat with us', icon: 'chatsupport' },
+  { id: 'help', label: 'Help Center', icon: 'helpchat' },
+  { id: 'chat', label: 'Instant Chat Support (24x7)', icon: 'chatsupport' },
 ]
 const ids = items.map((i) => i.id)
 
@@ -27,24 +27,22 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-type PlaygroundArgs = { selected: string; hovered: string; showAvatar: boolean; status: 'online' | 'offline' }
+type PlaygroundArgs = { selected: string; status: 'online' | 'offline' }
 
 /** A nav you can change from the Controls panel. Clicking an icon selects it. */
 export const Playground: StoryObj<PlaygroundArgs> = {
-  args: { selected: 'conversations', hovered: 'none', showAvatar: true, status: 'online' },
+  args: { selected: 'conversations', status: 'online' },
   argTypes: {
     selected: { control: 'select', options: ids, name: 'selected item' },
-    hovered: { control: 'select', options: ['none', ...ids], name: 'hover on', description: 'Pin the hover look on an icon' },
-    showAvatar: { control: 'boolean', name: 'show avatar' },
-    status: { control: 'inline-radio', options: ['online', 'offline'], name: 'avatar status', if: { arg: 'showAvatar' } },
+    status: { control: 'inline-radio', options: ['online', 'offline'], name: 'avatar status' },
   },
-  render: function Render({ selected, hovered, showAvatar, status }) {
+  render: function Render({ selected, status }) {
     const [value, setValue] = useState(selected)
     const [prev, setPrev] = useState(selected)
     if (prev !== selected) { setPrev(selected); setValue(selected) }
     return (
       <div style={{ height: 834 }}>
-        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} forceHoverId={hovered === 'none' ? undefined : hovered} user={showAvatar ? { initial: 'A', name: 'Alex', status } : undefined} />
+        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Alex', status }} />
       </div>
     )
   },

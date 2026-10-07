@@ -1,0 +1,20 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as SidebarStories from './ConversationsSidebar.stories'
+
+<Meta of={SidebarStories} />
+
+# Conversations sidebar
+
+The menu on the left of the inbox that lists where conversations live. It is 240px wide and fills the height of its container. It has a heading with a search button and a plus button, then groups of rows: My Work and Personal, the shared inboxes, and more folders such as Sent and Drafts.
+
+## Default
+
+Each row has an icon, a name and, for inboxes, an unread count.
+
+<Canvas of={SidebarStories.Default} />
+
+## Selected and hover
+
+The selected row has a light blue background and blue text. Pointing at a row turns it light grey. Slack is selected below and Email is pinned to show hover.
+
+<Canvas of={SidebarStories.SelectedAndHover} />

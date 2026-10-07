@@ -38,7 +38,28 @@ Check these when we go through each component.
 - **Red button colour differs between Figma pages.** The Button page's Error button is the bright red (`errorBorderDefault`, #e42525), but the modals use the darker red (`errorSurfaceDefault`, #b81717). The modal overrides the Button to match its own frame. Decide which red is right and make the Button and modal agree.
 - **Modal red button has no hover or pressed colour (removed for now).** In the Figma Error/Surface tokens, "Default" (#b81717) looks darker than "Dark" (#e8a0a0-ish light red), so the scale is back to front and there is no sensible darker colour to use on hover. Fix the Error/Surface token scale in the DS first, then add hover and pressed to the modal's red button (and check the Button page's Error button hover, which currently goes from the bright red to `errorSurfaceDefault`).
 - **Modal: details to confirm.** Buttons in Figma are 36px tall, which is not one of our Button heights (28, 32, 40), so the modal overrides them to 36px. The scrim behind the modal and any shadow were not read from Figma (not drawn in the frames). The "Create a tag" header uses 20px side padding while the others use 16px; I used 16px. The radio group is 8px shorter than Figma's (our Radio group spacing), so the SLA Settings modal is 212px, not 220px. The Add Members field is drawn as a select-style input in Figma; I used a plain Input.
+- **Main nav matches Omni_Master-Components, not the tokens (2026-10-07).** The nav is now 50px wide with the background `#2e3641`, copied from the Figma Main Nav in the Omni_Master-Components file (earlier it was 44px with `slateSurfaceDarkest`, `#334155`). `#2e3641` is not a token. Decide which dark colour is right and bind it to a token in Figma. The logo is the Omni_Master version (24 by 26.875), and the avatar is red (`pastelRedBorderDefault`) with a pale letter (`slateSurfaceSubtle300`) through new `--avatar-bg` support in Avatar. The hover colour (`slateSurfaceDark600`) is still my choice.
+- **Conversations sidebar (2026-10-07).** Built from the Omni_Master-Components file. Hover and selected colours are my choice (same as the Admin sidebar): Figma only draws the closed, resting rows, and the component has more states (open inbox cards, an Active variant) that were not read. The plus-and-arrow button has a raw drop shadow (`rgba(0,0,0,0.08)`) copied from Figma. Four glyphs are not in the HOT icon set and are drawn from Figma in `src/patterns/glyphs.tsx`: the Voice phone, Spam, the large plus and the Conversations inbox (shared with the Main nav). The Personal row has a count in Figma but it is hidden (opacity 0).
+- **Chat inbox icon updated (2026-10-07).** Replaced from the HOT Design System file (`chatinbox` at 14, 16 and 24px). It is now a speech circle with three dots. Check the Admin sidebar and empty states still look right with it.
 - **Admin sidebar icon choices.** Icons were matched by shape (for example Knowledge Hub = `file`, Apps = `apps1`). Confirm against the Figma icon names.
+
+## 0b. Icons that are not in the DS icon set (started 2026-10-07)
+
+These are drawn in code straight from Figma because the HOT icon set (14/16/24px, `src/icons`) does not have them. To deal with later: add each one to the DS icon page in Figma, regenerate the icons, and delete the local drawing. Keep adding to this list whenever a new one turns up.
+
+| Icon | Size | Used in | Where it lives in code |
+| --- | --- | --- | --- |
+| Lightning bolt | 12px, filled | SLA pill and SLA alert | `src/components/Sla/Bolt.tsx` |
+| Conversations inbox (rounded box with a tray) | 16px | Main nav | `src/patterns/glyphs.tsx` (`inbox`) |
+| Help in a speech bubble | 16px | Main nav footer | `src/patterns/glyphs.tsx` (`helpchat`) |
+| Voice (phone with signal arcs) | 16px | Conversations sidebar | `src/patterns/glyphs.tsx` (`voice`) |
+| Spam (alert in an octagon) | 16px | Conversations sidebar | `src/patterns/glyphs.tsx` (`spam`) |
+| Plus, large (the thin one in the plus/arrow button) | 16px | Conversations sidebar | `src/patterns/glyphs.tsx` (`plus`). The DS `add` icon is a smaller plus. |
+| Success check circle | 44px, filled | Modal (Profile Updated), drawn in the story only | `src/patterns/Modal/Modal.stories.tsx` |
+| AI Agents (robot head) | 20px grid | Empty state | `src/patterns/EmptyState/EmptyState.tsx` |
+| Empty-state icon set: signature, templates, chat, email, slack, voice, tags, business hours, API, shared inbox, accounts, contacts, conversations, select (open mail), note, search, notification | 24px, 2px outline | Empty state | `src/patterns/EmptyState/emptyStateIcons.ts`. They look like Untitled UI icons. The DS icon set has many of these shapes at 14/16px but not at this 24px/2px size. |
+
+Also not an icon but drawn in code: the Hiver logo in the Main nav (`MainNav.tsx`).
 
 ## 1. List item: standalone rows that are not in Figma
 
