@@ -1,11 +1,12 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { startRipple } from '../ripple'
 import './Button.css'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'filled' | 'ghost' | 'error' | 'neutral'
+export type ButtonVariant = 'primary' | 'secondary' | 'secondary-filled' | 'ghost' | 'error' | 'neutral'
 export type ButtonSize = 'xs' | 'sm' | 'md'
 
 type BaseProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> & {
-  /** Visual style. Figma "Type": Primary, Secondary, Filled, Ghost, Error, Neutral. */
+  /** Visual style. Figma "Type": Primary, Secondary, Secondary-filled (called "Filled" in Figma), Ghost, Error, Neutral. */
   variant?: ButtonVariant
   /** xs = 28px, sm = 32px, md = 40px tall. */
   size?: ButtonSize
@@ -41,7 +42,7 @@ export function Button(props: ButtonProps) {
   if (props.iconOnly) {
     const { iconOnly: _iconOnly, children, ...buttonProps } = rest as IconOnlyButtonProps
     return (
-      <button type={type} className={classes} {...buttonProps}>
+      <button type={type} className={classes} {...buttonProps} onMouseDown={(e) => { if (!e.currentTarget.disabled) startRipple(e); buttonProps.onMouseDown?.(e) }}>
         <span className="hot-btn__icon" aria-hidden="true">{children}</span>
       </button>
     )
@@ -49,7 +50,7 @@ export function Button(props: ButtonProps) {
 
   const { iconOnly: _iconOnly, iconLeft, iconRight, children, ...buttonProps } = rest as LabelButtonProps
   return (
-    <button type={type} className={classes} {...buttonProps}>
+    <button type={type} className={classes} {...buttonProps} onMouseDown={(e) => { if (!e.currentTarget.disabled) startRipple(e); buttonProps.onMouseDown?.(e) }}>
       {iconLeft && <span className="hot-btn__icon" aria-hidden="true">{iconLeft}</span>}
       {children}
       {iconRight && <span className="hot-btn__icon" aria-hidden="true">{iconRight}</span>}

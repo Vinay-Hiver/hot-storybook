@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import type { KeyboardEvent } from 'react'
 import { Badge } from '../Badge'
+import { startRipple } from '../ripple'
 import './Tabs.css'
 
 export type TabItem = {
@@ -58,6 +59,7 @@ export function Tabs({ tabs, value, onChange, variant = 'outlined', className, .
             tabIndex={selected ? 0 : -1}
             disabled={t.disabled}
             data-force-state={t.forceState}
+            onMouseDown={(e) => { if (!t.disabled) startRipple(e) }}
             onClick={() => onChange(t.value)}
           >
             {t.label}

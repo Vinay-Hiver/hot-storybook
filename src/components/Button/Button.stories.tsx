@@ -6,7 +6,7 @@ import { Icon } from '../../icons'
 
 const PlusIcon = () => <Icon name="add" />
 
-const variants = ['primary', 'secondary', 'filled', 'ghost', 'error', 'neutral'] as const
+const variants = ['primary', 'secondary', 'secondary-filled', 'ghost', 'error', 'neutral'] as const
 const sizes = ['xs', 'sm', 'md'] as const
 const states = ['default', 'hover', 'active', 'disabled'] as const
 

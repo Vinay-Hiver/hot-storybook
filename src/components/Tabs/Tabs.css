@@ -2,6 +2,8 @@
 .hot-tabs { display: flex; font: var(--fontWeightRegular) 14px/20px var(--fontFamily); color: var(--slateTextSubtle); }
 
 .hot-tab {
+  position: relative; /* with overflow hidden, keeps the click ripple inside the tab */
+  overflow: hidden;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;

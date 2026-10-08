@@ -9,6 +9,8 @@
   --btn-border-active: var(--btn-border);
   --btn-height: 40px;
 
+  position: relative; /* with overflow hidden, keeps the click ripple inside the button */
+  overflow: hidden;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -49,7 +51,7 @@
   --btn-fg-active: var(--primarySurfaceDefault);
   --btn-border-active: var(--primaryBorderDefault);
 }
-.hot-btn--filled {
+.hot-btn--secondary-filled {
   --btn-bg: var(--slateSurfaceSubtle100Hover);
   --btn-bg-hover: var(--slateSurfaceSubtle200);
   --btn-bg-active: var(--slateSurfaceSubtle300);
@@ -95,9 +97,9 @@
   cursor: not-allowed;
 }
 .hot-btn--secondary:disabled,
-.hot-btn--filled:disabled,
+.hot-btn--secondary-filled:disabled,
 .hot-btn--secondary[data-force-state='disabled'],
-.hot-btn--filled[data-force-state='disabled'] {
+.hot-btn--secondary-filled[data-force-state='disabled'] {
   border-color: var(--slateBorderLight);
 }
 .hot-btn--primary:disabled,
