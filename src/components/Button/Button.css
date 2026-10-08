@@ -44,17 +44,14 @@
   --btn-bg-hover: var(--primarySurfaceMildDark);
   --btn-bg-active: var(--primarySurfaceDark);
 }
-/* Secondary: hover and click copied from the product ("secondary-outline"). On hover the fill and the border both turn light grey.
-   While it is pressed it keeps that look (the text stays dark). */
+/* Secondary: hover copied from the product's Button (HotUiButton, type "secondary"). The fill turns slate 100 and the border stays slate 200.
+   The product has no separate pressed style, so pressed looks like hover. */
 .hot-btn--secondary {
   --btn-bg: var(--slateSurfaceWhite);
   --btn-border: var(--slateBorderLight);
   --btn-bg-hover: var(--slateSurfaceSubtle100Hover);
   --btn-bg-active: var(--slateSurfaceSubtle100Hover);
-  --btn-border-active: var(--slateSurfaceSubtle100Hover);
 }
-.hot-btn--secondary:hover:not(:disabled),
-.hot-btn--secondary[data-force-state='hover'] { border-color: var(--slateSurfaceSubtle100Hover); }
 
 .hot-btn--secondary-filled {
   --btn-bg: var(--slateSurfaceSubtle100Hover);
