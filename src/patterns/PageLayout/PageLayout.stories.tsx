@@ -6,6 +6,7 @@ import { ConversationsSidebar } from '../ConversationsSidebar'
 import { sampleSections } from '../ConversationsSidebar/sampleData'
 import { MainNav } from '../MainNav'
 import { navSampleFooterItems, navSampleItems } from '../MainNav/sampleData'
+import { ExampleRightPanel } from '../RightPanel/sampleData'
 import { PageLayout } from './PageLayout'
 
 const meta = {
@@ -19,15 +20,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const note: React.CSSProperties = { font: 'var(--fontWeightRegular) 14px/20px var(--fontFamily)', color: 'var(--slateTextSubtle)' }
-
-/** Stands in for the right panel, which is not built yet. */
-function RightPanelPlaceholder() {
-  return (
-    <div style={{ boxSizing: 'border-box', height: '100%', padding: 16, boxShadow: 'inset 1px 0 0 var(--slateBorderLight)', background: 'var(--slateSurfaceSubtle)' }}>
-      <div style={note}>Right panel (320px, to be built)</div>
-    </div>
-  )
-}
 
 /** Stands in for the sub-nav, which is not built yet. */
 function SubNavPlaceholder() {
@@ -67,7 +59,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
           nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={showAdmin ? 'admin' : navValue} onChange={setNavValue} user={{ initial: 'A', name: 'Alex' }} />}
           sidebar={showAdmin ? <AdminSidebar sections={adminSampleSections} value="shared-inbox" /> : <ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />}
           subNav={admin ? <SubNavPlaceholder /> : undefined}
-          rightPanel={admin ? undefined : <RightPanelPlaceholder />}
+          rightPanel={admin ? undefined : <ExampleRightPanel />}
         >
           <Content />
         </PageLayout>
@@ -83,7 +75,7 @@ export const HomePage: Story = {
   parameters: { controls: { disable: true }, docs: { story: { inline: false, iframeHeight: 560 } } },
   render: () => (
     <div style={{ height: '100vh' }}>
-      <PageLayout variant="home" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} />} sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />} rightPanel={<RightPanelPlaceholder />}>
+      <PageLayout variant="home" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} />} sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />} rightPanel={<ExampleRightPanel />}>
         <Content />
       </PageLayout>
     </div>

@@ -1,0 +1,108 @@
+/* HOT Design System — Right panel. Values read from the Figma right-panel sections (Omni_Master-Components); colors use tokens only. */
+.hot-right-panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 320px;
+  min-width: 320px;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--slateSurfaceWhite);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+}
+
+/* Fields: an icon and label on the left (120px), the value on the right */
+.hot-rp-fields { display: flex; flex-direction: column; gap: 4px; }
+.hot-rp-field { display: flex; align-items: center; min-height: 32px; }
+.hot-rp-field__label { display: flex; align-items: center; flex: none; gap: 10px; width: 120px; color: var(--slateTextSubtle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
+.hot-rp-field__label svg { flex: none; }
+.hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; padding: 6px; border-radius: 6px; color: var(--slateTextTitle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
+.hot-rp-field__value--link { color: var(--primarySurfaceDefault); }
+
+/* Top section */
+.hot-rp-top { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
+.hot-rp-top__title { margin: 0; font: var(--fontWeightMedium) 14px/20px var(--fontFamily); color: var(--slateTextBody); }
+
+/* Sub-sections: a thin line above each, and below the last. Each sits in a wrapper so it can be dragged. */
+.hot-rp-section { border-top: 1px solid var(--slateBorderMild); }
+.hot-rp-sortable { position: relative; }
+.hot-rp-sortable:last-child .hot-rp-section { border-bottom: 1px solid var(--slateBorderMild); }
+
+/* Dragging (same as the omni-boilerplate right panel): the section follows the pointer, folded up, on a white card with a soft shadow,
+   and the other sections slide out of the way. */
+.hot-rp-sortable--dragging {
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--slateTextTitle) 12%, transparent);
+}
+.hot-rp-sortable--dragging .hot-rp-section { border-bottom: 1px solid var(--slateBorderMild); }
+
+/* Header: the drag handle in the left gutter, and the toggle button that fills the rest */
+.hot-rp-section__header {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: background-color 150ms ease;
+  font: var(--fontWeightMedium) 14px/20px var(--fontFamily);
+  color: var(--slateTextBody);
+}
+.hot-rp-section__toggle {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px 20px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.hot-rp-section__icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 22px; height: 22px; }
+.hot-rp-section__title { flex: 1; min-width: 0; }
+.hot-rp-section__chevron { display: inline-flex; flex: none; transition: transform 250ms ease-in-out; }
+.hot-rp-section[data-open='true'] .hot-rp-section__chevron { transform: rotate(90deg); }
+.hot-rp-section__toggle:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: -2px; }
+
+/* Open or closed, a section turns light grey on hover and shows the drag handle on the left. The handle is the only part that starts a drag. */
+.hot-rp-section__grip {
+  position: absolute;
+  left: 4px;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--slateSurfaceDark600);
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 150ms ease;
+  cursor: grab;
+  touch-action: none;
+}
+.hot-rp-section__grip:active { cursor: grabbing; }
+.hot-rp-section__grip:focus-visible { opacity: 1; outline: 2px solid var(--primaryBorderDefault); }
+.hot-rp-section__header:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle100Hover); }
+.hot-rp-section__header:is(:hover, [data-force-state='hover']) .hot-rp-section__grip,
+.hot-rp-sortable--dragging .hot-rp-section__grip { opacity: 1; }
+.hot-rp-sortable--dragging .hot-rp-section__header { background: var(--slateSurfaceSubtle100Hover); }
+
+/* Open and close: slides over 250ms, ease in and out. Closed content is hidden and skipped by Tab. */
+.hot-rp-section__wrap { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 250ms ease-in-out, visibility 0s linear 250ms; }
+.hot-rp-section__wrap[data-open='true'] { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows 250ms ease-in-out, visibility 0s; }
+.hot-rp-section__body { min-height: 0; overflow: hidden; }
+.hot-rp-section__inner { padding: 0 20px 16px; } /* the padding lives inside, so it slides with the rest */
+@media (prefers-reduced-motion: reduce) { .hot-rp-section__wrap, .hot-rp-section__chevron { transition: none; } }
+
+/* A value row that holds chips (22px tall) is 36px tall, as in Figma. */
+.hot-rp-field__value:has(.hot-tag) { padding-block: 7px; }
