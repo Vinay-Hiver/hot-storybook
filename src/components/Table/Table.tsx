@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
+import { Button } from '../Button'
 import { Tooltip } from '../Tooltip'
 import './Table.css'
 
@@ -71,9 +72,9 @@ export function Table<Row extends Record<string, unknown>>({ columns, rows, getR
                         <span key={a.label} className="hot-table__action-wrap">
                           {a.divided && <span className="hot-table__divider" aria-hidden="true" />}
                           <Tooltip content={a.label} placement="top">
-                            <button type="button" className="hot-table__action" aria-label={a.label} onClick={() => a.onClick?.(row, i)}>
+                            <Button iconOnly variant="ghost" size="xs" className="hot-table__action" aria-label={a.label} onClick={() => a.onClick?.(row, i)}>
                               <Icon name={a.icon} size={16} />
-                            </button>
+                            </Button>
                           </Tooltip>
                         </span>
                       ))}

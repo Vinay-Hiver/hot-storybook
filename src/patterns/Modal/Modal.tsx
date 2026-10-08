@@ -1,5 +1,6 @@
 import { useId } from 'react'
 import type { ReactNode } from 'react'
+import { Button } from '../../components/Button'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import './Modal.css'
@@ -26,9 +27,9 @@ export function Modal({ title, layout = 'standard', width = 400, icon, onClose, 
   const titleId = useId()
   const classes = ['hot-modal', `hot-modal--${layout}`, className].filter(Boolean).join(' ')
   const close = onClose && (
-    <button type="button" className="hot-modal__close" aria-label="Close" onClick={onClose}>
+    <Button iconOnly variant="ghost" size="xs" className="hot-modal__close" aria-label="Close" onClick={onClose}>
       <Icon name="close" size={14} />
-    </button>
+    </Button>
   )
 
   if (layout === 'centered') {

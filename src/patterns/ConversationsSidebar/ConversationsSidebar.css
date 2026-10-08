@@ -18,7 +18,6 @@
 .hot-conv-sidebar__title { margin: 0; font: var(--fontWeightMedium) 16px/24px var(--fontFamily); color: var(--slateTextBody); }
 .hot-conv-sidebar__actions { display: flex; align-items: center; gap: 8px; }
 
-.hot-conv-sidebar__search,
 .hot-conv-sidebar__create,
 .hot-conv-sidebar__menu {
   box-sizing: border-box;
@@ -31,11 +30,10 @@
   color: var(--slateTextBody);
   cursor: pointer;
 }
-.hot-conv-sidebar__search svg,
 .hot-conv-sidebar__create svg,
 .hot-conv-sidebar__menu svg { flex: none; }
-.hot-conv-sidebar__search { width: 24px; height: 24px; padding: 4px; border-radius: 6px; }
-.hot-conv-sidebar__search:hover { background: var(--slateSurfaceSubtle100Hover); }
+/* The search button is the ghost icon Button (28px), pulled in 2px so the header keeps its 24px slot. */
+.hot-conv-sidebar__search { margin: -2px; }
 
 /* The plus and the arrow sit side by side as one white button, with a 1px gap. The drop shadow is a raw value copied from Figma. */
 .hot-conv-sidebar__split { display: flex; gap: 1px; filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.08)); }

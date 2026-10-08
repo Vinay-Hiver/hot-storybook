@@ -73,20 +73,3 @@
 .hot-table__row:is(:hover, :focus-within, [data-force-state='hover']) .hot-table__actions { display: flex; }
 .hot-table__action-wrap { display: inline-flex; align-items: center; gap: 4px; }
 .hot-table__divider { width: 1px; height: 20px; background: var(--slateBorderLight); margin: 0 -1px 0 0; /* takes no room, like the 0-width line in Figma */ }
-.hot-table__action {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 5px; /* plus the 1px border = the 6px inset in Figma, so the icon stays 16px */
-  border: 1px solid transparent;
-  border-radius: 6px;
-  background: transparent;
-  color: var(--slateIconsActive);
-  cursor: pointer;
-}
-.hot-table__action svg { flex: none; }
-.hot-table__action:hover { background: var(--slateSurfaceSubtle100Hover); }
-.hot-table__action:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: 1px; }

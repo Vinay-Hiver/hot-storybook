@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from '../../components/Button'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { isPatternGlyph, PatternGlyph } from '../glyphs'
@@ -73,9 +74,9 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
       <div className="hot-conv-sidebar__header">
         <h2 className="hot-conv-sidebar__title">{title}</h2>
         <div className="hot-conv-sidebar__actions">
-          <button type="button" className="hot-conv-sidebar__search" aria-label="Search" onClick={onSearch}>
+          <Button iconOnly variant="ghost" size="xs" className="hot-conv-sidebar__search" aria-label="Search" onClick={onSearch}>
             <Icon name="search" size={16} />
-          </button>
+          </Button>
           <div className="hot-conv-sidebar__split">
             <button type="button" className="hot-conv-sidebar__create" aria-label="New" onClick={onCreate}>
               <PatternGlyph name="plus" />
