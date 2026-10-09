@@ -23,7 +23,7 @@ export const viewLibrary: Record<string, ViewDef> = {
   tickets: { id: 'tickets', label: 'Tickets', icon: 'ticket', hasCount: true },
   tags: { id: 'tags', label: 'Tags', icon: 'tag', hasCount: false },
   pending: { id: 'pending', label: 'Pending', icon: 'clock', hasCount: true },
-  closed: { id: 'closed', label: 'Closed', icon: 'tick', hasCount: false },
+  closed: { id: 'closed', label: 'Closed', icon: 'tick2', hasCount: false },
   allViews: { id: 'allViews', label: 'All Views', icon: 'layering', hasCount: false },
 }
 
