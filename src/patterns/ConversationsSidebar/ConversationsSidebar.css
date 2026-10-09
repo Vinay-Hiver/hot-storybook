@@ -72,7 +72,7 @@
 .hot-conv-sidebar__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hot-conv-sidebar__count { flex: none; font: var(--fontWeightRegular) 12px/18px var(--fontFamily); color: var(--slateTextBody); }
 .hot-conv-sidebar__item--grouped .hot-conv-sidebar__count { padding: 2px 6px; border-radius: 1000px; }
-.hot-conv-sidebar__item:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle100Hover); }
+.hot-conv-sidebar__item:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSlate150); }
 .hot-conv-sidebar__item[aria-current='page'] { background: var(--primarySurfaceSubtle); color: var(--primarySurfaceDefault); }
 .hot-conv-sidebar__item[aria-current='page'] .hot-conv-sidebar__count { color: var(--primarySurfaceDefault); }
 
@@ -113,5 +113,5 @@
 .hot-conv-sidebar__view svg { flex: none; }
 .hot-conv-sidebar__view .hot-conv-sidebar__label { flex: 1; min-width: 0; }
 .hot-conv-sidebar__view-count { flex: none; font: var(--fontWeightRegular) 14px/20px var(--fontFamily); text-align: right; }
-.hot-conv-sidebar__view:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle100Hover); }
+.hot-conv-sidebar__view:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSlate150); }
 .hot-conv-sidebar__view[aria-current='page'] { background: var(--primarySurfaceSubtle); color: var(--primarySurfaceDefault); font-weight: var(--fontWeightMedium); }

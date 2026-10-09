@@ -28,7 +28,7 @@ const redAvatar = { '--avatar-bg': 'var(--pastelRedSurfaceDefault)' } as CSSProp
  */
 export function ExampleRightPanel({ open = ['contact'], hoverSection }: { open?: string[]; hoverSection?: string }) {
   return (
-    <RightPanel aria-label="Details">
+    <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
       <RightPanelTop title="Inbox name">
         <Row icon="assigned" label="Assignee">
           <Avatar initial="M" size="small" status="online" style={redAvatar} />

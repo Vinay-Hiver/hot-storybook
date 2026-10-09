@@ -96,3 +96,30 @@
   --btn-bg-hover: var(--slateSurfaceSubtle100Hover);
   --btn-border-active: transparent;
 }
+
+/* Reorderable rows: a drag handle on the right that shows on hover. While dragging, the row floats on a white card with a soft shadow. */
+.hot-dropdown__row { position: relative; }
+.hot-dropdown__grip {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--slateSurfaceDark600);
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 150ms ease;
+  cursor: grab;
+  touch-action: none;
+}
+.hot-dropdown__grip:active { cursor: grabbing; }
+.hot-dropdown__grip:focus-visible { opacity: 1; outline: 2px solid var(--primaryBorderDefault); }
+.hot-dropdown__row:hover .hot-dropdown__grip,
+.hot-dropdown__row--dragging .hot-dropdown__grip { opacity: 1; }
+.hot-dropdown__row--dragging { background: var(--slateSurfaceWhite); border-radius: 8px; box-shadow: 0 4px 12px color-mix(in srgb, var(--slateTextTitle) 12%, transparent); }

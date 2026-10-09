@@ -1,26 +1,36 @@
 import type { ConversationsSidebarSection, ConversationsSidebarView } from './ConversationsSidebar'
+import { channelViews, viewLibrary } from './data'
+import type { ViewChannelId } from './data'
 
 /** Example inboxes and views, shared by the Conversations sidebar and Page layout stories. */
-const views = (counts: boolean, n: number): ConversationsSidebarView[] => [
-  { id: 'unassigned', label: 'Unassigned', icon: 'unassigned', count: counts ? n : undefined },
-  { id: 'bot', label: 'Assigned to Bot', icon: 'bot', count: counts ? n : undefined },
-  { id: 'mine', label: 'Mine', icon: 'user', count: counts ? n + 15 : undefined },
-  { id: 'all-assigned', label: 'All Assigned', icon: 'team', count: counts ? n : undefined },
-  { id: 'tags', label: 'Tags', icon: 'tag' },
-  { id: 'closed', label: 'Closed', icon: 'tick' },
-]
-// Each inbox has its own views. The ids are prefixed so two inboxes never share one.
-const inboxViews = (inbox: string, counts: boolean, n: number) => views(counts, n).map((v) => ({ ...v, id: `${inbox}-${v.id}` }))
+// Example counts for each channel's views (Email's are from the Figma design). Views not listed here show 0.
+const sampleCounts: Record<ViewChannelId, Record<string, number>> = {
+  chat: { unassigned: 9, bot: 9, mine: 24, allAssigned: 9 },
+  slack: { unassigned: 4, mine: 6, allAssigned: 12, pending: 2 },
+  whatsapp: { unassigned: 3, mine: 8, allAssigned: 15, pending: 1 },
+  sms: { unassigned: 2, mine: 5, allAssigned: 7 },
+  email: { mine: 0, unassigned: 5, team: 0, tickets: 1 },
+}
+
+/** The views of one channel, from the defaults in `data.ts`. The ids are prefixed so two inboxes never share one. */
+const inboxViews = (channel: ViewChannelId, counts: boolean): ConversationsSidebarView[] =>
+  channelViews[channel].map((key) => {
+    const v = viewLibrary[key]
+    return { id: `${channel}-${v.id}`, label: v.label, icon: v.icon, count: counts && v.hasCount ? (sampleCounts[channel][v.id] ?? 0) : undefined }
+  })
 
 export const sampleSections = (counts: boolean, open: string[] = []): ConversationsSidebarSection[] => [
   { items: [{ id: 'my-work', label: 'My Work', icon: 'sminbox', count: counts ? '99+' : undefined }, { id: 'personal', label: 'Personal', icon: 'personal' }] },
   {
     title: 'Shared Inbox',
     items: [
-      { id: 'chat', label: 'Chat inbox 01', icon: 'chatinbox', views: inboxViews('chat', counts, 9), defaultExpanded: open.includes('chat') },
-      { id: 'slack', label: 'Slack', icon: 'slack', views: inboxViews('slack', counts, 4), defaultExpanded: open.includes('slack') },
-      { id: 'voice', label: 'Voice', icon: 'voice', views: inboxViews('voice', counts, 12), defaultExpanded: open.includes('voice') },
-      { id: 'email', label: 'Email', icon: 'mailbox', views: inboxViews('email', counts, 30), defaultExpanded: open.includes('email') },
+      { id: 'chat', label: 'Chat inbox 01', icon: 'chatinbox', views: inboxViews('chat', counts), defaultExpanded: open.includes('chat') },
+      { id: 'slack', label: 'Slack', icon: 'slack', views: inboxViews('slack', counts), defaultExpanded: open.includes('slack') },
+      { id: 'whatsapp', label: 'WhatsApp', icon: 'whatsapp', views: inboxViews('whatsapp', counts), defaultExpanded: open.includes('whatsapp') },
+      { id: 'sms', label: 'SMS', icon: 'sms', views: inboxViews('sms', counts), defaultExpanded: open.includes('sms') },
+      { id: 'email', label: 'Email', icon: 'mailbox', views: inboxViews('email', counts), defaultExpanded: open.includes('email') },
+      // Voice has no views defined yet, so it is a plain row.
+      { id: 'voice', label: 'Voice', icon: 'voice', count: counts ? '63' : undefined },
     ],
   },
   {

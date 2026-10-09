@@ -13,7 +13,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-type PlaygroundArgs = { title: string; selected: string; showCounts: boolean; openInbox: 'none' | 'chat' | 'slack' | 'voice' | 'email' }
+type PlaygroundArgs = { title: string; selected: string; showCounts: boolean; openInbox: 'none' | 'chat' | 'slack' | 'whatsapp' | 'sms' | 'email' }
 
 /** A sidebar you can change from the Controls panel. Click an inbox to open or close it, and click any row to select it. */
 export const Playground: StoryObj<PlaygroundArgs> = {
@@ -22,7 +22,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     title: { control: 'text' },
     selected: { control: 'select', options: ['none', ...ids], name: 'selected item' },
     showCounts: { control: 'boolean', name: 'unread counts' },
-    openInbox: { control: 'inline-radio', options: ['none', 'chat', 'slack', 'voice', 'email'], name: 'open inbox', description: 'Which inbox starts open' },
+    openInbox: { control: 'inline-radio', options: ['none', 'chat', 'slack', 'whatsapp', 'sms', 'email'], name: 'open inbox', description: 'Which inbox starts open' },
   },
   render: function Render({ title, selected, showCounts, openInbox }) {
     const [value, setValue] = useState(selected)
