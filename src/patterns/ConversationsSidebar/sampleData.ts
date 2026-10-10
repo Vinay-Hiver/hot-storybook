@@ -1,5 +1,5 @@
 import type { ConversationsSidebarSection, ConversationsSidebarView } from './ConversationsSidebar'
-import { channelViews, viewLibrary } from './data'
+import { channelViews, myWorkViews, viewLibrary } from './data'
 import type { ViewChannelId } from './data'
 
 /** Example inboxes and views, shared by the Conversations sidebar and Page layout stories. */
@@ -19,8 +19,11 @@ const inboxViews = (channel: ViewChannelId, counts: boolean): ConversationsSideb
     return { id: `${channel}-${v.id}`, label: v.label, icon: v.icon, count: counts && v.hasCount ? (sampleCounts[channel][v.id] ?? 0) : undefined }
   })
 
+// Example counts for the My Work queues (Figma shows 5 and 99+).
+const myWorkCounts: Record<string, number> = { liveQueue: 5, standardQueue: 150 }
+
 export const sampleSections = (counts: boolean, open: string[] = []): ConversationsSidebarSection[] => [
-  { items: [{ id: 'my-work', label: 'My Work', icon: 'sminbox', count: counts ? '99+' : undefined }, { id: 'personal', label: 'Personal', icon: 'personal' }] },
+  { items: [{ id: 'my-work', label: 'My Work', icon: 'sminbox', count: counts ? '99+' : undefined, views: myWorkViews.map((v) => ({ id: `my-work-${v.id}`, label: v.label, icon: v.icon, count: counts ? myWorkCounts[v.id] : undefined })), defaultExpanded: open.includes('my-work'), hoverIcon: 'settings3' }, { id: 'personal', label: 'Personal', icon: 'personal' }] },
   {
     title: 'Shared Inbox',
     items: [

@@ -5,6 +5,12 @@ import type { ReactNode } from 'react'
  * 1.3 outline, on a 16px box (some are shifted inside a bigger frame, so each has its own viewBox).
  */
 export const patternGlyphs = {
+  // A filled lightning bolt (16px).
+  bolt: {
+    box: '0 0 16 16',
+    filled: true,
+    paths: ['M9 2L3 9H8L7 14L13 7H8L9 2Z'],
+  },
   inbox: {
     box: '6 6 16 16',
     paths: [
@@ -51,7 +57,7 @@ export function PatternGlyph({ name }: { name: PatternGlyphName }): ReactNode {
   const g = patternGlyphs[name]
   const dots: readonly (readonly [number, number])[] = 'dots' in g ? g.dots : []
   return (
-    <svg width={16} height={16} viewBox={g.box} fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width={16} height={16} viewBox={g.box} fill={'filled' in g ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       {(g.paths as readonly (string | { d: string; at: readonly [number, number] })[]).map((p) =>
         typeof p === 'string' ? <path key={p.slice(0, 24)} d={p} /> : <path key={p.d.slice(0, 24)} d={p.d} transform={`translate(${p.at[0]} ${p.at[1]})`} />,
       )}

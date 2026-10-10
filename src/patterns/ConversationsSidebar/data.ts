@@ -27,6 +27,12 @@ export const viewLibrary: Record<string, ViewDef> = {
   allViews: { id: 'allViews', label: 'All Views', icon: 'layering', hasCount: false },
 }
 
+/** The views under "My Work": the queues the person works from. */
+export const myWorkViews: ViewDef[] = [
+  { id: 'liveQueue', label: 'Live Queue', icon: 'bolt', hasCount: true },
+  { id: 'standardQueue', label: 'Standard Queue', icon: 'clock', hasCount: true },
+]
+
 /** The views each channel starts with, in order. */
 export const channelViews: Record<ViewChannelId, string[]> = {
   slack: ['unassigned', 'mine', 'allAssigned', 'tags', 'pending', 'closed'],

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Button } from '../../components/Button'
+import { startRipple } from '../../components/ripple'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { isPatternGlyph, PatternGlyph } from '../glyphs'
@@ -27,6 +28,8 @@ export type ConversationsSidebarItem = {
   views?: ConversationsSidebarView[]
   /** An inbox starts open when this is set. */
   defaultExpanded?: boolean
+  /** Shows this icon on hover, in the place of the arrow (for example `settings3` on My Work). It is for display only. */
+  hoverIcon?: IconName
 }
 
 export type ConversationsSidebarSection = {
@@ -102,6 +105,7 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
                         className={`hot-conv-sidebar__item${section.title ? ' hot-conv-sidebar__item--grouped' : ''}`}
                         aria-current={item.id === value ? 'page' : undefined}
                         data-force-state={hover}
+                        onMouseDown={startRipple}
                         onClick={() => onChange?.(item.id)}
                       >
                         <span className="hot-conv-sidebar__item-main">
@@ -126,6 +130,7 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
                       aria-controls={panelId}
                       data-expanded={open}
                       data-force-state={item.id === forceHoverId ? 'hover' : undefined}
+                      onMouseDown={startRipple}
                       onClick={() => toggle(item.id)}
                     >
                       <span className="hot-conv-sidebar__item-main">
@@ -135,7 +140,7 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
                       {/* Closed: the total, and an arrow in its place on hover. Open: nothing, and a downward arrow on hover. */}
                       <span className="hot-conv-sidebar__slot">
                         {!open && shown && <span className="hot-conv-sidebar__count">{shown}</span>}
-                        <span className="hot-conv-sidebar__chevron" aria-hidden="true"><Icon name="chevronright" size={16} /></span>
+                        <span className={`hot-conv-sidebar__chevron${item.hoverIcon ? ' hot-conv-sidebar__chevron--static' : ''}`} aria-hidden="true"><Icon name={item.hoverIcon ?? 'chevronright'} size={16} /></span>
                       </span>
                     </button>
                     <div className="hot-conv-sidebar__views-wrap" data-open={open}>
@@ -147,6 +152,7 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
                               className="hot-conv-sidebar__view"
                               aria-current={view.id === value ? 'page' : undefined}
                               data-force-state={view.id === forceHoverId && view.id !== value ? 'hover' : undefined}
+                              onMouseDown={startRipple}
                               onClick={() => onChange?.(view.id)}
                             >
                               <ItemIcon icon={view.icon} />

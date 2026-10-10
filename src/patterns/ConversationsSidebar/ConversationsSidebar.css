@@ -51,6 +51,8 @@
 .hot-conv-sidebar__list { list-style: none; margin: 0; padding: 0; }
 
 .hot-conv-sidebar__item {
+  position: relative; /* with overflow hidden, keeps the press ripple inside the row */
+  overflow: hidden;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -84,7 +86,7 @@
 .hot-conv-sidebar__inbox:focus-visible .hot-conv-sidebar__chevron { opacity: 1; }
 .hot-conv-sidebar__inbox:is(:hover, [data-force-state='hover']) .hot-conv-sidebar__slot .hot-conv-sidebar__count,
 .hot-conv-sidebar__inbox:focus-visible .hot-conv-sidebar__slot .hot-conv-sidebar__count { visibility: hidden; }
-.hot-conv-sidebar__inbox[data-expanded='true'] .hot-conv-sidebar__chevron { transform: rotate(90deg); }
+.hot-conv-sidebar__inbox[data-expanded='true'] .hot-conv-sidebar__chevron:not(.hot-conv-sidebar__chevron--static) { transform: rotate(90deg); }
 
 /* Views: indented under the inbox, with a thin line down the left */
 /* Opening and closing slides over 250ms, ease in and out. The views stay in the page but are hidden (and skipped by Tab) while closed. */
@@ -95,6 +97,8 @@
 .hot-conv-sidebar__views { position: relative; list-style: none; margin: 0; padding: 0 0 0 34px; }
 .hot-conv-sidebar__views::before { content: ''; position: absolute; left: 17px; top: 0; height: calc(100% - 14px); width: 1px; background: var(--slateBorderLight); }
 .hot-conv-sidebar__view {
+  position: relative; /* with overflow hidden, keeps the press ripple inside the row */
+  overflow: hidden;
   box-sizing: border-box;
   display: flex;
   align-items: center;
