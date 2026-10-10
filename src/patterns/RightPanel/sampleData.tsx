@@ -4,6 +4,7 @@ import { Tag } from '../../components/Tag'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { RightPanel, RightPanelSection, RightPanelTop } from './RightPanel'
+import { ActivityNotes } from './ActivityNotes'
 import { customFieldKinds, fields, samples, sections } from './data'
 import type { FieldDef, SectionDef } from './data'
 
@@ -101,7 +102,8 @@ function SectionRows({ section }: { section: SectionDef }) {
   if (section.type === 'notes') return <Row icon="note" label="Notes">Add a note</Row>
   if (section.type === 'activity') {
     const day = samples.email.activity?.[0]
-    return <>{day?.items.map((a) => <Row key={a.text} icon="clock" label={a.time}>{a.text}</Row>)}</>
+    // The icon is chosen by meaning for now ("self-assigned" is a person, "ticket" is the ticket icon).
+    return <ActivityNotes days={day ? [{ day: day.day, events: day.items.map((a) => ({ icon: /ticket/i.test(a.text) ? 'ticket' : 'user', text: a.text, time: a.time })) }] : []} />
   }
   const defs = (section.fields ?? []).map((id) => fields[id])
   return <>{defs.map((f) => <Row key={f.id} icon={f.icon} label={f.label} link={f.kind === 'countLink'}><FieldValue def={f} /></Row>)}</>

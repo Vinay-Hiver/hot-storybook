@@ -110,6 +110,33 @@
 /* A value row that holds chips (22px tall) is 36px tall, as in Figma. */
 .hot-rp-field__value:has(.hot-tag) { padding-block: 7px; }
 
+/* Activity & Notes (Figma: 88px note area, then days with a divider and a list) */
+.hot-rp-activity { display: flex; flex-direction: column; }
+.hot-rp-activity__compose { padding-top: 8px; }
+.hot-rp-activity__note {
+  box-sizing: border-box; display: block; width: 100%; padding: 10px 8px; margin: 0 0 8px;
+  border: 1px solid var(--slateBorderLight); border-radius: 6px; background: var(--slateSurfaceWhite);
+  color: var(--slateTextSubtle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); text-align: left; cursor: text;
+}
+.hot-rp-activity__note:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: 1px; }
+.hot-rp-activity__only { display: flex; justify-content: flex-end; align-items: center; height: 30px; padding-top: 10px; box-sizing: border-box; }
+.hot-rp-activity__only .hot-checkbox__label { color: var(--slateTextSubtle); font: var(--fontWeightMedium) 14px/20px var(--fontFamily); }
+.hot-rp-activity__day { padding-top: 12px; }
+.hot-rp-activity__divider { display: flex; align-items: center; padding: 24px 0 20px; margin-bottom: 8px; }
+.hot-rp-activity__line { flex: 1; height: 1px; background: var(--slate150); }
+.hot-rp-activity__divider .hot-rp-activity__line:first-child { margin-right: 4px; }
+.hot-rp-activity__divider .hot-rp-activity__line:last-child { margin-left: 4px; }
+.hot-rp-activity__pill {
+  box-sizing: border-box; display: inline-flex; align-items: center; flex: none; height: 20px; padding: 0 12px;
+  border: 1px solid var(--slateBorderMild); border-radius: 9999px; color: var(--slateTextSubtle); font: var(--fontWeightRegular) 12px/18px var(--fontFamily);
+}
+.hot-rp-activity__list { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.hot-rp-activity__item { display: flex; gap: 12px; }
+.hot-rp-activity__icon { display: flex; flex: none; align-items: center; justify-content: center; width: 18px; height: 20px; color: var(--slateTextBody); }
+.hot-rp-activity__text { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
+.hot-rp-activity__what { color: var(--slateTextBody); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
+.hot-rp-activity__time { color: var(--slateTextSubtle); font: var(--fontWeightRegular) 12px/18px var(--fontFamily); }
+
 /* Customize widgets: a full-width button after the last section, with a flyout above it */
 .hot-rp-footer { box-sizing: border-box; padding: 20px 12px; }
 .hot-rp-footer__button { width: 100%; --btn-bg: var(--slateSurfaceSubtle); --btn-bg-hover: var(--slateSurfaceSubtle100Hover); --btn-bg-active: var(--slateSurfaceSubtle100Hover); }
