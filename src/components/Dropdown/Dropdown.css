@@ -39,31 +39,6 @@
 .hot-dropdown__search { box-sizing: border-box; flex: none; padding: 8px 8px 2px; }
 .hot-dropdown--no-actions .hot-dropdown__search { padding: 12px 11px 8px; }
 
-.hot-dropdown__field {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 32px;
-  padding: 6px 8px;
-  border: 1px solid var(--slateBorderLight);
-  border-radius: 6px;
-  background: var(--slateSurfaceWhite);
-}
-.hot-dropdown__field:focus-within { border-color: var(--blueBorderDark); }
-.hot-dropdown__field-icon { display: inline-flex; flex: none; width: 16px; height: 16px; color: var(--slateBorderDefault); }
-.hot-dropdown__field-input {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: var(--slateTextBody);
-  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
-}
-.hot-dropdown__field-input::placeholder { color: var(--slateTextDisabled); opacity: 1; }
-
 /* Options: 4px side padding, 8px below */
 .hot-dropdown__list {
   box-sizing: border-box;

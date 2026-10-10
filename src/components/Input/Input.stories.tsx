@@ -36,6 +36,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 type PlaygroundArgs = {
+  showLabel: boolean
   label: string
   placeholder: string
   showHelper: boolean
@@ -47,24 +48,28 @@ type PlaygroundArgs = {
   showCount: boolean
   prefix: 'none' | 'icon' | 'text'
   action: boolean
-  kind: 'text' | 'tags' | 'phone'
+  kind: 'text' | 'search' | 'tags' | 'phone'
 }
 
 /** One field you can change from the Controls panel. */
 export const Playground: StoryObj<PlaygroundArgs> = {
   parameters: { layout: 'centered', controls: { exclude: ['suffix', 'forceState'] } },
-  args: { label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', size: 'md', error: false, disabled: false, required: false, showCount: false, prefix: 'none', action: false, kind: 'text' },
+  args: { showLabel: true, label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', size: 'md', error: false, disabled: false, required: false, showCount: false, prefix: 'none', action: false, kind: 'text' },
   argTypes: {
+    showLabel: { control: 'boolean', name: 'label', description: 'Show the label above the field' },
+    label: { control: 'text', name: 'label text', if: { arg: 'showLabel' } },
     showHelper: { control: 'boolean', name: 'helperText', description: 'Show helper text below the field' },
     helperText: { control: 'text', name: 'helper text', if: { arg: 'showHelper' } },
     size: { control: 'inline-radio', options: ['sm', 'md'] },
-    kind: { control: 'inline-radio', options: ['text', 'tags', 'phone'], description: 'Text, a tags input, or a phone input with a country button' },
+    kind: { control: 'inline-radio', options: ['text', 'search', 'tags', 'phone'], description: 'Text, a search field, a tags input, or a phone input with a country button' },
     prefix: { control: 'inline-radio', options: ['none', 'icon', 'text'], description: 'Content before the text (text kind only)' },
     action: { control: 'boolean', description: 'Divided action on the right edge' },
   },
-  render: function Render({ prefix, action, showCount, showHelper, helperText, kind, ...args }) {
+  render: function Render({ showLabel, prefix, action, showCount, showHelper, helperText, kind, ...rest }) {
+    const args = { ...rest, label: showLabel ? rest.label : undefined }
     const [tags, setTags] = useState<string[]>(['Label', 'Label'])
     if (kind === 'tags') return <Input key="tags" {...args} helperText={showHelper ? helperText : undefined} tags={tags} onTagsChange={setTags} />
+    if (kind === 'search') return <Input key="search" {...args} helperText={showHelper ? helperText : undefined} search />
     if (kind === 'phone') return <Input key="phone" {...args} helperText={showHelper ? helperText : undefined} country={unitedStates} countries={countries} countryId="US" placeholder={args.placeholder} />
     return (
       <Input
@@ -72,7 +77,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
         helperText={showHelper ? helperText : undefined}
         showCount={showCount}
         maxLength={showCount ? 50 : undefined}
-        prefix={prefix === 'icon' ? <Icon name="search" size={14} /> : prefix === 'text' ? 'https://' : undefined}
+        prefix={prefix === 'icon' ? <Icon name="info" size={14} /> : prefix === 'text' ? 'https://' : undefined}
         action={action ? { label: 'Action' } : undefined}
       />
     )
@@ -100,7 +105,8 @@ export const Affixes: Story = {
   render: () => (
     <div style={row}>
       <div style={col}>
-        <Input label="Icon prefix" placeholder="Search" prefix={<Icon name="search" size={14} />} />
+        <Input label="Search" placeholder="Search" search />
+        <Input label="Icon prefix" placeholder="Placeholder" prefix={<Icon name="info" size={14} />} />
         <Input label="Text prefix" placeholder="yourcompany.com" prefix="https://" />
       </div>
       <div style={col}>

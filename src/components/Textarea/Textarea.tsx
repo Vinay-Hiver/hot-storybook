@@ -74,6 +74,7 @@ export function Textarea({
           onChange={handleChange}
           aria-invalid={error || undefined}
           aria-describedby={helperText || count ? `${id}-helper` : undefined}
+          aria-label={rest['aria-label'] ?? (!label && typeof rest.placeholder === 'string' ? rest.placeholder : undefined)}
         />
       )}
     </FormField>

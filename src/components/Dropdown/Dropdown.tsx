@@ -5,6 +5,7 @@ import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifi
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Button } from '../Button'
+import { Input } from '../Input'
 import { ListAvatar, ListCheck, ListIcon, ListItem, ListRadio } from '../List'
 import { Icon } from '../../icons'
 import './Dropdown.css'
@@ -107,10 +108,7 @@ export function Dropdown({
 
       {searchable && (
         <div className="hot-dropdown__search">
-          <label className="hot-dropdown__field">
-            <span className="hot-dropdown__field-icon" aria-hidden="true"><Icon name="search" size={16} /></span>
-            <input className="hot-dropdown__field-input" placeholder={searchPlaceholder} value={query} onChange={(e) => setQuery(e.target.value)} aria-label={searchPlaceholder} />
-          </label>
+          <Input search size="sm" fullWidth placeholder={searchPlaceholder} value={query} onChange={(e) => setQuery(e.target.value)} aria-label={searchPlaceholder} />
         </div>
       )}
 

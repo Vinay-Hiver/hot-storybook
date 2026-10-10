@@ -65,7 +65,6 @@ These are drawn in code straight from Figma because the HOT icon set (14/16/24px
 | Voice (phone with signal arcs) | 16px | Conversations sidebar | `src/patterns/glyphs.tsx` (`voice`) |
 | Spam (alert in an octagon) | 16px | Conversations sidebar | `src/patterns/glyphs.tsx` (`spam`) |
 | Unassigned (person with a question mark) | 16px | Conversations sidebar views | `src/patterns/glyphs.tsx` (`unassigned`) |
-| Bot (robot head) | 16px | Conversations sidebar views | `src/patterns/glyphs.tsx` (`bot`) |
 | Plus, large (the thin one in the plus/arrow button) | 16px | Conversations sidebar | `src/patterns/glyphs.tsx` (`plus`). The DS `add` icon is a smaller plus. |
 | Success check circle | 44px, filled | Modal (Profile Updated), drawn in the story only | `src/patterns/Modal/Modal.stories.tsx` |
 | AI Agents (robot head) | 20px grid | Empty state | `src/patterns/EmptyState/EmptyState.tsx` |

@@ -1,5 +1,6 @@
 import { useCallback, useId, useState } from 'react'
 import type { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
+import { Icon } from '../../icons'
 import { FormField } from './FormField'
 import type { FieldSize, ForcedState } from './FormField'
 import { TagsEditor } from './TagsEditor'
@@ -8,7 +9,7 @@ import { toCountry } from './flags'
 import type { Country, ListedCountry } from './flags'
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> & {
-  /** Label shown above the field. */
+  /** Label shown above the field. Optional: leave it out for a field without one (the placeholder then names it for screen readers). */
   label?: ReactNode
   /** Small text below the field. Turns red when `error` is set. */
   helperText?: ReactNode
@@ -18,6 +19,8 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'p
   size?: FieldSize
   /** Content before the text, such as a 14px `<Icon>` or a fixed string like "https://". */
   prefix?: ReactNode
+  /** Makes it a search field: a 16px search icon before the text and `type="search"`. Use with `size="sm"` inside lists and menus. */
+  search?: boolean
   /** Content after the text, such as a unit. */
   suffix?: ReactNode
   /** A divided action on the right edge (Figma "With CTA"), for example "Copy". */
@@ -48,7 +51,7 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'p
 }
 
 export function Input({
-  label, helperText, error, size = 'md', prefix, suffix, action, showCount, fullWidth, forceState, tags, defaultTags, onTagsChange, country, onCountryClick, countries, countryId, onCountryChange, countryListOpen,
+  label, helperText, error, size = 'md', prefix, search, suffix, action, showCount, fullWidth, forceState, tags, defaultTags, onTagsChange, country, onCountryClick, countries, countryId, onCountryChange, countryListOpen,
   id: idProp, className, disabled, required, maxLength, value, defaultValue, onChange, ...rest
 }: InputProps) {
   const generated = useId()
@@ -106,7 +109,8 @@ export function Input({
           </span>
         </button>
       )}
-      {prefix && <span className={`hot-field__affix${typeof prefix === 'string' ? '' : ' hot-field__affix--icon'}`}>{prefix}</span>}
+      {search && <span className="hot-field__affix hot-field__affix--search" aria-hidden="true"><Icon name="search" size={16} /></span>}
+      {prefix && !search && <span className={`hot-field__affix${typeof prefix === 'string' ? '' : ' hot-field__affix--icon'}`}>{prefix}</span>}
       {tagsMode ? (
         <TagsEditor
           id={id} tags={currentTags} onChange={setTags} placeholder={rest.placeholder} disabled={disabled} required={required}
@@ -116,7 +120,7 @@ export function Input({
         <input
           {...rest}
           id={id}
-          type={shownCountry ? 'tel' : rest.type}
+          type={shownCountry ? 'tel' : search ? 'search' : rest.type}
           inputMode={shownCountry ? 'tel' : rest.inputMode}
           autoComplete={shownCountry ? 'tel-national' : rest.autoComplete}
           className="hot-field__control"
@@ -128,6 +132,7 @@ export function Input({
           onChange={handleChange}
           aria-invalid={error || undefined}
           aria-describedby={helperText ? `${id}-helper` : undefined}
+          aria-label={rest['aria-label'] ?? (!label && typeof rest.placeholder === 'string' ? rest.placeholder : undefined)}
         />
       )}
       {count && <span className="hot-field__affix hot-field__count">{count}</span>}

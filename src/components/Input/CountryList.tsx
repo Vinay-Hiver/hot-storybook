@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ListItem } from '../List'
-import { Icon } from '../../icons'
+import { Input } from './Input'
 import type { ListedCountry } from './flags'
 import '../Dropdown/Dropdown.css'
 import './CountryList.css'
@@ -45,17 +45,11 @@ export function CountryList({ countries, selectedId, onSelect, onClose }: Countr
   return (
     <div ref={rootRef} className="hot-dropdown hot-country-list" role="dialog" aria-label="Choose a country">
       <div className="hot-dropdown__search">
-        <label className="hot-dropdown__field">
-          <span className="hot-dropdown__field-icon" aria-hidden="true"><Icon name="search" size={16} /></span>
-          <input
-            ref={searchRef}
-            className="hot-dropdown__field-input"
-            placeholder="Search countries..."
-            aria-label="Search countries"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </label>
+        <Input
+          search size="sm" fullWidth ref={searchRef}
+          placeholder="Search countries..." aria-label="Search countries"
+          value={query} onChange={(e) => setQuery(e.target.value)}
+        />
       </div>
 
       <ul className="hot-dropdown__list hot-country-list__list" role="listbox" aria-label="Countries">

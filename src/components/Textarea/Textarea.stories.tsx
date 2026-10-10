@@ -23,6 +23,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 type PlaygroundArgs = {
+  showLabel: boolean
   label: string
   placeholder: string
   showHelper: boolean
@@ -37,8 +38,10 @@ type PlaygroundArgs = {
 /** One field you can change from the Controls panel. */
 export const Playground: StoryObj<PlaygroundArgs> = {
   parameters: { layout: 'centered' },
-  args: { label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', error: false, disabled: false, required: false, showCount: false, kind: 'text' },
+  args: { showLabel: true, label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', error: false, disabled: false, required: false, showCount: false, kind: 'text' },
   argTypes: {
+    showLabel: { control: 'boolean', name: 'label', description: 'Show the label above the field' },
+    label: { control: 'text', name: 'label text', if: { arg: 'showLabel' } },
     kind: { control: 'inline-radio', options: ['text', 'tags'], description: 'Plain text, or a tags field where tags wrap onto more lines' },
     showHelper: { control: 'boolean', name: 'helperText', description: 'Show helper text below the field' },
     helperText: { control: 'text', name: 'helper text', if: { arg: 'showHelper' } },
@@ -47,7 +50,8 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     required: { control: 'boolean' },
     showCount: { control: 'boolean' },
   },
-  render: function Render({ showCount, showHelper, helperText, kind, ...args }) {
+  render: function Render({ showLabel, showCount, showHelper, helperText, kind, ...rest }) {
+    const args = { ...rest, label: showLabel ? rest.label : undefined }
     const [tags, setTags] = useState<string[]>(['Label', 'Label'])
     if (kind === 'tags') return <Textarea key="tags" {...args} helperText={showHelper ? helperText : undefined} tags={tags} onTagsChange={setTags} />
     return <Textarea {...args} helperText={showHelper ? helperText : undefined} showCount={showCount} maxLength={showCount ? 500 : undefined} />

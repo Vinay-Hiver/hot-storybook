@@ -55,6 +55,29 @@ The boilerplate needs a short `CLAUDE.md` at its root. It is the skill file we p
 7. Guardrails: a check against raw colors and fonts, a check that only design-system components are imported, a screenshot comparison against the Storybook.
 8. Test with about ten real designer requests and tune the skill.
 
+## Last step (idea, 2026-10-10): write a finished prototype back to Figma
+
+**Problem.** A designer can build a whole flow as an AI prototype without opening Figma, but devs ask for a Figma link to feed their own AI agent. Asking an AI agent to redraw the prototype in Figma works, but it is slow and uses a lot of tokens.
+
+**Idea.** Make the conversion mechanical, with no AI in the loop:
+
+1. Every Storybook component renders a marker with its name and props (for example `data-hot="Button"` plus variant, size, state). A one-time change inside each component.
+2. A capture step (a Chrome extension, or a Playwright script that visits each screen and state) walks the rendered page. For marked components it records the name and props; for everything else it records layout from computed styles (direction, gap, padding, size) and text.
+3. The result is a JSON tree of design-system components and auto-layout frames.
+4. A plain Figma plugin (no AI) reads the JSON: imports each component from the DS library by key, sets variant properties and text, builds frames with auto-layout, and binds colours to the Figma variables.
+
+Why it should work here: component props were built from the Figma variants, icon names match, and the Storybook tokens are generated from the Figma variables, so every lookup is a plain mapping.
+
+**Related options.**
+- Limit prototypes to design-system components and layout only (no custom CSS), so each page is a tree of components and conversion is trivial. Anything custom becomes a plain frame, flagged for a designer.
+- Or skip Figma for the handoff: give devs the prototype link and an exported component and props spec their agent can read. Worth checking whether "devs need Figma" is a real requirement. (Their product is Vue, ours is React, so the code itself is not reusable, but the structure and tokens are.)
+- Figma Code Connect maps Figma components to code, mostly Figma to code, so it helps with the mapping table only.
+- Tools like html.to.design capture a page as raw frames, not as design-system instances.
+
+**Known limits.** Auto-layout from computed CSS is imperfect on complex or absolutely positioned layouts; Figma shows one frame per screen and state, not live behaviour; anything outside the design system needs a fallback; components added in a prototype but missing in Figma.
+
+**First step when we get here.** A spike on one screen end to end (for example the Page layout with the Conversations sidebar), and have a designer judge whether the Figma output is close enough to hand to devs.
+
 ## Open questions
 
 - Are the repos private or public? If `HOT-Storybook` is private, designers must be members of the GitHub organisation and sign in once, and Netlify or Vercel need an access token. Making it public removes that friction.
