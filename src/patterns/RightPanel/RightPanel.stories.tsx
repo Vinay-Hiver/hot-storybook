@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { RightPanel } from './RightPanel'
-import { ExampleRightPanel } from './sampleData'
+import { sections } from './data'
+import { AllSectionsRightPanel, ExampleRightPanel, allSectionIds } from './sampleData'
 
 const meta = {
   title: 'Patterns/Right panel',
@@ -12,15 +13,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-type PlaygroundArgs = { open: ('contact' | 'account' | 'related' | 'custom')[] }
+type PlaygroundArgs = { show: string[] }
 
-/** The panel with four sub-sections. Choose which ones start open, and click a header to open or close it. */
+/** The panel with every section from the right panel database. Choose which ones to show, and click a header to open or close it. */
 export const Playground: StoryObj<PlaygroundArgs> = {
-  args: { open: ['contact'] },
-  argTypes: { open: { control: 'check', options: ['contact', 'account', 'related', 'custom'], name: 'open sections' } },
-  render: ({ open }) => (
+  args: { show: allSectionIds },
+  argTypes: { show: { control: { type: 'check', labels: Object.fromEntries(allSectionIds.map((id) => [id, sections[id].title])) }, options: allSectionIds, name: 'show sections' } },
+  render: ({ show }) => (
     <div style={{ height: 760 }}>
-      <ExampleRightPanel key={open.join(',')} open={open} />
+      <AllSectionsRightPanel key={show.join(',')} show={show} />
     </div>
   ),
 }

@@ -4,6 +4,8 @@ import { Tag } from '../../components/Tag'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { RightPanel, RightPanelSection, RightPanelTop } from './RightPanel'
+import { customFieldKinds, fields, samples, sections } from './data'
+import type { FieldDef, SectionDef } from './data'
 
 /** A row: [icon] [label] ...space... [value]. Built from the Icon atom and plain text, with colour tokens (see RightPanel.css). */
 function Row({ icon, label, children, link }: { icon: IconName; label: string; children?: React.ReactNode; link?: boolean }) {
@@ -65,10 +67,67 @@ export function ExampleRightPanel({ open = ['contact'], hoverSection }: { open?:
         <Row icon="flag" label="Open">3</Row>
       </RightPanelSection>
 
-      <RightPanelSection id="custom" title="Custom fields" icon="tag" defaultExpanded={open.includes('custom')} forceHover={hoverSection === 'custom'}>
+      <RightPanelSection id="custom" title="Custom fields" icon="text" defaultExpanded={open.includes('custom')} forceHover={hoverSection === 'custom'}>
         <Row icon="tag" label="Plan">Enterprise</Row>
         <Row icon="flag" label="Region">North America</Row>
       </RightPanelSection>
+    </RightPanel>
+  )
+}
+
+/** Every section id in the database, in the order they are listed there. */
+export const allSectionIds = Object.keys(sections)
+
+// One set of example values for the whole database: the first channel that has a value for a field supplies it.
+const sampleValues: Record<string, string | number> = Object.assign({}, ...Object.values(samples).map((c) => c.values).reverse())
+
+/** One field's value, drawn by its kind. */
+function FieldValue({ def }: { def: FieldDef }) {
+  const value = sampleValues[def.id]
+  if (def.kind === 'avatarText') return <><Avatar initial={String(value ?? '?').charAt(0).toUpperCase()} size="small" style={redAvatar} /><span style={{ marginLeft: 4 }}>{value}</span></>
+  if (value === undefined) return <>Empty</>
+  return <>{value}</>
+}
+
+function SectionRows({ section }: { section: SectionDef }) {
+  if (section.type === 'customFields') {
+    const rows = samples.slack.customFields ?? []
+    return <>{rows.map((r) => <Row key={r.label} icon={customFieldKinds.text.icon} label={r.label}>{r.value ?? r.placeholder ?? 'Empty'}</Row>)}</>
+  }
+  if (section.type === 'list') {
+    const items = samples.slack.previousConversations ?? []
+    return <>{items.map((c, i) => <Row key={i} icon="conversation" label={c.from}>{c.preview} · {c.date}</Row>)}</>
+  }
+  if (section.type === 'notes') return <Row icon="note" label="Notes">Add a note</Row>
+  if (section.type === 'activity') {
+    const day = samples.email.activity?.[0]
+    return <>{day?.items.map((a) => <Row key={a.text} icon="clock" label={a.time}>{a.text}</Row>)}</>
+  }
+  const defs = (section.fields ?? []).map((id) => fields[id])
+  return <>{defs.map((f) => <Row key={f.id} icon={f.icon} label={f.label} link={f.kind === 'countLink'}><FieldValue def={f} /></Row>)}</>
+}
+
+/**
+ * A right panel with every section in the database, for the Playground. `show` lists which sections are in the panel.
+ * Temporary: the sections of type list, notes, insights and activity are drawn as plain rows, because their own layouts
+ * (conversation items, note box, AI summary card, timeline) are not built yet.
+ */
+export function AllSectionsRightPanel({ show = allSectionIds }: { show?: string[] }) {
+  return (
+    <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
+      <RightPanelTop title="Inbox name">
+        <Row icon="assigned" label="Assignee">
+          <Avatar initial="M" size="small" status="online" style={redAvatar} />
+          <span style={{ marginLeft: 4 }}>Mark Scout</span>
+        </Row>
+        <Row icon="flag" label="Status"><OpenStatus /><span style={{ marginLeft: 4 }}>Open</span></Row>
+        <Row icon="tag" label="Tags"><Tag color="violet" onRemove={() => {}} removeLabel="Remove Finance">Finance</Tag></Row>
+      </RightPanelTop>
+      {allSectionIds.filter((id) => show.includes(id)).map((id) => (
+        <RightPanelSection key={id} id={id} title={sections[id].title} icon={sections[id].icon} defaultExpanded>
+          <SectionRows section={sections[id]} />
+        </RightPanelSection>
+      ))}
     </RightPanel>
   )
 }

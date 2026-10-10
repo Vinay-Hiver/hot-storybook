@@ -14,16 +14,19 @@
 }
 
 /* Fields: an icon and label on the left (120px), the value on the right */
-.hot-rp-fields { display: flex; flex-direction: column; gap: 4px; }
-.hot-rp-field { display: flex; align-items: center; min-height: 32px; }
-.hot-rp-field__label { display: flex; align-items: center; flex: none; gap: 10px; width: 120px; color: var(--slateTextSubtle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
+.hot-rp-fields { display: flex; flex-direction: column; }
+.hot-rp-field { display: flex; align-items: center; gap: 12px; min-height: 36px; }
+.hot-rp-field__label { display: flex; align-items: center; flex: none; gap: 10px; width: 108px; color: var(--slateTextSubtle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
 .hot-rp-field__label svg { flex: none; }
-.hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; padding: 6px; border-radius: 6px; color: var(--slateTextTitle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
+.hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; min-height: 36px; padding: 8px; border-radius: 6px; color: var(--slateTextTitle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
 .hot-rp-field__value--link { color: var(--primarySurfaceDefault); }
 
-/* Top section */
+/* Top section. Its rows are 32px with 4px between them (the sub-sections' rows are 36px with none). */
 .hot-rp-top { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
-.hot-rp-top__title { margin: 0; font: var(--fontWeightMedium) 14px/20px var(--fontFamily); color: var(--slateTextBody); }
+.hot-rp-top .hot-rp-fields { gap: 4px; }
+.hot-rp-top .hot-rp-field { min-height: 32px; }
+.hot-rp-top .hot-rp-field__value { min-height: 32px; padding: 6px; }
+.hot-rp-top__title { margin: 0; min-height: 21px; font: var(--fontWeightMedium) 14px/20px var(--fontFamily); color: var(--slateTextBody); }
 
 /* Sub-sections: a thin line above each, and below the last. Each sits in a wrapper so it can be dragged. */
 .hot-rp-section { border-top: 1px solid var(--slateBorderMild); }
@@ -56,7 +59,7 @@
   align-items: center;
   gap: 8px;
   min-width: 0;
-  padding: 16px 20px;
+  padding: 15px 20px 12px; /* 49px tall in Figma */
   border: 0;
   background: transparent;
   color: inherit;
