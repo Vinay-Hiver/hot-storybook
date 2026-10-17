@@ -2,16 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Dropdown } from '../../components/Dropdown'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
-import { isPatternGlyph, PatternGlyph } from '../glyphs'
-import type { PatternGlyphName } from '../glyphs'
 import './SubNav.css'
 
 export type SubNavItem = {
   /** Unique id, also the value passed to `onChange`. */
   id: string
   label: string
-  /** An icon name from the HOT icon set, or one of the pattern glyphs. */
-  icon: IconName | PatternGlyphName
+  /** An icon name from the HOT icon set. */
+  icon: IconName
 }
 
 export type SubNavProps = {
@@ -41,8 +39,8 @@ export type SubNavProps = {
   className?: string
 }
 
-function ItemIcon({ icon }: { icon: IconName | PatternGlyphName }) {
-  return isPatternGlyph(icon) ? <PatternGlyph name={icon} /> : <Icon name={icon} size={16} />
+function ItemIcon({ icon }: { icon: IconName }) {
+  return <Icon name={icon} size={16} />
 }
 
 export function SubNav({ title, subtitle, items, value, onChange, onBack, onTitleClick, switcher = 'box', switchOptions, switchValue, onSwitch, forceSwitchOpen, forceHoverId, className }: SubNavProps) {

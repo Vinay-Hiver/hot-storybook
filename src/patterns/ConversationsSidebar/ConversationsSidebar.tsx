@@ -3,15 +3,13 @@ import { Button } from '../../components/Button'
 import { startRipple } from '../../components/ripple'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
-import { isPatternGlyph, PatternGlyph } from '../glyphs'
-import type { PatternGlyphName } from '../glyphs'
 import './ConversationsSidebar.css'
 
 export type ConversationsSidebarView = {
   /** Unique id, also the value passed to `onChange` when the view is chosen. */
   id: string
   label: string
-  icon: IconName | PatternGlyphName
+  icon: IconName
   /** How many conversations are in the view. Leave out for a view without a count, such as Tags or Closed. */
   count?: number
 }
@@ -20,8 +18,8 @@ export type ConversationsSidebarItem = {
   /** Unique id, also the value passed to `onChange`. */
   id: string
   label: string
-  /** An icon name from the HOT icon set, or one of the pattern glyphs. */
-  icon: IconName | PatternGlyphName
+  /** An icon name from the HOT icon set. */
+  icon: IconName
   /** The unread count shown on the right, for example `99+`. Leave out for no count. For an inbox with `views`, the total of the views is shown instead. */
   count?: string
   /** Makes this row an inbox that opens to show its views. */
@@ -58,8 +56,8 @@ export type ConversationsSidebarProps = {
   className?: string
 }
 
-function ItemIcon({ icon }: { icon: IconName | PatternGlyphName }) {
-  return isPatternGlyph(icon) ? <PatternGlyph name={icon} /> : <Icon name={icon} size={16} />
+function ItemIcon({ icon }: { icon: IconName }) {
+  return <Icon name={icon} size={16} />
 }
 
 export function ConversationsSidebar({ title = 'Conversations', sections, value, onChange, onSearch, onCreate, onCreateMenu, onExpandedChange, forceHoverId, className }: ConversationsSidebarProps) {

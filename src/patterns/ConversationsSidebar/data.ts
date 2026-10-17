@@ -1,5 +1,4 @@
 import type { IconName } from '../../icons/iconData'
-import type { PatternGlyphName } from '../glyphs'
 
 /** The channels (inbox types) whose inboxes have views. */
 export type ViewChannelId = 'chat' | 'slack' | 'whatsapp' | 'sms' | 'email'
@@ -8,14 +7,14 @@ export type ViewChannelId = 'chat' | 'slack' | 'whatsapp' | 'sms' | 'email'
 export type ViewDef = {
   id: string
   label: string
-  icon: IconName | PatternGlyphName
+  icon: IconName
   /** Whether the view shows a count of its conversations on the right. Tags and All Views do not. */
   hasCount: boolean
 }
 
 /** Every view the sidebar can show. A channel picks from these, in its own order. */
 export const viewLibrary: Record<string, ViewDef> = {
-  unassigned: { id: 'unassigned', label: 'Unassigned', icon: 'unassigned', hasCount: true },
+  unassigned: { id: 'unassigned', label: 'Unassigned', icon: 'unassigned2', hasCount: true },
   bot: { id: 'bot', label: 'Assigned to Bot', icon: 'bot', hasCount: true },
   mine: { id: 'mine', label: 'Mine', icon: 'user', hasCount: true },
   allAssigned: { id: 'allAssigned', label: 'All assigned', icon: 'team', hasCount: true },

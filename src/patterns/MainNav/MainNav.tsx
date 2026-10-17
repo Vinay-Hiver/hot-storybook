@@ -5,7 +5,6 @@ import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { Avatar } from '../../components/Avatar'
 import { Tooltip } from '../../components/Tooltip'
-import { isPatternGlyph, PatternGlyph } from '../glyphs'
 import { HelpMenu, UserMenu } from './MainNavMenus'
 import type { UserMenuProps } from './MainNavMenus'
 import './MainNav.css'
@@ -83,7 +82,6 @@ function Flyout({ trigger, onClose, children }: { trigger: HTMLElement | null; o
 }
 
 function NavIcon({ icon }: { icon: MainNavIcon }): ReactNode {
-  if (isPatternGlyph(icon)) return <PatternGlyph name={icon} />
   return <Icon name={icon as IconName} size={16} />
 }
 

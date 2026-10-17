@@ -1,5 +1,4 @@
 import type { IconName } from '../../icons/iconData'
-import type { PatternGlyphName } from '../glyphs'
 
 /** The channels (inbox types) that have a Sub-nav in the admin panel. */
 export type SubNavChannelId = 'email' | 'slack' | 'chat' | 'voice' | 'sms' | 'whatsapp'
@@ -8,8 +7,8 @@ export type SubNavChannelId = 'email' | 'slack' | 'chat' | 'voice' | 'sms' | 'wh
 export type SubNavItemDef = {
   id: string
   label: string
-  /** An icon name from the HOT icon set, or one of the pattern glyphs (for icons the DS does not have). */
-  icon: IconName | PatternGlyphName
+  /** An icon name from the HOT icon set. */
+  icon: IconName
 }
 
 /** The small arrow beside the heading, which switches to another inbox: a boxed button, a bare arrow, or nothing. */

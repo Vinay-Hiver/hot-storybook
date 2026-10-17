@@ -1,5 +1,4 @@
 import type { IconName } from '../../icons/iconData'
-import type { PatternGlyphName } from '../../patterns/glyphs'
 import type { SubNavChannelId } from '../../patterns/SubNav/data'
 
 export type Inbox = {
@@ -15,7 +14,7 @@ export type InboxChannel = {
   label: string
   /** One inbox of this channel, for the "Create ..." button, for example "Chat Inbox". */
   singular: string
-  icon: IconName | PatternGlyphName
+  icon: IconName
   inboxes: Inbox[]
 }
 

@@ -8,8 +8,6 @@ import type { TableColumn } from '../../components/Table'
 import { AdminSidebar } from '../../patterns/AdminSidebar'
 import { adminSampleSections } from '../../patterns/AdminSidebar/sampleData'
 import { EmptyState } from '../../patterns/EmptyState'
-import { isPatternGlyph, PatternGlyph } from '../../patterns/glyphs'
-import type { PatternGlyphName } from '../../patterns/glyphs'
 import { MainNav } from '../../patterns/MainNav'
 import { navSampleFooterItems, navSampleItems, navSampleUserMenu } from '../../patterns/MainNav/sampleData'
 import { PageLayout } from '../../patterns/PageLayout'
@@ -20,8 +18,8 @@ import { sharedInboxChannels } from './data'
 import type { Inbox } from './data'
 import './SharedInboxesPage.css'
 
-function ChannelIcon({ icon }: { icon: IconName | PatternGlyphName }) {
-  return isPatternGlyph(icon) ? <PatternGlyph name={icon} /> : <Icon name={icon} size={16} />
+function ChannelIcon({ icon }: { icon: IconName }) {
+  return <Icon name={icon} size={16} />
 }
 
 /** The heading bar over a page's content: 60px tall, a line under it, the page name on the left. */

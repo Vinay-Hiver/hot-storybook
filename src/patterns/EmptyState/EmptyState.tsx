@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Icon } from '../../icons/Icon'
-import { emptyStateIcons } from './emptyStateIcons'
+import { emptyStateIconFor } from './emptyStateIcons'
 import type { EmptyStateIconName } from './emptyStateIcons'
 import './EmptyState.css'
 
@@ -17,15 +17,7 @@ export type EmptyStateProps = {
 }
 
 function Glyph({ name }: { name: EmptyStateIconName }) {
-  // These empty states use DS icons at 24px: AI agent is Bot, notification is Notification, conversations is Conversations.
-  if (name === 'aiagent') return <Icon name="bot" size={24} />
-  if (name === 'conversations') return <Icon name="conversations" size={24} />
-  if (name === 'notification') return <Icon name="notification" size={24} />
-  return (
-    <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {emptyStateIcons[name].map((d) => <path key={d.slice(0, 32)} d={d} />)}
-    </svg>
-  )
+  return <Icon name={emptyStateIconFor(name)} size={24} />
 }
 
 export function EmptyState({ icon, title, description, action, className }: EmptyStateProps) {
