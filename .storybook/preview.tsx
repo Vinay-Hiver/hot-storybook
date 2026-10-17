@@ -36,7 +36,7 @@ const controlOrder = [
   // kind
   'kind', 'example', 'variant', 'type', 'display', 'channel', 'color',
   // content
-  'showLabel', 'label', 'title', 'titleIcon', 'icon', 'initial', 'text', 'content', 'showDescription', 'description',
+  'showLabel', 'label', 'showTitle', 'title', 'titleIcon', 'icon', 'initial', 'text', 'content', 'showDescription', 'description',
   'showAction', 'actionLabel', 'placeholder', 'searchPlaceholder', 'showHelper', 'helperText', 'subtitle', 'inboxEmail',
   'removable', 'removeLabel', 'buttons', 'openInbox', 'inboxId', 'settingsItem', 'showCounts', 'show', 'tabs', 'tabCount',
   'counts', 'rowCount', 'actionCount', 'options', 'name',

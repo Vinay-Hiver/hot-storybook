@@ -1,5 +1,5 @@
 import { isValidElement, useCallback, useId, useState } from 'react'
-import type { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
+import type { ChangeEvent, InputHTMLAttributes, ReactNode, Ref } from 'react'
 import { Icon } from '../../icons'
 import { FormField } from './FormField'
 import type { FieldSize, ForcedState } from './FormField'
@@ -9,6 +9,8 @@ import { toCountry } from './flags'
 import type { Country, ListedCountry } from './flags'
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> & {
+  /** Gives access to the text box itself, for example to focus it. Passed on to the `<input>`. */
+  ref?: Ref<HTMLInputElement>
   /** Label shown above the field. Optional: leave it out for a field without one (the placeholder then names it for screen readers). */
   label?: ReactNode
   /** Small text below the field. Turns red when `error` is set. */

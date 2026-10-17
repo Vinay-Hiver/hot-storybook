@@ -34,7 +34,8 @@ for (const [figmaName, svg] of Object.entries(raw)) {
     const attrs = {}
     for (const a of m[2].matchAll(/([\w-]+)="([^"]*)"/g)) {
       let [, k, v] = a
-      if ((k === 'stroke' || k === 'fill') && v !== 'none') v = 'currentColor'
+      // Colours become the text colour, except a colour written as var(--token): those icons (the status icons) keep their own colours
+      if ((k === 'stroke' || k === 'fill') && v !== 'none' && !v.startsWith('var(')) v = 'currentColor'
       attrs[camel(k)] = v
     }
     els.push([m[1], attrs])

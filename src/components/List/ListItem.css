@@ -22,8 +22,8 @@
 .hot-list-item--description.hot-list-item--no-leading { min-height: 58px; }
 
 /* Compact: the size used inside dropdown menus */
-.hot-list-item--compact { gap: 8px; min-height: 32px; padding: 4px; }
-.hot-list-item--compact.hot-list-item--no-leading { min-height: 28px; padding: 4px; }
+.hot-list-item--compact { gap: 8px; min-height: 40px; padding: 8px 4px; }
+.hot-list-item--compact.hot-list-item--no-leading { min-height: 36px; padding: 8px 4px; }
 
 .hot-list-item__main { display: flex; align-items: center; gap: 12px; flex: 1 1 auto; min-width: 0; }
 .hot-list-item--compact .hot-list-item__main { gap: 4px; }
@@ -49,6 +49,7 @@
 .hot-list-el { position: relative; display: inline-flex; flex: none; align-items: center; justify-content: center; width: 24px; height: 24px; }
 
 .hot-list-icon { color: var(--slateTextBody); }
+.hot-list-icon--round { border-radius: 9999px; background: var(--slateSurfaceSubtle100Hover); }
 
 /* Radio element */
 .hot-list-radio { box-sizing: border-box; position: relative; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--slateBorderLight); background: var(--slateSurfaceWhite); }

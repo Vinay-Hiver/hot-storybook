@@ -1,10 +1,12 @@
 import { channels, channelIds } from './channels'
 import { customFieldKinds, fields, footerActions, tabs } from './fields'
+import { sampleAssignees, statusOptions } from './options'
 import { samples } from './samples'
 import { sections } from './sections'
 import type { ChannelDef, ChannelId, FieldDef, FooterActionDef, SectionDef, SectionRef, TabDef } from './types'
 
-export { channels, channelIds, customFieldKinds, fields, footerActions, samples, sections, tabs }
+export { channels, channelIds, customFieldKinds, fields, footerActions, sampleAssignees, samples, sections, statusOptions, tabs }
+export type { Assignee, StatusOption } from './options'
 export type * from './types'
 
 /** A section as one channel shows it: the shared section with this channel's title and fields applied. */

@@ -48,3 +48,13 @@
 .hot-avatar--small .hot-avatar__status::before { inset: 0.94px; }
 .hot-avatar--small .hot-avatar__status--offline { left: 11px; top: 11px; }
 .hot-avatar--small .hot-avatar__status--offline::after { inset: 1.88px; }
+
+/* Colours, from the pastel surface tokens (grey is the slate surface). */
+.hot-avatar--lightBlue { --avatar-bg: var(--pastelLightBlueSurfaceDefault); }
+.hot-avatar--red { --avatar-bg: var(--pastelRedSurfaceDefault); }
+.hot-avatar--orange { --avatar-bg: var(--pastelOrangeSurfaceDefault); }
+.hot-avatar--yellow { --avatar-bg: var(--pastelYellowSurfaceDefault); }
+.hot-avatar--green { --avatar-bg: var(--pastelGreenSurfaceDefault); }
+.hot-avatar--purple { --avatar-bg: var(--pastelPurpleSurfaceDefault); }
+.hot-avatar--violet { --avatar-bg: var(--pastelVioletSurfaceDefault); }
+.hot-avatar--grey { --avatar-bg: var(--slateSurfaceDefault); }

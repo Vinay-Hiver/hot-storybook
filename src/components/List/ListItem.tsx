@@ -7,20 +7,20 @@ import './ListItem.css'
 
 /* ---------- Left elements (Figma "List Elements") ---------- */
 
-export type ListAvatarProps = Pick<AvatarProps, 'initial' | 'status' | 'size'>
+export type ListAvatarProps = Pick<AvatarProps, 'initial' | 'status' | 'size' | 'color'>
 
 /** The Avatar component in the 24px left-element area (18px when small). */
-export function ListAvatar({ initial, status = 'online', size = 'default' }: ListAvatarProps) {
+export function ListAvatar({ initial, status = 'online', size = 'default', color }: ListAvatarProps) {
   return (
     <span className="hot-list-el" style={size === 'small' ? { width: 18, height: 18 } : undefined}>
-      <Avatar initial={initial} status={status} size={size} />
+      <Avatar initial={initial} status={status} size={size} color={color} />
     </span>
   )
 }
 
-/** 14px icon centered in the 24px element area. */
-export function ListIcon({ name }: { name: IconName }) {
-  return <span className="hot-list-el hot-list-icon"><Icon name={name} size={14} /></span>
+/** 14px icon centered in the 24px element area. With `background` it sits on a round grey fill (the hover colour), like an avatar. */
+export function ListIcon({ name, background }: { name: IconName; background?: boolean }) {
+  return <span className={`hot-list-el hot-list-icon${background ? ' hot-list-icon--round' : ''}`}><Icon name={name} size={14} /></span>
 }
 
 /** Visual-only radio, for rows that are already a button. */

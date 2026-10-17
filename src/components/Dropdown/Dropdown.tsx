@@ -8,6 +8,8 @@ import { Button } from '../Button'
 import { Input } from '../Input'
 import { ListAvatar, ListCheck, ListIcon, ListItem, ListRadio } from '../List'
 import { Icon } from '../../icons'
+import type { IconName } from '../../icons'
+import type { AvatarColor } from '../Avatar'
 import './Dropdown.css'
 
 export type DropdownOption = {
@@ -17,6 +19,14 @@ export type DropdownOption = {
   description?: string
   /** Avatar style only: the dot on the avatar. Defaults to online. */
   status?: 'online' | 'offline'
+  /** Avatar style only: the colour of the avatar. */
+  color?: AvatarColor
+  /** An icon for this row (a 14px icon from the icon set). It wins over the list's variant, so one list can mix icon rows with avatar or text rows, for example a "None" row above a list of people. */
+  icon?: IconName
+  /** With `icon`: puts the icon on a round grey fill (the hover colour), the way an avatar looks. Without it the icon stands alone. */
+  iconBackground?: boolean
+  /** Anything else for the left side of this row, for example a `ListAvatar` or `ListIcon`. Wins over `icon` and the variant. */
+  leading?: React.ReactNode
 }
 export type DropdownVariant = 'default' | 'avatar' | 'icon' | 'checkbox' | 'radio'
 
@@ -69,6 +79,8 @@ export function Dropdown({
   const current = value ?? inner
   const selectedList = Array.isArray(current) ? current : current ? [current] : []
   const multi = variant === 'checkbox'
+  // Rows without a checkbox or radio show a blue tick on the selected row
+  const showTick = variant !== 'checkbox' && variant !== 'radio'
 
   const shown = useMemo(() => options.filter((o) => o.label.toLowerCase().includes(query.trim().toLowerCase())), [options, query])
 
@@ -80,9 +92,11 @@ export function Dropdown({
 
   const leadingFor = (o: DropdownOption) => {
     const on = selectedList.includes(o.value)
+    if (o.leading) return o.leading
+    if (o.icon) return <ListIcon name={o.icon} background={o.iconBackground} />
     switch (variant) {
-      case 'avatar': return <ListAvatar initial={o.label} status={o.status ?? 'online'} />
-      case 'icon': return <ListIcon name="flag" />
+      case 'avatar': return <ListAvatar initial={o.label} status={o.status ?? 'online'} color={o.color} />
+      case 'icon': return undefined
       case 'checkbox': return <ListCheck selected={on} />
       case 'radio': return <ListRadio selected={on} />
       default: return undefined
@@ -101,7 +115,7 @@ export function Dropdown({
   const row = (o: DropdownOption) => (
     <ListItem
       compact={!o.description} role="option" aria-selected={selectedList.includes(o.value)} label={o.label} description={o.description} leading={leadingFor(o)}
-      rightElement={!!o.description && selectedList.includes(o.value)} trailing="check" onClick={() => choose(o.value)}
+      rightElement={(!!o.description || showTick) && selectedList.includes(o.value)} trailing="check" onClick={() => choose(o.value)}
     />
   )
 

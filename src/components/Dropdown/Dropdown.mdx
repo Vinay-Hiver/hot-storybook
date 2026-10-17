@@ -9,7 +9,7 @@ The menu panel that opens under a field or button, for choosing from a list. It 
 
 ## Styles
 
-Five row styles: checkboxes, avatar with a status dot, icon, radios and plain text.
+Five row styles: checkboxes, avatar with a status dot, icon, radios and plain text. In the icon style each row names its own `icon`. Avatars take a `color`.
 
 <Canvas of={DropdownStories.Styles} />
 
@@ -18,3 +18,9 @@ Five row styles: checkboxes, avatar with a status dot, icon, radios and plain te
 An optional search box for long lists, and Cancel and Apply buttons when the choice is saved on confirmation.
 
 <Canvas of={DropdownStories.SearchAndButtons} />
+
+## Mixing rows
+
+Any row can bring its own `icon` (or a `leading` element), and it wins over the list's style. So one list can mix kinds of rows, for example a "None" row with an icon above rows with coloured avatars. An icon can stand alone or sit on a round grey fill (`iconBackground`), which looks like an avatar and lines up with the avatars below it.
+
+<Canvas of={DropdownStories.MixedRows} />

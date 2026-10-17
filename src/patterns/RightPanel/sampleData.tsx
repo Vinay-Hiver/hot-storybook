@@ -5,6 +5,7 @@ import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { RightPanel, RightPanelSection, RightPanelTop } from './RightPanel'
 import { ActivityNotes } from './ActivityNotes'
+import { AssigneeField, StatusField } from './FieldSelects'
 import { customFieldKinds, fields, samples, sections } from './data'
 import type { FieldDef, SectionDef } from './data'
 
@@ -18,11 +19,6 @@ function Row({ icon, label, children, link }: { icon: IconName; label: string; c
   )
 }
 
-/** The Figma "Open" status ring: a red outline circle. */
-function OpenStatus() {
-  return <span style={{ display: 'inline-flex', color: 'var(--pastelRedSurfaceDefault)' }}><Icon name="status" size={16} /></span>
-}
-
 const redAvatar = { '--avatar-bg': 'var(--pastelRedSurfaceDefault)' } as CSSProperties
 
 /**
@@ -33,14 +29,8 @@ export function ExampleRightPanel({ open = ['contact'], hoverSection }: { open?:
   return (
     <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
       <RightPanelTop title="Inbox name">
-        <Row icon="assigned" label="Assignee">
-          <Avatar initial="M" size="small" status="online" style={redAvatar} />
-          <span style={{ marginLeft: 4 }}>Mark Scout</span>
-        </Row>
-        <Row icon="flag" label="Status">
-          <OpenStatus />
-          <span style={{ marginLeft: 4 }}>Open</span>
-        </Row>
+        <AssigneeField />
+        <StatusField />
         <Row icon="tag" label="Tags">
           <Tag color="violet" onRemove={() => {}} removeLabel="Remove Finance">Finance</Tag>
           {/* Temporary: a clickable "Add" chip is not built, so a Tag sits inside a plain button. */}
@@ -118,11 +108,8 @@ export function AllSectionsRightPanel({ show = allSectionIds }: { show?: string[
   return (
     <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
       <RightPanelTop title="Inbox name">
-        <Row icon="assigned" label="Assignee">
-          <Avatar initial="M" size="small" status="online" style={redAvatar} />
-          <span style={{ marginLeft: 4 }}>Mark Scout</span>
-        </Row>
-        <Row icon="flag" label="Status"><OpenStatus /><span style={{ marginLeft: 4 }}>Open</span></Row>
+        <AssigneeField />
+        <StatusField />
         <Row icon="tag" label="Tags"><Tag color="violet" onRemove={() => {}} removeLabel="Remove Finance">Finance</Tag></Row>
       </RightPanelTop>
       {allSectionIds.filter((id) => show.includes(id)).map((id) => (

@@ -21,6 +21,24 @@
 .hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; min-height: 36px; padding: 8px; border-radius: 6px; color: var(--slateTextTitle); font: var(--fontWeightRegular) 14px/20px var(--fontFamily); }
 .hot-rp-field__value--link { color: var(--primarySurfaceDefault); }
 
+/* The Status list is short, so it is 160px wide instead of the Dropdown's 260px */
+.hot-dropdown.hot-rp-status-dropdown { width: 160px; }
+
+/* A value you can press (Assignee, Status): hover shows the grey fill and a small white box with a down chevron, as in Figma. */
+.hot-rp-field__value--select, .hot-rp-top .hot-rp-field__value--select { flex-wrap: nowrap; padding: 0; }
+.hot-rp-select {
+  box-sizing: border-box; display: flex; align-items: center; gap: 8px; width: 100%; min-height: 32px; padding: 6px;
+  border: 0; border-radius: 6px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.hot-rp-select:hover, .hot-rp-select[aria-expanded='true'] { background: var(--slateSurfaceSlate150); }
+.hot-rp-select:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: -2px; }
+.hot-rp-select__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hot-rp-select__chevron {
+  box-sizing: border-box; display: none; align-items: center; justify-content: center; flex: none; width: 18px; height: 18px;
+  border: 0.5px solid var(--slateBorderLight); border-radius: 6px; background: var(--slateSurfaceWhite); color: var(--slateTextBody);
+}
+.hot-rp-select:is(:hover, :focus-visible, [aria-expanded='true']) .hot-rp-select__chevron { display: inline-flex; }
+
 /* Top section. Its rows are 32px with 4px between them (the sub-sections' rows are 36px with none). */
 .hot-rp-top { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
 .hot-rp-top .hot-rp-fields { gap: 4px; }

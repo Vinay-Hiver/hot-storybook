@@ -35,15 +35,26 @@
   background: var(--slateBorderMild);
 }
 
-/* Search area: 42px with buttons below, 52px without (Figma uses different padding) */
-.hot-dropdown__search { box-sizing: border-box; flex: none; padding: 8px 8px 2px; }
-.hot-dropdown--no-actions .hot-dropdown__search { padding: 12px 11px 8px; }
+/* Search area: 8px above the box (under the title, or from the top of the panel), 8px at the sides, and nothing below it: the 6px under the search box comes from the list. The box is as wide as the option rows (8px in from each side). */
+.hot-dropdown__search { box-sizing: border-box; flex: none; padding: 8px 8px 0; }
 
-/* Options: 4px side padding, 8px below */
+/* An avatar sits in the same place as a checkbox, radio or icon: those are 14px marks centred in a 24px area, so they start 5px in. The avatar (and an icon on a round fill) fills the whole 24px, so it gets 5px of space on its left to match. */
+.hot-dropdown .hot-list-el:has(> .hot-avatar), .hot-dropdown .hot-list-icon--round { margin-left: 5px; }
+
+/* The gap you see between the mark and the text is 10px for every row style. Checkboxes, radios and icons are 14px marks centred in a 24px area (5px of space inside on each side), so they need 5px more; avatars, round icons and flags fill more of the area. */
+.hot-dropdown .hot-list-item--compact .hot-list-item__main { gap: 5px; }
+.hot-dropdown .hot-list-item--compact .hot-list-item__main:is(:has(> .hot-list-el > .hot-avatar), :has(> .hot-list-icon--round)) { gap: 10px; }
+.hot-dropdown .hot-list-item--compact .hot-list-item__main:has(> .hot-country-list__flag) { gap: 6px; }
+
+/* A mark sits 9px inside its row on the left (4px of row padding + 5px of centring in its 24px area). The tick on the right and the text of a text-only row get the same 9px. */
+.hot-dropdown .hot-list-item--compact .hot-list-item__trailing { margin-right: 5px; }
+.hot-dropdown .hot-list-item--compact.hot-list-item--no-leading { padding-left: 9px; }
+
+/* Options: 6px above (under the title or the search box, or the top edge of the panel), 8px at the sides and below */
 .hot-dropdown__list {
   box-sizing: border-box;
   margin: 0;
-  padding: 0 4px 8px;
+  padding: 6px 8px 8px;
   list-style: none;
   max-height: 264px;
   overflow-y: auto;
