@@ -1,0 +1,26 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as SubNavStories from './SubNav.stories'
+
+<Meta of={SubNavStories} />
+
+# Sub-nav
+
+The second menu in the admin panel, next to the Admin sidebar. 240px wide, with a back arrow, a heading and a small line under it, then a list of pages. The list is different for each channel.
+
+## Default
+
+The selected item has a light blue background and blue text.
+
+<Canvas of={SubNavStories.Default} />
+
+## Hover
+
+Pointing at an item turns it light grey.
+
+<Canvas of={SubNavStories.Hover} />
+
+## Switch menu
+
+Pressing the heading opens a menu of the other inboxes. The open inbox has a blue tick, and the arrow turns up.
+
+<Canvas of={SubNavStories.SwitchMenu} />

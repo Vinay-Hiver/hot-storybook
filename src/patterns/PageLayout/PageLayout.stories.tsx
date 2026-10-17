@@ -5,8 +5,9 @@ import { adminSampleSections } from '../AdminSidebar/sampleData'
 import { ConversationsSidebar } from '../ConversationsSidebar'
 import { sampleSections } from '../ConversationsSidebar/sampleData'
 import { MainNav } from '../MainNav'
-import { navSampleFooterItems, navSampleItems } from '../MainNav/sampleData'
+import { navSampleFooterItems, navSampleItems, navSampleUserMenu } from '../MainNav/sampleData'
 import { ExampleRightPanel } from '../RightPanel/sampleData'
+import { SharedInboxesPage } from '../../pages/SharedInboxes'
 import { PageLayout } from './PageLayout'
 
 const meta = {
@@ -20,15 +21,6 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const note: React.CSSProperties = { font: 'var(--fontWeightRegular) 14px/20px var(--fontFamily)', color: 'var(--slateTextSubtle)' }
-
-/** Stands in for the sub-nav, which is not built yet. */
-function SubNavPlaceholder() {
-  return (
-    <div style={{ boxSizing: 'border-box', height: '100%', padding: 16, boxShadow: 'inset -1px 0 0 var(--slateBorderLight)', background: 'var(--slateSurfaceWhite)' }}>
-      <div style={note}>Sub-nav (240px, to be built)</div>
-    </div>
-  )
-}
 
 function Content() {
   return (
@@ -52,14 +44,15 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     const [navValue, setNavValue] = useState('conversations')
     const admin = variant === 'admin panel'
     const showAdmin = admin || sidebar === 'admin'
+    // The admin panel layout shows the Shared Inbox page (Shared Inbox is the selected admin item): the sub-nav with Email inboxes selected, and their table.
+    if (admin) return <div style={{ height: '100vh' }}><SharedInboxesPage channel="email" /></div>
     return (
       <div style={{ height: '100vh' }}>
         <PageLayout
-          variant={admin ? 'admin' : 'home'}
-          nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={showAdmin ? 'admin' : navValue} onChange={setNavValue} user={{ initial: 'A', name: 'Alex' }} />}
+          variant="home"
+          nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={showAdmin ? 'admin' : navValue} onChange={setNavValue} user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
           sidebar={showAdmin ? <AdminSidebar sections={adminSampleSections} value="shared-inbox" /> : <ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />}
-          subNav={admin ? <SubNavPlaceholder /> : undefined}
-          rightPanel={admin ? undefined : <ExampleRightPanel />}
+          rightPanel={<ExampleRightPanel />}
         >
           <Content />
         </PageLayout>
@@ -75,7 +68,7 @@ export const HomePage: Story = {
   parameters: { controls: { disable: true }, docs: { story: { inline: false, iframeHeight: 560 } } },
   render: () => (
     <div style={{ height: '100vh' }}>
-      <PageLayout variant="home" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} />} sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />} rightPanel={<ExampleRightPanel />}>
+      <PageLayout variant="home" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />} sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />} rightPanel={<ExampleRightPanel />}>
         <Content />
       </PageLayout>
     </div>
@@ -86,11 +79,5 @@ export const AdminPanel: Story = {
   tags: ['!dev'],
   args: { nav: null, sidebar: null, children: null },
   parameters: { controls: { disable: true }, docs: { story: { inline: false, iframeHeight: 560 } } },
-  render: () => (
-    <div style={{ height: '100vh' }}>
-      <PageLayout variant="admin" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" user={{ initial: 'A', name: 'Alex' }} />} sidebar={<AdminSidebar sections={adminSampleSections} value="shared-inbox" />} subNav={<SubNavPlaceholder />}>
-        <Content />
-      </PageLayout>
-    </div>
-  ),
+  render: () => <div style={{ height: '100vh' }}><SharedInboxesPage channel="email" /></div>,
 }

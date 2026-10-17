@@ -20,7 +20,7 @@ export type ConversationsSidebarItem = {
   /** Unique id, also the value passed to `onChange`. */
   id: string
   label: string
-  /** An icon name from the HOT icon set, or one of the pattern glyphs (`inbox`, `voice`, `spam`). */
+  /** An icon name from the HOT icon set, or one of the pattern glyphs. */
   icon: IconName | PatternGlyphName
   /** The unread count shown on the right, for example `99+`. Leave out for no count. For an inbox with `views`, the total of the views is shown instead. */
   count?: string
@@ -82,10 +82,10 @@ export function ConversationsSidebar({ title = 'Conversations', sections, value,
           </Button>
           <div className="hot-conv-sidebar__split">
             <button type="button" className="hot-conv-sidebar__create" aria-label="New" onClick={onCreate}>
-              <PatternGlyph name="plus" />
+              <Icon name="add" size={16} />
             </button>
             <button type="button" className="hot-conv-sidebar__menu" aria-label="More options" onClick={onCreateMenu}>
-              <Icon name="dropdown" size={16} />
+              <Icon name="chevrondown" size={16} />
             </button>
           </div>
         </div>

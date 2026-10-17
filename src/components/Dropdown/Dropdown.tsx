@@ -13,6 +13,8 @@ import './Dropdown.css'
 export type DropdownOption = {
   value: string
   label: string
+  /** A smaller grey line under the label (for example an email address). A row with one shows a tick when it is the selected row. */
+  description?: string
   /** Avatar style only: the dot on the avatar. Defaults to online. */
   status?: 'online' | 'offline'
 }
@@ -97,7 +99,10 @@ export function Dropdown({
   }
 
   const row = (o: DropdownOption) => (
-    <ListItem compact role="option" aria-selected={selectedList.includes(o.value)} label={o.label} leading={leadingFor(o)} onClick={() => choose(o.value)} />
+    <ListItem
+      compact={!o.description} role="option" aria-selected={selectedList.includes(o.value)} label={o.label} description={o.description} leading={leadingFor(o)}
+      rightElement={!!o.description && selectedList.includes(o.value)} trailing="check" onClick={() => choose(o.value)}
+    />
   )
 
   const classes = ['hot-dropdown', !actions && 'hot-dropdown--no-actions', !searchable && 'hot-dropdown--no-search', className].filter(Boolean).join(' ')

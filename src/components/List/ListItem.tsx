@@ -50,13 +50,15 @@ export type ListItemProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'child
   leading?: ReactNode
   /** Shows the right element: a blue check on a label row, or a blue chevron on a row with a description. */
   rightElement?: boolean
+  /** Which mark the right element draws: a chevron (default on a row with a description) or a tick (default on a row without one). */
+  trailing?: 'chevron' | 'check'
   /** The tighter size used inside dropdown menus (32px, or 28px for text only). */
   compact?: boolean
   /** Storybook only: pins hover or pressed so it can be shown without interaction. */
   forceState?: 'hover' | 'active'
 }
 
-export function ListItem({ label, description, leading, rightElement, compact, forceState, className, type = 'button', ...rest }: ListItemProps) {
+export function ListItem({ label, description, leading, rightElement, trailing, compact, forceState, className, type = 'button', ...rest }: ListItemProps) {
   const classes = [
     'hot-list-item', compact && 'hot-list-item--compact', rightElement && 'hot-list-item--right', !leading && 'hot-list-item--no-leading',
     description && 'hot-list-item--description', className,
@@ -77,9 +79,9 @@ export function ListItem({ label, description, leading, rightElement, compact, f
       </span>
       {rightElement && (
         <span className="hot-list-item__trailing" aria-hidden="true">
-          <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round">
-            {description ? <path d="M5.25 3.5 8.75 7 5.25 10.5" /> : <path d="M2.5 7.5 5.5 10.5 11.5 3.5" />}
-          </svg>
+          {(trailing ?? (description ? 'chevron' : 'check')) === 'chevron'
+            ? <Icon name="chevronright" size={14} />
+            : <Icon name="tick" size={14} />}
         </span>
       )}
     </button>

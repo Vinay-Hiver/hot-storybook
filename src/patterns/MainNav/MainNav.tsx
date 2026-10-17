@@ -1,12 +1,16 @@
-import type { ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import type { KeyboardEvent, ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { Avatar } from '../../components/Avatar'
 import { Tooltip } from '../../components/Tooltip'
 import { isPatternGlyph, PatternGlyph } from '../glyphs'
+import { HelpMenu, UserMenu } from './MainNavMenus'
+import type { UserMenuProps } from './MainNavMenus'
 import './MainNav.css'
 
-export type MainNavIcon = IconName | 'inbox' | 'helpchat'
+export type MainNavIcon = IconName
 
 export type MainNavItem = {
   /** Unique id, also the value passed to `onChange`. */
@@ -27,9 +31,55 @@ export type MainNavProps = {
   onFooterClick?: (id: string) => void
   /** The person's letter and status, shown at the bottom. Leave out to hide the avatar. */
   user?: { initial: string; name?: string; status?: 'online' | 'offline' }
-  /** Storybook only: pins the hover look on one item, by `id`. */
+  /** Fills the menu that opens from the avatar. Leave out for an avatar that does nothing when clicked. */
+  userMenu?: Omit<UserMenuProps, 'onSelect'>
+  /** Opens the Help Center menu when the footer item with the id `help` is clicked. On by default. */
+  helpMenu?: boolean
+  /** Called when a row in either menu is chosen. `menu` says which one, `id` which row. The menu closes afterwards. */
+  onMenuSelect?: (menu: 'user' | 'help', id: string) => void
+  /** Storybook only: pins hover on one item (by `id`), or shows a menu open without clicking. */
   forceHoverId?: string
+  forceMenu?: 'user' | 'help'
   className?: string
+}
+
+/** A menu that floats to the right of the nav, with its bottom edge level with the button that opened it. */
+function Flyout({ trigger, onClose, children }: { trigger: HTMLElement | null; onClose: () => void; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [pos, setPos] = useState<{ left: number; bottom: number } | null>(null)
+  useLayoutEffect(() => {
+    if (!trigger) return
+    const r = trigger.closest('.hot-main-nav')?.getBoundingClientRect() ?? trigger.getBoundingClientRect()
+    const t = trigger.getBoundingClientRect()
+    setPos({ left: r.right + 8, bottom: window.innerHeight - t.bottom - 4 })
+  }, [trigger])
+  // The menu is hidden until it is placed, so the first row takes focus once it is visible
+  useEffect(() => {
+    if (pos) ref.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus()
+  }, [pos])
+  useEffect(() => {
+    const down = (e: MouseEvent) => {
+      const el = e.target as HTMLElement
+      if (!ref.current?.contains(el) && !trigger?.contains(el)) onClose()
+    }
+    const key = (e: globalThis.KeyboardEvent) => { if (e.key === 'Escape') { onClose(); trigger?.focus() } }
+    document.addEventListener('mousedown', down)
+    document.addEventListener('keydown', key)
+    return () => { document.removeEventListener('mousedown', down); document.removeEventListener('keydown', key) }
+  }, [trigger, onClose])
+  const move = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    e.preventDefault()
+    const items = [...(ref.current?.querySelectorAll<HTMLElement>('[role="menuitem"]') ?? [])]
+    const i = items.indexOf(document.activeElement as HTMLElement)
+    items[(i + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length]?.focus()
+  }
+  return createPortal(
+    <div ref={ref} className="hot-menu-flyout" style={pos ? { left: pos.left, bottom: pos.bottom } : { visibility: 'hidden' }} onKeyDown={move}>
+      {children}
+    </div>,
+    document.body,
+  )
 }
 
 function NavIcon({ icon }: { icon: MainNavIcon }): ReactNode {
@@ -51,7 +101,15 @@ function HiverLogo() {
   )
 }
 
-export function MainNav({ items, value, onChange, footerItems = [], onFooterClick, user, forceHoverId, className }: MainNavProps) {
+export function MainNav({ items, value, onChange, footerItems = [], onFooterClick, user, userMenu, helpMenu = true, onMenuSelect, forceHoverId, forceMenu, className }: MainNavProps) {
+  const [openMenu, setOpenMenu] = useState<'user' | 'help' | null>(forceMenu ?? null)
+  const avatarRef = useRef<HTMLButtonElement>(null)
+  const helpRef = useRef<HTMLButtonElement>(null)
+  // Storybook's forceMenu needs the trigger to exist before the menu can be placed
+  const [ready, setReady] = useState(false)
+  useEffect(() => setReady(true), [])
+  const close = () => setOpenMenu(null)
+  const choose = (menu: 'user' | 'help') => (id: string) => { onMenuSelect?.(menu, id); close() }
   return (
     <nav className={['hot-main-nav', className].filter(Boolean).join(' ')} aria-label="Main">
       <div className="hot-main-nav__top">
@@ -79,18 +137,39 @@ export function MainNav({ items, value, onChange, footerItems = [], onFooterClic
         {footerItems.map((item) => (
           <Tooltip key={item.id} content={item.label} placement="right" portal boundary=".hot-main-nav" gap={2}>
             <button
+              ref={item.id === 'help' ? helpRef : undefined}
               type="button"
               className="hot-main-nav__footer-item"
               aria-label={item.label}
-              data-force-state={item.id === forceHoverId ? 'hover' : undefined}
-              onClick={() => onFooterClick?.(item.id)}
+              aria-haspopup={item.id === 'help' && helpMenu ? 'menu' : undefined}
+              aria-expanded={item.id === 'help' && helpMenu ? openMenu === 'help' : undefined}
+              data-force-state={item.id === forceHoverId || (item.id === 'help' && openMenu === 'help') ? 'hover' : undefined}
+              onClick={() => { if (item.id === 'help' && helpMenu) setOpenMenu((m) => (m === 'help' ? null : 'help')); onFooterClick?.(item.id) }}
             >
               <NavIcon icon={item.icon} />
             </button>
           </Tooltip>
         ))}
-        {user && <Avatar className="hot-main-nav__avatar" initial={user.initial} status={user.status ?? 'online'} title={user.name} />}
+        {user && (userMenu ? (
+          <button
+            ref={avatarRef}
+            type="button"
+            className="hot-main-nav__avatar-button"
+            aria-label={user.name ? `Account menu, ${user.name}` : 'Account menu'}
+            aria-haspopup="menu"
+            aria-expanded={openMenu === 'user'}
+            onClick={() => setOpenMenu((m) => (m === 'user' ? null : 'user'))}
+          >
+            <Avatar className="hot-main-nav__avatar" initial={user.initial} status={user.status ?? 'online'} />
+          </button>
+        ) : <Avatar className="hot-main-nav__avatar" initial={user.initial} status={user.status ?? 'online'} title={user.name} />)}
       </div>
+      {ready && openMenu === 'user' && userMenu && (
+        <Flyout trigger={avatarRef.current} onClose={close}><UserMenu {...userMenu} onSelect={choose('user')} /></Flyout>
+      )}
+      {ready && openMenu === 'help' && helpMenu && (
+        <Flyout trigger={helpRef.current} onClose={close}><HelpMenu onSelect={choose('help')} /></Flyout>
+      )}
     </nav>
   )
 }

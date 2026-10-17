@@ -29,7 +29,7 @@ export const viewLibrary: Record<string, ViewDef> = {
 
 /** The views under "My Work": the queues the person works from. */
 export const myWorkViews: ViewDef[] = [
-  { id: 'liveQueue', label: 'Live Queue', icon: 'bolt', hasCount: true },
+  { id: 'liveQueue', label: 'Live Queue', icon: 'boltfilled', hasCount: true },
   { id: 'standardQueue', label: 'Standard Queue', icon: 'clock', hasCount: true },
 ]
 

@@ -38,13 +38,15 @@ export type TableProps<Row> = {
   getRowId?: (row: Row, index: number) => string | number
   /** Icon buttons (1 to 4) that appear at the right end of a row on hover or keyboard focus. */
   rowActions?: TableAction<Row>[]
+  /** Makes each row clickable (and reachable with the keyboard): called with the row that was pressed. Pressing a row action does not count. */
+  onRowClick?: (row: Row, index: number) => void
   /** Storybook only: pins the hover look on one row (counting from 0). */
   forceHoverRow?: number
   className?: string
   'aria-label'?: string
 }
 
-export function Table<Row extends Record<string, unknown>>({ columns, rows, getRowId, rowActions, forceHoverRow, className, ...rest }: TableProps<Row>) {
+export function Table<Row extends Record<string, unknown>>({ columns, rows, getRowId, rowActions, onRowClick, forceHoverRow, className, ...rest }: TableProps<Row>) {
   return (
     <div className={['hot-table-wrap', className].filter(Boolean).join(' ')}>
       <table className="hot-table" {...rest}>
@@ -62,7 +64,14 @@ export function Table<Row extends Record<string, unknown>>({ columns, rows, getR
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={getRowId ? getRowId(row, i) : i} className="hot-table__row" data-force-state={forceHoverRow === i ? 'hover' : undefined}>
+            <tr
+              key={getRowId ? getRowId(row, i) : i}
+              className={`hot-table__row${onRowClick ? ' hot-table__row--clickable' : ''}`}
+              data-force-state={forceHoverRow === i ? 'hover' : undefined}
+              tabIndex={onRowClick ? 0 : undefined}
+              onClick={onRowClick ? () => onRowClick(row, i) : undefined}
+              onKeyDown={onRowClick ? (e) => { if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); onRowClick(row, i) } } : undefined}
+            >
               {columns.map((c, ci) => (
                 <td key={c.key} className={`hot-table__td${c.align && c.align !== 'left' ? ` hot-table__td--${c.align}` : ''}${rowActions && ci === columns.length - 1 ? ' hot-table__td--actions' : ''}`}>
                   {c.render ? c.render(row, i) : (row[c.key] as ReactNode)}
@@ -72,7 +81,7 @@ export function Table<Row extends Record<string, unknown>>({ columns, rows, getR
                         <span key={a.label} className="hot-table__action-wrap">
                           {a.divided && <span className="hot-table__divider" aria-hidden="true" />}
                           <Tooltip content={a.label} placement="top">
-                            <Button iconOnly variant="ghost" size="xs" className="hot-table__action" aria-label={a.label} onClick={() => a.onClick?.(row, i)}>
+                            <Button iconOnly variant="ghost" size="xs" className="hot-table__action" aria-label={a.label} onClick={(e) => { e.stopPropagation(); a.onClick?.(row, i) }}>
                               <Icon name={a.icon} size={16} />
                             </Button>
                           </Tooltip>

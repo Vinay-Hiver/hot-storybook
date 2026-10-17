@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react'
 import { Icon } from '../../icons/Icon'
-import { Bolt } from './Bolt'
 import { slaMessage, slaNames } from './sla'
 import type { SlaKind, SlaStatus } from './sla'
 import './Sla.css'
@@ -22,10 +21,10 @@ export function SlaAlert({ kind, status, time, onClick, className, ...rest }: Sl
   const content = (
     <>
       <span className="hot-sla-alert__main">
-        <span className="hot-sla-alert__badge" aria-hidden="true"><Bolt /></span>
+        <span className="hot-sla-alert__badge" aria-hidden="true"><Icon name="boltfilled" /></span>
         <span className="hot-sla-alert__message">{message}</span>
       </span>
-      <Icon name="dropdown" size={14} />
+      <Icon name="chevrondown" size={14} />
     </>
   )
   const label = `${slaNames[kind]}: ${message}`

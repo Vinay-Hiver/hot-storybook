@@ -15,7 +15,6 @@ const meta = {
     error: { control: 'boolean' },
     disabled: { control: 'boolean' },
     required: { control: 'boolean' },
-    showCount: { control: 'boolean' },
     prefix: { control: false },
     suffix: { control: false },
     action: { control: false },
@@ -45,16 +44,16 @@ type PlaygroundArgs = {
   error: boolean
   disabled: boolean
   required: boolean
-  showCount: boolean
   prefix: 'none' | 'icon' | 'text'
+  suffix: 'none' | 'icon' | 'text' | 'count'
   action: boolean
   kind: 'text' | 'search' | 'tags' | 'phone'
 }
 
 /** One field you can change from the Controls panel. */
 export const Playground: StoryObj<PlaygroundArgs> = {
-  parameters: { layout: 'centered', controls: { exclude: ['suffix', 'forceState'] } },
-  args: { showLabel: true, label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', size: 'md', error: false, disabled: false, required: false, showCount: false, prefix: 'none', action: false, kind: 'text' },
+  parameters: { layout: 'centered', controls: { exclude: ['forceState'] } },
+  args: { showLabel: true, label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', size: 'md', error: false, disabled: false, required: false, prefix: 'none', suffix: 'none', action: false, kind: 'text' },
   argTypes: {
     showLabel: { control: 'boolean', name: 'label', description: 'Show the label above the field' },
     label: { control: 'text', name: 'label text', if: { arg: 'showLabel' } },
@@ -63,9 +62,10 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     size: { control: 'inline-radio', options: ['sm', 'md'] },
     kind: { control: 'inline-radio', options: ['text', 'search', 'tags', 'phone'], description: 'Text, a search field, a tags input, or a phone input with a country button' },
     prefix: { control: 'inline-radio', options: ['none', 'icon', 'text'], description: 'Content before the text (text kind only)' },
+    suffix: { control: 'inline-radio', options: ['none', 'icon', 'text', 'count'], description: 'Content after the text: an icon (for example a chevron on a dropdown field), text such as a unit, or a live counter (text kind only)' },
     action: { control: 'boolean', description: 'Divided action on the right edge' },
   },
-  render: function Render({ showLabel, prefix, action, showCount, showHelper, helperText, kind, ...rest }) {
+  render: function Render({ showLabel, prefix, suffix, action, showHelper, helperText, kind, ...rest }) {
     const args = { ...rest, label: showLabel ? rest.label : undefined }
     const [tags, setTags] = useState<string[]>(['Label', 'Label'])
     if (kind === 'tags') return <Input key="tags" {...args} helperText={showHelper ? helperText : undefined} tags={tags} onTagsChange={setTags} />
@@ -75,9 +75,9 @@ export const Playground: StoryObj<PlaygroundArgs> = {
       <Input
         {...args}
         helperText={showHelper ? helperText : undefined}
-        showCount={showCount}
-        maxLength={showCount ? 50 : undefined}
+        maxLength={suffix === 'count' ? 50 : undefined}
         prefix={prefix === 'icon' ? <Icon name="info" size={14} /> : prefix === 'text' ? 'https://' : undefined}
+        suffix={suffix === 'icon' ? <Icon name="chevrondown" size={16} /> : suffix === 'text' ? 'USD' : suffix === 'count' ? { count: true } : undefined}
         action={action ? { label: 'Action' } : undefined}
       />
     )
@@ -110,7 +110,9 @@ export const Affixes: Story = {
         <Input label="Text prefix" placeholder="yourcompany.com" prefix="https://" />
       </div>
       <div style={col}>
-        <Input label="Counter" placeholder="Short description" maxLength={50} showCount />
+        <Input label="Suffix: icon" placeholder="Select an option" suffix={<Icon name="chevrondown" size={16} />} readOnly />
+        <Input label="Suffix: text" placeholder="Amount" suffix="USD" />
+        <Input label="Suffix: counter" placeholder="Short description" maxLength={50} suffix={{ count: true }} />
         <Input label="With action" placeholder="Invite link" action={{ label: 'Copy' }} />
       </div>
     </div>
@@ -194,7 +196,7 @@ export const AllVariants: Story = {
                     return (
                       <div key={name}>
                         <div style={{ ...label, marginBottom: 8 }}>{name}</div>
-                        {kind === 'text' && <Input {...common} placeholder="Placeholder" maxLength={50} showCount defaultValue={filled ? 'Filled value' : undefined} />}
+                        {kind === 'text' && <Input {...common} placeholder="Placeholder" maxLength={50} suffix={{ count: true }} defaultValue={filled ? 'Filled value' : undefined} />}
                         {kind === 'tags' && <Input {...common} placeholder="Placeholder" defaultTags={filled ? ['Label', 'Label'] : []} />}
                         {kind === 'phone' && <Input {...common} country={unitedStates} placeholder={filled ? undefined : undefined} defaultValue={filled ? '(555) 000-0000' : undefined} />}
                       </div>

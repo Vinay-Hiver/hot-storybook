@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MainNav } from './MainNav'
-import { navSampleFooterItems as footerItems, navSampleIds as ids, navSampleItems as items } from './sampleData'
+import { navSampleFooterItems as footerItems, navSampleIds as ids, navSampleItems as items, navSampleUserMenu as userMenu } from './sampleData'
 
 const meta = {
   title: 'Patterns/Main nav',
   component: MainNav,
   parameters: { layout: 'centered' },
-  argTypes: { items: { control: false }, footerItems: { control: false }, value: { control: false }, onChange: { control: false }, onFooterClick: { control: false }, user: { control: false }, forceHoverId: { control: false } },
+  argTypes: { items: { control: false }, footerItems: { control: false }, value: { control: false }, onChange: { control: false }, onFooterClick: { control: false }, user: { control: false }, userMenu: { control: false }, forceHoverId: { control: false }, forceMenu: { control: false }, onMenuSelect: { control: false } },
 } satisfies Meta<typeof MainNav>
 
 export default meta
@@ -28,7 +28,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     if (prev !== selected) { setPrev(selected); setValue(selected) }
     return (
       <div style={{ height: 834 }}>
-        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Alex', status }} />
+        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Alex', status }} userMenu={userMenu} />
       </div>
     )
   },

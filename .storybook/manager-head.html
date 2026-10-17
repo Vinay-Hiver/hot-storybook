@@ -1,3 +1,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* The "Playground" story shows a play icon in the sidebar instead of the story icon. It takes the colour of the story icon, so it still turns white when selected. */
+  a[id$='--playground'] svg[type='story'] {
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 2.8L11 7L4 11.2Z' fill='black' stroke='black' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px 14px no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 2.8L11 7L4 11.2Z' fill='black' stroke='black' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") center / 14px 14px no-repeat;
+  }
+  a[id$='--playground'] svg[type='story'] use { visibility: hidden; }
+</style>

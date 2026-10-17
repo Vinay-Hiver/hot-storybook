@@ -4,7 +4,8 @@
   z-index: 1000;
   top: calc(100% + 5px);
   left: 0;
-  width: 288px;
+  width: 100%;
+  min-width: 320px; /* the default width of the whole phone input */
   max-width: calc(100vw - 32px);
 }
 /* Product: the list scrolls and is at most half the screen tall */

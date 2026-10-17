@@ -1,4 +1,4 @@
-import { useCallback, useId, useState } from 'react'
+import { isValidElement, useCallback, useId, useState } from 'react'
 import type { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
 import { Icon } from '../../icons'
 import { FormField } from './FormField'
@@ -21,12 +21,10 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'p
   prefix?: ReactNode
   /** Makes it a search field: a 16px search icon before the text and `type="search"`. Use with `size="sm"` inside lists and menus. */
   search?: boolean
-  /** Content after the text, such as a unit. */
-  suffix?: ReactNode
+  /** Content after the text: a 14px or 16px `<Icon>` (for example a chevron on a dropdown field), short text such as a unit, or `{ count: true }` for a live "0/50" counter (needs `maxLength`). */
+  suffix?: ReactNode | { count: true }
   /** A divided action on the right edge (Figma "With CTA"), for example "Copy". */
   action?: { label: string; onClick?: () => void }
-  /** Shows a live "0/50" counter. Needs `maxLength`. */
-  showCount?: boolean
   /** Stretch to the width of the parent instead of 320px. */
   fullWidth?: boolean
   /** Turns the field into a tags input. Typed text becomes a removable Tag on Enter or comma. */
@@ -50,8 +48,12 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'p
   forceState?: ForcedState
 }
 
+function isCountSuffix(s: unknown): s is { count: true } {
+  return typeof s === 'object' && s !== null && !isValidElement(s) && 'count' in s
+}
+
 export function Input({
-  label, helperText, error, size = 'md', prefix, search, suffix, action, showCount, fullWidth, forceState, tags, defaultTags, onTagsChange, country, onCountryClick, countries, countryId, onCountryChange, countryListOpen,
+  label, helperText, error, size = 'md', prefix, search, suffix, action, fullWidth, forceState, tags, defaultTags, onTagsChange, country, onCountryClick, countries, countryId, onCountryChange, countryListOpen,
   id: idProp, className, disabled, required, maxLength, value, defaultValue, onChange, ...rest
 }: InputProps) {
   const generated = useId()
@@ -68,7 +70,8 @@ export function Input({
   const open = countryListOpen ?? listOpen
   const closeList = useCallback(() => setListOpen(false), [])
   const [length, setLength] = useState(String(value ?? defaultValue ?? '').length)
-  const count = showCount && maxLength ? `${value === undefined ? length : String(value).length}/${maxLength}` : null
+  const wantsCount = isCountSuffix(suffix)
+  const count = wantsCount && maxLength ? `${value === undefined ? length : String(value).length}/${maxLength}` : null
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const el = e.target
@@ -105,7 +108,7 @@ export function Input({
           <span className="hot-field__flag" aria-hidden="true">{shownCountry.flag}</span>
           <span className="hot-field__dial">{shownCountry.dialCode}</span>
           <span className="hot-field__chevron" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.33" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6l4 4 4-4" /></svg>
+            <Icon name="chevrondown" size={16} />
           </span>
         </button>
       )}
@@ -136,7 +139,7 @@ export function Input({
         />
       )}
       {count && <span className="hot-field__affix hot-field__count">{count}</span>}
-      {suffix && <span className="hot-field__affix">{suffix}</span>}
+      {suffix && !wantsCount && <span className={`hot-field__affix${typeof suffix === 'string' ? '' : ' hot-field__affix--icon'}`}>{suffix as ReactNode}</span>}
       {countries && shownCountry && open && (
         <CountryList
           countries={countries} selectedId={activeId} onClose={closeList}

@@ -2,7 +2,7 @@ import type { MainNavItem } from './MainNav'
 
 /** The Main nav's example icons, shared by the Main nav and Page layout stories. */
 export const navSampleItems: MainNavItem[] = [
-  { id: 'conversations', label: 'Conversations', icon: 'inbox' },
+  { id: 'conversations', label: 'Conversations', icon: 'conversations' },
   { id: 'notifications', label: 'Notifications', icon: 'notification' },
   { id: 'templates', label: 'Templates', icon: 'movetofolder' },
   { id: 'customers', label: 'Customers', icon: 'contact' },
@@ -15,3 +15,6 @@ export const navSampleFooterItems: MainNavItem[] = [
 ]
 export const navSampleIds = navSampleItems.map((i) => i.id)
 
+
+/** The account menu's example person, shared by the Main nav and Page layout stories. */
+export const navSampleUserMenu = { name: 'Praveen Borawar', email: 'praveen.b@hiverhq.co.in', availability: 'Available on Chat, Email and Voice' }
