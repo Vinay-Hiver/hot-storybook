@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import type { ReactNode } from 'react'
-import { Button } from '../../components/Button'
+import { Button } from '../Button'
 import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import './Modal.css'

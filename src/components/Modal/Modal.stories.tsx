@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
-import { Radio, RadioGroup } from '../../components/Radio'
+import { Button } from '../Button'
+import { Input } from '../Input'
+import { Radio, RadioGroup } from '../Radio'
 import type { IconName } from '../../icons/iconData'
 import { Modal, ModalNote, ModalText } from './Modal'
 
 const meta = {
-  title: 'Patterns/Modal',
+  title: 'Components/Modal',
   component: Modal,
   parameters: { layout: 'centered' },
   // Only the Playground's own controls are shown; the component's props are hidden from the panel.

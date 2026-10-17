@@ -87,8 +87,34 @@ const preview: Preview = {
       },
     },
 
+    // No background or grid buttons in the toolbar
+    backgrounds: { disable: true },
+
     options: {
-      storySort: { order: ['Foundations', ['Colors', 'Typography', 'Icons'], 'Components', 'Patterns', 'Pages', ['Home page', 'Admin panel'], 'Admin panel'] },
+      // The sections in a fixed order, and everything inside a section (components, patterns, pages) alphabetically.
+      // The stories of one component keep the order they are written in, so Playground stays first.
+      storySort: (a, b) => {
+        const sections = ['Foundations', 'Components', 'Patterns', 'Pages', 'Admin panel']
+        const fixed = { Foundations: ['Colors', 'Typography', 'Icons'], Pages: ['Home page', 'Admin panel'] }
+        if (a.title === b.title) return 0
+        const pa = a.title.split('/')
+        const pb = b.title.split('/')
+        for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+          const x = pa[i]
+          const y = pb[i]
+          if (x === y) continue
+          if (x === undefined) return -1
+          if (y === undefined) return 1
+          const list = i === 0 ? sections : fixed[pa[0]]
+          if (list) {
+            const ix = list.indexOf(x)
+            const iy = list.indexOf(y)
+            if (ix !== iy) return (ix < 0 ? list.length : ix) - (iy < 0 ? list.length : iy)
+          }
+          return x.localeCompare(y, undefined, { sensitivity: 'base' })
+        }
+        return 0
+      },
     },
 
     a11y: {
