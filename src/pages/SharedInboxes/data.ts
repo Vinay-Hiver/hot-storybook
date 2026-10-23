@@ -1,11 +1,16 @@
 import type { IconName } from '../../icons/iconData'
 import type { SubNavChannelId } from '../../patterns/SubNav/data'
 
+/** How an email inbox is connected to its mailbox. */
+export type AccountType = 'Outlook User Account' | 'Outlook Shared Mailbox' | 'Forwarding Mailbox' | 'Distribution List or Microsoft 365 Group'
+
 export type Inbox = {
   id: string
   name: string
-  /** Only email inboxes have an address; it shows under the heading of their settings. */
+  /** Only email inboxes have an address; it shows under the heading of their settings and in the list. */
   email?: string
+  /** Only email inboxes have one; it shows in the list. */
+  accountType?: AccountType
 }
 
 export type InboxChannel = {
@@ -23,10 +28,10 @@ export const sharedInboxChannels: InboxChannel[] = [
   {
     id: 'email', label: 'Email Inboxes', singular: 'Email Inbox', icon: 'mailbox',
     inboxes: [
-      { id: 'email-1', name: 'Customer Support', email: 'support@acme.com' },
-      { id: 'email-2', name: 'Sales Enquiries', email: 'sales@acme.com' },
-      { id: 'email-3', name: 'Billing', email: 'billing@acme.com' },
-      { id: 'email-4', name: 'Partnerships', email: 'partners@acme.com' },
+      { id: 'email-1', name: 'Customer Support', email: 'support@acme.com', accountType: 'Outlook User Account' },
+      { id: 'email-2', name: 'Sales Enquiries', email: 'sales@acme.com', accountType: 'Outlook Shared Mailbox' },
+      { id: 'email-3', name: 'Billing', email: 'billing@acme.com', accountType: 'Forwarding Mailbox' },
+      { id: 'email-4', name: 'Partnerships', email: 'partners@acme.com', accountType: 'Distribution List or Microsoft 365 Group' },
     ],
   },
   {

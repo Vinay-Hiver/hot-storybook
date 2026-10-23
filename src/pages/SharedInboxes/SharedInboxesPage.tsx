@@ -51,8 +51,11 @@ export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, 
   const channel = sharedInboxChannels.find((c) => c.id === channelId) ?? sharedInboxChannels[0]
   const inboxes = lists[channel.id] ?? []
 
+  // Email inboxes also show their address and how the mailbox is connected; the other channels have neither.
   const columns: TableColumn<Inbox>[] = [
-    { key: 'name', header: 'Name', render: (r) => <span className="hot-shared-inboxes__name"><ChannelIcon icon={channel.icon} />{r.name}</span> },
+    { key: 'name', header: 'Name', width: channel.id === 'email' ? '28%' : undefined, render: (r) => <span className="hot-shared-inboxes__name"><ChannelIcon icon={channel.icon} />{r.name}</span> },
+    // The Account Type column takes what is left, so its longest value ("Distribution List or Microsoft 365 Group") fits
+    ...(channel.id === 'email' ? [{ key: 'email', header: 'Email', width: '27%' }, { key: 'accountType', header: 'Account Type' }] : []),
     { key: 'actions', width: 100 },
   ]
 
