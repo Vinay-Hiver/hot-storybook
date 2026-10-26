@@ -9,7 +9,7 @@ type GalleryArgs = { size: IconSize }
 const meta: Meta<GalleryArgs> = {
   title: 'Foundations/Icons',
   parameters: { layout: 'fullscreen' },
-  argTypes: { size: { control: 'inline-radio', options: [14, 16, 24], description: '14px = non-actionable, 16px = actionable, 24px = future use' } },
+  argTypes: { size: { control: 'inline-radio', options: [14, 16, 24, 30], description: '14px = non-actionable, 16px = actionable, 24px = future use, 30px = the file-type icons' } },
   args: { size: 16 },
 }
 export default meta

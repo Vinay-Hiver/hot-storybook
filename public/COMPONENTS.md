@@ -413,7 +413,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 
 ## Icons
 
-`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 185 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
+`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 196 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
 
 ## Colour tokens
 

@@ -119,4 +119,4 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Built:** Email and Account Type columns in the Shared Inboxes > Email inboxes table (one account type for each of the four inboxes).
 - **Decided:** every counted view in each inbox shows 1 conversation by default, so an inbox's total is its number of counted views.
 - **Built:** the Voice inbox now has views (Mine, Unassigned, All assigned, Tags, Closed) and Personal has views (Inbox, Tags, Archived, Trash), from the screenshots you sent.
-
+- **Built:** the 11 file-type icons for attachments (PDF, PPT, XLS, DOC, DOCX, MP4, MOV, TXT, ZIP, RAR, Image) from the Multiple Attachments in Notes file, as `filepdf`, `fileppt` and so on, at a new 30px size. **Decided:** the 24×30 drawing sits in a 30×30 canvas (3px added on each side, so the square is exact); the icons keep their own colours, bound to the pastel tokens; the ZIP and RAR body uses the same colour as DOC (`pastelYellow700`).

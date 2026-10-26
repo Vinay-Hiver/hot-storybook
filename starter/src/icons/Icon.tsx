@@ -8,14 +8,14 @@ export type IconProps = Omit<SVGProps<SVGSVGElement>, 'name' | 'width' | 'height
   name: IconName
   /**
    * Artwork size in px. Each size is drawn separately in Figma with its own stroke weight:
-   * 14 (stroke 1.1, non-actionable), 16 (stroke 1.3, actionable, default), 24 (stroke 1.5).
+   * 14 (stroke 1.1, non-actionable), 16 (stroke 1.3, actionable, default), 24 (stroke 1.5). 30 is only for the file-type icons (`filepdf`, `filexls`, ...).
    */
   size?: IconSize
   /** Accessible name. Leave empty for decorative icons, which are hidden from screen readers. */
   title?: string
 }
 
-const sizes: IconSize[] = [14, 16, 24]
+const sizes: IconSize[] = [14, 16, 24, 30]
 
 /** Uses the requested size when it exists for this icon, otherwise the closest drawn size. */
 function pickSize(name: IconName, wanted: IconSize): IconSize {
