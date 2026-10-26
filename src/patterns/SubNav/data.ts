@@ -96,15 +96,15 @@ export const subNavChannels: Record<SubNavChannelId, SubNavChannelDef> = {
     items: ['aiAgent', 'members', 'autoAssignment', 'preChatForm', 'widgetDesign', 'transcript', 'widgetScript', 'settings'],
   },
   voice: {
-    id: 'voice', label: 'Voice', subtitle: false, switcher: 'none', defaultSelected: 'members',
+    id: 'voice', label: 'Voice', subtitle: false, switcher: 'box', defaultSelected: 'members',
     items: ['members', 'messages', 'settings'],
   },
   sms: {
-    id: 'sms', label: 'SMS', subtitle: false, switcher: 'plain', defaultSelected: 'members',
+    id: 'sms', label: 'SMS', subtitle: false, switcher: 'box', defaultSelected: 'members',
     items: ['members', 'generalSettings'],
   },
   whatsapp: {
-    id: 'whatsapp', label: 'WhatsApp', subtitle: false, switcher: 'plain', defaultSelected: 'members',
+    id: 'whatsapp', label: 'WhatsApp', subtitle: false, switcher: 'box', defaultSelected: 'members',
     items: ['members', 'configuration', 'generalSettings'],
   },
 }

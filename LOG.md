@@ -124,3 +124,4 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Decided:** Admin sidebar items follow the Sub-nav item spacing (Figma 3209:8118): 216px wide, 12px in from each side, 2px apart (changed from the Figma 4px at the user's request), 32px high, 8px padding and gap. The section headings and the header now start at 20px, in line with the icons.
 - **Decided:** the browser tab reads "Storybook • Page name" (was "Page name ⋅ Storybook"), set in `.storybook/manager.ts`.
 - **Decided:** text in the Admin sidebar and the Sub-nav cannot be selected (`user-select: none`).
+- **Decided:** Voice, SMS and WhatsApp inbox Sub-navs now use the boxed switcher with the inbox menu, like Email, Slack and Chat (Voice had none; SMS and WhatsApp had the bare arrow).
