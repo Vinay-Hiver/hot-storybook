@@ -1,5 +1,6 @@
 /* HOT Design System — Admin panel sidebar. Values read from the Figma "Admin Panel" frame; colors use tokens only. */
 .hot-admin-sidebar {
+  user-select: none;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

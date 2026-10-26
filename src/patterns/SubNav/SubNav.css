@@ -1,5 +1,6 @@
 /* HOT Design System — Sub-nav. Values read from the Figma "Sub-nav" frame (HOT Storybook - AI Boilerplate, 3205:3643); colors use tokens only. */
 .hot-sub-nav {
+  user-select: none;
   position: relative; /* the switch menu opens under the heading */
   box-sizing: border-box;
   display: flex;
