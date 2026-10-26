@@ -17,7 +17,9 @@ export type DropdownOption = {
   label: string
   /** A smaller grey line under the label (for example an email address). A row with one shows a tick when it is the selected row. */
   description?: string
-  /** Avatar style only: the dot on the avatar. Defaults to online. */
+  /** Avatar style only: shows the status dot on this row's avatar. Off by default. */
+  showStatus?: boolean
+  /** Avatar style only, with `showStatus`: online (default) or offline. */
   status?: 'online' | 'offline'
   /** Avatar style only: the colour of the avatar. */
   color?: AvatarColor
@@ -95,7 +97,7 @@ export function Dropdown({
     if (o.leading) return o.leading
     if (o.icon) return <ListIcon name={o.icon} background={o.iconBackground} />
     switch (variant) {
-      case 'avatar': return <ListAvatar initial={o.label} showStatus status={o.status ?? 'online'} color={o.color} />
+      case 'avatar': return <ListAvatar initial={o.label} showStatus={o.showStatus} status={o.status ?? 'online'} color={o.color} />
       case 'icon': return undefined
       case 'checkbox': return <ListCheck selected={on} />
       case 'radio': return <ListRadio selected={on} />

@@ -13,22 +13,23 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-type PlaygroundArgs = { selected: string; status: 'online' | 'offline' }
+type PlaygroundArgs = { selected: string; showStatus: boolean; status: 'online' | 'offline' }
 
 /** A nav you can change from the Controls panel. Clicking an icon selects it. */
 export const Playground: StoryObj<PlaygroundArgs> = {
-  args: { selected: 'conversations', status: 'online' },
+  args: { selected: 'conversations', showStatus: false, status: 'online' },
   argTypes: {
     selected: { control: 'select', options: ids, name: 'selected item' },
-    status: { control: 'inline-radio', options: ['online', 'offline'], name: 'avatar status' },
+    showStatus: { control: 'boolean', name: 'avatar status dot', description: 'Shows the status dot on the avatar' },
+    status: { control: 'inline-radio', options: ['online', 'offline'], name: 'avatar status', if: { arg: 'showStatus' } },
   },
-  render: function Render({ selected, status }) {
+  render: function Render({ selected, showStatus, status }) {
     const [value, setValue] = useState(selected)
     const [prev, setPrev] = useState(selected)
     if (prev !== selected) { setPrev(selected); setValue(selected) }
     return (
       <div style={{ height: 834 }}>
-        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Alex', status }} userMenu={userMenu} />
+        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Alex', showStatus, status }} userMenu={userMenu} />
       </div>
     )
   },
