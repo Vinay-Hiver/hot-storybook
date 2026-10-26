@@ -112,3 +112,11 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Decided:** the Figma Design tab (`@storybook/addon-designs`) was tried and removed again, at your request.
 - **Built:** pull request [storybookjs/storybook#36853](https://github.com/storybookjs/storybook/pull/36853), opened from the `Vinay-Hiver` account with no co-author line, fixing a broken link in Storybook's README.
 - **Decided:** `THINGS_TO_BE_FIXED.md` holds only what needs action; this file holds what was built, decided and fixed.
+
+## 26-Oct
+
+- **Built:** Agent docs and the starter template. `public/COMPONENTS.md` (components, props, tokens, page recipes, about 5,600 tokens) and `ICONS.md` are generated from the code before every Storybook build; `starter/` is a ready Vite and React project with the components; `public/START-HERE.md` is the one file a designer drops into a folder and asks Claude to read. **Decided:** the package option is parked for later; the setup has to be plug and play (a plain markdown file, no install).
+- **Built:** Email and Account Type columns in the Shared Inboxes > Email inboxes table (one account type for each of the four inboxes).
+- **Decided:** every counted view in each inbox shows 1 conversation by default, so an inbox's total is its number of counted views.
+- **Built:** the Voice inbox now has views (Mine, Unassigned, All assigned, Tags, Closed) and Personal has views (Inbox, Tags, Archived, Trash), from the screenshots you sent.
+
