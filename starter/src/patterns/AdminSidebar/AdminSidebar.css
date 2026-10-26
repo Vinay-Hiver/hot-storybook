@@ -33,7 +33,7 @@
   color: var(--slateTextSubtle);
 }
 /* Items follow the Sub-nav: 216px wide (12px in from each side), 4px apart */
-.hot-admin-sidebar__list { display: flex; flex-direction: column; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.hot-admin-sidebar__list { display: flex; flex-direction: column; gap: 2px; list-style: none; margin: 0; padding: 0; }
 
 .hot-admin-sidebar__item {
   box-sizing: border-box;
