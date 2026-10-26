@@ -10,7 +10,7 @@ import '../src/tokens/typography.css'
  */
 const plainFlags = new Set([
   'disabled', 'error', 'invalid', 'required', 'search', 'fullWidth', 'indeterminate', 'iconOnly', 'loading',
-  'compact', 'divided', 'searchable', 'reorderable', 'customizeWidgets', 'hasCount', 'dismissible', 'showClose', 'portal',
+  'compact', 'divided', 'searchable', 'reorderable', 'customizeWidgets', 'hasCount', 'dismissible', 'showClose', 'portal', 'showStatus',
 ])
 
 type ArgTypeLike = { type?: { name?: string; value?: unknown }; control?: unknown; table?: { disable?: boolean; defaultValue?: { summary?: string } } }
@@ -41,7 +41,7 @@ const controlOrder = [
   'removable', 'removeLabel', 'buttons', 'openInbox', 'inboxId', 'settingsItem', 'showCounts', 'show', 'tabs', 'tabCount',
   'counts', 'rowCount', 'actionCount', 'options', 'name',
   // look and add-ons
-  'size', 'width', 'placement', 'status', 'time', 'iconLeft', 'iconRight', 'leading', 'rightElement', 'trailing', 'prefix',
+  'size', 'width', 'placement', 'showStatus', 'status', 'time', 'iconLeft', 'iconRight', 'leading', 'rightElement', 'trailing', 'prefix',
   'suffix', 'search', 'action', 'showCount', 'compact', 'switcher', 'switchOptions', 'switchValue', 'showClose',
 ]
 const lateOrder = [

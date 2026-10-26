@@ -21,7 +21,8 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `color?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" — Background colour of the circle.
 - `initial`: string — The letter shown in the circle.
 - `size?`: "default" | "small" (default default) — Default is 24px, small is 18px.
-- `status?`: "online" | "offline" (default online) — Green dot when online, grey dot when offline.
+- `showStatus?`: boolean (default false) — Shows the status dot at the bottom right.
+- `status?`: "online" | "offline" (default online) — With showStatus: a green dot when online (default), a grey dot when offline.
 
 ```tsx
 <Avatar initial="P" size="small" color="red" status="online" />
@@ -102,9 +103,10 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 
 ### ListAvatar
 `import { ListAvatar } from './components/List'` — The Avatar component in the 24px left-element area (18px when small).
-- `status?`: "online" | "offline" (default online) — Green dot when online, grey dot when offline.
+- `status?`: "online" | "offline" (default online) — With showStatus: a green dot when online (default), a grey dot when offline.
 - `size?`: "default" | "small" (default default) — Default is 24px, small is 18px.
 - `initial`: string — The letter shown in the circle.
+- `showStatus?`: boolean — Shows the status dot at the bottom right.
 
 ### ListCheck
 `import { ListCheck } from './components/List'` — Visual-only checkbox, for rows that are already a button.

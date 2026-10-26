@@ -158,9 +158,9 @@ export function MainNav({ items, value, onChange, footerItems = [], onFooterClic
             aria-expanded={openMenu === 'user'}
             onClick={() => setOpenMenu((m) => (m === 'user' ? null : 'user'))}
           >
-            <Avatar className="hot-main-nav__avatar" initial={user.initial} status={user.status ?? 'online'} />
+            <Avatar className="hot-main-nav__avatar" initial={user.initial} showStatus status={user.status ?? 'online'} />
           </button>
-        ) : <Avatar className="hot-main-nav__avatar" initial={user.initial} status={user.status ?? 'online'} title={user.name} />)}
+        ) : <Avatar className="hot-main-nav__avatar" initial={user.initial} showStatus status={user.status ?? 'online'} title={user.name} />)}
       </div>
       {ready && openMenu === 'user' && userMenu && (
         <Flyout trigger={avatarRef.current} onClose={close}><UserMenu {...userMenu} onSelect={choose('user')} /></Flyout>

@@ -51,8 +51,8 @@ export const LeftElements: Story = {
   render: () => (
     <div style={col}>
       <ListItem label="Text only" />
-      <ListItem label="Avatar online" leading={<ListAvatar initial="A" status="online" />} />
-      <ListItem label="Avatar offline" leading={<ListAvatar initial="A" status="offline" />} />
+      <ListItem label="Avatar online" leading={<ListAvatar initial="A" showStatus status="online" />} />
+      <ListItem label="Avatar offline" leading={<ListAvatar initial="A" showStatus status="offline" />} />
       <ListItem label="Icon" leading={<ListIcon name="flag" />} />
       <ListItem label="Radio" leading={<ListRadio selected />} />
       <ListItem label="Checkbox" leading={<ListCheck selected />} />
@@ -122,10 +122,10 @@ export const AllVariants: Story = {
         <section>
           <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>Left elements</h3>
           <div style={row}>
-            <ListAvatar initial="A" status="online" />
-            <ListAvatar initial="A" status="offline" />
-            <ListAvatar initial="A" status="online" size="small" />
-            <ListAvatar initial="A" status="offline" size="small" />
+            <ListAvatar initial="A" showStatus status="online" />
+            <ListAvatar initial="A" showStatus status="offline" />
+            <ListAvatar initial="A" showStatus status="online" size="small" />
+            <ListAvatar initial="A" showStatus status="offline" size="small" />
             <ListIcon name="flag" />
             <ListRadio selected={false} />
             <ListRadio selected />

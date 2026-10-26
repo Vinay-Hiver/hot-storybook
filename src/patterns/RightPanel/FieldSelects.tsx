@@ -60,7 +60,7 @@ export function AssigneeField({ value, onChange, people = sampleAssignees }: Ass
   return (
     <SelectValue
       icon="assigned" label="Assignee" open={open} onOpenChange={setOpen} ariaLabel={`Assignee: ${name}`}
-      shown={person ? <Avatar initial={name} size="small" color={person.color} status={person.status} /> : <Icon name="user" size={14} />}
+      shown={person ? <Avatar initial={name} size="small" color={person.color} /> : <Icon name="user" size={14} />}
     >
       <Dropdown
         variant="avatar" searchable searchPlaceholder="Search Assignee" value={current}

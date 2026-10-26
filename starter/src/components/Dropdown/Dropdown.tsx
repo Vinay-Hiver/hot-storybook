@@ -95,7 +95,7 @@ export function Dropdown({
     if (o.leading) return o.leading
     if (o.icon) return <ListIcon name={o.icon} background={o.iconBackground} />
     switch (variant) {
-      case 'avatar': return <ListAvatar initial={o.label} status={o.status ?? 'online'} color={o.color} />
+      case 'avatar': return <ListAvatar initial={o.label} showStatus status={o.status ?? 'online'} color={o.color} />
       case 'icon': return undefined
       case 'checkbox': return <ListCheck selected={on} />
       case 'radio': return <ListRadio selected={on} />

@@ -9,7 +9,8 @@ const meta = {
   argTypes: {
     initial: { control: 'text' },
     size: { control: 'inline-radio', options: ['default', 'small'] },
-    status: { control: 'inline-radio', options: ['online', 'offline'] },
+    showStatus: { control: 'boolean', name: 'show status', description: 'Shows the status dot' },
+    status: { control: 'inline-radio', options: ['online', 'offline'], if: { arg: 'showStatus' } },
   },
 } satisfies Meta<typeof Avatar>
 
@@ -19,7 +20,13 @@ type Story = StoryObj<typeof meta>
 /** One avatar you can change from the Controls panel. */
 export const Playground: Story = {
   parameters: { layout: 'centered' },
-  args: { initial: 'A', size: 'default', status: 'online' },
+  args: {
+    initial: 'A',
+    size: 'default',
+    showStatus: false,
+    status: 'online',
+    color: "yellow"
+  },
 }
 
 const row: React.CSSProperties = { display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center' }
@@ -41,10 +48,10 @@ export const Statuses: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <div style={row}>
-      <Avatar initial="A" status="online" />
-      <Avatar initial="A" status="offline" />
-      <Avatar initial="A" size="small" status="online" />
-      <Avatar initial="A" size="small" status="offline" />
+      <Avatar initial="A" showStatus status="online" />
+      <Avatar initial="A" showStatus status="offline" />
+      <Avatar initial="A" size="small" showStatus status="online" />
+      <Avatar initial="A" size="small" showStatus status="offline" />
     </div>
   ),
 }
@@ -62,8 +69,8 @@ export const AllVariants: Story = {
       {(['default', 'small'] as const).map((size) => (
         <div key={size} style={{ display: 'contents' }}>
           <span style={{ ...label, textTransform: 'capitalize' }}>{size}</span>
-          <div><Avatar initial="A" size={size} status="online" /></div>
-          <div><Avatar initial="A" size={size} status="offline" /></div>
+          <div><Avatar initial="A" size={size} showStatus status="online" /></div>
+          <div><Avatar initial="A" size={size} showStatus status="offline" /></div>
         </div>
       ))}
     </div>

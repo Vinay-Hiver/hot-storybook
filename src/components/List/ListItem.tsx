@@ -7,13 +7,13 @@ import './ListItem.css'
 
 /* ---------- Left elements (Figma "List Elements") ---------- */
 
-export type ListAvatarProps = Pick<AvatarProps, 'initial' | 'status' | 'size' | 'color'>
+export type ListAvatarProps = Pick<AvatarProps, 'initial' | 'showStatus' | 'status' | 'size' | 'color'>
 
 /** The Avatar component in the 24px left-element area (18px when small). */
-export function ListAvatar({ initial, status = 'online', size = 'default', color }: ListAvatarProps) {
+export function ListAvatar({ initial, showStatus, status = 'online', size = 'default', color }: ListAvatarProps) {
   return (
     <span className="hot-list-el" style={size === 'small' ? { width: 18, height: 18 } : undefined}>
-      <Avatar initial={initial} status={status} size={size} color={color} />
+      <Avatar initial={initial} showStatus={showStatus} status={status} size={size} color={color} />
     </span>
   )
 }
