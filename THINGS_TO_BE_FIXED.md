@@ -43,7 +43,6 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] The Personal row has a count in Figma that is hidden (opacity 0).
 - [ ] Slack, Voice and Email use the same views as Chat: not confirmed. Voice stays a plain row until its views are defined. The total capping at "99+" and Pending showing a count are my guesses.
 - [ ] Counts are Inter in Figma; the sidebar uses the system font token.
-- [ ] **Voice and Personal views** were built from screenshots, not from Figma frames. Check the icons I picked (Inbox = `mailbox`, Archived = `archive`, Trash = `delete`, Mine = `user`, Closed = `tick2`) and the label "All assigned" (the Voice screenshot shows "All Assigned"; all inboxes share one label). Voice's views are Mine, Unassigned, All assigned, Tags, Closed; Personal's are Inbox, Tags, Archived, Trash.
 
 ## 5. Main nav menus
 
