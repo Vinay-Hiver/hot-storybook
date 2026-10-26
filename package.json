@@ -9,7 +9,9 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "agent-docs": "node scripts/generate-agent-docs.mjs && node scripts/sync-starter.mjs",
+    "prebuild-storybook": "npm run agent-docs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
