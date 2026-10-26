@@ -28,12 +28,12 @@
   display: flex;
   align-items: center;
   height: 32px;
-  padding: 0 12px;
+  padding: 0 8px; /* the heading lines up with the icons of the items under it */
   font: var(--fontWeightMedium) 13px/18px var(--fontFamily);
   color: var(--slateTextSubtle);
 }
-.hot-admin-sidebar__list { list-style: none; margin: 0; padding: 0; }
-.hot-admin-sidebar__list--inset { padding: 0 4px; }
+/* Items follow the Sub-nav: 216px wide (12px in from each side), 4px apart */
+.hot-admin-sidebar__list { display: flex; flex-direction: column; gap: 4px; list-style: none; margin: 0; padding: 0; }
 
 .hot-admin-sidebar__item {
   box-sizing: border-box;
