@@ -55,6 +55,7 @@ Only things that need action: something is built but needs another look, a decis
 ## 6. Sub-nav and Shared Inboxes page
 
 - [ ] **Alignment after the spacing change.** The Shared Inboxes heading (now 24px high with 12px padding) no longer lines up with the Admin sidebar's 50px title row or the 60px bar over the page content. Check against Figma.
+- [ ] **Schedule and Settings Sub-navs** (Figma 3209:9296 and 3209:9947): the pages themselves are not built (a placeholder shows the page name). The Account item's icon in Figma is a building with a small annex, which is not in the DS icon set, so the DS `account` icon (a briefcase) stands in; Deliverability uses the DS `building` icon. Users and the other Admin sidebar items do nothing yet.
 - [ ] The back arrow and the small arrow beside the title only call `onBack` and `onTitleClick`; nothing in Figma says what they open.
 - [ ] The arrow beside the heading is a boxed button in Email, Slack and Chat, a bare arrow in SMS and WhatsApp, and missing in Voice. The data keeps this as drawn: it may be Figma frames that were not updated.
 - [ ] WhatsApp has two "General settings" rows in Figma (the first labelled "Configuration"); read as Members, Configuration, General settings. Confirm.

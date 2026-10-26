@@ -23,11 +23,13 @@ function ChannelIcon({ icon }: { icon: IconName }) {
 }
 
 /** The heading bar over a page's content: 60px tall, a line under it, the page name on the left. */
-function PageBar({ title, action }: { title: string; action?: ReactNode }) {
+export function PageBar({ title, action }: { title: string; action?: ReactNode }) {
   return <div className="hot-shared-inboxes__bar"><h1 className="hot-shared-inboxes__bar-title">{title}</h1>{action}</div>
 }
 
 export type SharedInboxesPageProps = {
+  /** Called with the id of the Admin sidebar item that was pressed (for example `schedule`), so a page above can switch to it. */
+  onAdminNavigate?: (id: string) => void
   /** Which channel's inboxes show first. */
   channel?: SubNavChannelId
   /** Opens this inbox's settings straight away (an inbox id, for example `whatsapp-1`). */
@@ -41,7 +43,7 @@ export type SharedInboxesPageProps = {
  * Pressing an inbox opens its settings: the sub-nav then lists that channel's settings pages, from the Sub-nav database.
  * Temporary: the settings pages themselves are not built yet, so the content shows a placeholder.
  */
-export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, settingsItem }: SharedInboxesPageProps) {
+export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, settingsItem, onAdminNavigate }: SharedInboxesPageProps) {
   const [channelId, setChannelId] = useState<SubNavChannelId>(initialChannel)
   const [lists, setLists] = useState<Record<string, Inbox[]>>(() => Object.fromEntries(sharedInboxChannels.map((c) => [c.id, c.inboxes])))
   const found = inboxId ? sharedInboxChannels.flatMap((c) => c.inboxes.map((i) => ({ channel: c.id, inbox: i }))).find((x) => x.inbox.id === inboxId) : undefined
@@ -60,7 +62,7 @@ export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, 
   ]
 
   const nav = <MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />
-  const sidebar = <AdminSidebar sections={adminSampleSections} value="shared-inbox" />
+  const sidebar = <AdminSidebar sections={adminSampleSections} value="shared-inbox" onChange={onAdminNavigate} />
 
   let subNav: ReactNode
   let content: ReactNode

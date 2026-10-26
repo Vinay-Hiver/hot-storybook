@@ -49,9 +49,39 @@ export const subNavLibrary: Record<string, SubNavItemDef> = {
   messages: { id: 'messages', label: 'Messages', icon: 'conversationrules' }, // same icon as Conversation Rules
   generalSettings: { id: 'generalSettings', label: 'General settings', icon: 'setting' },
   configuration: { id: 'configuration', label: 'Configuration', icon: 'adminsettings' },
+  // Schedule
+  shifts: { id: 'shifts', label: 'Shifts', icon: 'calander' },
+  businessHours: { id: 'businessHours', label: 'Business Hours', icon: 'clock' },
+  // Settings
+  identityAccess: { id: 'identityAccess', label: 'Identity & Access', icon: 'identity' },
+  deliverability: { id: 'deliverability', label: 'Deliverability', icon: 'building' },
+  plansBilling: { id: 'plansBilling', label: 'Plans & Billing', icon: 'wallet' },
+  account: { id: 'account', label: 'Account', icon: 'account' },
 }
 
 /** What each channel's Sub-nav contains, in its order. */
+/** The admin sections (not inboxes) that have a Sub-nav: Schedule and Settings, from the Figma frames 3209:9296 and 3209:9947. */
+export type AdminSubNavId = 'schedule' | 'settings'
+export type AdminSubNavDef = { id: AdminSubNavId; label: string; items: string[]; defaultSelected: string }
+
+export const adminSubNavs: Record<AdminSubNavId, AdminSubNavDef> = {
+  schedule: { id: 'schedule', label: 'Schedule', items: ['shifts', 'businessHours'], defaultSelected: 'shifts' },
+  settings: { id: 'settings', label: 'Settings', items: ['identityAccess', 'deliverability', 'plansBilling', 'account'], defaultSelected: 'identityAccess' },
+}
+
+/** An admin section's Sub-nav with every id replaced by its definition. */
+export function getAdminSubNav(id: AdminSubNavId) {
+  const section = adminSubNavs[id]
+  return {
+    ...section,
+    items: section.items.map((itemId) => {
+      const item = subNavLibrary[itemId]
+      if (!item) throw new Error(`Sub-nav data: "${id}" uses unknown item "${itemId}"`)
+      return item
+    }),
+  }
+}
+
 export const subNavChannels: Record<SubNavChannelId, SubNavChannelDef> = {
   email: {
     id: 'email', label: 'Email', subtitle: true, switcher: 'box', defaultSelected: 'members',
