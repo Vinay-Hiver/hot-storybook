@@ -1,32 +1,39 @@
-# React + TypeScript + Vite
+# HOT Design System Storybook
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Hiver's HOT design system as working React components, built from Figma. Browse every component, colour, icon and text style, or use them to build a prototype with Claude.
 
-Currently, two official plugins are available:
+**Browse it:** https://hot-storybook.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Build a prototype with Claude (no coding needed)
 
-## React Compiler
+1. **Install Node.js** (version 18 or newer) from https://nodejs.org if you don't have it.
+2. **Make an empty folder** for your prototype, for example `My prototype`.
+3. **Download [`START-HERE.md`](public/START-HERE.md)** and put it in that folder.
+4. **Open the folder in Claude Code** (the Claude desktop app, Code tab, or `claude` in a terminal).
+5. **Type:** `Follow START-HERE.md`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Claude copies the starter, installs it, runs it and gives you a local address to open. Then it asks what page you want to build. Describe the page in plain words, or paste a screenshot or a Figma link.
 
-## Expanding the Oxlint configuration
+Your prototype uses the real HOT components, colours and icons, so it looks like the product. If a component you need doesn't exist yet, Claude tells you instead of drawing a copy.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+You need access to this GitHub repo for the setup to work.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## What's inside
+
+| Section in Storybook | What you find |
+|---|---|
+| Foundations | Colours, typography, spacing, radius, icons |
+| Components | Button, Input, Dropdown, Modal, Tabs, Table and more, with props and Docs |
+| Patterns | Main nav, Sub-nav, Admin sidebar |
+| Pages | Full screens built from the above |
+
+`starter/` is the template your prototype is copied from. `public/COMPONENTS.md` and `public/ICONS.md` list every component and icon for Claude.
+
+## Run Storybook locally (for the design system team)
+
+```bash
+npm install
+npm run storybook
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Opens at http://localhost:6006. Run `npm run build-storybook` before pushing. `LOG.md` is the history of what was built and `THINGS_TO_BE_FIXED.md` lists open items.
