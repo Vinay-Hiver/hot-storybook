@@ -1,5 +1,5 @@
 /* HOT Design System — Tabs. Values read from the Figma "Tabs" page; colors use tokens only. */
-.hot-tabs { display: flex; font: var(--fontWeightRegular) 14px/20px var(--fontFamily); color: var(--slateTextSubtle); }
+.hot-tabs { display: flex; font: var(--text-body-md-regular); color: var(--slateTextSubtle); }
 
 .hot-tab {
   position: relative; /* with overflow hidden, keeps the click ripple inside the tab */

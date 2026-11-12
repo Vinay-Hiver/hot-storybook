@@ -9,7 +9,7 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
+  font: var(--text-body-md-regular);
   color: var(--slateTextBody);
 }
 .hot-switch--large {

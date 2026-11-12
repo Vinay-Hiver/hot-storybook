@@ -107,7 +107,7 @@ export const AllVariants: Story = {
     <div style={{ display: 'grid', gap: 48, fontFamily: 'var(--fontFamily)' }}>
       {variants.map((variant) => (
         <section key={variant}>
-          <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 16px', textTransform: 'capitalize' }}>{variant}</h3>
+          <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 16px', textTransform: 'capitalize' }}>{variant}</h3>
           <div style={{ display: 'grid', gridTemplateColumns: '64px repeat(4, max-content)', columnGap: 40, rowGap: 20, alignItems: 'center' }}>
             <span />
             {states.map((s) => <span key={s} style={{ ...label, textTransform: 'capitalize' }}>{s}</span>)}

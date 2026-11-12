@@ -104,7 +104,7 @@ export const AllVariants: Story = {
       <div style={{ display: 'grid', gap: 48, fontFamily: 'var(--fontFamily)' }}>
         {[false, true].map((desc) => (
           <section key={String(desc)}>
-            <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>{desc ? 'With description' : 'Label only'}</h3>
+            <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>{desc ? 'With description' : 'Label only'}</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '110px repeat(3, 232px)', gap: '12px 24px', alignItems: 'center' }}>
               <span />
               {states.map((s) => <span key={s.name} style={label}>{s.name}</span>)}
@@ -120,7 +120,7 @@ export const AllVariants: Story = {
           </section>
         ))}
         <section>
-          <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>Left elements</h3>
+          <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>Left elements</h3>
           <div style={row}>
             <ListAvatar initial="A" showStatus status="online" />
             <ListAvatar initial="A" showStatus status="offline" />

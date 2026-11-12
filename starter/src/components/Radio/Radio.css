@@ -13,7 +13,7 @@
   align-items: center;
   gap: 2px;
   min-height: 20px;
-  font: var(--fontWeightRegular) 12px/18px var(--fontFamily);
+  font: var(--text-body-xs-regular);
   color: var(--radio-group-label);
 }
 .hot-radio-group__required { color: var(--radio-group-required); }
@@ -24,7 +24,7 @@
   gap: 4px;
   min-height: 24px;
   cursor: pointer;
-  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
+  font: var(--text-body-md-regular);
   color: var(--slateTextBody);
 }
 

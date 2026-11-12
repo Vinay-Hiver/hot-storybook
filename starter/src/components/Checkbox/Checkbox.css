@@ -6,7 +6,7 @@
   gap: 4px;
   min-height: 24px;
   cursor: pointer;
-  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
+  font: var(--text-body-md-regular);
   color: var(--slateTextBody);
 }
 

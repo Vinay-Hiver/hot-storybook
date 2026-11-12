@@ -81,6 +81,8 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `label?`: ReactNode — Label shown above the field.
 - `helperText?`: ReactNode — Small text below the field.
 - `error?`: boolean — Shows the error border and red helper text.
+- `success?`: boolean — Turns the helper text green with a tick before it.
+- `helperIcon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
 - `size?`: "sm" | "md" (default md) — sm = 32px, md = 40px tall.
 - `prefix?`: ReactNode — Content before the text, such as a 14px <Icon> or a fixed string like "https://".
 - `search?`: boolean — Makes it a search field: a 16px search icon before the text and type="search".
@@ -261,6 +263,8 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `label?`: ReactNode — Label shown above the field.
 - `helperText?`: ReactNode — Small text below the field.
 - `error?`: boolean — Shows the error border and red helper text.
+- `success?`: boolean — Turns the helper text green with a tick before it.
+- `helperIcon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
 - `showCount?`: boolean — Shows a live "0/500" counter.
 - `fullWidth?`: boolean — Stretch to the width of the parent instead of 320px.
 - `tags?`: string[] — Turns the field into a tags field.
@@ -429,7 +433,7 @@ Use them as `var(--<family><Role><Variant>)`, for example `var(--slateTextBody)`
 - indigo — Text: Title/Body/Subtle/Caption/Disabled; Surface: Default/Subtle/Dark/Disabled; Border: Default/Dark/Light
 - pastelViolet, pastelLightBlue, pastelRed, pastelPurple, pastelOrange, pastelYellow, pastelGreen — the accent colours; each has Surface, Text and Border in the same variants as above
 
-Fonts: Inter 400, 500 and 600, already set on the page. Text classes follow the Figma style names, for example `.text-body-md-medium` (14/20) and `.text-heading-lg` (20/28); the full list is in `src/tokens/typography.css`.
+Fonts: Inter 400, 500 and 600, already set on the page. Text classes follow the Figma style names, for example `.text-body-md-medium` (14/20) and `.text-heading-lg` (20/28); each also exists as a CSS variable for components, for example `font: var(--text-body-md-medium)`. The full list is in `src/tokens/typography.css`.
 
 ## Page recipes
 

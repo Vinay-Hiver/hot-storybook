@@ -8,6 +8,9 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Main nav background `#2e3641` is not a token.** Copied from the Omni_Master-Components Main Nav (the DS token would be `slateSurfaceDarkest`, `#334155`). Decide which dark is right and bind it to a token in Figma. The nav hover colour (`slateSurfaceDark600`) is my choice.
 - [ ] **Asterisk in Figma.** The Textarea and Radio asterisks are still bound to variables from another library, and its text style (`body/md/medium`, Inter) is not a HOT text style.
 - [ ] **Text styles are not variables.** The 12 Figma text styles exist only as CSS classes nobody uses; about 44 `font:` declarations are written as literals (34 equal a text style, 10 match none). No-match cases: the 12px/16px medium helper label in the stories, Admin sidebar headings (13px/18px), the small Avatar letter (9px/13.5px), and `Tabs.css` setting `font-weight` in 3 places. The Sub-nav and Shared Inboxes CSS add 7 more literals. Needs a yes: add one CSS variable per text style and replace the literals.
+- [ ] **Text sizes that match no Figma style** (left hard-coded; check each against Figma): Main nav menu title `14px/23px` ([MainNav.css:90](src/patterns/MainNav/MainNav.css)), Admin sidebar section title `13px/18px` Medium (Figma's 13px is 13/19), Modal centred title `18px/28px` Regular (Figma has 18/28 in Medium only), small Avatar initial `9px/13.5px`.
+- [ ] **Story labels** use `500 12px/16px` (11 places) and a few larger headings (30/36, 24/28, 15/22) that are not Figma styles. They are story chrome, not components.
+- [ ] **Vite template leftovers:** `src/index.css` and `src/App.css` still set fonts and sizes (`--heading`, `--mono`, 56/36/24/20/15px) and `main.tsx` imports `index.css`. Check whether any of it is used.
 
 ## 2. Decisions and Figma checks for built components
 

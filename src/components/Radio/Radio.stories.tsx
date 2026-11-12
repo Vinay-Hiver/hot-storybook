@@ -91,7 +91,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: 48, fontFamily: 'var(--fontFamily)' }}>
       <section>
-        <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>Group</h3>
+        <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>Group</h3>
         <div style={row}>
           {[false, true].flatMap((required) =>
             ['1', '2', '3'].map((sel) => (
@@ -105,7 +105,7 @@ export const AllVariants: Story = {
         </div>
       </section>
       <section>
-        <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>Without a label</h3>
+        <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>Without a label</h3>
         <div style={row}>
           <RadioGroup defaultValue="b">
             <div style={{ display: 'flex', gap: 24 }}>

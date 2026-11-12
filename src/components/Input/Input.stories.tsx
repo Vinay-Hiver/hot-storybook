@@ -42,6 +42,8 @@ type PlaygroundArgs = {
   helperText: string
   size: 'sm' | 'md'
   error: boolean
+  success: boolean
+  helperIcon: 'none' | 'tick' | 'info'
   disabled: boolean
   required: boolean
   prefix: 'none' | 'icon' | 'text'
@@ -53,20 +55,22 @@ type PlaygroundArgs = {
 /** One field you can change from the Controls panel. */
 export const Playground: StoryObj<PlaygroundArgs> = {
   parameters: { layout: 'centered', controls: { exclude: ['forceState'] } },
-  args: { showLabel: true, label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', size: 'md', error: false, disabled: false, required: false, prefix: 'none', suffix: 'none', action: false, kind: 'text' },
+  args: { showLabel: true, label: 'Label', placeholder: 'Placeholder', showHelper: false, helperText: 'Optional helper text', size: 'md', error: false, success: false, helperIcon: 'none', disabled: false, required: false, prefix: 'none', suffix: 'none', action: false, kind: 'text' },
   argTypes: {
     showLabel: { control: 'boolean', name: 'label', description: 'Show the label above the field' },
     label: { control: 'text', name: 'label text', if: { arg: 'showLabel' } },
     showHelper: { control: 'boolean', name: 'helperText', description: 'Show helper text below the field' },
     helperText: { control: 'text', name: 'helper text', if: { arg: 'showHelper' } },
+    success: { control: 'boolean', description: 'Green helper text with a tick before it. Turn helperText on to see it. Ignored when error is on.', if: { arg: 'showHelper' } },
+    helperIcon: { control: 'inline-radio', options: ['none', 'tick', 'info'], name: 'helper icon', description: 'A 16px icon before the helper text', if: { arg: 'showHelper' } },
     size: { control: 'inline-radio', options: ['sm', 'md'] },
     kind: { control: 'inline-radio', options: ['text', 'search', 'tags', 'phone'], description: 'Text, a search field, a tags input, or a phone input with a country button' },
     prefix: { control: 'inline-radio', options: ['none', 'icon', 'text'], description: 'Content before the text (text kind only)' },
     suffix: { control: 'inline-radio', options: ['none', 'icon', 'text', 'count'], description: 'Content after the text: an icon (for example a chevron on a dropdown field), text such as a unit, or a live counter (text kind only)' },
     action: { control: 'boolean', description: 'Divided action on the right edge' },
   },
-  render: function Render({ showLabel, prefix, suffix, action, showHelper, helperText, kind, ...rest }) {
-    const args = { ...rest, label: showLabel ? rest.label : undefined }
+  render: function Render({ showLabel, prefix, suffix, action, showHelper, helperText, helperIcon, kind, ...rest }) {
+    const args = { ...rest, label: showLabel ? rest.label : undefined, helperIcon: helperIcon === 'none' ? undefined : helperIcon }
     const [tags, setTags] = useState<string[]>(['Label', 'Label'])
     if (kind === 'tags') return <Input key="tags" {...args} helperText={showHelper ? helperText : undefined} tags={tags} onTagsChange={setTags} />
     if (kind === 'search') return <Input key="search" {...args} helperText={showHelper ? helperText : undefined} search />
@@ -161,6 +165,7 @@ export const States: Story = {
       <Input label="Focused" placeholder="Placeholder" forceState="focus" />
       <Input label="Filled" defaultValue="Filled value" />
       <Input label="Error" defaultValue="Filled value" error helperText="This looks wrong" />
+      <Input label="Success" defaultValue="Filled value" success helperText="Field validation is successful." />
       <Input label="Disabled" placeholder="Placeholder" disabled />
     </div>
   ),
@@ -178,6 +183,7 @@ export const AllVariants: Story = {
       { name: 'Focused', props: { forceState: 'focus' as const } },
       { name: 'Filled', props: { filled: true } },
       { name: 'Error', props: { filled: true, error: true } },
+      { name: 'Success', props: { filled: true, success: true } },
       { name: 'Disabled', props: { disabled: true } },
     ]
     const kinds = ['text', 'tags', 'phone'] as const
@@ -188,10 +194,10 @@ export const AllVariants: Story = {
             <h2 style={{ font: '500 24px/28px var(--fontFamily)', margin: 0, textTransform: 'capitalize' }}>{kind}</h2>
             {(['md', 'sm'] as const).map((size) => (
               <section key={size}>
-                <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px', textTransform: 'uppercase' }}>{size}</h3>
+                <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px', textTransform: 'uppercase' }}>{size}</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, 320px)', gap: '28px 32px' }}>
                   {states.map(({ name, props }) => {
-                    const { filled, ...rest } = props as { filled?: boolean; error?: boolean; disabled?: boolean; forceState?: 'hover' | 'focus' }
+                    const { filled, ...rest } = props as { filled?: boolean; error?: boolean; success?: boolean; disabled?: boolean; forceState?: 'hover' | 'focus' }
                     const common = { size, label: 'Label', helperText: 'Optional helper text', required: true, ...rest }
                     return (
                       <div key={name}>

@@ -57,12 +57,12 @@ export const Gallery: Story = {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={`Search ${iconNames.length} icons`}
           aria-label="Search icons"
-          style={{ boxSizing: 'border-box', width: 320, height: 40, padding: '0 12px', marginBottom: 32, border: '1px solid var(--slateBorderLight)', borderRadius: 6, font: '400 14px/20px var(--fontFamily)', color: 'var(--slateTextBody)' }}
+          style={{ boxSizing: 'border-box', width: 320, height: 40, padding: '0 12px', marginBottom: 32, border: '1px solid var(--slateBorderLight)', borderRadius: 6, font: 'var(--text-body-md-regular)', color: 'var(--slateTextBody)' }}
         />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(132px, 1fr))', gap: 20 }}>
           {shown.map((n) => <Cell key={n} name={n} size={size} />)}
         </div>
-        {!shown.length && <p style={{ font: '400 14px/20px var(--fontFamily)', color: 'var(--slateTextSubtle)' }}>No icons match “{query}”.</p>}
+        {!shown.length && <p style={{ font: 'var(--text-body-md-regular)', color: 'var(--slateTextSubtle)' }}>No icons match “{query}”.</p>}
       </div>
     )
   },

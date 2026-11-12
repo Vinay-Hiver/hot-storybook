@@ -85,7 +85,7 @@ export const AllVariants: Story = {
       <div style={{ display: 'grid', gap: 48, fontFamily: 'var(--fontFamily)' }}>
         {groups.map((g) => (
           <section key={g.name}>
-            <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>{g.name}</h3>
+            <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>{g.name}</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '120px repeat(3, 120px)', rowGap: 16, alignItems: 'center' }}>
               <span />
               {states.map((s) => <span key={s.name} style={label}>{s.name}</span>)}

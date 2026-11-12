@@ -32,7 +32,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     display === 'pill' ? <SlaPill kind={kind} status={status} /> : <div style={{ width: 325 }}><SlaAlert kind={kind} status={status} time={time} /></div>,
 }
 
-const label: React.CSSProperties = { font: '500 12px/18px var(--fontFamily)', color: 'var(--slateTextSubtle)', textTransform: 'capitalize' }
+const label: React.CSSProperties = { font: 'var(--text-body-xs-medium)', color: 'var(--slateTextSubtle)', textTransform: 'capitalize' }
 const pillGrid: React.CSSProperties = { display: 'grid', gridTemplateColumns: '100px 60px 60px', gap: 16, alignItems: 'center', justifyItems: 'start', fontFamily: 'var(--fontFamily)' }
 
 function Pills() {

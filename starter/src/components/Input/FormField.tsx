@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import { Icon } from '../../icons'
+import type { IconName } from '../../icons/iconData'
 import './Input.css'
 
 export type FieldSize = 'sm' | 'md'
@@ -10,6 +12,10 @@ export type FormFieldProps = {
   required?: boolean
   helperText?: ReactNode
   error?: boolean
+  /** Turns the helper text green and shows a tick before it (unless `helperIcon` says otherwise). */
+  success?: boolean
+  /** A 16px icon before the helper text, by name from the HOT icon set. */
+  helperIcon?: IconName
   disabled?: boolean
   size?: FieldSize
   fullWidth?: boolean
@@ -24,10 +30,10 @@ export type FormFieldProps = {
 
 /** Shared frame for Input and Textarea: label, bordered box, helper text. */
 export function FormField({
-  id, label, required, helperText, error, disabled, size = 'md', fullWidth, textarea, className, forceState, boxClassName, children,
+  id, label, required, helperText, error, success, helperIcon, disabled, size = 'md', fullWidth, textarea, className, forceState, boxClassName, children,
 }: FormFieldProps) {
   const classes = [
-    'hot-field', `hot-field--${size}`, error && 'hot-field--error', disabled && 'hot-field--disabled',
+    'hot-field', `hot-field--${size}`, error && 'hot-field--error', success && !error && 'hot-field--success', disabled && 'hot-field--disabled',
     fullWidth && 'hot-field--full', textarea && 'hot-field--textarea', className,
   ].filter(Boolean).join(' ')
 
@@ -40,7 +46,12 @@ export function FormField({
         </label>
       )}
       <div className={['hot-field__box', boxClassName].filter(Boolean).join(' ')}>{children}</div>
-      {helperText && <div className="hot-field__helper" id={`${id}-helper`}>{helperText}</div>}
+      {helperText && (
+        <div className="hot-field__helper" id={`${id}-helper`}>
+          {(helperIcon || (success && !error)) && <span className="hot-field__helper-icon" aria-hidden="true"><Icon name={helperIcon ?? 'tick'} size={16} /></span>}
+          <span className="hot-field__helper-text">{helperText}</span>
+        </div>
+      )}
     </div>
   )
 }

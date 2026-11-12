@@ -14,7 +14,7 @@ const meta = {
 
 export default meta
 
-const note: React.CSSProperties = { font: 'var(--fontWeightRegular) 14px/20px var(--fontFamily)', color: 'var(--slateTextSubtle)' }
+const note: React.CSSProperties = { font: 'var(--text-body-md-regular)', color: 'var(--slateTextSubtle)' }
 
 /** The home page: Main nav, Conversations sidebar, a flexible content area and the Right panel. */
 export const Playground: StoryObj = {
@@ -29,7 +29,7 @@ export const Playground: StoryObj = {
           rightPanel={<ExampleRightPanel />}
         >
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: 24, textAlign: 'center' }}>
-            <div style={{ font: 'var(--fontWeightMedium) 16px/24px var(--fontFamily)', color: 'var(--slateTextBody)', marginBottom: 4 }}>Content</div>
+            <div style={{ font: 'var(--text-body-lg-medium)', color: 'var(--slateTextBody)', marginBottom: 4 }}>Content</div>
             <div style={note}>This area takes all the space that is left, so it grows and shrinks with the browser.</div>
           </div>
         </PageLayout>

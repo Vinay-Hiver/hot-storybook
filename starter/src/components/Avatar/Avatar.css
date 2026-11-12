@@ -12,7 +12,7 @@
   border-radius: 50%;
   background: var(--avatar-bg, var(--pastelLightBlueSurfaceDefault));
   color: var(--avatar-letter, var(--slateSurfaceWhite));
-  font: var(--fontWeightMedium) 12px/18px var(--fontFamily);
+  font: var(--text-body-xs-medium);
   user-select: none;
 }
 .hot-avatar--small { width: 18px; height: 18px; font-size: 9px; line-height: 13.5px; }

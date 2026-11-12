@@ -91,14 +91,14 @@ export const AllVariants: Story = {
     return (
       <div style={{ display: 'grid', gap: 48, fontFamily: 'var(--fontFamily)' }}>
         <section>
-          <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>Outlined</h3>
+          <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>Outlined</h3>
           <div style={label}>With counts</div>
           <div style={{ width: 520 }}><Tabs tabs={states(true)} value="active" onChange={noop} variant="outlined" /></div>
           <div style={{ ...label, marginTop: 32 }}>Without counts</div>
           <div style={{ width: 520 }}><Tabs tabs={states(false)} value="active" onChange={noop} variant="outlined" /></div>
         </section>
         <section>
-          <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px' }}>Filled</h3>
+          <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px' }}>Filled</h3>
           <div style={label}>Two tabs</div>
           <Tabs tabs={states(false).slice(0, 2)} value="active" onChange={noop} variant="filled" />
           <div style={{ ...label, marginTop: 32 }}>Three tabs</div>

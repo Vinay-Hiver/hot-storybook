@@ -13,7 +13,7 @@
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
-  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
+  font: var(--text-body-md-regular);
   color: var(--slateTextBody);
 }
 
@@ -30,7 +30,7 @@
 .hot-table__th {
   height: 48px;
   background: var(--slateSurfaceSubtle);
-  font: var(--fontWeightMedium) 14px/20px var(--fontFamily);
+  font: var(--text-body-md-medium);
   letter-spacing: 0.14px;
   color: var(--slateTextBody);
   white-space: nowrap;

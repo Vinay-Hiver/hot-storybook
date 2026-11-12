@@ -1,6 +1,7 @@
 import { isValidElement, useCallback, useId, useState } from 'react'
 import type { ChangeEvent, InputHTMLAttributes, ReactNode, Ref } from 'react'
 import { Icon } from '../../icons'
+import type { IconName } from '../../icons/iconData'
 import { FormField } from './FormField'
 import type { FieldSize, ForcedState } from './FormField'
 import { TagsEditor } from './TagsEditor'
@@ -17,6 +18,10 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'p
   helperText?: ReactNode
   /** Shows the error border and red helper text. */
   error?: boolean
+  /** Turns the helper text green with a tick before it. Ignored when `error` is set. */
+  success?: boolean
+  /** A 16px icon before the helper text, by name from the HOT icon set (for example `info`). */
+  helperIcon?: IconName
   /** sm = 32px, md = 40px tall. */
   size?: FieldSize
   /** Content before the text, such as a 14px `<Icon>` or a fixed string like "https://". */
@@ -55,7 +60,7 @@ function isCountSuffix(s: unknown): s is { count: true } {
 }
 
 export function Input({
-  label, helperText, error, size = 'md', prefix, search, suffix, action, fullWidth, forceState, tags, defaultTags, onTagsChange, country, onCountryClick, countries, countryId, onCountryChange, countryListOpen,
+  label, helperText, error, success, helperIcon, size = 'md', prefix, search, suffix, action, fullWidth, forceState, tags, defaultTags, onTagsChange, country, onCountryClick, countries, countryId, onCountryChange, countryListOpen,
   id: idProp, className, disabled, required, maxLength, value, defaultValue, onChange, ...rest
 }: InputProps) {
   const generated = useId()
@@ -97,7 +102,7 @@ export function Input({
 
   return (
     <FormField
-      id={id} label={label} required={required} helperText={helperText} error={error} disabled={disabled}
+      id={id} label={label} required={required} helperText={helperText} error={error} success={success} helperIcon={helperIcon} disabled={disabled}
       size={size} fullWidth={fullWidth} className={[className, tagsMode && 'hot-field--tags', countries && 'hot-field--has-country-list'].filter(Boolean).join(' ') || undefined} forceState={forceState}
       boxClassName={action ? 'hot-field__box--action' : undefined}
     >

@@ -99,7 +99,7 @@ export const AllVariants: Story = {
     <div style={{ display: 'grid', gap: 56, fontFamily: 'var(--fontFamily)' }}>
       {variants.map((variant) => (
         <section key={variant}>
-          <h3 style={{ font: '500 16px/24px var(--fontFamily)', margin: '0 0 20px', textTransform: 'capitalize' }}>{variant}</h3>
+          <h3 style={{ font: 'var(--text-body-lg-medium)', margin: '0 0 20px', textTransform: 'capitalize' }}>{variant}</h3>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, alignItems: 'flex-start' }}>
             {[
               { name: 'Search + buttons', searchable: true, actions: {} },

@@ -21,7 +21,7 @@
   align-items: center;
   height: 47px;
   padding: 8px 8px 12px;
-  font: var(--fontWeightMedium) 16px/24px var(--fontFamily);
+  font: var(--text-body-lg-medium);
 }
 .hot-admin-sidebar__sections { display: flex; flex-direction: column; gap: 12px; }
 .hot-admin-sidebar__section { display: flex; flex-direction: column; }
@@ -48,7 +48,7 @@
   border-radius: 8px;
   background: transparent;
   color: var(--slateTextBody);
-  font: var(--fontWeightRegular) 14px/20px var(--fontFamily);
+  font: var(--text-body-md-regular);
   text-align: left;
   cursor: pointer;
 }

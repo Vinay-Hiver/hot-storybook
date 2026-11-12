@@ -92,7 +92,7 @@ export const Removable: Story = {
     return (
       <div style={row}>
         {tags.map((t) => <Tag key={t} onRemove={() => setTags(tags.filter((x) => x !== t))} removeLabel={`Remove ${t}`}>{t}</Tag>)}
-        {!tags.length && <span style={{ font: '400 12px/18px var(--fontFamily)', color: 'var(--slateTextSubtle)' }}>All removed. Reload the story to reset.</span>}
+        {!tags.length && <span style={{ font: 'var(--text-body-xs-regular)', color: 'var(--slateTextSubtle)' }}>All removed. Reload the story to reset.</span>}
       </div>
     )
   },
