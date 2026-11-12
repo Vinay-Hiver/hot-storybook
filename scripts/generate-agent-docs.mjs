@@ -205,7 +205,7 @@ for (const [f, r] of Object.entries(fam)) {
   out += `- ${f} — ${parts.join('; ')}\n`
 }
 if (pastel.length) out += `- ${pastel.join(', ')} — the accent colours; each has Surface, Text and Border in the same variants as above\n`
-out += `\nFonts: Hanken Grotesk 400 and 500, already set on the page. Text sizes in use: 12/18, 14/20, 16/24 (size/line-height).\n\n`
+out += `\nFonts: Inter 400, 500 and 600, already set on the page. Text classes follow the Figma style names, for example \`.text-body-md-medium\` (14/20) and \`.text-heading-lg\` (20/28); the full list is in \`src/tokens/typography.css\`.\n\n`
 
 out += `${RECIPES}\n`
 

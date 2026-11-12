@@ -125,3 +125,4 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Decided:** the browser tab reads "Storybook • Page name" (was "Page name ⋅ Storybook"), set in `.storybook/manager.ts`.
 - **Decided:** text in the Admin sidebar and the Sub-nav cannot be selected (`user-select: none`).
 - **Decided:** Voice, SMS and WhatsApp inbox Sub-navs now use the boxed switcher with the inbox menu, like Email, Slack and Chat (Voice had none; SMS and WhatsApp had the bare arrow).
+- **Decided:** typography now follows the Inter text styles in the Figma file (22 styles; it was Hanken Grotesk until 28-Oct, Figma moved to Inter by 01-Nov). Classes are named after the styles, for example `.text-body-md-medium`, replacing `.text-label-small`, `.text-body-small` and the H1–H4 classes. No component used the old H1–H4 or large body classes, so nothing else changed. H1 (36/44) and H2 (30/36) are gone because Figma has no matching style.
