@@ -3,8 +3,8 @@
 .hot-checkbox {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 24px;
+  gap: var(--spacing1);
+  min-height: var(--spacing6);
   cursor: pointer;
   font: var(--text-body-md-regular);
   color: var(--slateTextBody);
@@ -19,16 +19,16 @@
   pointer-events: none;
 }
 
-/* 24px area around the 14px box */
+/* The 14px box with a 4px margin around it */
 .hot-checkbox__box {
   position: relative;
   box-sizing: border-box;
   flex: none;
-  width: 14px;
-  height: 14px;
-  margin: 5px;
+  width: var(--iconSize14);
+  height: var(--iconSize14);
+  margin: var(--spacing1);
   border: 1px solid var(--slateBorderDefault);
-  border-radius: 3px;
+  border-radius: var(--radius4);
   background: var(--slateSurfaceWhite);
   transition: background-color 120ms ease, border-color 120ms ease;
 }
@@ -36,11 +36,12 @@
 .hot-checkbox__mark {
   position: absolute;
   display: none;
-  left: 1px;
+  left: 50%;
+  transform: translateX(-50%);
   color: var(--slateSurfaceWhite);
 }
-.hot-checkbox__check { top: 2px; width: 8px; height: 6px; }
-.hot-checkbox__dash { top: 4px; width: 8px; height: 2px; }
+.hot-checkbox__check { top: var(--spacing05); width: var(--spacing2); height: var(--spacing15); }
+.hot-checkbox__dash { top: var(--spacing1); width: var(--spacing2); height: var(--spacing05); }
 
 .hot-checkbox__label { display: inline-flex; align-items: center; gap: 0; }
 .hot-checkbox__required { color: var(--errorBorderDefault); }
@@ -48,7 +49,7 @@
 /* Checked and indeterminate: solid blue */
 .hot-checkbox__input:checked + .hot-checkbox__box,
 .hot-checkbox--indeterminate .hot-checkbox__box {
-  border-width: 2px;
+  border-width: var(--spacing05);
   background: var(--primarySurfaceDefault);
   border-color: var(--primarySurfaceDefault);
 }
@@ -77,6 +78,6 @@
 }
 .hot-checkbox--disabled .hot-checkbox__mark { color: var(--slateSurfaceDark500); }
 
-/* No label: 20px area */
-.hot-checkbox--bare { min-height: 20px; }
-.hot-checkbox--bare .hot-checkbox__box { margin: 3px; }
+/* No label: 20px tall, 2px margin */
+.hot-checkbox--bare { min-height: var(--spacing5); }
+.hot-checkbox--bare .hot-checkbox__box { margin: var(--spacing05); }

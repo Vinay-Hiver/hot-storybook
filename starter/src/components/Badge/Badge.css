@@ -4,8 +4,8 @@
   display: inline-flex;
   align-items: center;
   height: 18px;
-  padding: 0 6px;
-  border-radius: 12px;
+  padding: 0 var(--spacing15);
+  border-radius: var(--radius12);
   font: var(--text-body-xs-regular);
   white-space: nowrap;
 }

@@ -5,8 +5,8 @@
 
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  width: 320px;
+  gap: var(--spacing15);
+  width: var(--spacing80);
   max-width: 100%;
   font: var(--text-body-md-regular);
   color: var(--slateTextBody);
@@ -16,7 +16,7 @@
 .hot-field__label {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--spacing05);
   font: var(--text-body-md-medium);
   color: var(--slateTextBody);
 }
@@ -26,15 +26,15 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 40px;
-  padding: 0 12px;
+  gap: var(--spacing25);
+  min-height: var(--spacing10);
+  padding: 0 var(--spacing3);
   border: 1px solid var(--slateBorderLight);
-  border-radius: 6px;
+  border-radius: var(--radius6);
   background: var(--slateSurfaceWhite);
   transition: background-color 120ms ease, border-color 120ms ease;
 }
-.hot-field--sm .hot-field__box { min-height: 32px; }
+.hot-field--sm .hot-field__box { min-height: var(--spacing8); }
 
 .hot-field__control {
   flex: 1 1 auto;
@@ -67,7 +67,7 @@
   align-self: stretch;
   display: inline-flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 0 var(--spacing3);
   border: 0;
   border-left: 1px solid var(--slateBorderLight);
   background: transparent;
@@ -76,7 +76,7 @@
   cursor: pointer;
 }
 
-.hot-field__helper { display: flex; align-items: flex-start; gap: 8px; font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
+.hot-field__helper { display: flex; align-items: flex-start; gap: var(--spacing2); font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
 .hot-field__helper-icon { display: inline-flex; flex: none; align-items: center; height: 18px; }
 .hot-field__helper-text { min-width: 0; flex: 1 1 auto; }
 
@@ -89,11 +89,11 @@
 .hot-field[data-force-state='focus'] .hot-field__box {
   background: var(--slateSurfaceWhite);
   border-color: var(--blueBorderDark);
-  border-radius: 8px;
+  border-radius: var(--radius8);
 }
 .hot-field--error .hot-field__box {
   border-color: var(--errorBorderDefault);
-  border-radius: 8px;
+  border-radius: var(--radius8);
 }
 .hot-field--error .hot-field__helper { color: var(--errorTextBody); }
 .hot-field--success .hot-field__helper { color: var(--successTextBody); }
@@ -107,17 +107,17 @@
 .hot-field--disabled .hot-field__count { color: var(--slateTextDisabled); }
 
 /* Textarea */
-.hot-field--textarea .hot-field__box { align-items: stretch; min-height: 80px; padding: 10px 12px; }
+.hot-field--textarea .hot-field__box { align-items: stretch; min-height: var(--spacing20); padding: var(--spacing25) var(--spacing3); }
 .hot-field--textarea:not(.hot-field--tags) .hot-field__box { max-height: 100px; } /* the tags version keeps growing with its tags */
 .hot-field--textarea .hot-field__control { resize: vertical; min-height: 58px; max-height: 78px; }
 
 /* ---- Tags input (Figma "Tags" type) ---- */
-.hot-field--tags .hot-field__box { gap: 6px; }
-.hot-field__tags { display: flex; flex: 1 1 auto; align-items: center; gap: 6px; min-width: 0; overflow: hidden; }
+.hot-field--tags .hot-field__box { gap: var(--spacing15); }
+.hot-field__tags { display: flex; flex: 1 1 auto; align-items: center; gap: var(--spacing15); min-width: 0; overflow: hidden; }
 .hot-field__tags .hot-tag { flex: none; }
 .hot-field__tag-input { flex: 1 1 60px; min-width: 60px; }
 /* In a Textarea the tags wrap onto more lines */
-.hot-field__tags--wrap { flex-wrap: wrap; row-gap: 6px; align-items: flex-start; align-self: stretch; overflow: visible; }
+.hot-field__tags--wrap { flex-wrap: wrap; row-gap: var(--spacing15); align-items: flex-start; align-self: stretch; overflow: visible; }
 .hot-field__tags--wrap .hot-field__tag-input { align-self: center; }
 
 /* ---- Phone input (Figma "Phone" type): country button before the number ---- */
@@ -125,8 +125,8 @@
   display: inline-flex;
   align-items: center;
   flex: none;
-  gap: 8px;
-  height: 20px;
+  gap: var(--spacing2);
+  height: var(--spacing5);
   margin: 0;
   padding: 0;
   border: 0;
@@ -135,14 +135,14 @@
   font: var(--text-body-md-medium);
   cursor: pointer;
 }
-.hot-field__country:focus-visible { outline: 2px solid var(--primarySurfaceLighter); outline-offset: 2px; border-radius: 4px; }
+.hot-field__country:focus-visible { outline: var(--spacing05) solid var(--primarySurfaceLighter); outline-offset: var(--spacing05); border-radius: var(--radius4); }
 .hot-field__country:disabled { cursor: not-allowed; }
-.hot-field__flag { display: inline-flex; width: 16px; height: 16px; flex: none; }
+.hot-field__flag { display: inline-flex; width: var(--iconSizeSm); height: var(--iconSizeSm); flex: none; }
 .hot-field__flag > svg { width: 100%; height: 100%; }
-.hot-field__chevron { display: inline-flex; width: 16px; height: 16px; flex: none; color: var(--slateIconsSubtle); }
+.hot-field__chevron { display: inline-flex; width: var(--iconSizeSm); height: var(--iconSizeSm); flex: none; color: var(--slateIconsSubtle); }
 .hot-field__chevron > svg { width: 100%; height: 100%; }
 /* The tags text box must not take the textarea's minimum height */
-.hot-field--textarea .hot-field__tag-input { min-height: 0; height: 20px; resize: none; }
+.hot-field--textarea .hot-field__tag-input { min-height: 0; height: var(--spacing5); resize: none; }
 
 /* The country list opens under the field, so the box is its anchor */
 .hot-field--has-country-list .hot-field__box { position: relative; }

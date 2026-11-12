@@ -7,9 +7,9 @@
   flex: none;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: var(--iconSizeLg);
+  height: var(--iconSizeLg);
+  border-radius: var(--radiusFull);
   background: var(--avatar-bg, var(--pastelLightBlueSurfaceDefault));
   color: var(--avatar-letter, var(--slateSurfaceWhite));
   font: var(--text-body-xs-medium);
@@ -20,34 +20,34 @@
 /* Status dot: a white ring with a colored dot inside. It sits at the bottom-right corner. */
 .hot-avatar__status {
   position: absolute;
-  left: 16px;
-  top: 16px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  left: var(--spacing4);
+  top: var(--spacing4);
+  width: var(--spacing2);
+  height: var(--spacing2);
+  border-radius: var(--radiusFull);
   background: var(--avatar-ring, var(--slateSurfaceWhite));
 }
 .hot-avatar__status::before {
   content: '';
   position: absolute;
-  inset: 1px;
-  border-radius: 50%;
+  inset: var(--spacing0);
+  border-radius: var(--radiusFull);
   background: var(--successBorderDark);
 }
 .hot-avatar__status--offline::before { background: var(--slateSurfaceDefault); }
 .hot-avatar__status--offline::after {
   content: '';
   position: absolute;
-  inset: 2px;
-  border-radius: 50%;
+  inset: var(--spacing05);
+  border-radius: var(--radiusFull);
   background: var(--slateSurfaceWhite);
 }
 
-/* Small: the dot is 7.5px and, as in Figma, sits slightly lower and further out */
-.hot-avatar--small .hot-avatar__status { left: 12px; top: 12px; width: 7.5px; height: 7.5px; }
-.hot-avatar--small .hot-avatar__status::before { inset: 0.94px; }
-.hot-avatar--small .hot-avatar__status--offline { left: 11px; top: 11px; }
-.hot-avatar--small .hot-avatar__status--offline::after { inset: 1.88px; }
+/* Small: the dot is 8px and, as in Figma, sits slightly lower and further out */
+.hot-avatar--small .hot-avatar__status { left: var(--spacing3); top: var(--spacing3); width: var(--spacing2); height: var(--spacing2); }
+.hot-avatar--small .hot-avatar__status::before { inset: var(--spacing0); }
+.hot-avatar--small .hot-avatar__status--offline { left: var(--spacing25); top: var(--spacing25); }
+.hot-avatar--small .hot-avatar__status--offline::after { inset: var(--spacing05); }
 
 /* Colours, from the pastel surface tokens (grey is the slate surface). */
 .hot-avatar--lightBlue { --avatar-bg: var(--pastelLightBlueSurfaceDefault); }

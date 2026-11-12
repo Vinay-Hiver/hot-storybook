@@ -5,12 +5,12 @@
   top: calc(100% + 5px);
   left: 0;
   width: 100%;
-  min-width: 320px; /* the default width of the whole phone input */
-  max-width: calc(100vw - 32px);
+  min-width: var(--spacing80); /* the default width of the whole phone input */
+  max-width: calc(100vw - var(--spacing8));
 }
 /* Product: the list scrolls and is at most half the screen tall */
-.hot-country-list__list { max-height: 50vh; padding: 6px 8px 8px; }
+.hot-country-list__list { max-height: 50vh; padding: var(--spacing15) var(--spacing2) var(--spacing2); }
 .hot-country-list__flag { font-size: 16px; line-height: 24px; }
-.hot-country-list__text { display: inline-flex; align-items: baseline; gap: 8px; min-width: 0; }
+.hot-country-list__text { display: inline-flex; align-items: baseline; gap: var(--spacing2); min-width: 0; }
 .hot-country-list__dial { color: var(--slateTextSubtle); flex: none; }
-.hot-country-list__empty { padding: 20px 16px; text-align: center; font: var(--text-body-md-regular); color: var(--slateTextBody); }
+.hot-country-list__empty { padding: var(--spacing5) var(--spacing4); text-align: center; font: var(--text-body-md-regular); color: var(--slateTextBody); }
