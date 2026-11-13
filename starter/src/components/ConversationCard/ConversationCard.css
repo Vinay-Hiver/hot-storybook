@@ -1,0 +1,52 @@
+/* HOT Design System — Conversation card. Values read from the Figma "conversation cards" frame (3275:4534); colors use tokens only. */
+.hot-conv-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing2);
+  width: 100%;
+  padding: var(--spacing4) var(--spacing3);
+  border-bottom: 1px solid var(--slateBorderMild);
+  background: var(--slateSurfaceWhite);
+  color: var(--slateTextBody);
+  font-family: var(--fontFamily);
+  text-align: left;
+  cursor: pointer;
+}
+.hot-conv-card:hover, .hot-conv-card[data-force-state='hover'] { background: var(--slateSurfaceSubtle100Hover); }
+
+/* Selected: pale blue with a 1.5px blue bar on the left. No hover state. */
+.hot-conv-card--selected,
+.hot-conv-card--selected:hover { background: var(--primarySurfaceSubtle); border-left: 1.5px solid var(--primarySurfaceDefault); }
+
+/* Not in Figma: keyboard focus outline */
+.hot-conv-card:focus-visible { outline: var(--spacing05) solid var(--primarySurfaceLighter); outline-offset: -2px; }
+
+/* The name row and the message line sit 2px apart; the chips are 8px below them. */
+.hot-conv-card__main { display: flex; flex-direction: column; gap: var(--spacing05); }
+
+/* Name and date */
+.hot-conv-card__title-row { display: flex; align-items: center; gap: var(--spacing2); }
+.hot-conv-card__who { display: flex; flex: 1; align-items: center; gap: var(--spacing1); min-width: 0; }
+.hot-conv-card__lead { display: inline-flex; flex: none; align-items: center; justify-content: center; width: var(--iconSizeMd); height: var(--iconSizeMd); }
+.hot-conv-card__name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); }
+.hot-conv-card__date { flex: none; font: var(--text-body-sm-regular); }
+
+/* One line of the latest message, with an optional reply arrow */
+.hot-conv-card__preview-row { display: flex; align-items: center; gap: var(--spacing1); min-width: 0; }
+.hot-conv-card__reply { display: inline-flex; flex: none; width: var(--iconSizeXs); height: var(--iconSizeXs); }
+.hot-conv-card__reply > svg { width: 100%; height: 100%; }
+.hot-conv-card__preview { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-regular); }
+
+/* SLA pills, tags and the "+N" count. */
+.hot-conv-card__chips { display: flex; align-items: center; gap: var(--spacing15); overflow: hidden; }
+.hot-conv-card__more {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  height: var(--spacing5);
+  padding: 0 var(--spacing1);
+  border-radius: var(--radius4);
+  background: var(--slateSurfaceWhite);
+  font: var(--text-body-sm-medium);
+}

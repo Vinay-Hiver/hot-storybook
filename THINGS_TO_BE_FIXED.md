@@ -97,6 +97,10 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Figma cleanup on the Icons page:** the frame 7162:9248 (it still holds the Bolt Filled drawing, which is not needed in Figma, and the drawings above) and the red test frame 7163:12.
 - [ ] **Figma file oddities, left as they are:** icon name typos (`calander`, `clipbord`, `massage`), near-duplicate icons, the invisible 100×100 frame in the Tab hover variant, hidden check and cross icons in every Switch variant, a faint search icon colour in the Dropdown Menu radio style.
 
+## 11. Conversation card
+
+- [ ] **SLA pill fill:** the FRT pill uses `--errorSurfaceDisabled` for overdue, while Figma's card frame uses `--pastelRedTextSubtle`.
+
 ## 10. Other
 
 - [ ] **Unexplained "Storybook published!" message** seen in the first Storybook session. Nothing was published on purpose. Ask whether anyone clicked a publish or share option.

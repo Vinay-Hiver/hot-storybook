@@ -1,0 +1,28 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as CardStories from './ConversationCard.stories'
+
+<Meta of={CardStories} />
+
+# Conversation card
+
+One conversation in the conversation list: the channel icon, who it is with, the date, the latest message and, when there are any, SLA pills and tags. The list shows a card for every conversation in the inbox that is selected.
+
+## States
+
+- **Unselected** is white. It turns light grey when the pointer is over it.
+- **Selected** is the open conversation: pale blue with a blue bar on the left. It has no hover state.
+- **Hovering the channel icon** swaps the icon for a checkbox, in both states. A checked box stays visible.
+- **SLA and tags**: SLA pills come first, then the tags. "+N" is only a count of the tags that are not shown, it opens nothing.
+- **Replied**: a small reply arrow before the message shows that the latest message was a reply sent from here. Only chat, SMS and WhatsApp show it.
+
+<Canvas of={CardStories.States} />
+
+## Channels
+
+The `channel` prop sets the icon: email, Slack, chat, voice, SMS or WhatsApp. These are the same channels as the Sub-nav. A voice card has only two possible second lines, "Incoming voice call started" and "Outgoing voice call started", set with `callDirection`.
+
+<Canvas of={CardStories.Channels} />
+
+## Using it
+
+The card fills the width of its parent.

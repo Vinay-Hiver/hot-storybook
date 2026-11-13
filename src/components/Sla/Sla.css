@@ -4,9 +4,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing1);
-  height: 18px;
-  padding: 0 var(--spacing15);
+  gap: var(--spacing0);
+  height: var(--spacing5);
+  padding: 0 var(--spacing1);
   border-radius: var(--radius4);
   background: var(--slateSurfaceDefault);
   color: var(--slateSurfaceWhite);
