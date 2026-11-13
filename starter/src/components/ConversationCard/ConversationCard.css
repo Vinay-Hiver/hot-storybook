@@ -15,9 +15,9 @@
 }
 .hot-conv-card:hover, .hot-conv-card[data-force-state='hover'] { background: var(--slateSurfaceSubtle100Hover); }
 
-/* Selected: pale blue with a 1.5px blue bar on the left. No hover state. */
+/* Selected: pale blue with a 1.5px blue bar on the left. The bar is drawn inside the card with a shadow, so it takes no room and the content does not move when a card becomes selected. No hover state. */
 .hot-conv-card--selected,
-.hot-conv-card--selected:hover { background: var(--primarySurfaceSubtle); border-left: 1.5px solid var(--primarySurfaceDefault); }
+.hot-conv-card--selected:hover { background: var(--primarySurfaceSubtle); box-shadow: inset 1.5px 0 0 var(--primarySurfaceDefault); }
 
 /* Not in Figma: keyboard focus outline */
 .hot-conv-card:focus-visible { outline: var(--spacing05) solid var(--primarySurfaceLighter); outline-offset: -2px; }

@@ -85,6 +85,7 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Right panel database:** each field's icon was chosen by meaning, not read from Figma: check them. Voice's right panel is not built. Sub-section names and fields are example content: the real ones per channel are not defined.
 - [ ] **Assignee and Status:** check against Figma: the dropdown width (Assignee 260px, Status 160px, right edge lined up with the value), the row heights inside them and the avatar colour given to each example person. The trigger shows a plain person icon (no round fill) when "None" is chosen. The chosen value is only remembered while the panel is on screen.
 - [ ] **Dropdown not rechecked after the latest changes:** the country list in the phone input (its 6px flag gap is an estimate, not measured), and both right-panel dropdowns next to the Figma dropdown frames. The round icon fill (`iconBackground`) is the same colour as a row's hover fill, so it blends in when the row is hovered.
+- [ ] **Tags row height:** the rule at `RightPanel.css:129` gives a row with a tag 7px above and below, set for the old 22px tag. Tags are now 20px, so the row is 34px instead of Figma's 36px. Changing the padding to `--spacing2` (8px) brings it back to 36px.
 
 ## 8. Input
 
@@ -100,6 +101,14 @@ Only things that need action: something is built but needs another look, a decis
 ## 11. Conversation card
 
 - [ ] **SLA pill fill:** the FRT pill uses `--errorSurfaceDisabled` for overdue, while Figma's card frame uses `--pastelRedTextSubtle`.
+
+## 12. Home page conversation list
+
+- [ ] **Header values from a screenshot:** there is no Figma frame for the list header yet. The header (43px, 16px medium title, icon and title 8px apart) and the "All Conversations" bar (41px, 13px medium) were measured from the product screenshot. Share the Figma frame to check them.
+- [ ] **Header icon:** the icon before the view name is `splitview`, chosen from the screenshot. Confirm it.
+- [ ] **Unread badge and unread look:** the screenshot shows a blue count badge (for example "2") before the date and a bolder card for unread conversations. The Conversation card has neither yet.
+- [ ] **Other sidebar items:** My Work, Personal and the More items (Sent, Drafts and so on) show no list yet, only shared inbox views do.
+- [ ] **Opening a conversation:** pressing a card only selects it. The conversation view is not built.
 
 ## 10. Other
 

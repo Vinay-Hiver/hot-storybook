@@ -1,19 +1,20 @@
 import type { ConversationsSidebarSection, ConversationsSidebarView } from './ConversationsSidebar'
 import { channelViews, myWorkViews, personalViews, viewLibrary } from './data'
 import type { ViewChannelId } from './data'
+import { conversationCounts } from '../ConversationList/sampleData'
 
 /** Example inboxes and views, shared by the Conversations sidebar and Page layout stories. */
-// Every inbox view that shows a count has 1 conversation, so an inbox's total is the number of its counted views.
+// A personal view that shows a count has 1 conversation. An inbox view that shows a count has as many as the channel's dummy list in the Conversation list.
 const conversationsPerView = 1
 
 /** A list of views from the library, in the given order. The ids are prefixed so two inboxes never share one. */
-const viewsFor = (prefix: string, keys: string[], counts: boolean): ConversationsSidebarView[] =>
+const viewsFor = (prefix: string, keys: string[], counts: boolean, perView = conversationsPerView): ConversationsSidebarView[] =>
   keys.map((key) => {
     const v = viewLibrary[key]
-    return { id: `${prefix}-${v.id}`, label: v.label, icon: v.icon, count: counts && v.hasCount ? conversationsPerView : undefined }
+    return { id: `${prefix}-${v.id}`, label: v.label, icon: v.icon, count: counts && v.hasCount ? perView : undefined }
   })
 
-const inboxViews = (channel: ViewChannelId, counts: boolean): ConversationsSidebarView[] => viewsFor(channel, channelViews[channel], counts)
+const inboxViews = (channel: ViewChannelId, counts: boolean): ConversationsSidebarView[] => viewsFor(channel, channelViews[channel], counts, conversationCounts[channel])
 
 // Example counts for the My Work queues (Figma shows 5 and 99+).
 const myWorkCounts: Record<string, number> = { liveQueue: 5, standardQueue: 150 }

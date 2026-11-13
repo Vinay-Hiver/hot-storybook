@@ -1,0 +1,18 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as ListStories from './ConversationList.stories'
+
+<Meta of={ListStories} />
+
+# Conversation list
+
+The column of conversation cards that opens when a view of a shared inbox is chosen in the Conversations sidebar, for example Chat → Unassigned. It is 300px wide and scrolls on its own.
+
+- **Header**: an icon and the name of the view.
+- **All Conversations**: a small heading under it.
+- **Cards**: one Conversation card per conversation, with the channel icon of the inbox. Pressing a card selects it. Opening the conversation is not built yet.
+
+Tags and All Views do not show a list.
+
+Each channel has its own dummy conversations (5 to 8). Every view of that channel shows the same list for now, and the counts in the sidebar match.
+
+<Canvas of={ListStories.Playground} />

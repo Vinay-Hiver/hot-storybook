@@ -339,6 +339,16 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 <AssigneeField value={who} onChange={setWho} />   // inside <RightPanelTop>, next to <StatusField />
 ```
 
+### ConversationList
+`import { ConversationList } from './patterns/ConversationList'`
+- `title`: string — The name of the view the list belongs to, for example "Unassigned".
+- `icon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… (default splitview) — The icon before the title.
+- `subtitle?`: string (default All Conversations) — The small heading under the title.
+- `channel`: "slack" | "sms" | "voice" | "whatsapp" | "email" | "chat" — The channel of the inbox.
+- `conversations`: ConversationListItem[] — The conversations, newest first.
+- `selectedId?`: string — The id of the selected conversation.
+- `onSelect?`: function
+
 ### ConversationsSidebar
 `import { ConversationsSidebar } from './patterns/ConversationsSidebar'`
 - `title?`: string (default Conversations) — The heading at the top.

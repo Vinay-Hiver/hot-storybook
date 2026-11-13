@@ -1,0 +1,36 @@
+/* HOT Design System — Conversation list: the column of conversation cards on the home page. Measured from a screenshot of the product (no Figma frame for the header yet); colors use tokens only. */
+.hot-conv-list {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  width: 300px;
+  height: 100%;
+  border-right: 1px solid var(--slateBorderMild);
+  background: var(--slateSurfaceWhite);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+}
+.hot-conv-list__header {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing2);
+  height: 43px;
+  padding: 0 var(--spacing4);
+  border-bottom: 1px solid var(--slateBorderMild);
+}
+.hot-conv-list__icon { display: inline-flex; flex: none; color: var(--slateIconsSubtle); }
+.hot-conv-list__title { margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-lg-medium); color: var(--slateTextBody); }
+.hot-conv-list__sub {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 41px;
+  padding: 0 var(--spacing3);
+  border-bottom: 1px solid var(--slateBorderMild);
+  font: var(--text-body-sm-medium);
+}
+.hot-conv-list__cards { flex: 1; min-height: 0; overflow-y: auto; }
