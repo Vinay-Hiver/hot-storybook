@@ -4,16 +4,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: var(--spacing1);
   height: 18px;
-  padding: 0 6px;
-  border-radius: 4px;
+  padding: 0 var(--spacing15);
+  border-radius: var(--radius4);
   background: var(--slateSurfaceDefault);
   color: var(--slateSurfaceWhite);
   font: var(--text-body-xs-regular);
   white-space: nowrap;
 }
-.hot-sla-pill__icon { flex: none; width: 12px; height: 12px; }
+.hot-sla-pill__icon { flex: none; width: var(--iconSizeXs); height: var(--iconSizeXs); }
 .hot-sla-pill--due { background: var(--warningSurfaceDark); }
 .hot-sla-pill--overdue { background: var(--errorSurfaceDisabled); }
 .hot-sla-pill--done { background: var(--successBorderDark); }
@@ -25,11 +25,11 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: var(--spacing3);
   width: 100%;
-  padding: 8px 12px;
+  padding: var(--spacing2) var(--spacing3);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius8);
   background: var(--alert-bg);
   color: var(--alert-fg);
   font: var(--text-body-xs-medium);
@@ -40,9 +40,9 @@
 .hot-sla-alert--done { --alert-bg: var(--pastelGreenSurfaceSubtle); --alert-fg: var(--successTextBody); }
 
 .hot-sla-alert--button { cursor: pointer; }
-.hot-sla-alert--button:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: 2px; }
+.hot-sla-alert--button:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: var(--spacing05); }
 
-.hot-sla-alert__main { display: flex; flex: 1; align-items: center; gap: 8px; min-width: 0; }
+.hot-sla-alert__main { display: flex; flex: 1; align-items: center; gap: var(--spacing2); min-width: 0; }
 .hot-sla-alert__message { flex: 1; min-width: 0; }
 .hot-sla-alert__badge {
   box-sizing: border-box;
@@ -50,12 +50,12 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  width: 16px;
-  height: 16px;
-  padding: 2px;
-  border-radius: 20px;
+  width: var(--spacing4);
+  height: var(--spacing4);
+  padding: var(--spacing05);
+  border-radius: var(--radius20);
   background: var(--alert-fg);
   color: var(--slateSurfaceWhite);
 }
-.hot-sla-alert__badge > svg { width: 12px; height: 12px; }
+.hot-sla-alert__badge > svg { width: var(--spacing3); height: var(--spacing3); }
 .hot-sla-alert > svg { flex: none; }

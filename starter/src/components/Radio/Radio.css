@@ -11,8 +11,8 @@
 .hot-radio-group__label {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  min-height: 20px;
+  gap: var(--spacing05);
+  min-height: var(--spacing5);
   font: var(--text-body-xs-regular);
   color: var(--radio-group-label);
 }
@@ -21,8 +21,8 @@
 .hot-radio {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  min-height: 24px;
+  gap: var(--spacing1);
+  min-height: var(--spacing6);
   cursor: pointer;
   font: var(--text-body-md-regular);
   color: var(--slateTextBody);
@@ -42,11 +42,11 @@
   position: relative;
   box-sizing: border-box;
   flex: none;
-  width: 14px;
-  height: 14px;
-  margin: 5px;
+  width: var(--iconSize14);
+  height: var(--iconSize14);
+  margin: var(--spacing1);
   border: 2px solid var(--slateBorderLight);
-  border-radius: 50%;
+  border-radius: var(--radiusFull);
   background: var(--slateSurfaceWhite);
   transition: background-color 120ms ease, border-color 120ms ease;
 }
@@ -55,9 +55,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
+  width: var(--spacing1);
+  height: var(--spacing1);
+  border-radius: var(--radiusFull);
   background: #fafbfc;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -72,8 +72,8 @@
 /* Not in Figma: keyboard focus and disabled, so the control is usable */
 .hot-radio__input:focus-visible + .hot-radio__circle,
 .hot-radio[data-force-state='focus'] .hot-radio__circle {
-  outline: 2px solid var(--primarySurfaceLighter);
-  outline-offset: 2px;
+  outline: var(--spacing05) solid var(--primarySurfaceLighter);
+  outline-offset: var(--spacing05);
 }
 .hot-radio--disabled { cursor: not-allowed; color: var(--slateTextDisabled); }
 .hot-radio--disabled .hot-radio__circle,

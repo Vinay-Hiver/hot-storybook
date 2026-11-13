@@ -31,24 +31,24 @@
   left: 0;
   right: 0;
   bottom: -1px;
-  height: 1px;
+  height: var(--spacing0);
   background: var(--slateBorderMild);
 }
 
 /* Search area: 8px above the box (under the title, or from the top of the panel), 8px at the sides, and nothing below it: the 6px under the search box comes from the list. The box is as wide as the option rows (8px in from each side). */
 .hot-dropdown__search { box-sizing: border-box; flex: none; padding: var(--spacing2) var(--spacing2) 0; }
 
-/* An avatar sits in the same place as a checkbox, radio or icon: those are 14px marks centred in a 24px area, so they start 5px in. The avatar (and an icon on a round fill) fills the whole 24px, so it gets 5px of space on its left to match. */
-.hot-dropdown .hot-list-el:has(> .hot-avatar), .hot-dropdown .hot-list-icon--round { margin-left: 5px; }
+/* An avatar sits in the same place as a checkbox, radio or icon: those are 14px marks centred in a 24px area, so they start about 5px in; the offsets below are snapped to the 4px token. The avatar (and an icon on a round fill) fills the whole 24px, so it gets 4px of space on its left to match. */
+.hot-dropdown .hot-list-el:has(> .hot-avatar), .hot-dropdown .hot-list-icon--round { margin-left: var(--spacing1); }
 
-/* The gap you see between the mark and the text is 10px for every row style. Checkboxes, radios and icons are 14px marks centred in a 24px area (5px of space inside on each side), so they need 5px more; avatars, round icons and flags fill more of the area. */
-.hot-dropdown .hot-list-item--compact .hot-list-item__main { gap: 5px; }
+/* The gap you see between the mark and the text is 10px for every row style. Checkboxes, radios and icons are 14px marks centred in a 24px area (about 5px of space inside on each side), so they need 4px more; avatars, round icons and flags fill more of the area. */
+.hot-dropdown .hot-list-item--compact .hot-list-item__main { gap: var(--spacing1); }
 .hot-dropdown .hot-list-item--compact .hot-list-item__main:is(:has(> .hot-list-el > .hot-avatar), :has(> .hot-list-icon--round)) { gap: var(--spacing25); }
 .hot-dropdown .hot-list-item--compact .hot-list-item__main:has(> .hot-country-list__flag) { gap: var(--spacing15); }
 
-/* A mark sits 9px inside its row on the left (4px of row padding + 5px of centring in its 24px area). The tick on the right and the text of a text-only row get the same 9px. */
-.hot-dropdown .hot-list-item--compact .hot-list-item__trailing { margin-right: 5px; }
-.hot-dropdown .hot-list-item--compact.hot-list-item--no-leading { padding-left: 9px; }
+/* A mark sits about 9px inside its row on the left (4px of row padding + about 5px of centring in its 24px area). The tick on the right gets 4px and a text-only row gets 8px of left padding. */
+.hot-dropdown .hot-list-item--compact .hot-list-item__trailing { margin-right: var(--spacing1); }
+.hot-dropdown .hot-list-item--compact.hot-list-item--no-leading { padding-left: var(--spacing2); }
 
 /* Options: 6px above (under the title or the search box, or the top edge of the panel), 8px at the sides and below */
 .hot-dropdown__list {
@@ -56,7 +56,7 @@
   margin: 0;
   padding: var(--spacing15) var(--spacing2) var(--spacing2);
   list-style: none;
-  max-height: 264px;
+  max-height: var(--spacing64);
   overflow-y: auto;
 }
 .hot-dropdown__empty { padding: var(--spacing2); color: var(--slateTextSubtle); }

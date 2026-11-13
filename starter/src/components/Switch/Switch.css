@@ -1,22 +1,22 @@
 /* HOT Design System — Switch. Values read from the Figma "Switch" page; colors use tokens only. */
 .hot-switch {
-  --sw-w: 32px;
-  --sw-h: 16px;
-  --sw-knob: 12px;
-  --sw-travel: 16px;
+  --sw-w: var(--spacing8);
+  --sw-h: var(--spacing4);
+  --sw-knob: var(--spacing3);
+  --sw-travel: var(--spacing4);
 
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing2);
   cursor: pointer;
   font: var(--text-body-md-regular);
   color: var(--slateTextBody);
 }
 .hot-switch--large {
-  --sw-w: 40px;
-  --sw-h: 20px;
-  --sw-knob: 16px;
-  --sw-travel: 20px;
+  --sw-w: var(--spacing10);
+  --sw-h: var(--spacing5);
+  --sw-knob: var(--spacing4);
+  --sw-travel: var(--spacing5);
 }
 
 .hot-switch__input {
@@ -39,11 +39,11 @@
 }
 .hot-switch__knob {
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: var(--spacing05);
+  left: var(--spacing05);
   width: var(--sw-knob);
   height: var(--sw-knob);
-  border-radius: 50%;
+  border-radius: var(--radiusFull);
   background: var(--slateSurfaceWhite);
   transition: transform 150ms ease;
 }

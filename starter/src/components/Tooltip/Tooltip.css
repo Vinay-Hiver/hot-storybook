@@ -6,9 +6,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 24px;
-  padding: 0 8px;
-  border-radius: 4px;
+  height: var(--spacing6);
+  padding: 0 var(--spacing2);
+  border-radius: var(--radius4);
   background: var(--slateSurfaceDark600);
   color: var(--slateSurfaceWhite);
   font: var(--text-body-xs-regular);
@@ -17,10 +17,10 @@
 
 /* Floating position, used by the Tooltip wrapper. The 6px gap is not in Figma. */
 .hot-tooltip--floating { position: absolute; z-index: 1000; pointer-events: none; }
-.hot-tooltip--top { bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
-.hot-tooltip--bottom { top: calc(100% + 6px); left: 50%; transform: translateX(-50%); }
-.hot-tooltip--left { right: calc(100% + 6px); top: 50%; transform: translateY(-50%); }
-.hot-tooltip--right { left: calc(100% + 6px); top: 50%; transform: translateY(-50%); }
+.hot-tooltip--top { bottom: calc(100% + var(--spacing15)); left: 50%; transform: translateX(-50%); }
+.hot-tooltip--bottom { top: calc(100% + var(--spacing15)); left: 50%; transform: translateX(-50%); }
+.hot-tooltip--left { right: calc(100% + var(--spacing15)); top: 50%; transform: translateY(-50%); }
+.hot-tooltip--right { left: calc(100% + var(--spacing15)); top: 50%; transform: translateY(-50%); }
 
 /* Portal position: drawn on the page itself at the point next to the element. */
 .hot-tooltip--portal { position: fixed; z-index: 2000; pointer-events: none; }

@@ -2,7 +2,7 @@
 .hot-country-list {
   position: absolute;
   z-index: 1000;
-  top: calc(100% + 5px);
+  top: calc(100% + var(--spacing1));
   left: 0;
   width: 100%;
   min-width: var(--spacing80); /* the default width of the whole phone input */

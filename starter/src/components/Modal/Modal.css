@@ -45,7 +45,7 @@
 
 /* Centered: no header bar */
 .hot-modal--centered { align-items: center; padding: var(--spacing4); gap: var(--spacing4); }
-.hot-modal__corner { position: absolute; top: 17px; right: var(--spacing4); }
+.hot-modal__corner { position: absolute; top: var(--spacing4); right: var(--spacing4); }
 .hot-modal__centered-body { display: flex; flex-direction: column; align-items: center; gap: var(--spacing2); width: 300px; max-width: 100%; text-align: center; }
 .hot-modal__big-icon { display: inline-flex; width: 44px; height: 44px; }
 .hot-modal__centered-heading { display: flex; flex-direction: column; gap: var(--spacing1); width: 100%; }

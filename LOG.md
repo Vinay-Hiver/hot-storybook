@@ -135,3 +135,10 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Built:** Checkbox uses the spacing, radius and icon-size tokens. The box margin is now 4px (was 5px; 2px, was 3px, without a label), and the corner radius 4px (was 3px), because they snap to the scale. The check and dash are centred with left 50% so they stay centred whatever the border width.
 - **Built:** Button heights (28, 32, 40px) and the Button and Tag focus-ring width (2px) use the spacing tokens, same pixel values. The Tag close-button focus ring offset is now 2px (was 1px).
 - **Built:** Dropdown, Input (with Textarea fields, tags and country list), List item and Modal use the spacing, radius and icon-size tokens wherever the value is on the scale (same pixel values). Off-scale values stay as px.
+- **Built:** Dropdown: title line height 0 (token `--spacing0`, was 1px), row offsets 5px and 9px snapped to 4px and 8px, options max-height 256px (was 264px); Input country list offset 4px (was 5px).
+- **Built:** List item checkbox radius 4px (was 3px) and its check mark centred with left 50% (as in Checkbox); radio and dot radius use `--radiusFull`; Modal corner button top is 16px (was 17px).
+- **Built:** Radio, Sla, Switch (including its size variables) and Table use the spacing, radius and icon-size tokens wherever the value is on the scale (same pixel values). Popover had no pixel values. Off-scale values stay as px.
+- **Built:** Radio circle margin 4px (was 5px), Radio and Switch circles use `--radiusFull`, SLA alert gap 12px (was 13px), Table row-actions padding 2px (was 3px).
+- **Built:** Loader, Tabs and Tooltip use the spacing and radius tokens wherever the value is on the scale (same pixel values). Textarea shares the Input styles and the ripple helper has no pixel values, so both were already covered or needed nothing. Off-scale values stay as px.
+- **Built:** Loader ring radius uses `--radiusFull` and its ring is 6px thick (was 7px); Tab underline width uses `--spacing05`.
+- **Built:** Shared Inbox page uses the spacing tokens for its gaps and padding (same pixel values). The 60px heading bar height stays as px.

@@ -52,13 +52,13 @@
 .hot-list-icon--round { border-radius: var(--radiusFull); background: var(--slateSurfaceSubtle100Hover); }
 
 /* Radio element */
-.hot-list-radio { box-sizing: border-box; position: relative; width: var(--iconSize14); height: var(--iconSize14); border-radius: 50%; border: 2px solid var(--slateBorderLight); background: var(--slateSurfaceWhite); }
+.hot-list-radio { box-sizing: border-box; position: relative; width: var(--iconSize14); height: var(--iconSize14); border-radius: var(--radiusFull); border: 2px solid var(--slateBorderLight); background: var(--slateSurfaceWhite); }
 .hot-list-radio--on { background: var(--primarySurfaceDefault); border-color: var(--primarySurfaceDefault); }
-.hot-list-radio--on::after { content: ''; position: absolute; top: 50%; left: 50%; width: var(--spacing1); height: var(--spacing1); border-radius: 50%; background: #fafbfc; transform: translate(-50%, -50%); }
+.hot-list-radio--on::after { content: ''; position: absolute; top: 50%; left: 50%; width: var(--spacing1); height: var(--spacing1); border-radius: var(--radiusFull); background: #fafbfc; transform: translate(-50%, -50%); }
 
 /* Checkbox element (Figma "List Elements"): thin grey border when off, solid blue when on.
    Hover and press are shown by the row behind it. */
-.hot-list-check { box-sizing: border-box; position: relative; width: var(--iconSize14); height: var(--iconSize14); border-radius: 3px; border: 1px solid var(--slateBorderDefault); background: var(--slateSurfaceWhite); }
+.hot-list-check { box-sizing: border-box; position: relative; width: var(--iconSize14); height: var(--iconSize14); border-radius: var(--radius4); border: 1px solid var(--slateBorderDefault); background: var(--slateSurfaceWhite); }
 .hot-list-check--on { border-width: 2px; background: var(--primarySurfaceDefault); border-color: var(--primarySurfaceDefault); }
-.hot-list-check svg { display: none; position: absolute; left: 1px; top: var(--spacing05); width: var(--spacing2); height: var(--spacing15); color: var(--slateSurfaceWhite); }
+.hot-list-check svg { display: none; position: absolute; left: 50%; transform: translateX(-50%); top: var(--spacing05); width: var(--spacing2); height: var(--spacing15); color: var(--slateSurfaceWhite); }
 .hot-list-check--on svg { display: block; }
