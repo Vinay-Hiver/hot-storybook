@@ -5,19 +5,19 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: var(--spacing4);
   flex: none;
   width: 50px;
   height: 100%;
-  padding: 0 8px 12px;
+  padding: 0 var(--spacing2) var(--spacing3);
   /* Raw colour copied from the Figma Main Nav (Omni_Master-Components). It is not a token yet. */
   background: #2e3641;
 }
-.hot-main-nav__top { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.hot-main-nav__logo-cell { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; padding: 11px 0 10px; }
+.hot-main-nav__top { display: flex; flex-direction: column; gap: var(--spacing2); width: 100%; }
+.hot-main-nav__logo-cell { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; padding: 11px 0 var(--spacing25); }
 .hot-main-nav__logo { display: block; flex: none; }
-.hot-main-nav__group { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.hot-main-nav__bottom { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.hot-main-nav__group { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: var(--spacing4); }
+.hot-main-nav__bottom { display: flex; flex-direction: column; align-items: center; gap: var(--spacing4); }
 
 .hot-main-nav__item,
 .hot-main-nav__footer-item {
@@ -27,19 +27,19 @@
   justify-content: center;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius6);
   background: transparent;
   color: var(--slateSurfaceSubtle300);
   cursor: pointer;
 }
-.hot-main-nav__item { width: 28px; height: 28px; }
-.hot-main-nav__footer-item { width: 28px; height: 28px; margin: -2px; } /* same 28px hover box as the top icons, without moving the 16px icons */
+.hot-main-nav__item { width: 28px; height: var(--spacing7); }
+.hot-main-nav__footer-item { width: 28px; height: var(--spacing7); margin: -2px; } /* same 28px hover box as the top icons, without moving the 16px icons */
 .hot-main-nav__item svg,
 .hot-main-nav__footer-item svg { flex: none; }
 .hot-main-nav__item:is(:hover, [data-force-state='hover']),
 .hot-main-nav__footer-item:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceDark600); }
 .hot-main-nav__item:focus-visible,
-.hot-main-nav__footer-item:focus-visible { outline: 2px solid var(--slateSurfaceWhite); outline-offset: 1px; }
+.hot-main-nav__footer-item:focus-visible { outline: var(--spacing05) solid var(--slateSurfaceWhite); outline-offset: 1px; }
 .hot-main-nav__item[aria-current='page'] { background: var(--slateSurfaceDark500); color: var(--slateSurfaceWhite); }
 
 /* The avatar here is red with a pale letter, as in Figma. */
@@ -47,35 +47,35 @@
 
 /* The avatar becomes a button when it opens the account menu. It keeps the avatar's look and gets the same hover box as the other icons. */
 .hot-main-nav__avatar-button { display: inline-flex; padding: 0; border: 0; background: transparent; border-radius: 50%; cursor: pointer; }
-.hot-main-nav__avatar-button:focus-visible { outline: 2px solid var(--slateSurfaceWhite); outline-offset: 2px; }
+.hot-main-nav__avatar-button:focus-visible { outline: var(--spacing05) solid var(--slateSurfaceWhite); outline-offset: var(--spacing05); }
 
 /* Menus that open from the nav (Figma: avatar menu 350px wide, Help Center menu 350px wide) */
-.hot-menu-flyout { position: fixed; z-index: 1000; max-height: calc(100vh - 16px); animation: hot-menu-in 200ms ease-out; }
+.hot-menu-flyout { position: fixed; z-index: 1000; max-height: calc(100vh - var(--spacing4)); animation: hot-menu-in 200ms ease-out; }
 @keyframes hot-menu-in { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .hot-menu-flyout { animation: none; } }
 .hot-menu {
   box-sizing: border-box;
   width: 351px; /* 350px inside the 0.5px border, as in Figma */
   border: 0.5px solid var(--slateBorderLight);
-  border-radius: 8px;
+  border-radius: var(--radius8);
   background: var(--slateSurfaceWhite);
   box-shadow: 0 6px 30px color-mix(in srgb, var(--slateTextTitle) 6%, transparent);
   font-family: var(--fontFamily);
 }
-.hot-menu--user { padding-top: 12px; }
-.hot-menu__header { padding: 12px 24px; }
+.hot-menu--user { padding-top: var(--spacing3); }
+.hot-menu__header { padding: var(--spacing3) var(--spacing6); }
 .hot-menu__name { font: var(--text-body-lg-medium); color: var(--slateTextBody); }
 .hot-menu__email { font: var(--text-body-md-regular); color: var(--slateTextSubtle); }
-.hot-menu__rows { display: flex; flex-direction: column; padding: 0 16px; }
+.hot-menu__rows { display: flex; flex-direction: column; padding: 0 var(--spacing4); }
 .hot-menu__row {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing2);
   width: 100%;
-  padding: 12px;
+  padding: var(--spacing3);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius8);
   background: var(--slateSurfaceWhite);
   text-align: left;
   cursor: pointer;
@@ -85,17 +85,17 @@
 .hot-menu__icon, .hot-menu__arrow { display: inline-flex; flex: none; color: var(--slateBorderDark); }
 .hot-menu__arrow { margin-left: auto; }
 .hot-menu__label { font: var(--text-body-md-medium); color: var(--slateTextTitle); }
-.hot-menu__row--availability { gap: 12px; }
+.hot-menu__row--availability { gap: var(--spacing3); }
 .hot-menu__text { display: flex; flex: 1; flex-direction: column; min-width: 0; }
 .hot-menu__title { font: var(--fontWeightRegular) 14px/23px var(--fontFamily); color: var(--slateTextTitle); }
 .hot-menu__sub { font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
-.hot-menu__footer { box-sizing: border-box; padding: 12px 24px 20px; }
+.hot-menu__footer { box-sizing: border-box; padding: var(--spacing3) var(--spacing6) var(--spacing5); }
 .hot-menu__logo { display: block; }
 
 /* Help Center menu: title, then 40px rows with 4px between them, and body-coloured icons */
-.hot-menu--help { padding: 8px 16px 16px; }
-.hot-menu__title-bar { display: flex; align-items: center; height: 48px; font: var(--text-body-lg-medium); color: var(--slateTextBody); }
-.hot-menu__rows--help { gap: 4px; padding: 0; }
-.hot-menu--help .hot-menu__row { padding: 10px 8px; }
+.hot-menu--help { padding: var(--spacing2) var(--spacing4) var(--spacing4); }
+.hot-menu__title-bar { display: flex; align-items: center; height: var(--spacing12); font: var(--text-body-lg-medium); color: var(--slateTextBody); }
+.hot-menu__rows--help { gap: var(--spacing1); padding: 0; }
+.hot-menu--help .hot-menu__row { padding: var(--spacing25) var(--spacing2); }
 .hot-menu--help .hot-menu__icon, .hot-menu--help .hot-menu__arrow { color: var(--slateTextBody); }
 .hot-menu--help .hot-menu__label { color: var(--slateTextBody); }

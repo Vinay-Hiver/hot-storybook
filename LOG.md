@@ -142,3 +142,6 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Built:** Loader, Tabs and Tooltip use the spacing and radius tokens wherever the value is on the scale (same pixel values). Textarea shares the Input styles and the ripple helper has no pixel values, so both were already covered or needed nothing. Off-scale values stay as px.
 - **Built:** Loader ring radius uses `--radiusFull` and its ring is 6px thick (was 7px); Tab underline width uses `--spacing05`.
 - **Built:** Shared Inbox page uses the spacing tokens for its gaps and padding (same pixel values). The 60px heading bar height stays as px.
+- **Built:** Empty state and Admin sidebar use the spacing and radius tokens wherever the value is on the scale (same pixel values). Widths stay as px. The Admin sidebar header is 48px (was 47px) and the Empty state icon is fully round (`--radiusFull`, was 110px).
+- **Built:** Sub-nav, Conversations sidebar, Main nav and Right panel use the spacing, radius and icon-size tokens wherever the value is on the scale (same pixel values). Widths stay as px. Off-scale values stay as px.
+- **Built:** Sub-nav menu top 64px (was 66px). Conversations sidebar header 48px (was 47px), split button gap 0 (was 1px), count pill radius `--radiusFull` (was 1000px) and the views line 16px from the left (was 17px).

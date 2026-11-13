@@ -3,7 +3,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing25);
   flex: none; /* never shrinks below 240px, even inside a flex row */
   width: 240px;
   min-width: 240px;
@@ -14,9 +14,9 @@
   color: var(--slateTextBody);
 }
 
-.hot-conv-sidebar__header { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; height: 47px; padding: 10px 12px; }
+.hot-conv-sidebar__header { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; height: var(--spacing12); padding: var(--spacing25) var(--spacing3); }
 .hot-conv-sidebar__title { margin: 0; font: var(--text-body-lg-medium); color: var(--slateTextBody); }
-.hot-conv-sidebar__actions { display: flex; align-items: center; gap: 8px; }
+.hot-conv-sidebar__actions { display: flex; align-items: center; gap: var(--spacing2); }
 
 .hot-conv-sidebar__create,
 .hot-conv-sidebar__menu {
@@ -36,18 +36,18 @@
 .hot-conv-sidebar__search { margin: -2px; }
 
 /* The plus and the arrow sit side by side as one white button, with a 1px gap. The drop shadow is a raw value copied from Figma. */
-.hot-conv-sidebar__split { display: flex; gap: 1px; filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.08)); }
+.hot-conv-sidebar__split { display: flex; gap: var(--spacing0); filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.08)); }
 .hot-conv-sidebar__create,
-.hot-conv-sidebar__menu { height: 28px; background: var(--slateSurfaceWhite); }
-.hot-conv-sidebar__create { width: 32px; border-radius: 8px 0 0 8px; }
-.hot-conv-sidebar__menu { width: 20px; border-radius: 0 8px 8px 0; }
+.hot-conv-sidebar__menu { height: var(--spacing7); background: var(--slateSurfaceWhite); }
+.hot-conv-sidebar__create { width: 32px; border-radius: var(--radius8) 0 0 var(--radius8); }
+.hot-conv-sidebar__menu { width: 20px; border-radius: 0 var(--radius8) var(--radius8) 0; }
 .hot-conv-sidebar__create:hover,
 .hot-conv-sidebar__menu:hover { background: var(--slateSurfaceSubtle100Hover); }
-.hot-conv-sidebar :is(button):focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: -2px; }
+.hot-conv-sidebar :is(button):focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -2px; }
 
-.hot-conv-sidebar__sections { display: flex; flex-direction: column; gap: 12px; }
-.hot-conv-sidebar__section { display: flex; flex-direction: column; padding: 0 8px; }
-.hot-conv-sidebar__section-title { display: flex; align-items: center; height: 26px; padding: 0 8px; font: var(--text-body-xs-medium); color: var(--slateTextSubtle); }
+.hot-conv-sidebar__sections { display: flex; flex-direction: column; gap: var(--spacing3); }
+.hot-conv-sidebar__section { display: flex; flex-direction: column; padding: 0 var(--spacing2); }
+.hot-conv-sidebar__section-title { display: flex; align-items: center; height: 26px; padding: 0 var(--spacing2); font: var(--text-body-xs-medium); color: var(--slateTextSubtle); }
 .hot-conv-sidebar__list { list-style: none; margin: 0; padding: 0; }
 
 .hot-conv-sidebar__item {
@@ -59,28 +59,28 @@
   justify-content: space-between;
   width: 100%;
   height: 34px;
-  padding: 8px;
+  padding: var(--spacing2);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radius8);
   background: transparent;
   color: var(--slateTextBody);
   font: var(--text-body-md-regular);
   text-align: left;
   cursor: pointer;
 }
-.hot-conv-sidebar__item--grouped { padding-right: 4px; }
-.hot-conv-sidebar__item-main { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.hot-conv-sidebar__item--grouped { padding-right: var(--spacing1); }
+.hot-conv-sidebar__item-main { display: flex; align-items: center; gap: var(--spacing25); min-width: 0; }
 .hot-conv-sidebar__item-main svg { flex: none; }
 .hot-conv-sidebar__label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hot-conv-sidebar__count { flex: none; font: var(--text-body-xs-regular); color: var(--slateTextBody); }
-.hot-conv-sidebar__item--grouped .hot-conv-sidebar__count { padding: 2px 6px; border-radius: 1000px; }
+.hot-conv-sidebar__item--grouped .hot-conv-sidebar__count { padding: var(--spacing05) var(--spacing15); border-radius: var(--radiusFull); }
 .hot-conv-sidebar__item:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSlate150); }
 .hot-conv-sidebar__item[aria-current='page'] { background: var(--primarySurfaceSubtle); color: var(--primarySurfaceDefault); }
 .hot-conv-sidebar__item[aria-current='page'] .hot-conv-sidebar__count { color: var(--primarySurfaceDefault); }
 
 /* Inbox rows: the total on the right, an arrow in its place on hover */
 .hot-conv-sidebar__slot { position: relative; display: inline-flex; align-items: center; justify-content: flex-end; flex: none; min-width: 16px; min-height: 18px; }
-.hot-conv-sidebar__chevron { position: absolute; right: 6px; display: inline-flex; opacity: 0; transition: transform 250ms ease-in-out; }
+.hot-conv-sidebar__chevron { position: absolute; right: var(--spacing15); display: inline-flex; opacity: 0; transition: transform 250ms ease-in-out; }
 .hot-conv-sidebar__chevron svg { flex: none; }
 .hot-conv-sidebar__inbox:is(:hover, [data-force-state='hover']) .hot-conv-sidebar__chevron,
 .hot-conv-sidebar__inbox:focus-visible .hot-conv-sidebar__chevron { opacity: 1; }
@@ -95,19 +95,19 @@
 .hot-conv-sidebar__views-wrap > .hot-conv-sidebar__views { min-height: 0; overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .hot-conv-sidebar__views-wrap, .hot-conv-sidebar__chevron { transition: none; } }
 .hot-conv-sidebar__views { position: relative; list-style: none; margin: 0; padding: 0 0 0 34px; }
-.hot-conv-sidebar__views::before { content: ''; position: absolute; left: 17px; top: 0; height: calc(100% - 14px); width: 1px; background: var(--slateBorderLight); }
+.hot-conv-sidebar__views::before { content: ''; position: absolute; left: var(--spacing4); top: 0; height: calc(100% - 14px); width: 1px; background: var(--slateBorderLight); }
 .hot-conv-sidebar__view {
   position: relative; /* with overflow hidden, keeps the press ripple inside the row */
   overflow: hidden;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing25);
   width: 100%;
   height: 34px;
-  padding: 0 8px;
+  padding: 0 var(--spacing2);
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius6);
   background: transparent;
   color: var(--slateTextTitle);
   font: var(--text-body-md-regular);

@@ -15,10 +15,10 @@
 
 /* Fields: an icon and label on the left (120px), the value on the right */
 .hot-rp-fields { display: flex; flex-direction: column; }
-.hot-rp-field { display: flex; align-items: center; gap: 12px; min-height: 36px; }
-.hot-rp-field__label { display: flex; align-items: center; flex: none; gap: 10px; width: 108px; color: var(--slateTextSubtle); font: var(--text-body-md-regular); }
+.hot-rp-field { display: flex; align-items: center; gap: var(--spacing3); min-height: var(--spacing9); }
+.hot-rp-field__label { display: flex; align-items: center; flex: none; gap: var(--spacing25); width: 108px; color: var(--slateTextSubtle); font: var(--text-body-md-regular); }
 .hot-rp-field__label svg { flex: none; }
-.hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; min-height: 36px; padding: 8px; border-radius: 6px; color: var(--slateTextTitle); font: var(--text-body-md-regular); }
+.hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: var(--spacing2); min-width: 0; min-height: var(--spacing9); padding: var(--spacing2); border-radius: var(--radius6); color: var(--slateTextTitle); font: var(--text-body-md-regular); }
 .hot-rp-field__value--link { color: var(--primarySurfaceDefault); }
 
 /* The Status list is short, so it is 160px wide instead of the Dropdown's 260px */
@@ -27,23 +27,23 @@
 /* A value you can press (Assignee, Status): hover shows the grey fill and a small white box with a down chevron, as in Figma. */
 .hot-rp-field__value--select, .hot-rp-top .hot-rp-field__value--select { flex-wrap: nowrap; padding: 0; }
 .hot-rp-select {
-  box-sizing: border-box; display: flex; align-items: center; gap: 8px; width: 100%; min-height: 32px; padding: 6px;
-  border: 0; border-radius: 6px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  box-sizing: border-box; display: flex; align-items: center; gap: var(--spacing2); width: 100%; min-height: var(--spacing8); padding: var(--spacing15);
+  border: 0; border-radius: var(--radius6); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
 }
 .hot-rp-select:hover, .hot-rp-select[aria-expanded='true'] { background: var(--slateSurfaceSlate150); }
-.hot-rp-select:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: -2px; }
+.hot-rp-select:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -2px; }
 .hot-rp-select__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hot-rp-select__chevron {
   box-sizing: border-box; display: none; align-items: center; justify-content: center; flex: none; width: 18px; height: 18px;
-  border: 0.5px solid var(--slateBorderLight); border-radius: 6px; background: var(--slateSurfaceWhite); color: var(--slateTextBody);
+  border: 0.5px solid var(--slateBorderLight); border-radius: var(--radius6); background: var(--slateSurfaceWhite); color: var(--slateTextBody);
 }
 .hot-rp-select:is(:hover, :focus-visible, [aria-expanded='true']) .hot-rp-select__chevron { display: inline-flex; }
 
 /* Top section. Its rows are 32px with 4px between them (the sub-sections' rows are 36px with none). */
-.hot-rp-top { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
-.hot-rp-top .hot-rp-fields { gap: 4px; }
-.hot-rp-top .hot-rp-field { min-height: 32px; }
-.hot-rp-top .hot-rp-field__value { min-height: 32px; padding: 6px; }
+.hot-rp-top { display: flex; flex-direction: column; gap: var(--spacing4); padding: var(--spacing5); }
+.hot-rp-top .hot-rp-fields { gap: var(--spacing1); }
+.hot-rp-top .hot-rp-field { min-height: var(--spacing8); }
+.hot-rp-top .hot-rp-field__value { min-height: var(--spacing8); padding: var(--spacing15); }
 .hot-rp-top__title { margin: 0; min-height: 21px; font: var(--text-body-md-medium); color: var(--slateTextBody); }
 
 /* Sub-sections: a thin line above each, and below the last. Each sits in a wrapper so it can be dragged. */
@@ -75,9 +75,9 @@
   display: flex;
   flex: 1;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing2);
   min-width: 0;
-  padding: 15px 20px 12px; /* 49px tall in Figma */
+  padding: 15px var(--spacing5) var(--spacing3); /* 49px tall in Figma */
   border: 0;
   background: transparent;
   color: inherit;
@@ -89,18 +89,18 @@
 .hot-rp-section__title { flex: 1; min-width: 0; }
 .hot-rp-section__chevron { display: inline-flex; flex: none; transition: transform 250ms ease-in-out; }
 .hot-rp-section[data-open='true'] .hot-rp-section__chevron { transform: rotate(90deg); }
-.hot-rp-section__toggle:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: -2px; }
+.hot-rp-section__toggle:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -2px; }
 
 /* Open or closed, a section turns light grey on hover and shows the drag handle on the left. The handle is the only part that starts a drag. */
 .hot-rp-section__grip {
   position: absolute;
-  left: 4px;
+  left: var(--spacing1);
   top: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
+  width: var(--iconSizeSm);
+  height: var(--iconSizeSm);
   padding: 0;
   border: 0;
   background: transparent;
@@ -112,7 +112,7 @@
   touch-action: none;
 }
 .hot-rp-section__grip:active { cursor: grabbing; }
-.hot-rp-section__grip:focus-visible { opacity: 1; outline: 2px solid var(--primaryBorderDefault); }
+.hot-rp-section__grip:focus-visible { opacity: 1; outline: var(--spacing05) solid var(--primaryBorderDefault); }
 .hot-rp-section__header:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle100Hover); }
 .hot-rp-section__header:is(:hover, [data-force-state='hover']) .hot-rp-section__grip,
 .hot-rp-sortable--dragging .hot-rp-section__grip { opacity: 1; }
@@ -122,7 +122,7 @@
 .hot-rp-section__wrap { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 250ms ease-in-out, visibility 0s linear 250ms; }
 .hot-rp-section__wrap[data-open='true'] { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows 250ms ease-in-out, visibility 0s; }
 .hot-rp-section__body { min-height: 0; overflow: hidden; }
-.hot-rp-section__inner { padding: 0 20px 16px; } /* the padding lives inside, so it slides with the rest */
+.hot-rp-section__inner { padding: 0 var(--spacing5) var(--spacing4); } /* the padding lives inside, so it slides with the rest */
 @media (prefers-reduced-motion: reduce) { .hot-rp-section__wrap, .hot-rp-section__chevron { transition: none; } }
 
 /* A value row that holds chips (22px tall) is 36px tall, as in Figma. */
@@ -130,46 +130,46 @@
 
 /* Activity & Notes (Figma: 88px note area, then days with a divider and a list) */
 .hot-rp-activity { display: flex; flex-direction: column; }
-.hot-rp-activity__compose { padding-top: 8px; }
+.hot-rp-activity__compose { padding-top: var(--spacing2); }
 .hot-rp-activity__note {
-  box-sizing: border-box; display: block; width: 100%; padding: 10px 8px; margin: 0 0 8px;
-  border: 1px solid var(--slateBorderLight); border-radius: 6px; background: var(--slateSurfaceWhite);
+  box-sizing: border-box; display: block; width: 100%; padding: var(--spacing25) var(--spacing2); margin: 0 0 var(--spacing2);
+  border: 1px solid var(--slateBorderLight); border-radius: var(--radius6); background: var(--slateSurfaceWhite);
   color: var(--slateTextSubtle); font: var(--text-body-md-regular); text-align: left; cursor: text;
 }
-.hot-rp-activity__note:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: 1px; }
-.hot-rp-activity__only { display: flex; justify-content: flex-end; align-items: center; height: 30px; padding-top: 10px; box-sizing: border-box; }
+.hot-rp-activity__note:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: 1px; }
+.hot-rp-activity__only { display: flex; justify-content: flex-end; align-items: center; height: 30px; padding-top: var(--spacing25); box-sizing: border-box; }
 .hot-rp-activity__only .hot-checkbox__label { color: var(--slateTextSubtle); font: var(--text-body-md-medium); }
-.hot-rp-activity__day { padding-top: 12px; }
-.hot-rp-activity__divider { display: flex; align-items: center; padding: 24px 0 20px; margin-bottom: 8px; }
+.hot-rp-activity__day { padding-top: var(--spacing3); }
+.hot-rp-activity__divider { display: flex; align-items: center; padding: var(--spacing6) 0 var(--spacing5); margin-bottom: var(--spacing2); }
 .hot-rp-activity__line { flex: 1; height: 1px; background: var(--slate150); }
-.hot-rp-activity__divider .hot-rp-activity__line:first-child { margin-right: 4px; }
-.hot-rp-activity__divider .hot-rp-activity__line:last-child { margin-left: 4px; }
+.hot-rp-activity__divider .hot-rp-activity__line:first-child { margin-right: var(--spacing1); }
+.hot-rp-activity__divider .hot-rp-activity__line:last-child { margin-left: var(--spacing1); }
 .hot-rp-activity__pill {
-  box-sizing: border-box; display: inline-flex; align-items: center; flex: none; height: 20px; padding: 0 12px;
-  border: 1px solid var(--slateBorderMild); border-radius: 9999px; color: var(--slateTextSubtle); font: var(--text-body-xs-regular);
+  box-sizing: border-box; display: inline-flex; align-items: center; flex: none; height: var(--spacing5); padding: 0 var(--spacing3);
+  border: 1px solid var(--slateBorderMild); border-radius: var(--radiusFull); color: var(--slateTextSubtle); font: var(--text-body-xs-regular);
 }
-.hot-rp-activity__list { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
-.hot-rp-activity__item { display: flex; gap: 12px; }
-.hot-rp-activity__icon { display: flex; flex: none; align-items: center; justify-content: center; width: 18px; height: 20px; color: var(--slateTextBody); }
-.hot-rp-activity__text { display: flex; flex: 1; flex-direction: column; gap: 4px; min-width: 0; }
+.hot-rp-activity__list { display: flex; flex-direction: column; gap: var(--spacing4); margin: 0; padding: 0; list-style: none; }
+.hot-rp-activity__item { display: flex; gap: var(--spacing3); }
+.hot-rp-activity__icon { display: flex; flex: none; align-items: center; justify-content: center; width: 18px; height: var(--iconSizeMd); color: var(--slateTextBody); }
+.hot-rp-activity__text { display: flex; flex: 1; flex-direction: column; gap: var(--spacing1); min-width: 0; }
 .hot-rp-activity__what { color: var(--slateTextBody); font: var(--text-body-md-regular); }
 .hot-rp-activity__time { color: var(--slateTextSubtle); font: var(--text-body-xs-regular); }
 
 /* Customize widgets: a full-width button after the last section, with a flyout above it */
-.hot-rp-footer { box-sizing: border-box; padding: 20px 12px; }
+.hot-rp-footer { box-sizing: border-box; padding: var(--spacing5) var(--spacing3); }
 .hot-rp-footer__button { width: 100%; --btn-bg: var(--slateSurfaceSubtle); --btn-bg-hover: var(--slateSurfaceSubtle100Hover); --btn-bg-active: var(--slateSurfaceSubtle100Hover); }
 /* Its top is set when it opens, in the panel's coordinates. It dissolves in over 200ms, the same as the tooltips. */
-.hot-rp-flyout { position: absolute; left: 12px; right: 12px; z-index: 5; animation: hot-rp-flyout-in 200ms ease-out; }
+.hot-rp-flyout { position: absolute; left: var(--spacing3); right: var(--spacing3); z-index: 5; animation: hot-rp-flyout-in 200ms ease-out; }
 @keyframes hot-rp-flyout-in { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .hot-rp-flyout { animation: none; } }
 .hot-rp-flyout__list { width: 100%; }
 /* Each section row in the flyout is 40px tall. */
-.hot-rp-flyout__list .hot-list-item--compact { min-height: 40px; }
+.hot-rp-flyout__list .hot-list-item--compact { min-height: var(--spacing10); }
 /* 8px of space between the title's line and the first row. */
-.hot-rp-flyout__list .hot-dropdown__list { padding-top: 8px; }
+.hot-rp-flyout__list .hot-dropdown__list { padding-top: var(--spacing2); }
 
 /* Tab bar at the top: 48px, with a thin line under it. The selected tab has a 2px underline. */
-.hot-rp-tabs { display: flex; flex: none; align-items: stretch; box-sizing: border-box; height: 48px; padding: 0 12px; box-shadow: inset 0 -1px 0 var(--slateBorderMild); }
+.hot-rp-tabs { display: flex; flex: none; align-items: stretch; box-sizing: border-box; height: var(--spacing12); padding: 0 var(--spacing3); box-shadow: inset 0 -1px 0 var(--slateBorderMild); }
 .hot-rp-tab {
   position: relative;
   overflow: hidden; /* keeps the click ripple inside the tab */
@@ -177,9 +177,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  height: 48px;
-  padding: 16px;
+  gap: var(--spacing2);
+  height: var(--spacing12);
+  padding: var(--spacing4);
   border: 0;
   background: transparent;
   color: var(--slateTextBody);
@@ -187,8 +187,8 @@
 }
 .hot-rp-tab svg { flex: none; }
 .hot-rp-tab:hover { background: var(--slateSurfaceSubtle100Hover); }
-.hot-rp-tab[aria-selected='true']::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--slateTextBody); }
-.hot-rp-tab:focus-visible { outline: 2px solid var(--primaryBorderDefault); outline-offset: -2px; }
+.hot-rp-tab[aria-selected='true']::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: var(--spacing05); background: var(--slateTextBody); }
+.hot-rp-tab:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -2px; }
 
 /* Everything under the tab bar. This is the part that scrolls, and the flyout is placed against it. */
 .hot-rp-body { position: relative; flex: 1; min-height: 0; overflow-y: auto; }
