@@ -169,7 +169,7 @@
 .hot-rp-flyout__list .hot-dropdown__list { padding-top: var(--spacing2); }
 
 /* Tab bar at the top: 48px, with a thin line under it. The selected tab has a 2px underline. */
-.hot-rp-tabs { display: flex; flex: none; align-items: stretch; box-sizing: border-box; height: var(--spacing12); padding: 0 var(--spacing3); box-shadow: inset 0 -1px 0 var(--slateBorderMild); }
+.hot-rp-tabs { display: flex; flex: none; align-items: stretch; box-sizing: border-box; height: 44px; padding: 0 var(--spacing3); box-shadow: inset 0 -1px 0 var(--slateBorderMild); }
 .hot-rp-tab {
   position: relative;
   overflow: hidden; /* keeps the click ripple inside the tab */

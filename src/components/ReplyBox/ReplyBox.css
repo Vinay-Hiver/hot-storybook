@@ -1,0 +1,39 @@
+/* HOT Design System — Reply box. Values read from the Figma "reply-box" frame (3278:5249); colors use tokens only. */
+.hot-reply-box {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--slateBorderLight);
+  border-radius: var(--radius8);
+  background: var(--slateSurfaceWhite);
+  font-family: var(--fontFamily);
+}
+.hot-reply-box__input {
+  box-sizing: border-box;
+  display: block;
+  flex: 1;
+  width: 100%;
+  min-height: var(--spacing24);
+  padding: var(--spacing3) var(--spacing3) 0;
+  border: 0;
+  outline: 0;
+  resize: none;
+  background: transparent;
+  color: var(--slateTextTitle);
+  font: var(--text-body-md-regular);
+}
+.hot-reply-box__input::placeholder { color: var(--slateBorderDark); opacity: 1; }
+.hot-reply-box__toolbar {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: var(--spacing2) var(--spacing3);
+  border-top: 1px solid var(--slateBorderLight);
+}
+/* Figma's tool buttons are 24px; the Button is 28px, so the gap is 4px and the first one sits 2px to the left to keep the icons where Figma has them. */
+.hot-reply-box__tools { display: flex; align-items: center; gap: var(--spacing1); margin-left: -2px; }

@@ -1,0 +1,52 @@
+/* HOT Design System — Chat conversation. Values read from the Figma "overall-view" frame (3278:5166); colors use tokens only. */
+.hot-chat-conv {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  background: var(--slateSurfaceSubtle);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+}
+.hot-chat-conv__top {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing2);
+  height: 44px;
+  padding: 0 var(--spacing5);
+  border-bottom: 1px solid var(--slateBorderMild);
+  background: var(--slateSurfaceWhite);
+}
+.hot-chat-conv__name { flex: 1; min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); color: var(--slateTextTitle); }
+
+/* The thread: 20px all round, 4px between entries, scrolls on its own */
+.hot-chat-conv__thread {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing1);
+  min-height: 0;
+  padding: var(--spacing5);
+  overflow-y: auto;
+}
+.hot-chat-conv__message { padding-bottom: var(--spacing2); }
+
+/* A line about something that happened, 64px tall with the text centred */
+.hot-chat-conv__activity {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--spacing2);
+  min-height: var(--spacing16);
+  font: var(--text-body-sm-regular);
+  color: var(--slateTextBody);
+}
+.hot-chat-conv__activity > svg { flex: none; }
+
+.hot-chat-conv__composer { flex: none; padding: var(--spacing5); }

@@ -23,7 +23,7 @@ export type ConversationListProps = {
   className?: string
 }
 
-export function ConversationList({ title, icon = 'splitview', subtitle = 'All Conversations', channel, conversations, selectedId, onSelect, className }: ConversationListProps) {
+export function ConversationList({ title, icon = 'collapseview', subtitle = 'All Conversations', channel, conversations, selectedId, onSelect, className }: ConversationListProps) {
   return (
     <section className={['hot-conv-list', className].filter(Boolean).join(' ')} aria-label={title}>
       <header className="hot-conv-list__header">

@@ -48,6 +48,13 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 <Button variant="primary" size="sm" iconLeft={<Icon name="add" size={16} />}>Create</Button>
 ```
 
+### ChatMessage
+`import { ChatMessage } from './components/ChatMessage'` — One message in a Chat conversation (Figma "user-message" and "agent-message").
+- `from`: "user" | "agent" — Who sent it.
+- `text`: ReactNode — The message.
+- `time`: string — When it was sent, for example Jul 23, 10:01 AM.
+- `agentName?`: string — Agent messages only: the name shown before the time, for example Michael Scott - Jul…
+
 ### Checkbox
 `import { Checkbox } from './components/Checkbox'`
 - `label?`: ReactNode — Text next to the box.
@@ -213,6 +220,15 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 <RadioGroup label="Priority" name="p" value={p} onChange={setP}><Radio value="low" label="Low" /><Radio value="high" label="High" /></RadioGroup>
 ```
 
+### ReplyBox
+`import { ReplyBox } from './components/ReplyBox'` — The box an agent types a reply in: a text area, an emoji and an attachment button, a…
+- `value?`: string — The text in the box.
+- `onChange?`: function
+- `onSend?`: function
+- `placeholder?`: string (default Shift + Enter for new line) — Shown while the box is empty.
+- `onEmojiClick?`: function
+- `onAttachClick?`: function
+
 ### SlaAlert
 `import { SlaAlert } from './components/Sla'`
 - `onClick?`: () => void
@@ -339,10 +355,17 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 <AssigneeField value={who} onChange={setWho} />   // inside <RightPanelTop>, next to <StatusField />
 ```
 
+### ChatConversation
+`import { ChatConversation } from './patterns/ChatConversation'` — The Chat conversation: a top bar with the customer, the thread of messages, and the…
+- `name`: string — The customer's name, shown in the top bar.
+- `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" (default violet) — The colour of the customer's avatar.
+- `items`: ChatThreadItem[] — The thread, oldest first.
+- `onSend?`: function
+
 ### ConversationList
 `import { ConversationList } from './patterns/ConversationList'`
 - `title`: string — The name of the view the list belongs to, for example "Unassigned".
-- `icon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… (default splitview) — The icon before the title.
+- `icon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… (default collapseview) — The icon before the title.
 - `subtitle?`: string (default All Conversations) — The small heading under the title.
 - `channel`: "slack" | "sms" | "voice" | "whatsapp" | "email" | "chat" — The channel of the inbox.
 - `conversations`: ConversationListItem[] — The conversations, newest first.
@@ -442,7 +465,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 
 ## Icons
 
-`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 196 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
+`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 197 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
 
 ## Colour tokens
 

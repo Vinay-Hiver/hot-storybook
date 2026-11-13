@@ -1,0 +1,25 @@
+/* HOT Design System — Chat message. Values read from the Figma "user-message" and "agent-message" frames (3278:5244, 3278:5245); colors use tokens only. */
+.hot-chat-message {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing1);
+  width: fit-content;
+  max-width: 450px;
+  font-family: var(--fontFamily);
+}
+.hot-chat-message--user { align-self: flex-start; }
+.hot-chat-message--agent { align-self: flex-end; }
+
+.hot-chat-message__bubble {
+  padding: var(--spacing2) var(--spacing3);
+  border-radius: var(--radius8);
+  font: var(--text-body-md-regular);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.hot-chat-message--user .hot-chat-message__bubble { background: var(--blueSurfaceSubtle); color: var(--slateTextTitle); }
+.hot-chat-message--agent .hot-chat-message__bubble { background: var(--primarySurfaceDefault); color: var(--slateSurfaceWhite); }
+
+.hot-chat-message__meta { margin: 0; font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
+.hot-chat-message--agent .hot-chat-message__meta { text-align: right; }

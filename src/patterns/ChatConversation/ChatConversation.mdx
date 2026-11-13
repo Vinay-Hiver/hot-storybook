@@ -1,0 +1,14 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as ConvStories from './ChatConversation.stories'
+
+<Meta of={ConvStories} />
+
+# Chat conversation
+
+The conversation view for the Chat channel, shown next to the conversation list. It has three parts.
+
+- **Top bar**: the customer's avatar and name. 44px tall.
+- **Thread**: the messages, oldest first. It scrolls on its own and keeps the newest message in view. Messages from the customer are on the left and messages from the agent on the right.
+- **Reply box**: where the agent writes a reply.
+
+<Canvas of={ConvStories.Playground} />

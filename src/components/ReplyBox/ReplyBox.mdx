@@ -1,0 +1,13 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as ReplyStories from './ReplyBox.stories'
+
+<Meta of={ReplyStories} />
+
+# Reply box
+
+Where an agent writes a reply. A text area on top, and under it an emoji button, an attachment button and Send.
+
+- **Empty**: Send is disabled.
+- **With text**: Send is on. Pressing Send, or Enter, sends the text and clears the box. Shift + Enter starts a new line.
+
+<Canvas of={ReplyStories.States} />

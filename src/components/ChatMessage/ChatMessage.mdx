@@ -1,0 +1,15 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as MessageStories from './ChatMessage.stories'
+
+<Meta of={MessageStories} />
+
+# Chat message
+
+One message in a Chat conversation. It has two states, depending on who sent it.
+
+- **User**: the customer. A pale blue bubble on the left, with the time under it.
+- **Agent**: someone on the team. A solid blue bubble with white text on the right, with the agent's name and the time under it.
+
+A message is at most 450px wide, and longer text wraps.
+
+<Canvas of={MessageStories.Senders} />
