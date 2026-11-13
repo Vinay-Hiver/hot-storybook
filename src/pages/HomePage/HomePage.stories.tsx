@@ -4,7 +4,8 @@ import type { AvatarColor } from '../../components/Avatar'
 import type { ConversationChannel } from '../../components/ConversationCard'
 import { ChatConversation } from '../../patterns/ChatConversation'
 import type { ChatThreadItem } from '../../patterns/ChatConversation'
-import { sampleChatThreads, sampleWhatsAppThreads } from '../../patterns/ChatConversation/sampleData'
+import { sampleChatThreads, sampleSmsThreads, sampleWhatsAppThreads } from '../../patterns/ChatConversation/sampleData'
+import { nowLabel, scheduleUserReply } from '../../patterns/ChatConversation/simulatedReply'
 import { ConversationList } from '../../patterns/ConversationList'
 import { sampleConversations } from '../../patterns/ConversationList/sampleData'
 import { ConversationsSidebar } from '../../patterns/ConversationsSidebar'
@@ -23,15 +24,14 @@ export default meta
 
 const channels = Object.keys(sampleConversations) as ConversationChannel[]
 const avatarColors: AvatarColor[] = ['violet', 'lightBlue', 'green', 'orange', 'purple', 'red', 'yellow', 'grey']
-const sentTime = () => new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).replace(' at', ',')
 
-/** The home page: Main nav, Conversations sidebar, the Conversation list for the chosen view, and the Right panel. Chat and WhatsApp conversations open next to the list; the other channels come later. */
+/** The home page: Main nav, Conversations sidebar, the Conversation list for the chosen view, and the Right panel. Chat, WhatsApp and SMS conversations open next to the list; the other channels come later. */
 export const Playground: StoryObj = {
   render: function Render() {
     const [navValue, setNavValue] = useState('conversations')
     const [view, setView] = useState('chat-unassigned')
     const [selected, setSelected] = useState<string | undefined>(sampleConversations.chat[0].id)
-    const [threads, setThreads] = useState<Record<string, ChatThreadItem[]>>({ ...sampleChatThreads, ...sampleWhatsAppThreads })
+    const [threads, setThreads] = useState<Record<string, ChatThreadItem[]>>({ ...sampleChatThreads, ...sampleWhatsAppThreads, ...sampleSmsThreads })
     const sections = useMemo(() => sampleSections(true, ['chat']), [])
     // Going to a view of a shared inbox selects the first conversation in it. Only Chat opens it; the other channels have no conversation view yet.
     const go = (id: string) => {
@@ -44,7 +44,7 @@ export const Playground: StoryObj = {
       .flatMap((sec) => sec.items)
       .flatMap((item) => (item.views ?? []).map((v) => ({ channel: item.id, view: v })))
       .find((x) => x.view.id === view && channels.includes(x.channel as ConversationChannel) && !/-(tags|allViews)$/.test(x.view.id))
-    const openChannel = current?.channel === 'chat' || current?.channel === 'whatsapp' ? current.channel : undefined
+    const openChannel = current?.channel === 'chat' || current?.channel === 'whatsapp' || current?.channel === 'sms' ? current.channel : undefined
     const selectedConv = openChannel ? sampleConversations[openChannel].find((c) => c.id === selected) : undefined
     return (
       <div style={{ height: '100vh' }}>
@@ -67,7 +67,7 @@ export const Playground: StoryObj = {
                 selectedId={selected}
                 onSelect={setSelected}
               />
-              {/* Chat and WhatsApp conversations open. The other channels come later. */}
+              {/* Chat, WhatsApp and SMS conversations open. The other channels come later. */}
               {openChannel && selectedConv && selected && (
                 <ChatConversation
                   key={selected}
@@ -75,7 +75,12 @@ export const Playground: StoryObj = {
                   name={selectedConv.name}
                   avatarColor={avatarColors[sampleConversations[openChannel].findIndex((c) => c.id === selected) % avatarColors.length]}
                   items={threads[selected] ?? []}
-                  onSend={(text) => setThreads((prev) => ({ ...prev, [selected]: [...(prev[selected] ?? []), { id: String((prev[selected]?.length ?? 0) + 1), kind: 'message', from: 'agent', agentName: 'Perry', text, time: sentTime(), status: openChannel === 'whatsapp' ? 'sent' : undefined }] }))}
+                  onSend={(text) => {
+                    const id = selected
+                    setThreads((prev) => ({ ...prev, [id]: [...(prev[id] ?? []), { id: String((prev[id]?.length ?? 0) + 1), kind: 'message', from: 'agent', agentName: 'Perry', text, time: nowLabel(), status: openChannel === 'whatsapp' ? 'sent' : undefined }] }))
+                    // The customer answers a moment later, to mimic a conversation.
+                    scheduleUserReply((reply) => setThreads((prev) => ({ ...prev, [id]: [...(prev[id] ?? []), reply] })))
+                  }}
                 />
               )}
             </div>

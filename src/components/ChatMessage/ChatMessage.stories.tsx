@@ -8,7 +8,7 @@ const meta = {
   args: { from: 'user', text: 'The chat widget is not loading on mobile', time: 'Jul 23, 10:01 AM', agentName: 'Michael Scott' },
   argTypes: {
     from: { control: 'inline-radio', options: ['user', 'agent'], description: 'Who sent the message' },
-    channel: { control: 'inline-radio', options: ['chat', 'whatsapp'], description: 'On WhatsApp an agent message is a white card' },
+    channel: { control: 'inline-radio', options: ['chat', 'whatsapp', 'sms'], description: 'On WhatsApp and SMS an agent message is a white card' },
     agentName: { control: 'text', name: 'agent name', description: 'The name before the time', if: { arg: 'from', eq: 'agent' } },
     status: { control: 'inline-radio', options: [undefined, 'sent', 'delivered', 'read'], description: 'Ticks after the time (WhatsApp)', if: { arg: 'from', eq: 'agent' } },
   },

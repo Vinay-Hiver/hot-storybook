@@ -50,12 +50,12 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 
 ### ChatMessage
 `import { ChatMessage } from './components/ChatMessage'` — One message in a Chat conversation (Figma "user-message" and "agent-message").
-- `channel?`: "whatsapp" | "chat" (default chat) — The channel.
+- `channel?`: "sms" | "whatsapp" | "chat" (default chat) — The channel.
 - `from`: "user" | "agent" — Who sent it.
 - `text`: ReactNode — The message.
 - `time`: string — When it was sent, for example Jul 23, 10:01 AM.
 - `agentName?`: string — Agent messages only: the name shown before the time, for example Michael Scott - Jul…
-- `status?`: "sent" | "delivered" | "read" — Agent messages only (WhatsApp): how far the message has got.
+- `status?`: "sent" | "delivered" | "read" — Agent messages only, WhatsApp only: how far the message has got.
 
 ### Checkbox
 `import { Checkbox } from './components/Checkbox'`
@@ -360,8 +360,8 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 ```
 
 ### ChatConversation
-`import { ChatConversation } from './patterns/ChatConversation'` — The Chat and WhatsApp conversation: a top bar with the customer, the thread of messa…
-- `channel?`: "whatsapp" | "chat" (default chat) — The channel.
+`import { ChatConversation } from './patterns/ChatConversation'` — The Chat, SMS and WhatsApp conversation: a top bar with the customer, the thread of…
+- `channel?`: "sms" | "whatsapp" | "chat" (default chat) — The channel.
 - `name`: string — The customer's name, shown in the top bar.
 - `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" (default violet) — The colour of the customer's avatar.
 - `items`: ChatThreadItem[] — The thread, oldest first.

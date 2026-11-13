@@ -1,0 +1,16 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as SmsStories from './SmsConversation.stories'
+
+<Meta of={SmsStories} />
+
+# SMS
+
+The conversation view for the SMS channel. The layout is the same as Chat, with one difference.
+
+- **Agent messages** are a white card with a thin border, as on WhatsApp, not a blue bubble. They have no ticks.
+
+Messages from the customer are light grey on the left, the reply box is the same as in Chat, and messages are 12px apart.
+
+In Storybook, a generic reply from the customer arrives about 2 seconds after the agent sends a message, to mimic a conversation.
+
+<Canvas of={SmsStories.Playground} />

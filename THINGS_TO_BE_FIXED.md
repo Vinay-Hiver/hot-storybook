@@ -115,6 +115,7 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Avatar colour:** the top bar avatar in Figma uses `--pastelVioletSurfaceDark`. Our Avatar's violet is `--pastelVioletSurfaceDefault`, a lighter shade.
 - [ ] **Reply box tool buttons:** Figma's emoji and attachment buttons are 24px. The Button is 28px at its smallest, so they are 28px with a 4px gap and the icons sit where Figma has them.
 - [ ] **Overall view frame:** the "overall-view" frame still uses Hanken Grotesk and an older agent bubble (with a border and shadow). The message and reply box frames (Inter, no border) were used for the look; check the overall frame is updated.
+- [ ] **Slack:** when the Slack conversation view is built, add the simulated customer reply too (`scheduleUserReply` in `patterns/ChatConversation/simulatedReply.ts`), in its stories and on the Home page.
 - [ ] **Not built yet:** notes, activity lines from the right panel (the thread supports them but the sample has none), "Add note", the ⋮ menu (removed from the top bar for now) and the other channels (SMS comes next). Replies sent on the Home page live in the story only.
 
 ## 14. WhatsApp conversation

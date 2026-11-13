@@ -14,8 +14,8 @@ export type ChatThreadItem =
   | { id: string; kind: 'activity'; text: string; icon?: IconName }
 
 export type ChatConversationProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
-  /** The channel. `whatsapp` adds ticks to agent messages (a message's `status`) and a WhatsApp templates button to the reply box. */
-  channel?: 'chat' | 'whatsapp'
+  /** The channel. `sms` is like Chat, but agent messages are white cards. `whatsapp` also adds ticks to agent messages (a message's `status`) and a WhatsApp templates button to the reply box. */
+  channel?: 'chat' | 'whatsapp' | 'sms'
   /** The customer's name, shown in the top bar. */
   name: string
   /** The colour of the customer's avatar. */
@@ -26,7 +26,7 @@ export type ChatConversationProps = Omit<HTMLAttributes<HTMLDivElement>, 'childr
   onSend?: (text: string) => void
 }
 
-/** The Chat and WhatsApp conversation: a top bar with the customer, the thread of messages, and the reply box (Figma "overall-view" 3278:5166). */
+/** The Chat, SMS and WhatsApp conversation: a top bar with the customer, the thread of messages, and the reply box (Figma "overall-view" 3278:5166). */
 export function ChatConversation({ channel = 'chat', name, avatarColor = 'violet', items, onSend, className, ...rest }: ChatConversationProps) {
   const thread = useRef<HTMLDivElement>(null)
   // Keep the newest message in view.

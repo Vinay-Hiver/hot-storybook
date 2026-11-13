@@ -95,7 +95,7 @@ const preview: Preview = {
       // The stories of one component keep the order they are written in, so Playground stays first.
       storySort: (a, b) => {
         const sections = ['Foundations', 'Components', 'Patterns', 'Conversation Views', 'Pages', 'Admin panel']
-        const fixed = { Foundations: ['Colors', 'Typography', 'Spacing', 'Icons'], Pages: ['Home page', 'Admin panel'], 'Conversation Views': ['Chat', 'WhatsApp'] }
+        const fixed = { Foundations: ['Colors', 'Typography', 'Spacing', 'Icons'], Pages: ['Home page', 'Admin panel'], 'Conversation Views': ['Chat', 'WhatsApp', 'SMS'] }
         if (a.title === b.title) return 0
         const pa = a.title.split('/')
         const pb = b.title.split('/')

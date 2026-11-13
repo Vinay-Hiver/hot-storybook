@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ChatConversation } from './ChatConversation'
 import type { ChatThreadItem } from './ChatConversation'
+import { nowLabel, scheduleUserReply } from './simulatedReply'
 
 const start: ChatThreadItem[] = [
   { id: '1', kind: 'message', from: 'user', text: 'The chat widget is not loading on mobile', time: 'Jul 23, 10:01 AM' },
@@ -28,7 +29,10 @@ export const Playground: Story = {
         <ChatConversation
           {...args}
           items={items}
-          onSend={(text) => setItems((prev) => [...prev, { id: String(prev.length + 1), kind: 'message', from: 'agent', agentName: 'Michael Scott', text, time: 'Jul 23, 10:05 AM' }])}
+          onSend={(text) => {
+            setItems((prev) => [...prev, { id: String(prev.length + 1), kind: 'message', from: 'agent', agentName: 'Michael Scott', text, time: nowLabel() }])
+            scheduleUserReply((reply) => setItems((prev) => [...prev, reply]))
+          }}
         />
       </div>
     )

@@ -75,3 +75,30 @@ export const sampleWhatsAppThreads: Record<string, ChatThreadItem[]> = {
     waAgent('2', 'I will call you back tomorrow', 'Nov 10, 4:45 PM', 'sent'),
   ],
 }
+
+/** Dummy SMS threads, keyed by the id of the SMS conversation in the Conversation list (`sms-1` to `sms-6`). */
+export const sampleSmsThreads: Record<string, ChatThreadItem[]> = {
+  'sms-1': [
+    user('1', 'Need help resetting my account PIN', 'Nov 12, 10:00 AM'),
+    agent('2', 'Hi', 'Nov 12, 10:02 AM'),
+  ],
+  'sms-2': [
+    user('1', 'Your code is not working', 'Nov 12, 9:30 AM'),
+  ],
+  'sms-3': [
+    user('1', 'Please call me back about my ticket', 'Nov 11, 3:00 PM'),
+    agent('2', 'Calling you now', 'Nov 11, 3:05 PM'),
+    user('3', 'Thanks!', 'Nov 11, 3:20 PM'),
+  ],
+  'sms-4': [
+    user('1', 'STOP sending promo messages', 'Nov 11, 11:15 AM'),
+  ],
+  'sms-5': [
+    user('1', 'Please confirm my appointment', 'Nov 10, 5:00 PM'),
+  ],
+  'sms-6': [
+    user('1', 'Is the store open on Sunday?', 'Nov 10, 2:00 PM'),
+    agent('2', 'Yes, from 10 AM to 4 PM', 'Nov 10, 2:10 PM'),
+    user('3', 'Confirmed, see you then', 'Nov 10, 2:12 PM'),
+  ],
+}

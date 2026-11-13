@@ -8,10 +8,13 @@
   max-width: 450px;
   font-family: var(--fontFamily);
 }
-.hot-chat-message--user { align-self: flex-start; }
-.hot-chat-message--agent { align-self: flex-end; }
+.hot-chat-message--user { align-self: flex-start; align-items: flex-start; }
+.hot-chat-message--agent { align-self: flex-end; align-items: flex-end; }
 
 .hot-chat-message__bubble {
+  /* The bubble hugs its text. A user message sits on the left of the column, an agent message on the right. */
+  width: fit-content;
+  max-width: 100%;
   padding: var(--spacing2) var(--spacing3);
   border-radius: var(--radius8);
   font: var(--text-body-md-regular);
@@ -20,8 +23,10 @@
 }
 .hot-chat-message--user .hot-chat-message__bubble { background: var(--blueSurfaceSubtle); color: var(--slateTextTitle); }
 .hot-chat-message--agent .hot-chat-message__bubble { background: var(--primarySurfaceDefault); color: var(--slateSurfaceWhite); }
-/* WhatsApp: the agent's message is a white card with a 1px border and a faint shadow (Figma frame 3280:6097) */
-.hot-chat-message--whatsapp.hot-chat-message--agent .hot-chat-message__bubble { border: 1px solid var(--slateBorderLight); background: var(--slateSurfaceWhite); color: var(--slateTextTitle); box-shadow: 0 0 1px rgba(7, 26, 46, 0.04); }
+/* WhatsApp and SMS: the user's message is slate 150 instead of pale blue */
+.hot-chat-message--card.hot-chat-message--user .hot-chat-message__bubble { background: var(--slateSurfaceSlate150); }
+/* WhatsApp and SMS: the agent's message is a white card with a 1px border and a faint shadow (Figma frame 3280:6097) */
+.hot-chat-message--card.hot-chat-message--agent .hot-chat-message__bubble { border: 1px solid var(--slateBorderLight); background: var(--slateSurfaceWhite); color: var(--slateTextTitle); box-shadow: 0 0 1px rgba(7, 26, 46, 0.04); }
 
 /* The time, and for an agent message the ticks after it. The agent's line is right-aligned. */
 .hot-chat-message__meta { display: flex; align-items: center; gap: var(--spacing1); font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
