@@ -155,3 +155,10 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Fixed:** The top row of the Home page is 44px tall in all three columns: the Conversation list header (was 43px), the Chat conversation top bar and the Right panel tab bar (was 48px). The Chat conversation no longer has left and right borders.
 - **Built:** new icon from the HOT Design System file: Collapse view (14 and 16px), name `collapseview`.
 - **Fixed:** the Conversation list header uses the new `collapseview` icon (was `splitview`).
+- **Fixed:** Right panel tab: the tab was still 48px tall inside the 44px bar, so its underline sat below the bar line. The tab now stretches to the bar, so the underline sits on the line.
+- **Fixed:** the Conversation list header title uses body/md/medium (14/20), was body/lg/medium (16/24).
+- **Built:** Home page: opening an inbox in the sidebar lands on its first view, and going to any view of a shared inbox selects its first conversation card (also when the page loads), and for Chat it opens the conversation. The Chat inbox is now called Website Chat (was Chat inbox 01).
+- **Built:** new icon from the HOT Design System file: Double tick (14 and 16px), name `doubletick`.
+- **Built:** WhatsApp conversation (Figma frame 3280:6031): the Chat conversation pattern takes channel=whatsapp, which adds read ticks (new Double tick icon) after agent messages and a WhatsApp templates button (new Whatsapp Template icon, 14 and 16px) to the reply box. WhatsApp conversations open on the Home page with dummy threads. Messages in the thread are 12px apart in Chat and WhatsApp.
+- **Built:** a new Storybook section, Conversation Views, with Chat and WhatsApp (moved out of Patterns). WhatsApp agent messages follow the updated Figma frame 3280:6097: a white card with a 1px border and a faint shadow, with blue ticks after the time.
+- **Fixed:** Conversation card: the second line (the message, and the reply arrow before it) uses `--slateTextSubtle`.

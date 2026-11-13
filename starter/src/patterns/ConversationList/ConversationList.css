@@ -22,7 +22,7 @@
   border-bottom: 1px solid var(--slateBorderMild);
 }
 .hot-conv-list__icon { display: inline-flex; flex: none; color: var(--slateIconsSubtle); }
-.hot-conv-list__title { margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-lg-medium); color: var(--slateTextBody); }
+.hot-conv-list__title { margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); color: var(--slateTextBody); }
 .hot-conv-list__sub {
   box-sizing: border-box;
   display: flex;

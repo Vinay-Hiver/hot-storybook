@@ -9,17 +9,17 @@ const start: ChatThreadItem[] = [
 ]
 
 const meta = {
-  title: 'Patterns/Chat conversation',
+  title: 'Conversation Views/Chat',
   component: ChatConversation,
   parameters: { layout: 'centered' },
-  args: { name: 'Priya Nair', items: start },
-  argTypes: { items: { control: false }, onSend: { control: false }, avatarColor: { control: 'select', options: ['lightBlue', 'red', 'orange', 'yellow', 'green', 'purple', 'violet', 'grey'] } },
+  args: { name: 'Priya Nair', items: start, channel: 'chat' },
+  argTypes: { channel: { control: false }, items: { control: false }, onSend: { control: false }, avatarColor: { control: 'select', options: ['lightBlue', 'red', 'orange', 'yellow', 'green', 'purple', 'violet', 'grey'] } },
 } satisfies Meta<typeof ChatConversation>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-/** A conversation you can reply in. Type a reply and press Enter or Send: it joins the thread as a message from the agent. */
+/** A Chat conversation you can reply in. Type a reply and press Enter or Send: it joins the thread as a message from the agent. */
 export const Playground: Story = {
   render: function Render(args) {
     const [items, setItems] = useState(start)

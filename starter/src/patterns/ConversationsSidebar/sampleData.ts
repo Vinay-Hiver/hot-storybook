@@ -24,7 +24,7 @@ export const sampleSections = (counts: boolean, open: string[] = []): Conversati
   {
     title: 'Shared Inbox',
     items: [
-      { id: 'chat', label: 'Chat inbox 01', icon: 'chatinbox', views: inboxViews('chat', counts), defaultExpanded: open.includes('chat') },
+      { id: 'chat', label: 'Website Chat', icon: 'chatinbox', views: inboxViews('chat', counts), defaultExpanded: open.includes('chat') },
       { id: 'slack', label: 'Slack', icon: 'slack', views: inboxViews('slack', counts), defaultExpanded: open.includes('slack') },
       { id: 'whatsapp', label: 'WhatsApp', icon: 'whatsapp', views: inboxViews('whatsapp', counts), defaultExpanded: open.includes('whatsapp') },
       { id: 'sms', label: 'SMS', icon: 'sms', views: inboxViews('sms', counts), defaultExpanded: open.includes('sms') },

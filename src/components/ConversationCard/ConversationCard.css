@@ -33,7 +33,7 @@
 .hot-conv-card__date { flex: none; font: var(--text-body-sm-regular); }
 
 /* One line of the latest message, with an optional reply arrow */
-.hot-conv-card__preview-row { display: flex; align-items: center; gap: var(--spacing1); min-width: 0; }
+.hot-conv-card__preview-row { display: flex; align-items: center; gap: var(--spacing1); min-width: 0; color: var(--slateTextSubtle); }
 .hot-conv-card__reply { display: inline-flex; flex: none; width: var(--iconSizeXs); height: var(--iconSizeXs); }
 .hot-conv-card__reply > svg { width: 100%; height: 100%; }
 .hot-conv-card__preview { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-regular); }

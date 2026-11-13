@@ -40,3 +40,38 @@ export const sampleChatThreads: Record<string, ChatThreadItem[]> = {
     user('3', 'Got it, I will try that.', 'Nov 10, 1:19 PM'),
   ],
 }
+
+const waAgent = (id: string, text: string, time: string, status: 'sent' | 'delivered' | 'read'): ChatThreadItem => ({ id, kind: 'message', from: 'agent', agentName: 'Perry', text, time, status })
+
+/** Dummy WhatsApp threads, keyed by the id of the WhatsApp conversation in the Conversation list (`whatsapp-1` to `whatsapp-7`). */
+export const sampleWhatsAppThreads: Record<string, ChatThreadItem[]> = {
+  'whatsapp-1': [
+    user('1', 'Hi, I need help with my order', 'Nov 12, 10:01 AM'),
+    waAgent('2', 'Hello! Could you share the order number?', 'Nov 12, 10:03 AM', 'read'),
+    user('3', 'It is 48213', 'Nov 12, 10:04 AM'),
+    waAgent('4', 'Thanks, checking it now.', 'Nov 12, 10:05 AM', 'delivered'),
+  ],
+  'whatsapp-2': [
+    user('1', 'Can you send the details again?', 'Nov 12, 9:50 AM'),
+    waAgent('2', 'Sure, sending the details now', 'Nov 12, 9:52 AM', 'read'),
+  ],
+  'whatsapp-3': [
+    user('1', 'Is anyone there?', 'Nov 12, 10:00 AM'),
+    waAgent('2', 'Hello', 'Nov 12, 10:05 AM', 'read'),
+  ],
+  'whatsapp-4': [
+    user('1', 'Where is my refund?', 'Nov 11, 5:20 PM'),
+  ],
+  'whatsapp-5': [
+    user('1', 'My package arrived damaged', 'Nov 11, 3:10 PM'),
+    waAgent('2', 'Sorry to hear that. We will send a replacement.', 'Nov 11, 3:15 PM', 'read'),
+    user('3', 'Thanks, all sorted', 'Nov 11, 3:20 PM'),
+  ],
+  'whatsapp-6': [
+    user('1', 'Can I change my delivery address?', 'Nov 10, 6:00 PM'),
+  ],
+  'whatsapp-7': [
+    user('1', 'Can you call me tomorrow?', 'Nov 10, 4:40 PM'),
+    waAgent('2', 'I will call you back tomorrow', 'Nov 10, 4:45 PM', 'sent'),
+  ],
+}

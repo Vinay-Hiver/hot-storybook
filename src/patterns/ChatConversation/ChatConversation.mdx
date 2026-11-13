@@ -1,14 +1,14 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks'
-import * as ConvStories from './ChatConversation.stories'
+import * as ChatStories from './ChatConversation.stories'
 
-<Meta of={ConvStories} />
+<Meta of={ChatStories} />
 
-# Chat conversation
+# Chat
 
 The conversation view for the Chat channel, shown next to the conversation list. It has three parts.
 
 - **Top bar**: the customer's avatar and name. 44px tall.
-- **Thread**: the messages, oldest first. It scrolls on its own and keeps the newest message in view. Messages from the customer are on the left and messages from the agent on the right.
-- **Reply box**: where the agent writes a reply.
+- **Thread**: the messages, oldest first. It scrolls on its own and keeps the newest message in view. Messages from the customer (user) are on the left in pale blue, and messages from the agent are on the right in solid blue. Messages are 12px apart.
+- **Reply box**: where the agent writes a reply. Send turns on as soon as there is text, and Enter sends.
 
-<Canvas of={ConvStories.Playground} />
+<Canvas of={ChatStories.Playground} />

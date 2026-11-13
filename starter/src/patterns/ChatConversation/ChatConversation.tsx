@@ -10,10 +10,12 @@ import './ChatConversation.css'
 
 /** One entry in the thread: a message, or a line about something that happened, such as "Jim Halpert assigned this conversation to you". */
 export type ChatThreadItem =
-  | { id: string; kind: 'message'; from: 'user' | 'agent'; text: string; time: string; agentName?: string }
+  | { id: string; kind: 'message'; from: 'user' | 'agent'; text: string; time: string; agentName?: string; status?: 'sent' | 'delivered' | 'read' }
   | { id: string; kind: 'activity'; text: string; icon?: IconName }
 
 export type ChatConversationProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
+  /** The channel. `whatsapp` adds ticks to agent messages (a message's `status`) and a WhatsApp templates button to the reply box. */
+  channel?: 'chat' | 'whatsapp'
   /** The customer's name, shown in the top bar. */
   name: string
   /** The colour of the customer's avatar. */
@@ -24,8 +26,8 @@ export type ChatConversationProps = Omit<HTMLAttributes<HTMLDivElement>, 'childr
   onSend?: (text: string) => void
 }
 
-/** The Chat conversation: a top bar with the customer, the thread of messages, and the reply box (Figma "overall-view" 3278:5166). */
-export function ChatConversation({ name, avatarColor = 'violet', items, onSend, className, ...rest }: ChatConversationProps) {
+/** The Chat and WhatsApp conversation: a top bar with the customer, the thread of messages, and the reply box (Figma "overall-view" 3278:5166). */
+export function ChatConversation({ channel = 'chat', name, avatarColor = 'violet', items, onSend, className, ...rest }: ChatConversationProps) {
   const thread = useRef<HTMLDivElement>(null)
   // Keep the newest message in view.
   useEffect(() => {
@@ -42,7 +44,7 @@ export function ChatConversation({ name, avatarColor = 'violet', items, onSend, 
       <div className="hot-chat-conv__thread" ref={thread}>
         {items.map((item) =>
           item.kind === 'message' ? (
-            <ChatMessage key={item.id} from={item.from} text={item.text} time={item.time} agentName={item.agentName} className="hot-chat-conv__message" />
+            <ChatMessage key={item.id} channel={channel} from={item.from} text={item.text} time={item.time} agentName={item.agentName} status={channel === 'whatsapp' ? item.status : undefined} className="hot-chat-conv__message" />
           ) : (
             <div key={item.id} className="hot-chat-conv__activity">
               <Icon name={item.icon ?? 'assigned'} size={14} />
@@ -52,7 +54,11 @@ export function ChatConversation({ name, avatarColor = 'violet', items, onSend, 
         )}
       </div>
       <div className="hot-chat-conv__composer">
-        <ReplyBox onSend={onSend} />
+        <ReplyBox
+          onSend={onSend}
+          showTemplates={channel === 'whatsapp'}
+          placeholder={channel === 'whatsapp' ? 'Shift + Enter for new line. Type ‘/’ to search for WhatsApp templates and send quick replies' : undefined}
+        />
       </div>
     </section>
   )

@@ -168,7 +168,7 @@
 /* 8px of space between the title's line and the first row. */
 .hot-rp-flyout__list .hot-dropdown__list { padding-top: var(--spacing2); }
 
-/* Tab bar at the top: 48px, with a thin line under it. The selected tab has a 2px underline. */
+/* Tab bar at the top: 44px, with a thin line under it. The selected tab has a 2px underline. */
 .hot-rp-tabs { display: flex; flex: none; align-items: stretch; box-sizing: border-box; height: 44px; padding: 0 var(--spacing3); box-shadow: inset 0 -1px 0 var(--slateBorderMild); }
 .hot-rp-tab {
   position: relative;
@@ -178,8 +178,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing2);
-  height: var(--spacing12);
-  padding: var(--spacing4);
+  padding: 0 var(--spacing4); /* the tab is as tall as the bar (it stretches), so its underline sits on the line */
   border: 0;
   background: transparent;
   color: var(--slateTextBody);

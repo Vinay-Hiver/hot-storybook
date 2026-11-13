@@ -50,10 +50,12 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 
 ### ChatMessage
 `import { ChatMessage } from './components/ChatMessage'` — One message in a Chat conversation (Figma "user-message" and "agent-message").
+- `channel?`: "whatsapp" | "chat" (default chat) — The channel.
 - `from`: "user" | "agent" — Who sent it.
 - `text`: ReactNode — The message.
 - `time`: string — When it was sent, for example Jul 23, 10:01 AM.
 - `agentName?`: string — Agent messages only: the name shown before the time, for example Michael Scott - Jul…
+- `status?`: "sent" | "delivered" | "read" — Agent messages only (WhatsApp): how far the message has got.
 
 ### Checkbox
 `import { Checkbox } from './components/Checkbox'`
@@ -228,6 +230,8 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `placeholder?`: string (default Shift + Enter for new line) — Shown while the box is empty.
 - `onEmojiClick?`: function
 - `onAttachClick?`: function
+- `showTemplates?`: boolean — Shows a third button, for WhatsApp templates.
+- `onTemplateClick?`: function
 
 ### SlaAlert
 `import { SlaAlert } from './components/Sla'`
@@ -356,7 +360,8 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 ```
 
 ### ChatConversation
-`import { ChatConversation } from './patterns/ChatConversation'` — The Chat conversation: a top bar with the customer, the thread of messages, and the…
+`import { ChatConversation } from './patterns/ChatConversation'` — The Chat and WhatsApp conversation: a top bar with the customer, the thread of messa…
+- `channel?`: "whatsapp" | "chat" (default chat) — The channel.
 - `name`: string — The customer's name, shown in the top bar.
 - `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" (default violet) — The colour of the customer's avatar.
 - `items`: ChatThreadItem[] — The thread, oldest first.
@@ -465,7 +470,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 
 ## Icons
 
-`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 197 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
+`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 199 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
 
 ## Colour tokens
 

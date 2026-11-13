@@ -13,3 +13,9 @@ One message in a Chat conversation. It has two states, depending on who sent it.
 A message is at most 450px wide, and longer text wraps.
 
 <Canvas of={MessageStories.Senders} />
+
+## WhatsApp
+
+On WhatsApp the agent's message is a white card with a thin border instead of a blue bubble, and it shows ticks after the time: one grey tick when it is sent, two grey ticks when it is delivered and two blue ticks when it has been read. Chat messages have no ticks.
+
+<Canvas of={MessageStories.Ticks} />

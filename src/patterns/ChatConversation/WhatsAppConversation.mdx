@@ -1,0 +1,16 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as WhatsAppStories from './WhatsAppConversation.stories'
+
+<Meta of={WhatsAppStories} />
+
+# WhatsApp
+
+The conversation view for the WhatsApp channel. The layout is the same as Chat, with three differences.
+
+- **Agent messages** are a white card with a thin border, not a blue bubble.
+- **Ticks** after the agent's name and time show how far the message has got: one grey tick (sent), two grey ticks (delivered) or two blue ticks (read).
+- **Reply box** has a third button for WhatsApp templates, and its hint mentions them.
+
+Messages from the customer are pale blue on the left, as in Chat, and messages are 12px apart.
+
+<Canvas of={WhatsAppStories.Playground} />

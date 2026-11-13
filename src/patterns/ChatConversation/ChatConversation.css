@@ -23,18 +23,17 @@
 }
 .hot-chat-conv__name { flex: 1; min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); color: var(--slateTextTitle); }
 
-/* The thread: 20px all round, 4px between entries, scrolls on its own */
+/* The thread: 20px all round, 12px between entries, scrolls on its own */
 .hot-chat-conv__thread {
   box-sizing: border-box;
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: var(--spacing1);
+  gap: var(--spacing3);
   min-height: 0;
   padding: var(--spacing5);
   overflow-y: auto;
 }
-.hot-chat-conv__message { padding-bottom: var(--spacing2); }
 
 /* A line about something that happened, 64px tall with the text centred */
 .hot-chat-conv__activity {

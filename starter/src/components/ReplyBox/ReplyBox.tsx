@@ -17,10 +17,14 @@ export type ReplyBoxProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> & {
   onEmojiClick?: () => void
   /** Called when the attachment button is pressed. */
   onAttachClick?: () => void
+  /** Shows a third button, for WhatsApp templates. */
+  showTemplates?: boolean
+  /** Called when the WhatsApp template button is pressed. */
+  onTemplateClick?: () => void
 }
 
 /** The box an agent types a reply in: a text area, an emoji and an attachment button, and Send (Figma "reply-box" 3278:5249). */
-export function ReplyBox({ value, onChange, onSend, placeholder = 'Shift + Enter for new line', onEmojiClick, onAttachClick, className, ...rest }: ReplyBoxProps) {
+export function ReplyBox({ value, onChange, onSend, placeholder = 'Shift + Enter for new line', onEmojiClick, onAttachClick, showTemplates, onTemplateClick, className, ...rest }: ReplyBoxProps) {
   const [own, setOwn] = useState('')
   const text = value ?? own
   const set = (v: string) => { setOwn(v); onChange?.(v) }
@@ -40,6 +44,7 @@ export function ReplyBox({ value, onChange, onSend, placeholder = 'Shift + Enter
         <div className="hot-reply-box__tools">
           <Button iconOnly variant="ghost" size="xs" aria-label="Emoji" onClick={onEmojiClick}><Icon name="emoji" size={16} /></Button>
           <Button iconOnly variant="ghost" size="xs" aria-label="Attach a file" onClick={onAttachClick}><Icon name="attachment" size={16} /></Button>
+          {showTemplates && <Button iconOnly variant="ghost" size="xs" aria-label="WhatsApp templates" onClick={onTemplateClick}><Icon name="whatsapptemplate" size={16} /></Button>}
         </div>
         <Button size="xs" disabled={!canSend} onClick={send}>Send</Button>
       </div>

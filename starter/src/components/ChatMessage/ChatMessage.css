@@ -20,6 +20,11 @@
 }
 .hot-chat-message--user .hot-chat-message__bubble { background: var(--blueSurfaceSubtle); color: var(--slateTextTitle); }
 .hot-chat-message--agent .hot-chat-message__bubble { background: var(--primarySurfaceDefault); color: var(--slateSurfaceWhite); }
+/* WhatsApp: the agent's message is a white card with a 1px border and a faint shadow (Figma frame 3280:6097) */
+.hot-chat-message--whatsapp.hot-chat-message--agent .hot-chat-message__bubble { border: 1px solid var(--slateBorderLight); background: var(--slateSurfaceWhite); color: var(--slateTextTitle); box-shadow: 0 0 1px rgba(7, 26, 46, 0.04); }
 
-.hot-chat-message__meta { margin: 0; font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
-.hot-chat-message--agent .hot-chat-message__meta { text-align: right; }
+/* The time, and for an agent message the ticks after it. The agent's line is right-aligned. */
+.hot-chat-message__meta { display: flex; align-items: center; gap: var(--spacing1); font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
+.hot-chat-message--agent .hot-chat-message__meta { justify-content: flex-end; text-align: right; }
+.hot-chat-message__tick { display: inline-flex; flex: none; width: var(--iconSize14); height: var(--iconSize14); }
+.hot-chat-message__tick--read { color: var(--primarySurfaceDefault); }

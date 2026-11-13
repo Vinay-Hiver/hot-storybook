@@ -104,7 +104,7 @@ Only things that need action: something is built but needs another look, a decis
 
 ## 12. Home page conversation list
 
-- [ ] **Header values from a screenshot:** there is no Figma frame for the list header yet. The header (44px, 16px medium title, icon and title 8px apart) and the "All Conversations" bar (41px, 13px medium) were measured from the product screenshot. Share the Figma frame to check them.
+- [ ] **Header values from a screenshot:** there is no Figma frame for the list header yet. The header (44px, 14px medium title, icon and title 8px apart) and the "All Conversations" bar (41px, 13px medium) were measured from the product screenshot. Share the Figma frame to check them.
 
 - [ ] **Unread badge and unread look:** the screenshot shows a blue count badge (for example "2") before the date and a bolder card for unread conversations. The Conversation card has neither yet.
 - [ ] **Other sidebar items:** My Work, Personal and the More items (Sent, Drafts and so on) show no list yet, only shared inbox views do.
@@ -116,6 +116,14 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Reply box tool buttons:** Figma's emoji and attachment buttons are 24px. The Button is 28px at its smallest, so they are 28px with a 4px gap and the icons sit where Figma has them.
 - [ ] **Overall view frame:** the "overall-view" frame still uses Hanken Grotesk and an older agent bubble (with a border and shadow). The message and reply box frames (Inter, no border) were used for the look; check the overall frame is updated.
 - [ ] **Not built yet:** notes, activity lines from the right panel (the thread supports them but the sample has none), "Add note", the ⋮ menu (removed from the top bar for now) and the other channels (SMS comes next). Replies sent on the Home page live in the story only.
+
+## 14. WhatsApp conversation
+
+- [ ] **Template icon at 16px:** the HOT Design System file has the Whatsapp Template icon at 14px only. The 16px version used here comes from the reply-box frame in the Boilerplate file (same drawing, 1.3 stroke). Ask for a 16px component in the Icons page.
+- [ ] **Hint text:** the Figma reply box reads `Type '' to search for WhatsApp templates`, with the slash missing. The box shows `Type ‘/’`, as the product does.
+- [ ] **Sent and delivered ticks:** Figma shows only the blue "read" ticks. Sent (one grey tick) and delivered (two grey ticks) follow the prototype's behaviour and are not in a Figma frame.
+- [ ] **Templates:** the template button does nothing yet.
+- [ ] **Agent card:** the WhatsApp agent message is 38px tall (text 20px, 8px padding, 1px border); the Figma frame draws it 36px tall. Its faint shadow (`0 0 1px rgba(7,26,46,0.04)`) has no colour token.
 
 ## 10. Other
 

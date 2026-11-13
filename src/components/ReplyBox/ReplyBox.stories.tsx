@@ -16,6 +16,17 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {}
 
 // The stories below feed the Docs page and are hidden from the sidebar.
+export const WithTemplates: Story = {
+  tags: ['!dev'],
+  parameters: { controls: { disable: true } },
+  decorators: [],
+  render: () => (
+    <div style={{ width: 560 }}>
+      <ReplyBox showTemplates placeholder="Shift + Enter for new line. Type ‘/’ to search for WhatsApp templates and send quick replies" />
+    </div>
+  ),
+}
+
 export const States: Story = {
   tags: ['!dev'],
   parameters: { controls: { disable: true } },
