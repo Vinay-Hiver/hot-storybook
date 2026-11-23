@@ -16,7 +16,7 @@ This file wins over your guesses. Not covered: state your assumption in one line
 - "boilerplate/home page": App.tsx already shows it. Only edit data.
 - "only channels X,Y": homeData.inboxes keep X,Y; data.ts sharedInboxChannels keep X,Y. Tell user channels now on both.
 - "N inboxes" / "two <channel> inboxes": Home sidebar = ONE inbox per channel today. If N>1 for a channel say so, don't fake via rename. Admin: N rows under the channel, names = Home names.
-- "N dummy convos": N conversations per inbox in homeData. Names from The Office (Michael Scott, Dwight Schrute, Pam Beesly, Jim Halpert, Angela Martin...). Unique ids `<channel>-<n>`. Mix unread, some agent replies. Channel voice: sms/whatsapp short; email has `subject`,`email`, paragraph bodies; slack has `slackChannel`; voice has `call:'incoming'|'outgoing'`, no messages.
+- "N dummy convos" (none given = 2-3 per inbox, general support topics): N conversations per inbox in homeData. Names from The Office (Michael Scott, Dwight Schrute, Pam Beesly, Jim Halpert, Angela Martin...). Unique ids `<channel>-<n>`. Mix unread, some agent replies. Channel voice: sms/whatsapp short; email has `subject`,`email`, paragraph bodies; slack has `slackChannel`; voice has `call:'incoming'|'outgoing'`, no messages.
 - "custom fields": homeData.customFields [{id,label,kind:'text'|'number'|'date',value?}], date value YYYY-MM-DD. Other kinds NOT BUILT: tell user.
 - "show admin": Main nav Admin Panel already opens it. Ensure data.ts matches Home.
 - "new page": src/pages/<Name>.tsx; PageLayout variant home|admin; read COMPONENTS.md then docs/<Name>.md of components used; layouts in docs/recipes.md.
