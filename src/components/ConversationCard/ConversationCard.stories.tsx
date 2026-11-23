@@ -27,7 +27,7 @@ const meta = {
     channel: { control: 'select', options: channels, description: 'Each channel has its own icon. Changing it fills in a sample name and message.' },
     selected: { control: 'boolean' },
     unread: { control: 'boolean', description: 'Light grey, a blue dot before the date, and a medium-weight date and message' },
-    replied: { control: 'boolean', description: 'The reply arrow before the message. Only chat, SMS and WhatsApp show it.' },
+    replied: { control: 'boolean', description: 'The reply arrow before the message: the latest message was sent from here. Not used for voice.' },
     moreCount: { control: 'number' },
     forceState: { control: 'inline-radio', options: [undefined, 'hover', 'icon-hover'] },
     date: { control: false },

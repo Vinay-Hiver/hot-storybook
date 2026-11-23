@@ -85,7 +85,7 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Right panel database:** each field's icon was chosen by meaning, not read from Figma: check them. Voice's right panel is not built. Sub-section names and fields are example content: the real ones per channel are not defined.
 - [ ] **Assignee and Status:** check against Figma: the dropdown width (Assignee 260px, Status 160px, right edge lined up with the value), the row heights inside them and the avatar colour given to each example person. The trigger shows a plain person icon (no round fill) when "None" is chosen. The chosen value is only remembered while the panel is on screen.
 - [ ] **Dropdown not rechecked after the latest changes:** the country list in the phone input (its 6px flag gap is an estimate, not measured), and both right-panel dropdowns next to the Figma dropdown frames. The round icon fill (`iconBackground`) is the same colour as a row's hover fill, so it blends in when the row is hovered.
-- [ ] **Tags row height:** the rule at `RightPanel.css:129` gives a row with a tag 7px above and below, set for the old 22px tag. Tags are now 20px, so the row is 34px instead of Figma's 36px. Changing the padding to `--spacing2` (8px) brings it back to 36px.
+- [ ] **Co-assignee icon at 16px:** the HOT Design System file has the Co-assignee icon at 14px only (the size the Right panel uses). A 16px version would be needed anywhere else.
 
 ## 8. Input
 

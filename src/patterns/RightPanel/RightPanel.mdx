@@ -9,7 +9,7 @@ The panel on the right of a page, always 320px wide. Every channel uses the same
 
 ## Anatomy
 
-At the very top there is a bar with a tab (the Shared Inbox tab, an icon with a 2px underline when selected). The panel's content starts below it, and only the content scrolls. The top section has a heading (the name of the inbox the conversation belongs to) and a few fields, such as Assignee, Status and Tags. Under it, each sub-section has an icon, a name and an arrow. Inside a sub-section, each row is an icon and a label on the left, some space, and the value on the right. The rows are plain markup built from the Icon and text with colour tokens, not a separate component: the icon and label use the subtle text colour and the value uses the title text colour (or the link colour for a number you can click).
+At the very top there is a bar with a tab (the Shared Inbox tab, an icon with a 2px underline when selected). The panel's content starts below it, and only the content scrolls. The top section has a heading (the name of the inbox the conversation belongs to) and a few fields, such as Assignee, Status and Tags. Only the Email channel also has a Co-assignee under Assignee, which starts as None. Under it, each sub-section has an icon, a name and an arrow. Inside a sub-section, each row is an icon and a label on the left, some space, and the value on the right. The rows are plain markup built from the Icon and text with colour tokens, not a separate component: the icon and label use the subtle text colour and the value uses the title text colour (or the link colour for a number you can click).
 
 <Canvas of={PanelStories.Anatomy} />
 

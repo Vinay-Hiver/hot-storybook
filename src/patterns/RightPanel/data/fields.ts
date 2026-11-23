@@ -5,6 +5,7 @@ export const fields: Record<string, FieldDef> = {
   // Top section
   ticketId: { id: 'ticketId', label: 'Ticket ID', icon: 'hashnumber', kind: 'text', editable: false },
   assignee: { id: 'assignee', label: 'Assignee', icon: 'assigned', kind: 'assignee', editable: true },
+  coAssignee: { id: 'coAssignee', label: 'Co-assignee', icon: 'coassignee', kind: 'assignee', editable: true },
   status: { id: 'status', label: 'Status', icon: 'flag', kind: 'status', editable: true },
   tags: { id: 'tags', label: 'Tags', icon: 'tag', kind: 'tags', editable: true },
 

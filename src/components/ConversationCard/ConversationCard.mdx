@@ -14,7 +14,7 @@ One conversation in the conversation list: the channel icon, who it is with, the
 - **Unread** is light grey (the same grey as hover). A blue dot sits before the date, and the date and the message are medium weight instead of regular. It looks the same when the pointer is over it.
 - **Hovering the channel icon** swaps the icon for a checkbox, in both states. A checked box stays visible.
 - **SLA and tags**: SLA pills come first, then the tags. "+N" is only a count of the tags that are not shown, it opens nothing.
-- **Replied**: a small reply arrow before the message shows that the latest message was a reply sent from here. Only chat, SMS and WhatsApp show it.
+- **Second line**: it always shows the latest message that was received or sent, never an activity such as "chat was reopened" or "assigned to you". If the latest message was sent from here, it shows the reply arrow and the message. If it was received, it shows the first line of the message and no arrow. Voice cards show the call line instead.
 
 <Canvas of={CardStories.States} />
 

@@ -74,7 +74,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `preview?`: string — The latest message or the email subject.
 - `callDirection?`: "incoming" | "outgoing" (default incoming) — Voice only: the second line reads "Incoming voice call started" or "Outgoing voice c…
 - `channel?`: "email" | "slack" | "sms" | "voice" | "whatsapp" | "chat" (default chat) — The channel the conversation came from.
-- `replied?`: boolean — Shows a small reply arrow before the message: the latest message was a reply sent fr…
+- `replied?`: boolean — The latest message was sent from here, so a small reply arrow shows before it.
 - `selected?`: boolean — The card of the conversation that is open: pale blue with a blue bar on the left.
 - `unread?`: boolean — An unread conversation: light grey, a blue dot before the date, and a medium-weight…
 - `sla?`: ConversationCardSla[] — SLA pills (first response time, resolution time) shown on the chips row.
@@ -85,7 +85,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 
 ### Dropdown
 `import { Dropdown } from './components/Dropdown'` — The menu panel only.
-- `variant?`: "checkbox" | "radio" | "default" | "avatar" | "icon" (default default) — What each row looks like.
+- `variant?`: "checkbox" | "radio" | "icon" | "default" | "avatar" (default default) — What each row looks like.
 - `options`: DropdownOption[]
 - `title?`: string — Heading at the top of the panel.
 - `value?`: string | string[] — Selected value (a list of values for checkbox).
@@ -127,7 +127,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `helperText?`: ReactNode — Small text below the field.
 - `error?`: boolean — Shows the error border and red helper text.
 - `success?`: boolean — Turns the helper text green with a tick before it.
-- `helperIcon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
+- `helperIcon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "account" | "add"… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
 - `size?`: "sm" | "md" (default md) — sm = 32px, md = 40px tall.
 - `prefix?`: ReactNode — Content before the text, such as a 14px <Icon> or a fixed string like "https://".
 - `search?`: boolean — Makes it a search field: a 16px search icon before the text and type="search".
@@ -161,7 +161,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 
 ### ListIcon
 `import { ListIcon } from './components/List'` — 14px icon centered in the 24px element area.
-- `name`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account…
+- `name`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "account" | "add"…
 - `background?`: boolean
 
 ### ListItem
@@ -332,7 +332,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `helperText?`: ReactNode — Small text below the field.
 - `error?`: boolean — Shows the error border and red helper text.
 - `success?`: boolean — Turns the helper text green with a tick before it.
-- `helperIcon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
+- `helperIcon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "account" | "add"… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
 - `showCount?`: boolean — Shows a live "0/500" counter.
 - `fullWidth?`: boolean — Stretch to the width of the parent instead of 320px.
 - `tags?`: string[] — Turns the field into a tags field.
@@ -387,6 +387,9 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 - `value?`: string — The value of the person who owns the conversation, or none.
 - `onChange?`: function
 - `people?`: Assignee[]
+- `label?`: string (default Assignee) — The name of the field.
+- `icon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "account" | "add"… (default assigned) — The icon before the name.
+- `defaultValue?`: string — Which row starts selected when no value is given: a person's value, or none.
 
 ```tsx
 <AssigneeField value={who} onChange={setWho} />   // inside <RightPanelTop>, next to <StatusField />
@@ -400,10 +403,17 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 - `items`: ChatThreadItem[] — The thread, oldest first.
 - `onSend?`: function
 
+### CoAssigneeField
+`import { CoAssigneeField } from './patterns/RightPanel'` — The Co-assignee field: the same list as Assignee, with the Co-assignee icon, and it…
+- `defaultValue?`: string — Which row starts selected when no value is given: a person's value, or none.
+- `onChange?`: function
+- `value?`: string — The value of the person who owns the conversation, or none.
+- `people?`: Assignee[]
+
 ### ConversationList
 `import { ConversationList } from './patterns/ConversationList'`
 - `title`: string — The name of the view the list belongs to, for example "Unassigned".
-- `icon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… (default collapseview) — The icon before the title.
+- `icon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "account" | "add"… (default collapseview) — The icon before the title.
 - `subtitle?`: string (default All Conversations) — The small heading under the title.
 - `channel`: "email" | "slack" | "sms" | "voice" | "whatsapp" | "chat" — The channel of the inbox.
 - `conversations`: ConversationListItem[] — The conversations, newest first.
@@ -479,7 +489,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 ### RightPanelSection
 `import { RightPanelSection } from './patterns/RightPanel'`
 - `title`: string — The section name, for example "Contact".
-- `icon`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… — The icon before the name.
+- `icon`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "account" | "add"… — The icon before the name.
 - `defaultExpanded?`: boolean (default false) — Starts open when set.
 - `expanded?`: boolean — Open or closed, when you control it yourself.
 - `onExpandedChange?`: function
@@ -524,7 +534,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 
 ## Icons
 
-`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 199 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
+`<Icon name="mailbox" size={16} />` (`import { Icon } from './icons'`). 200 icons: the names are in `ICONS.md` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).
 
 ## Colour tokens
 

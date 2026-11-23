@@ -13,8 +13,8 @@ import './ConversationCard.css'
 export type ConversationChannel = 'email' | 'slack' | 'chat' | 'voice' | 'sms' | 'whatsapp'
 
 const channelIcons: Record<ConversationChannel, IconName> = { email: 'mailbox', slack: 'slack', chat: 'chatinbox', voice: 'voice', sms: 'sms', whatsapp: 'whatsapp' }
-/** Only these channels show the reply arrow. */
-const repliesShown: ConversationChannel[] = ['chat', 'sms', 'whatsapp']
+/** Voice cards have no message line, so no reply arrow. Every other channel shows it when the latest message was sent. */
+const noReplyArrow: ConversationChannel[] = ['voice']
 
 export type ConversationCardTag = { label: string; color?: ChipColor }
 export type ConversationCardSla = { kind: SlaKind; status: SlaStatus }
@@ -30,7 +30,7 @@ export type ConversationCardProps = Omit<HTMLAttributes<HTMLDivElement>, 'childr
   callDirection?: 'incoming' | 'outgoing'
   /** The channel the conversation came from. Sets the icon before the name. */
   channel?: ConversationChannel
-  /** Shows a small reply arrow before the message: the latest message was a reply sent from here. Only used for chat, SMS and WhatsApp. */
+  /** The latest message was sent from here, so a small reply arrow shows before it. When the latest message was received, the line shows its first line with no arrow. Not used for voice. */
   replied?: boolean
   /** The card of the conversation that is open: pale blue with a blue bar on the left. It has no hover state. */
   selected?: boolean
@@ -110,7 +110,7 @@ export function ConversationCard({
         <span className="hot-conv-card__date">{date}</span>
       </div>
       <div className="hot-conv-card__preview-row">
-        {replied && repliesShown.includes(channel) && (
+        {replied && !noReplyArrow.includes(channel) && (
           <span className="hot-conv-card__reply" aria-label="You replied">
             <Icon name="reply" size={14} />
           </span>

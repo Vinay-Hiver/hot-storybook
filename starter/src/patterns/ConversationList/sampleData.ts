@@ -1,4 +1,10 @@
 import type { ConversationCardProps, ConversationChannel } from '../../components/ConversationCard'
+import { sampleChatThreads, sampleSmsThreads, sampleWhatsAppThreads } from '../ChatConversation/sampleData'
+import { emailAgentAddress } from '../EmailConversation/emailThread'
+import { sampleEmails } from '../EmailConversation/sampleData'
+import { sampleSlackThreads } from '../SlackConversation/sampleData'
+import { withLatest } from './latest'
+import type { LatestMessage } from './latest'
 
 /** One conversation in the list: the props of a Conversation card, plus an id. */
 export type ConversationListItem = Pick<ConversationCardProps, 'name' | 'date' | 'preview' | 'replied' | 'callDirection' | 'unread' | 'sla' | 'tags' | 'moreCount'> & { id: string }
@@ -12,11 +18,11 @@ const priorityMedium: ConversationCardProps['tags'] = [{ label: 'Medium', color:
 
 const item = (channel: string, n: number, rest: Omit<ConversationListItem, 'id'>): ConversationListItem => ({ id: `${channel}-${n}`, ...rest })
 
-/** Dummy conversations for each channel. Every view of a channel shows the same list for now. */
-export const sampleConversations: Record<ConversationChannel, ConversationListItem[]> = {
+/** The dummy conversations for each channel, before the latest message is read from their threads. */
+const rawConversations: Record<ConversationChannel, ConversationListItem[]> = {
   chat: [
-    item('chat', 1, { name: 'Michael Scott', date: 'Nov 12', preview: 'Chat was reopened by Perry', sla: frtOverdue, tags: priorityHigh, moreCount: 1 }),
-    item('chat', 2, { unread: true, name: 'Dwight Schrute', date: 'Nov 12', preview: 'Chat was reopened by Perry' }),
+    item('chat', 1, { name: 'Michael Scott', date: 'Nov 12', sla: frtOverdue, tags: priorityHigh, moreCount: 1 }),
+    item('chat', 2, { unread: true, name: 'Dwight Schrute', date: 'Nov 12' }),
     item('chat', 3, { name: 'Pam Beesly', date: '09:20 AM', preview: 'Hello', replied: true }),
     item('chat', 4, { unread: true, name: 'Jim Halpert', date: 'Nov 12', preview: 'Can you share the invoice again?', tags: priorityLow }),
     item('chat', 5, { name: 'Angela Martin', date: 'Nov 11', preview: 'Thanks, that fixed it!', replied: true }),
@@ -66,6 +72,30 @@ export const sampleConversations: Record<ConversationChannel, ConversationListIt
     item('voice', 4, { name: 'Jim Halpert', date: 'Nov 11', callDirection: 'outgoing' }),
     item('voice', 5, { name: 'Angela Martin', date: 'Nov 10', callDirection: 'incoming', sla: frtDue }),
   ],
+}
+
+const chatLike = { ...sampleChatThreads, ...sampleWhatsAppThreads, ...sampleSmsThreads }
+
+/** The latest message of a dummy conversation, read from its thread. */
+const latestOfSample = (id: string): LatestMessage | undefined => {
+  const chat = chatLike[id]?.filter((m) => m.kind === 'message')
+  const lastChat = chat?.[chat.length - 1]
+  if (lastChat && lastChat.kind === 'message') return { text: lastChat.text, sent: lastChat.from === 'agent' }
+  const slack = sampleSlackThreads[id]
+  if (slack?.length) return { text: slack[slack.length - 1].text, sent: slack[slack.length - 1].from === 'agent' }
+  const email = sampleEmails[id]?.messages
+  if (email?.length) return { text: email[email.length - 1].body, sent: email[email.length - 1].email === emailAgentAddress }
+  return undefined
+}
+
+/** Dummy conversations for each channel. The second line of each card is the latest message of its thread. Every view of a channel shows the same list for now. */
+export const sampleConversations: Record<ConversationChannel, ConversationListItem[]> = {
+  chat: withLatest(rawConversations.chat, latestOfSample),
+  slack: withLatest(rawConversations.slack, latestOfSample),
+  whatsapp: withLatest(rawConversations.whatsapp, latestOfSample),
+  sms: withLatest(rawConversations.sms, latestOfSample),
+  email: withLatest(rawConversations.email, latestOfSample),
+  voice: rawConversations.voice,
 }
 
 /** How many conversations each channel has. The sidebar uses these as the counts of its views. */

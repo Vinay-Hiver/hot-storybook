@@ -5,7 +5,7 @@ import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { RightPanel, RightPanelSection, RightPanelTop } from './RightPanel'
 import { ActivityNotes } from './ActivityNotes'
-import { AssigneeField, StatusField } from './FieldSelects'
+import { AssigneeField, CoAssigneeField, StatusField } from './FieldSelects'
 import { customFieldKinds, fields, samples, sections } from './data'
 import type { FieldDef, SectionDef } from './data'
 
@@ -23,13 +23,14 @@ const redAvatar = { '--avatar-bg': 'var(--pastelRedSurfaceDefault)' } as CSSProp
 
 /**
  * An example right panel, shared by the Right panel and Page layout stories so both show the same thing.
- * `open` lists which sub-sections start open; `hoverSection` pins the hover look on one section's header.
+ * `open` lists which sub-sections start open; `hoverSection` pins the hover look on one section's header; `coAssignee` adds the Co-assignee field, which only the Email channel has.
  */
-export function ExampleRightPanel({ open = ['contact'], hoverSection }: { open?: string[]; hoverSection?: string }) {
+export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee = false }: { open?: string[]; hoverSection?: string; coAssignee?: boolean }) {
   return (
     <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
       <RightPanelTop title="Inbox name">
         <AssigneeField />
+        {coAssignee && <CoAssigneeField />}
         <StatusField />
         <Row icon="tag" label="Tags">
           <Tag color="violet" onRemove={() => {}} removeLabel="Remove Finance">Finance</Tag>

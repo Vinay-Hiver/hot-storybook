@@ -15,6 +15,9 @@ import { sampleSlackChannels, sampleSlackThreads } from '../../patterns/SlackCon
 import { addReaction, agentMessage, deleteMessage, removeReaction, scheduleSlackReply } from '../../patterns/SlackConversation/slackThread'
 import type { SlackThreadItem } from '../../patterns/SlackConversation'
 import { ConversationList } from '../../patterns/ConversationList'
+import { withLatest } from '../../patterns/ConversationList/latest'
+import type { LatestMessage } from '../../patterns/ConversationList/latest'
+import { emailAgentAddress } from '../../patterns/EmailConversation/emailThread'
 import { sampleConversations } from '../../patterns/ConversationList/sampleData'
 import { ConversationsSidebar } from '../../patterns/ConversationsSidebar'
 import { sampleSections } from '../../patterns/ConversationsSidebar/sampleData'
@@ -51,6 +54,17 @@ export const Playground: StoryObj = {
       const channel = id.split('-')[0] as ConversationChannel
       setSelected(channels.includes(channel) && !/-(tags|allViews)$/.test(id) ? sampleConversations[channel][0].id : undefined)
     }
+    // The second line of each card is the latest message of its thread, as it stands now (a message you send shows with the reply arrow).
+    const latestFor = (id: string): LatestMessage | undefined => {
+      const chat = threads[id]?.filter((m) => m.kind === 'message')
+      const lastChat = chat?.[chat.length - 1]
+      if (lastChat && lastChat.kind === 'message') return { text: lastChat.text, sent: lastChat.from === 'agent' }
+      const slack = slackThreads[id]
+      if (slack?.length) return { text: slack[slack.length - 1].text, sent: slack[slack.length - 1].from === 'agent' }
+      const email = emailThreads[id]
+      if (email?.length) return { text: email[email.length - 1].body, sent: email[email.length - 1].email === emailAgentAddress }
+      return undefined
+    }
     // A view of a shared inbox, found from the sidebar's own data. Tags and All Views show no list.
     const current = sections
       .flatMap((sec) => sec.items)
@@ -69,14 +83,14 @@ export const Playground: StoryObj = {
             // Opening an inbox lands on its first view.
             onExpandedChange={(id, open) => { const first = sections.flatMap((sec) => sec.items).find((i) => i.id === id)?.views?.[0]; if (open && first) go(first.id) }}
           />}
-          rightPanel={<ExampleRightPanel />}
+          rightPanel={<ExampleRightPanel coAssignee={current?.channel === 'email'} />}
         >
           {current && (
             <div style={{ display: 'flex', height: '100%' }}>
               <ConversationList
                 title={current.view.label}
                 channel={current.channel as ConversationChannel}
-                conversations={sampleConversations[current.channel as ConversationChannel]}
+                conversations={withLatest(sampleConversations[current.channel as ConversationChannel], latestFor)}
                 selectedId={selected}
                 onSelect={setSelected}
                 onIconClick={() => setSidebarCollapsed((c) => !c)}

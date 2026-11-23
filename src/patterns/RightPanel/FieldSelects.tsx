@@ -48,27 +48,38 @@ export type AssigneeFieldProps = {
   value?: string
   onChange?: (value: string) => void
   people?: Assignee[]
+  /** The name of the field. Default is "Assignee". */
+  label?: string
+  /** The icon before the name. Default is `assigned`. */
+  icon?: IconName
+  /** Which row starts selected when no `value` is given: a person's `value`, or `none`. Default is the first person. */
+  defaultValue?: string
 }
 
 /** The Assignee field: pressing the name opens a searchable list of people (with a "None" row) in a Dropdown. */
-export function AssigneeField({ value, onChange, people = sampleAssignees }: AssigneeFieldProps) {
-  const [inner, setInner] = useState(value ?? people[0]?.value ?? 'none')
+export function AssigneeField({ value, onChange, people = sampleAssignees, label = 'Assignee', icon = 'assigned', defaultValue }: AssigneeFieldProps) {
+  const [inner, setInner] = useState(value ?? defaultValue ?? people[0]?.value ?? 'none')
   const [open, setOpen] = useState(false)
   const current = value ?? inner
   const person = people.find((p) => p.value === current)
   const name = person ? person.label.replace(/ \(Me\)$/, '') : 'None'
   return (
     <SelectValue
-      icon="assigned" label="Assignee" open={open} onOpenChange={setOpen} ariaLabel={`Assignee: ${name}`}
+      icon={icon} label={label} open={open} onOpenChange={setOpen} ariaLabel={`${label}: ${name}`}
       shown={person ? <Avatar initial={name} size="small" color={person.color} /> : <Icon name="user" size={14} />}
     >
       <Dropdown
-        variant="avatar" searchable searchPlaceholder="Search Assignee" value={current}
+        variant="avatar" searchable searchPlaceholder={`Search ${label}`} value={current}
         options={[{ value: 'none', label: 'None', icon: 'user', iconBackground: true }, ...people.map((p) => ({ value: p.value, label: p.label, color: p.color, status: p.status }))]}
         onChange={(v) => { const next = String(v); setInner(next); onChange?.(next); setOpen(false) }}
       />
     </SelectValue>
   )
+}
+
+/** The Co-assignee field: the same list as Assignee, with the Co-assignee icon, and it starts as None. */
+export function CoAssigneeField(props: Omit<AssigneeFieldProps, 'label' | 'icon'>) {
+  return <AssigneeField defaultValue="none" {...props} label="Co-assignee" icon="coassignee" />
 }
 
 export type StatusFieldProps = {

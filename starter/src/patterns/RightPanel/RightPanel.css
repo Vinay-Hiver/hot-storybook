@@ -42,8 +42,12 @@
 /* Top section. Its rows are 32px with 4px between them (the sub-sections' rows are 36px with none). */
 .hot-rp-top { display: flex; flex-direction: column; gap: var(--spacing4); padding: var(--spacing5); }
 .hot-rp-top .hot-rp-fields { gap: var(--spacing1); }
-.hot-rp-top .hot-rp-field { min-height: var(--spacing8); }
-.hot-rp-top .hot-rp-field__value { min-height: var(--spacing8); padding: var(--spacing15); }
+.hot-rp-top .hot-rp-field { min-height: var(--spacing9); }
+/* Every field row in the top section is 36px tall, like the rows in the sections below. The select (Assignee, Status) is 32px and sits centred in it. */
+.hot-rp-top .hot-rp-field__value { min-height: var(--spacing9); padding: var(--spacing15); }
+.hot-rp-top .hot-rp-field__value--select { padding: 0; }
+/* The labels up here are short and stay on one line: "Co-assignee" is 1px wider than the 108px label column and would break after the hyphen. */
+.hot-rp-top .hot-rp-field__label span { white-space: nowrap; }
 .hot-rp-top__title { margin: 0; min-height: 21px; font: var(--text-body-md-medium); color: var(--slateTextBody); }
 
 /* Sub-sections: a thin line above each, and below the last. Each sits in a wrapper so it can be dragged. */

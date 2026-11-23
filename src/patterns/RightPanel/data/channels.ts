@@ -62,9 +62,9 @@ export const channels: Record<ChannelId, ChannelDef> = {
   email: {
     id: 'email',
     label: 'Email',
-    // Email shows the ticket ID above the assignee.
+    // Email shows the ticket ID above the assignee, and a Co-assignee under it. No other channel has a Co-assignee.
     tabs: ['sharedInbox'],
-    top: { title: 'inboxName', fields: ['ticketId', 'assignee', 'status', 'tags'] },
+    top: { title: 'inboxName', fields: ['ticketId', 'assignee', 'coAssignee', 'status', 'tags'] },
     sections: [
       { section: 'customFields', defaultExpanded: true, emptyValue: 'Empty' },
       { section: 'emailAccount', defaultExpanded: true, emptyValue: 'Empty' },
