@@ -2,23 +2,30 @@
 
 Hiver's HOT design system as working React components, built from Figma. Browse every component, colour, icon and text style, or use them to build a prototype with Claude.
 
+## Copy and paste this prompt into your AI tool
+
+Open an **empty folder** in Claude Code (or any AI agent), then paste:
+
+```text
+Fetch https://raw.githubusercontent.com/Vinay-Hiver/hot-storybook/main/public/START-HERE.md and follow it for this folder.
+```
+
+It sets up a working Hiver prototype and gives you a local address to open. You need Node.js 18 or newer ([nodejs.org](https://nodejs.org)).
+
 **Browse it:** https://hot-storybook.vercel.app
 
 ## Build a prototype with Claude (no coding needed)
 
 1. **Install Node.js** (version 18 or newer) from https://nodejs.org if you don't have it.
 2. **Make an empty folder** for your prototype, for example `My prototype`.
-3. **Download [`START-HERE.md`](public/START-HERE.md)** and put it in that folder.
-4. **Open the folder in Claude Code** (the Claude desktop app, Code tab, or `claude` in a terminal).
-5. **Type:** `Follow START-HERE.md`
+3. **Open the folder in Claude Code** (the Claude desktop app, Code tab, or `claude` in a terminal).
+4. **Paste the prompt above.** (Or download [`START-HERE.md`](public/START-HERE.md) into the folder and type `Follow START-HERE.md`.)
 
 Claude copies the starter, installs it quietly, runs it and gives you a local address to open. The starter opens on a working Hiver prototype: the **Home page** (sidebar, conversation list, conversations, right panel with custom fields) and the **Admin panel** (Shared Inboxes), switched from the Main nav. Describe what you want in plain words, for example:
 
 > Build me the boilerplate of Hiver. I want only SMS and WhatsApp channels, with 2-3 dummy convos in each, and 3 custom fields: MRR (number), Plan (text) and Date (date).
 
 Claude changes the data, not the page, so the result looks like the product. A new page can be built from the same components, and a screenshot or Figma link works too. If a component you need doesn't exist yet, Claude tells you instead of drawing a copy.
-
-You need access to this GitHub repo for the setup to work.
 
 ## What's inside
 
