@@ -194,3 +194,4 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Changed:** the phone input's default country (United States) uses the emoji flag like every country in the list; the drawn `UnitedStatesFlag` component is removed.
 - **Fixed:** the starter failed to start (`slack-logo.svg` not found by the Slack message): the sync now copies that asset to `starter/src/assets`. A copy of the starter was installed, type-checked and built in a scratch folder with no errors.
 - **Changed:** START-HERE asks its questions first (after only the Node and empty-folder checks), waits for the answers, then copies, installs, builds the data and only then starts the app, so the first thing the designer sees is the finished prototype.
+- **Changed:** START-HERE tells the AI to ask its three questions with its own question UI when it has one (Claude Code: AskUserQuestion, with checkboxes for channels and single-choice for the rest), and in plain text otherwise.
