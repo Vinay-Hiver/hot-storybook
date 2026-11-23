@@ -8,7 +8,7 @@ import * as EmailStories from './EmailConversation.stories'
 The conversation view for the Email channel. Like the prototype it is built from, it is a stack of message cards rather than chat bubbles.
 
 - **Top bar**: four icon buttons (mark as unread, mailbox, print, AI). 44px tall.
-- **Subject bar**: the subject, with reply, reply all and forward on the right.
+- **Subject bar**: the subject, with a toolbar on its right: expand all (it turns into collapse all once every message is open), a divider, reply, reply all and forward, another divider, and open in new window.
 - **Messages**: each is a card on a light grey background. The first starts open, showing the address, who it was sent to, the time, the text and Reply and Forward buttons. The others are closed to one line with the start of the text. Press a header or a closed card to open or close it.
 - **Reply**: pressing Reply opens a rich-text editor above the message, with the recipient, a formatting bar and the actions. Send turns on once there is text. A sent message joins the thread, and in Storybook a generic reply from the customer arrives about 2 seconds later.
 

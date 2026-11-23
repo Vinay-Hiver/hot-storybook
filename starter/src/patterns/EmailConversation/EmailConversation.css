@@ -11,10 +11,16 @@
   font-family: var(--fontFamily);
   color: var(--slateTextBody);
 }
+/* The top bar: four icon buttons */
 .hot-email-conv__top { box-sizing: border-box; display: flex; flex: none; align-items: center; gap: var(--spacing3); height: 44px; padding: 0 var(--spacing3); border-bottom: 1px solid var(--slateBorderMild); background: var(--slateSurfaceWhite); }
+/* The toolbar beside the subject (Figma frame 3295:303): 28px buttons 4px apart, with two 1px dividers 18px tall. The first divider has 4px beside it and the expand button 4px more, the second has 8px each side. */
+.hot-email-conv__tools { display: flex; flex: none; align-items: center; gap: var(--spacing1); }
+.hot-email-conv__expand { margin-right: var(--spacing1); }
+.hot-email-conv__divider { flex: none; width: 1px; height: 18px; background: var(--slateBorderLight); }
+.hot-email-conv__divider--first { margin: 0 var(--spacing1); }
+.hot-email-conv__divider--second { margin: 0 var(--spacing2); }
 .hot-email-conv__scroll { display: flex; flex: 1; flex-direction: column; min-height: 0; overflow-y: auto; background: var(--slateSurfaceSubtle); }
 .hot-email-conv__subject { box-sizing: border-box; display: flex; flex: none; align-items: center; justify-content: space-between; gap: var(--spacing3); height: var(--spacing12); padding: 0 var(--spacing4); border-bottom: 1px solid var(--slateBorderMild); background: var(--slateSurfaceWhite); }
 .hot-email-conv__subject-text { min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-xl-medium); color: var(--slateTextTitle); }
-.hot-email-conv__subject-actions { display: flex; flex: none; align-items: center; gap: var(--spacing1); }
 .hot-email-conv__messages { display: flex; flex-direction: column; gap: var(--spacing2); padding: var(--spacing2); }
 .hot-email-conv__item { display: flex; flex-direction: column; gap: var(--spacing2); }

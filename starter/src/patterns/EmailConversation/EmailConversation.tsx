@@ -18,7 +18,7 @@ export type EmailConversationProps = Omit<HTMLAttributes<HTMLDivElement>, 'child
   onSend?: (text: string) => void
 }
 
-/** The Email conversation: a top bar, the subject, and the thread of messages, each open or closed. Reply opens an editor above the message (the "linked-conversations" prototype). */
+/** The Email conversation: a top bar, the subject with a toolbar beside it (expand all, reply, reply all, forward, open in new window), and the thread of messages, each open or closed. Reply opens an editor above the message (the "linked-conversations" prototype). */
 export function EmailConversation({ subject, messages, inboxEmail = 'support@acme.com', onSend, className, ...rest }: EmailConversationProps) {
   const [expanded, setExpanded] = useState<string[]>(() => (messages[0] ? [messages[0].id] : []))
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
@@ -37,6 +37,8 @@ export function EmailConversation({ subject, messages, inboxEmail = 'support@acm
   const toggle = (id: string) => setExpanded((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]))
   const reply = (id: string) => setReplyingTo((prev) => (prev === id ? null : id))
   const firstOpen = expanded[0] ?? messages[0]?.id
+  const allOpen = messages.length > 0 && messages.every((m) => expanded.includes(m.id))
+  const toggleAll = () => setExpanded(allOpen ? [] : messages.map((m) => m.id))
   const recipientFor = (id: string) => messages.find((m) => m.id === id)?.email
 
   return (
@@ -50,10 +52,14 @@ export function EmailConversation({ subject, messages, inboxEmail = 'support@acm
       <div className="hot-email-conv__scroll" ref={scroller}>
         <div className="hot-email-conv__subject">
           <h1 className="hot-email-conv__subject-text">{subject}</h1>
-          <div className="hot-email-conv__subject-actions">
+          <div className="hot-email-conv__tools">
+            <Button iconOnly variant="ghost" size="xs" className="hot-email-conv__expand" aria-label={allOpen ? 'Collapse all' : 'Expand all'} onClick={toggleAll}><Icon name={allOpen ? 'collapse' : 'expand'} size={16} /></Button>
+            <span className="hot-email-conv__divider hot-email-conv__divider--first" aria-hidden="true" />
             <Button iconOnly variant="ghost" size="xs" aria-label="Reply" onClick={() => reply(firstOpen)}><Icon name="reply" size={16} /></Button>
             <Button iconOnly variant="ghost" size="xs" aria-label="Reply all" onClick={() => reply(firstOpen)}><Icon name="replyall" size={16} /></Button>
             <Button iconOnly variant="ghost" size="xs" aria-label="Forward"><Icon name="forward" size={16} /></Button>
+            <span className="hot-email-conv__divider hot-email-conv__divider--second" aria-hidden="true" />
+            <Button iconOnly variant="ghost" size="xs" aria-label="Open in new window"><Icon name="newtab" size={16} /></Button>
           </div>
         </div>
         <div className="hot-email-conv__messages">
