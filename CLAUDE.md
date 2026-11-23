@@ -5,3 +5,4 @@ Maintainer notes for AI working in THIS repo (the Storybook). The designers' pro
 - The designers' start: public/START-HERE.md, fetched from the raw GitHub URL in README.md (repo is public, branch main).
 - LOG.md = history; THINGS_TO_BE_FIXED.md = open items only.
 - Update a component's .mdx Docs page whenever its values change. Use spacing/radius/iconSize tokens when the value is exact. Never test in the browser unless asked.
+- After changing what the starter needs (new asset, dependency, folder), copy starter/ to a scratch folder and run `npm install && npx tsc --noEmit && npx vite build` there: a missing file only shows when a designer runs it.

@@ -10,6 +10,9 @@ for (const f of folders) {
   mkdirSync(`starter/src/${f}`, { recursive: true })
   cpSync(`src/${f}`, `starter/src/${f}`, { recursive: true, filter: keep })
 }
+// Files in src/assets that components import (the Slack logo); the rest of src/assets is Vite's demo art
+mkdirSync('starter/src/assets', { recursive: true })
+for (const f of ['slack-logo.svg']) cpSync(`src/assets/${f}`, `starter/src/assets/${f}`)
 for (const f of ['COMPONENTS.md', 'ICONS.md', 'PRODUCT-GUIDE.md']) cpSync(`public/${f}`, `starter/${f}`)
 rmSync('starter/docs', { recursive: true, force: true })
 cpSync('public/docs', 'starter/docs', { recursive: true })
