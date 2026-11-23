@@ -15,7 +15,7 @@ This file wins over your guesses. Not covered: state your assumption in one line
 ## PLAYBOOK (do ALL steps of a request, not only what was named)
 - "boilerplate/home page": App.tsx already shows it. Only edit data.
 - "only channels X,Y": homeData.inboxes keep X,Y; data.ts sharedInboxChannels keep X,Y. Tell user channels now on both.
-- "N inboxes" / "two <channel> inboxes": Home sidebar = ONE inbox per channel today. If N>1 for a channel say so, don't fake via rename. Admin: N rows under the channel, names = Home names.
+- "N inboxes" / "two <channel> inboxes": Home: one HomeInbox per inbox; several of one channel = same `channel`, unique `id` (e.g. email-2), own label + conversations. Admin: N rows under the channel (SharedInboxes/data.ts), names = Home labels.
 - "N dummy convos" (none given = 2-3 per inbox, general support topics): N conversations per inbox in homeData. Names from The Office (Michael Scott, Dwight Schrute, Pam Beesly, Jim Halpert, Angela Martin...). Unique ids `<channel>-<n>`. Mix unread, some agent replies. Channel voice: sms/whatsapp short; email has `subject`,`email`, paragraph bodies; slack has `slackChannel`; voice has `call:'incoming'|'outgoing'`, no messages.
 - "custom fields": homeData.customFields [{id,label,kind:'text'|'number'|'date',value?}], date value YYYY-MM-DD. Other kinds NOT BUILT: tell user.
 - "show admin": Main nav Admin Panel already opens it. Ensure data.ts matches Home.
@@ -29,7 +29,7 @@ This file wins over your guesses. Not covered: state your assumption in one line
 
 ## GAPS (edit as closed)
 - Home/Admin data not shared: edit both files.
-- Home: 1 inbox per channel. Custom field kinds: text, number, date. Voice: no conversation view. Nav items other than Conversations/Admin Panel do nothing.
+- Custom field kinds: text, number, date. Voice: no conversation view. Nav items other than Conversations/Admin Panel do nothing.
 
 ## EXTEND
 Add a PLAYBOOK line when a request needed a decision not made here: quoted request -> exact steps+files.

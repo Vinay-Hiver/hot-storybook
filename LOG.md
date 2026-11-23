@@ -197,3 +197,6 @@ Built on this day (per the notes) and committed on 17-Oct:
 - **Changed:** START-HERE tells the AI to ask its three questions with its own question UI when it has one (Claude Code: AskUserQuestion, with checkboxes for channels and single-choice for the rest), and in plain text otherwise.
 - **Changed:** START-HERE's questions use fixed wording and one label per option (the AI had merged channels such as "Chat + WhatsApp"): the channel question is "All six channels" or "Only some", with the names typed under Other (the tool allows 4 options, so six checkboxes are not possible); conversations 3 or 5; "Anything else you wanna include?"; no "(Recommended)" tags. Then simplified: channels are a typed answer in chat, conversations "3 to 5" or "8 to 10" plus Other.
 - **Changed:** START-HERE asks two questions (channels typed in chat; "Anything else you wanna include?"). Dummy conversations are no longer asked: 2-3 per inbox by default.
+
+## Several inboxes of one channel on Home
+- `HomeInbox` has an optional `id`; the Home sidebar tells inboxes apart by `id` (else channel), so two Email inboxes show as two entries. PRODUCT-GUIDE updated. Not browser-checked (tsc only).

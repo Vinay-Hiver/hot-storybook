@@ -28,6 +28,8 @@ import type { HomeConversation, HomeData, HomeInbox } from './homeData'
 
 const avatarColors: AvatarColor[] = ['violet', 'lightBlue', 'green', 'orange', 'purple', 'red', 'yellow', 'grey']
 const channelIcons: Record<ConversationChannel, IconName> = { chat: 'chatinbox', slack: 'slack', whatsapp: 'whatsapp', sms: 'sms', email: 'mailbox', voice: 'voice' }
+/** An inbox's id in the sidebar: its own `id`, else its channel. */
+const keyOf = (i: HomeInbox) => i.id ?? i.channel
 const hasNoList = (viewId: string) => /-(tags|allViews)$/.test(viewId)
 
 type ChatChannel = 'chat' | 'whatsapp' | 'sms'
@@ -46,12 +48,12 @@ const toListItem = (c: HomeConversation): ConversationListItem => ({ id: c.id, n
 /** The Shared Inbox part of the sidebar, built from the inboxes: each inbox gets its channel's views, counted by its conversations. */
 function sharedInboxItems(inboxes: HomeInbox[]) {
   return inboxes.map((inbox) => ({
-    id: inbox.channel,
+    id: keyOf(inbox),
     label: inbox.label,
     icon: channelIcons[inbox.channel],
     views: channelViews[inbox.channel].map((key) => {
       const v = viewLibrary[key]
-      return { id: `${inbox.channel}-${v.id}`, label: v.label, icon: v.icon, count: v.hasCount ? inbox.conversations.length : undefined }
+      return { id: `${keyOf(inbox)}-${v.id}`, label: v.label, icon: v.icon, count: v.hasCount ? inbox.conversations.length : undefined }
     }),
   }))
 }
@@ -66,7 +68,7 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
   const { inboxes, customFields } = data
   const first = inboxes[0]
   const [navValue, setNavValue] = useState('conversations')
-  const [view, setView] = useState(first ? `${first.channel}-${channelViews[first.channel][0]}` : '')
+  const [view, setView] = useState(first ? `${keyOf(first)}-${channelViews[first.channel][0]}` : '')
   // The icon at the top of the Conversation list hides the Conversations sidebar. The Main nav stays.
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [selected, setSelected] = useState<string | undefined>(first?.conversations[0]?.id)
@@ -76,14 +78,16 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
 
   const sections = useMemo<ConversationsSidebarSection[]>(() => {
     const base = sampleSections(true, first ? [first.channel] : [])
-    return base.map((sec) => (sec.title === 'Shared Inbox' ? { ...sec, items: sharedInboxItems(inboxes).map((it) => ({ ...it, defaultExpanded: it.id === first?.channel })) } : sec))
+    return base.map((sec) => (sec.title === 'Shared Inbox' ? { ...sec, items: sharedInboxItems(inboxes).map((it) => ({ ...it, defaultExpanded: it.id === (first && keyOf(first)) })) } : sec))
   }, [inboxes, first])
 
-  const inboxOf = (channel: string) => inboxes.find((i) => i.channel === channel)
+  const inboxOf = (id: string) => inboxes.find((i) => keyOf(i) === id)
+  // The inbox a view id belongs to (the longest matching id wins, so `email-2` beats `email`).
+  const inboxOfView = (viewId: string) => [...inboxes].sort((a, b) => keyOf(b).length - keyOf(a).length).find((i) => viewId.startsWith(`${keyOf(i)}-`))
   // Going to a view selects the first conversation in it (Tags and All Views show no list).
   const go = (id: string) => {
     setView(id)
-    const inbox = inboxOf(id.split('-')[0])
+    const inbox = inboxOfView(id)
     setSelected(inbox && !hasNoList(id) ? inbox.conversations[0]?.id : undefined)
   }
   // The second line of each card is the latest message of its thread, as it stands now (a message you send shows with the reply arrow).

@@ -4,8 +4,8 @@ import type { CustomFieldValue } from '../../patterns/RightPanel'
 /**
  * THE DATA OF THE HOME PAGE. Change this file to change the prototype; the page itself (HomePage.tsx) does not need to change.
  *
- * - `inboxes`: which channels show in the sidebar, in order. Delete an inbox to remove the channel. A channel is one of
- *   chat, whatsapp, sms, slack, email, voice.
+ * - `inboxes`: the inboxes in the sidebar, in order. Delete one to remove it. A channel is one of chat, whatsapp, sms, slack, email, voice.
+ *   A channel can have several inboxes: give each a unique `id` and its own `label` and conversations (unique conversation ids too).
  * - Each inbox has `conversations`. Every conversation has a customer `name`, a `date` for its card and its `messages`, oldest first.
  *   The card's second line always shows the latest message (a message you sent shows with the reply arrow).
  * - `customFields`: the fields in the "Custom fields" section of the right panel. A `kind` is text, number or date.
@@ -52,6 +52,8 @@ export type HomeConversation = {
 }
 
 export type HomeInbox = {
+  /** Only needed when a channel has several inboxes: a unique id for each, for example `email-2`. Leave out for the first or only one. */
+  id?: string
   channel: ConversationChannel
   /** The name in the sidebar, for example "Website Chat". */
   label: string
