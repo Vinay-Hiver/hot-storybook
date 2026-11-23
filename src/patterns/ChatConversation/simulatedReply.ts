@@ -17,13 +17,16 @@ export const userReplyDelay = 2000
 /** The time shown on a message sent right now, for example `Nov 12, 10:05 AM`. */
 export const nowLabel = () => new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).replace(' at', ',')
 
+/** A moment after the agent sends a message, calls `add` with a generic reply text from the customer. Used by the views whose messages are not Chat thread items (Slack). */
+export function scheduleUserReplyText(add: (text: string) => void) {
+  setTimeout(() => add(userReplies[Math.floor(Math.random() * userReplies.length)]), userReplyDelay)
+}
+
 /**
  * Mimics the customer: a moment after the agent sends a message, a generic reply from the customer arrives.
  * Call it right after adding the agent's message, and add the item it hands back to the thread.
- * Every conversation view (Chat, SMS, WhatsApp, and Slack when it is built) uses this in its stories and on the Home page.
+ * Every conversation view (Chat, SMS, WhatsApp and Slack) uses this in its stories and on the Home page.
  */
 export function scheduleUserReply(add: (item: ChatThreadItem) => void) {
-  setTimeout(() => {
-    add({ id: `reply-${Date.now()}`, kind: 'message', from: 'user', text: userReplies[Math.floor(Math.random() * userReplies.length)], time: nowLabel() })
-  }, userReplyDelay)
+  scheduleUserReplyText((text) => add({ id: `reply-${Date.now()}`, kind: 'message', from: 'user', text, time: nowLabel() }))
 }

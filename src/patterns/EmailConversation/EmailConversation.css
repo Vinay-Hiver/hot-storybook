@@ -1,0 +1,20 @@
+/* HOT Design System — Email conversation. Values read from the "linked-conversations" prototype (ConversationDetail), mapped to tokens; no Figma frame yet. */
+.hot-email-conv {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  border-right: 1px solid var(--slateBorderMild);
+  background: var(--slateSurfaceWhite);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+}
+.hot-email-conv__top { box-sizing: border-box; display: flex; flex: none; align-items: center; gap: var(--spacing3); height: 44px; padding: 0 var(--spacing3); border-bottom: 1px solid var(--slateBorderMild); background: var(--slateSurfaceWhite); }
+.hot-email-conv__scroll { display: flex; flex: 1; flex-direction: column; min-height: 0; overflow-y: auto; background: var(--slateSurfaceSubtle); }
+.hot-email-conv__subject { box-sizing: border-box; display: flex; flex: none; align-items: center; justify-content: space-between; gap: var(--spacing3); height: var(--spacing12); padding: 0 var(--spacing4); border-bottom: 1px solid var(--slateBorderMild); background: var(--slateSurfaceWhite); }
+.hot-email-conv__subject-text { min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-xl-medium); color: var(--slateTextTitle); }
+.hot-email-conv__subject-actions { display: flex; flex: none; align-items: center; gap: var(--spacing1); }
+.hot-email-conv__messages { display: flex; flex-direction: column; gap: var(--spacing2); padding: var(--spacing2); }
+.hot-email-conv__item { display: flex; flex-direction: column; gap: var(--spacing2); }

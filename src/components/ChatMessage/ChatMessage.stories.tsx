@@ -3,6 +3,8 @@ import { ChatMessage } from './ChatMessage'
 
 const meta = {
   title: 'Components/Chat message',
+  // Not shown in the sidebar: these are the parts of the Conversation Views, described on those pages.
+  tags: ['!dev'],
   component: ChatMessage,
   parameters: { layout: 'centered' },
   args: { from: 'user', text: 'The chat widget is not loading on mobile', time: 'Jul 23, 10:01 AM', agentName: 'Michael Scott' },

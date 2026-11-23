@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
+import { Agentation } from 'agentation'
 import '../src/tokens/tokens.css'
 import '../src/tokens/typography.css'
 
@@ -10,7 +11,7 @@ import '../src/tokens/typography.css'
  */
 const plainFlags = new Set([
   'disabled', 'error', 'invalid', 'required', 'search', 'fullWidth', 'indeterminate', 'iconOnly', 'loading',
-  'compact', 'divided', 'searchable', 'reorderable', 'customizeWidgets', 'hasCount', 'dismissible', 'showClose', 'portal', 'showStatus',
+  'compact', 'divided', 'searchable', 'reorderable', 'customizeWidgets', 'hasCount', 'dismissible', 'showClose', 'portal', 'showStatus', 'unread',
 ])
 
 type ArgTypeLike = { type?: { name?: string; value?: unknown }; control?: unknown; table?: { disable?: boolean; defaultValue?: { summary?: string } } }
@@ -79,6 +80,15 @@ const tidyArgTypes = Object.assign(
 )
 
 const preview: Preview = {
+  // Agentation: a toolbar (bottom right of the canvas) to click elements and leave notes for an AI agent. It runs while developing only, not in the built Storybook.
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        {import.meta.env.DEV && <Agentation />}
+      </>
+    ),
+  ],
   parameters: {
     controls: {
       matchers: {
@@ -95,7 +105,7 @@ const preview: Preview = {
       // The stories of one component keep the order they are written in, so Playground stays first.
       storySort: (a, b) => {
         const sections = ['Foundations', 'Components', 'Patterns', 'Conversation Views', 'Pages', 'Admin panel']
-        const fixed = { Foundations: ['Colors', 'Typography', 'Spacing', 'Icons'], Pages: ['Home page', 'Admin panel'], 'Conversation Views': ['Chat', 'WhatsApp', 'SMS'] }
+        const fixed = { Foundations: ['Colors', 'Typography', 'Spacing', 'Icons'], Pages: ['Home page', 'Admin panel'], 'Conversation Views': ['Chat', 'WhatsApp', 'SMS', 'Slack', 'Email'] }
         if (a.title === b.title) return 0
         const pa = a.title.split('/')
         const pb = b.title.split('/')

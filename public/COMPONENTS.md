@@ -20,7 +20,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `title?`: string — Accessible name, for example the person's full name.
 - `color?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" — Background colour of the circle.
 - `initial`: string — The letter shown in the circle.
-- `size?`: "default" | "small" (default default) — Default is 24px, small is 18px.
+- `size?`: "default" | "large" | "small" (default default) — Default is 24px, small is 18px and large is 32px.
 - `showStatus?`: boolean (default false) — Shows the status dot at the bottom right.
 - `status?`: "online" | "offline" (default online) — With showStatus: a green dot when online (default), a grey dot when offline.
 
@@ -73,9 +73,10 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `date`: string — The date or time of the latest message, for example Nov 12.
 - `preview?`: string — The latest message or the email subject.
 - `callDirection?`: "incoming" | "outgoing" (default incoming) — Voice only: the second line reads "Incoming voice call started" or "Outgoing voice c…
-- `channel?`: "slack" | "sms" | "voice" | "whatsapp" | "email" | "chat" (default chat) — The channel the conversation came from.
+- `channel?`: "email" | "slack" | "sms" | "voice" | "whatsapp" | "chat" (default chat) — The channel the conversation came from.
 - `replied?`: boolean — Shows a small reply arrow before the message: the latest message was a reply sent fr…
 - `selected?`: boolean — The card of the conversation that is open: pale blue with a blue bar on the left.
+- `unread?`: boolean — An unread conversation: light grey, a blue dot before the date, and a medium-weight…
 - `sla?`: ConversationCardSla[] — SLA pills (first response time, resolution time) shown on the chips row.
 - `tags?`: ConversationCardTag[] — Tags shown on the chips row after the SLA pills, for example a priority or a ticket…
 - `moreCount?`: number — How many more tags there are than shown.
@@ -100,13 +101,33 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 <Dropdown variant="avatar" searchable searchPlaceholder="Search" options={[{ value: 'a', label: 'Abhay', color: 'yellow' }]} value={v} onChange={setV} />
 ```
 
+### EmailEditor
+`import { EmailEditor } from './components/EmailEditor'` — The editor an agent writes an email reply in: a "Reply" header, the recipient, a ric…
+- `content?`: "",
+- `recipient?`: string — The address the reply goes to, shown as a chip after "To".
+- `onSend?`: function
+- `onDiscard?`: function
+- `placeholder?`: string — Shown while the editor is empty.
+
+### EmailMessage
+`import { EmailMessage } from './components/EmailMessage'` — One message in an email conversation: a card, open or closed.
+- `onToggle?`: () => void
+- `sender`: string — The sender's email address.
+- `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" — The sender's avatar colour.
+- `time`: string — When it was sent, for example Feb 4, 02:45 PM.
+- `body`: string — The message text.
+- `to?`: string (default support@acme.com) — Who it was sent to, shown under the address when the message is open.
+- `expanded?`: boolean — Open shows the whole message and its Reply and Forward buttons.
+- `onReply?`: function
+- `onForward?`: function
+
 ### Input
 `import { Input } from './components/Input'`
 - `label?`: ReactNode — Label shown above the field.
 - `helperText?`: ReactNode — Small text below the field.
 - `error?`: boolean — Shows the error border and red helper text.
 - `success?`: boolean — Turns the helper text green with a tick before it.
-- `helperIcon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
+- `helperIcon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
 - `size?`: "sm" | "md" (default md) — sm = 32px, md = 40px tall.
 - `prefix?`: ReactNode — Content before the text, such as a 14px <Icon> or a fixed string like "https://".
 - `search?`: boolean — Makes it a search field: a 16px search icon before the text and type="search".
@@ -130,7 +151,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 ### ListAvatar
 `import { ListAvatar } from './components/List'` — The Avatar component in the 24px left-element area (18px when small).
 - `status?`: "online" | "offline" (default online) — With showStatus: a green dot when online (default), a grey dot when offline.
-- `size?`: "default" | "small" (default default) — Default is 24px, small is 18px.
+- `size?`: "default" | "large" | "small" (default default) — Default is 24px, small is 18px and large is 32px.
 - `initial`: string — The letter shown in the circle.
 - `showStatus?`: boolean — Shows the status dot at the bottom right.
 
@@ -140,7 +161,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 
 ### ListIcon
 `import { ListIcon } from './components/List'` — 14px icon centered in the 24px element area.
-- `name`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle…
+- `name`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account…
 - `background?`: boolean
 
 ### ListItem
@@ -240,6 +261,18 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `status`: "done" | "upcoming" | "due" | "overdue" — Where that time stands.
 - `time`: string — The time shown in the text, for example "6:00 PM tomorrow".
 
+### SlackMessage
+`import { SlackMessage } from './components/SlackMessage'` — One message in a Slack conversation: a full-width row, not a bubble.
+- `name`: string — Who wrote it, for example Helly R or Mark Scout (You).
+- `time`: string — When it was sent, for example Nov 10, 04:11 PM.
+- `text`: string — The message.
+- `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" — The colour of the sender's avatar.
+- `reactions?`: Record<string, number> (default {}) — The reactions on the message: each emoji and how many people used it.
+- `canDelete?`: boolean — Shows the delete button in the hover toolbar.
+- `onAddReaction?`: function
+- `onRemoveReaction?`: function
+- `onDelete?`: function
+
 ### SlaPill
 `import { SlaPill } from './components/Sla'`
 - `kind`: "frt" | "rt" — Which time the pill is about: first response time (frt) or resolution time (rt).
@@ -299,7 +332,7 @@ Import from `components/<Name>` (for example `import { Button } from './componen
 - `helperText?`: ReactNode — Small text below the field.
 - `error?`: boolean — Shows the error border and red helper text.
 - `success?`: boolean — Turns the helper text green with a tick before it.
-- `helperIcon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
+- `helperIcon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… — A 16px icon before the helper text, by name from the HOT icon set (for example info).
 - `showCount?`: boolean — Shows a live "0/500" counter.
 - `fullWidth?`: boolean — Stretch to the width of the parent instead of 320px.
 - `tags?`: string[] — Turns the field into a tags field.
@@ -370,11 +403,13 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 ### ConversationList
 `import { ConversationList } from './patterns/ConversationList'`
 - `title`: string — The name of the view the list belongs to, for example "Unassigned".
-- `icon?`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… (default collapseview) — The icon before the title.
+- `icon?`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… (default collapseview) — The icon before the title.
 - `subtitle?`: string (default All Conversations) — The small heading under the title.
-- `channel`: "slack" | "sms" | "voice" | "whatsapp" | "email" | "chat" — The channel of the inbox.
+- `channel`: "email" | "slack" | "sms" | "voice" | "whatsapp" | "chat" — The channel of the inbox.
 - `conversations`: ConversationListItem[] — The conversations, newest first.
 - `selectedId?`: string — The id of the selected conversation.
+- `onIconClick?`: function
+- `iconLabel?`: string (default Toggle the sidebar) — The accessible name of the icon button.
 - `onSelect?`: function
 
 ### ConversationsSidebar
@@ -387,6 +422,13 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 - `onCreate?`: function
 - `onCreateMenu?`: function
 - `onExpandedChange?`: function
+
+### EmailConversation
+`import { EmailConversation } from './patterns/EmailConversation'` — The Email conversation: a top bar, the subject, and the thread of messages, each ope…
+- `subject`: string — The subject of the email conversation.
+- `messages`: EmailThreadMessage[] — The messages, in the order they are shown.
+- `inboxEmail?`: string (default support@acme.com) — The address the conversation was sent to, shown as "To: …" under the sender.
+- `onSend?`: function
 
 ### EmptyState
 `import { EmptyState } from './patterns/EmptyState'`
@@ -416,6 +458,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 - `variant?`: "home" | "admin" (default home) — Which page anatomy to use.
 - `nav`: ReactNode — The Main nav.
 - `sidebar`: ReactNode — The Conversations sidebar or the Admin sidebar.
+- `sidebarCollapsed?`: boolean — Hides the sidebar so the content moves up next to the Main nav.
 - `subNav?`: ReactNode — A second 240px column next to the sidebar, used by the admin variant.
 - `rightPanel?`: ReactNode — The right panel.
 
@@ -436,7 +479,7 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 ### RightPanelSection
 `import { RightPanelSection } from './patterns/RightPanel'`
 - `title`: string — The section name, for example "Contact".
-- `icon`: "open" | "account" | "add" | "addtosm" | "adminsettings" | "ai" | "aiagent" | "aisummarizer" | "alerttriangle… — The icon before the name.
+- `icon`: "search" | "send" | "document" | "link" | "note" | "status" | "switch" | "timer" | "text" | "open" | "account… — The icon before the name.
 - `defaultExpanded?`: boolean (default false) — Starts open when set.
 - `expanded?`: boolean — Open or closed, when you control it yourself.
 - `onExpandedChange?`: function
@@ -444,6 +487,17 @@ Bigger pieces of a page. Import from `patterns/<Name>`.
 ### RightPanelTop
 `import { RightPanelTop } from './patterns/RightPanel'`
 - `title`: string — The heading, for example the inbox name.
+
+### SlackConversation
+`import { SlackConversation } from './patterns/SlackConversation'` — The Slack conversation: a top bar with the customer and the Slack channel, the threa…
+- `name`: string — The customer's name, shown in the top bar and on their messages.
+- `channelName`: string — The Slack channel the conversation is in, without the #, for example support.
+- `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" (default violet) — The colour of the customer's avatar.
+- `items`: SlackThreadItem[] — The thread, oldest first.
+- `onSend?`: function
+- `onAddReaction?`: function
+- `onRemoveReaction?`: function
+- `onDelete?`: function
 
 ### StatusField
 `import { StatusField } from './patterns/RightPanel'` — The Status field: pressing it opens Open, Pending and Closed, each with its status i…

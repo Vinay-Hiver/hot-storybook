@@ -1,0 +1,47 @@
+/* HOT Design System — Email editor. Values read from the "linked-conversations" prototype (ReplySection), mapped to tokens; no Figma frame yet. */
+.hot-email-editor {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--slateBorderLight);
+  border-radius: var(--radius8);
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+  /* Slides in over 300ms, easing out */
+  animation: hot-email-editor-in 300ms ease-out;
+}
+@keyframes hot-email-editor-in { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .hot-email-editor { animation: none; } }
+
+.hot-email-editor__type { display: flex; align-items: center; gap: var(--spacing15); padding: var(--spacing2) var(--spacing4); border-bottom: 1px solid var(--slateBorderLight); border-radius: var(--radius8) var(--radius8) 0 0; background: var(--slateSurfaceSubtle); font: var(--text-body-md-regular); color: var(--slateTextBody); }
+.hot-email-editor__type > svg { opacity: 0.7; }
+
+.hot-email-editor__recipients { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; padding: var(--spacing2) var(--spacing4); border-bottom: 1px solid var(--slateBorderLight); }
+.hot-email-editor__to { display: flex; flex: 1; align-items: center; gap: var(--spacing3); }
+.hot-email-editor__label { font: var(--text-body-md-regular); color: var(--slateTextSubtle); }
+.hot-email-editor__links { display: flex; gap: var(--spacing3); }
+.hot-email-editor__links button { padding: 0; border: 0; background: transparent; font: var(--text-body-sm-regular); color: var(--slateTextSubtle); cursor: pointer; }
+.hot-email-editor__links button:hover { color: var(--slateTextBody); }
+
+/* The text area: at least 180px, with the Tiptap editor inside */
+.hot-email-editor__content { display: flex; flex-direction: column; min-height: 180px; padding: var(--spacing3) var(--spacing4); }
+.hot-email-editor__content .ProseMirror { min-height: 150px; outline: none; font: var(--text-body-md-regular); color: var(--slateTextBody); }
+.hot-email-editor__content .ProseMirror p { margin: 0; }
+.hot-email-editor__content .ProseMirror a { color: var(--primarySurfaceDefault); }
+.hot-email-editor__content .ProseMirror p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: left; height: 0; color: var(--slateTextDisabled); pointer-events: none; }
+
+.hot-email-editor__bars { display: flex; flex-direction: column; border-radius: 0 0 var(--radius8) var(--radius8); background: var(--slateSurfaceWhite); }
+.hot-email-editor__format { box-sizing: border-box; display: flex; align-items: center; gap: var(--spacing15); min-height: 41px; padding: var(--spacing2) var(--spacing3); border-top: 1px solid var(--slateBorderLight); transition: opacity 200ms ease; }
+.hot-email-editor__format--hidden { opacity: 0; pointer-events: none; }
+.hot-email-editor__pill { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--spacing15); padding: var(--spacing1) var(--spacing2); border-radius: var(--radius4); background: var(--slateSurfaceSubtle100Hover); font: var(--text-body-sm-medium); color: var(--slateTextBody); }
+.hot-email-editor__pill--font { width: 80px; }
+.hot-email-editor__pill--small { width: 50px; }
+.hot-email-editor__divider { width: 1px; height: 20px; margin: 0 var(--spacing1); background: var(--slateBorderLight); }
+/* A format that is on at the cursor, and the Text button while the formatting bar is open */
+.hot-email-editor .hot-btn.hot-email-editor__on { background: var(--blueSurfaceSubtle); color: var(--primarySurfaceDefault); }
+
+.hot-email-editor__actions { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing2) var(--spacing3); border-top: 1px solid var(--slateBorderLight); border-radius: 0 0 var(--radius8) var(--radius8); }
+.hot-email-editor__group { display: flex; align-items: center; gap: var(--spacing1); }
+.hot-email-editor__group--end { gap: var(--spacing3); }

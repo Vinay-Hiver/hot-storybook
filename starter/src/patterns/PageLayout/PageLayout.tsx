@@ -15,6 +15,8 @@ export type PageLayoutProps = {
   sidebar: ReactNode
   /** The page content. It takes all the space that is left, so its width follows the browser. */
   children: ReactNode
+  /** Hides the sidebar so the content moves up next to the Main nav. The Main nav stays. */
+  sidebarCollapsed?: boolean
   /** A second 240px column next to the sidebar, used by the `admin` variant. */
   subNav?: ReactNode
   /** The right panel. Always 320px wide. Leave out when the page has none. */
@@ -22,11 +24,11 @@ export type PageLayoutProps = {
   className?: string
 }
 
-export function PageLayout({ variant = 'home', nav, sidebar, children, subNav, rightPanel, className }: PageLayoutProps) {
+export function PageLayout({ variant = 'home', nav, sidebar, sidebarCollapsed, children, subNav, rightPanel, className }: PageLayoutProps) {
   return (
     <div className={['hot-page-layout', `hot-page-layout--${variant}`, className].filter(Boolean).join(' ')}>
       <div className="hot-page-layout__nav">{nav}</div>
-      <div className="hot-page-layout__sidebar">{sidebar}</div>
+      <div className={['hot-page-layout__sidebar', sidebarCollapsed && 'hot-page-layout__sidebar--collapsed'].filter(Boolean).join(' ')} aria-hidden={sidebarCollapsed || undefined}>{sidebar}</div>
       {subNav && <div className="hot-page-layout__sub-nav">{subNav}</div>}
       <main className="hot-page-layout__content">{children}</main>
       {rightPanel && <aside className="hot-page-layout__right-panel">{rightPanel}</aside>}

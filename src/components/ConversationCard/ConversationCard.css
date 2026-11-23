@@ -19,6 +19,14 @@
 .hot-conv-card--selected,
 .hot-conv-card--selected:hover { background: var(--primarySurfaceSubtle); box-shadow: inset 1.5px 0 0 var(--primarySurfaceDefault); }
 
+/* Unread (Figma frames 3291:390 and 3291:344): light grey (`--slateSurfaceSubtle100Hover`, the same as hover) with no bar, a medium-weight date and message in the body colour, and an 8px blue dot before the date. It looks the same under the pointer. */
+.hot-conv-card--unread,
+.hot-conv-card--unread:hover { background: var(--slateSurfaceSubtle100Hover); }
+.hot-conv-card--unread .hot-conv-card__date { font: var(--text-body-sm-medium); }
+.hot-conv-card--unread .hot-conv-card__preview-row { color: var(--slateTextBody); }
+.hot-conv-card--unread .hot-conv-card__preview { font: var(--text-body-md-medium); }
+.hot-conv-card__dot { flex: none; width: var(--spacing2); height: var(--spacing2); border-radius: var(--radiusFull); background: var(--primarySurfaceDefault); }
+
 /* Not in Figma: keyboard focus outline */
 .hot-conv-card:focus-visible { outline: var(--spacing05) solid var(--primarySurfaceLighter); outline-offset: -2px; }
 

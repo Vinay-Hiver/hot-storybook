@@ -3,6 +3,8 @@ import { ReplyBox } from './ReplyBox'
 
 const meta = {
   title: 'Components/Reply box',
+  // Not shown in the sidebar: these are the parts of the Conversation Views, described on those pages.
+  tags: ['!dev'],
   component: ReplyBox,
   parameters: { layout: 'centered' },
   argTypes: { value: { control: false }, onChange: { control: false }, onSend: { control: false }, onEmojiClick: { control: false }, onAttachClick: { control: false } },

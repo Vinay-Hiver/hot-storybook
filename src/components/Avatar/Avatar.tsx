@@ -6,8 +6,8 @@ export type AvatarColor = 'lightBlue' | 'red' | 'orange' | 'yellow' | 'green' | 
 export type AvatarProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
   /** The letter shown in the circle. Only the first letter is used. */
   initial: string
-  /** Default is 24px, small is 18px. */
-  size?: 'default' | 'small'
+  /** Default is 24px, small is 18px and large is 32px. */
+  size?: 'default' | 'small' | 'large'
   /** Shows the status dot at the bottom right. Off by default. */
   showStatus?: boolean
   /** With `showStatus`: a green dot when online (default), a grey dot when offline. */
@@ -19,7 +19,7 @@ export type AvatarProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
 }
 
 export function Avatar({ initial, size = 'default', showStatus = false, status = 'online', color, title, className, ...rest }: AvatarProps) {
-  const classes = ['hot-avatar', size === 'small' && 'hot-avatar--small', color && `hot-avatar--${color}`, className].filter(Boolean).join(' ')
+  const classes = ['hot-avatar', size === 'small' && 'hot-avatar--small', size === 'large' && 'hot-avatar--large', color && `hot-avatar--${color}`, className].filter(Boolean).join(' ')
   return (
     <span className={classes} role={title ? 'img' : undefined} aria-label={title} aria-hidden={title ? undefined : true} {...rest}>
       {initial.charAt(0).toUpperCase()}

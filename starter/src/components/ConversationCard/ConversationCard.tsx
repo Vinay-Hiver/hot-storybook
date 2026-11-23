@@ -34,6 +34,8 @@ export type ConversationCardProps = Omit<HTMLAttributes<HTMLDivElement>, 'childr
   replied?: boolean
   /** The card of the conversation that is open: pale blue with a blue bar on the left. It has no hover state. */
   selected?: boolean
+  /** An unread conversation: light grey, a blue dot before the date, and a medium-weight date and message. Selected cards keep the blue bar. */
+  unread?: boolean
   /** SLA pills (first response time, resolution time) shown on the chips row. */
   sla?: ConversationCardSla[]
   /** Tags shown on the chips row after the SLA pills, for example a priority or a ticket number. */
@@ -49,7 +51,7 @@ export type ConversationCardProps = Omit<HTMLAttributes<HTMLDivElement>, 'childr
 }
 
 export function ConversationCard({
-  name, date, preview, callDirection = 'incoming', channel = 'chat', replied, selected, sla, tags, moreCount, checked, onCheckedChange,
+  name, date, preview, callDirection = 'incoming', channel = 'chat', replied, selected, unread, sla, tags, moreCount, checked, onCheckedChange,
   forceState, className, onClick, onKeyDown, ...rest
 }: ConversationCardProps) {
   const [ownChecked, setOwnChecked] = useState(false)
@@ -60,7 +62,7 @@ export function ConversationCard({
   const line = channel === 'voice' ? (callDirection === 'outgoing' ? 'Outgoing voice call started' : 'Incoming voice call started') : preview
   const hasChips = !!sla?.length || !!tags?.length || !!moreCount
 
-  const classes = ['hot-conv-card', selected && 'hot-conv-card--selected', className].filter(Boolean).join(' ')
+  const classes = ['hot-conv-card', selected && 'hot-conv-card--selected', unread && 'hot-conv-card--unread', className].filter(Boolean).join(' ')
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(e)
     if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) {
@@ -104,6 +106,7 @@ export function ConversationCard({
           </span>
           <span className="hot-conv-card__name">{name}</span>
         </div>
+        {unread && <span className="hot-conv-card__dot" role="img" aria-label="Unread" />}
         <span className="hot-conv-card__date">{date}</span>
       </div>
       <div className="hot-conv-card__preview-row">

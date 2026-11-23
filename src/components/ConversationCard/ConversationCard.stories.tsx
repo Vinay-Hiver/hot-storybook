@@ -26,6 +26,7 @@ const meta = {
   argTypes: {
     channel: { control: 'select', options: channels, description: 'Each channel has its own icon. Changing it fills in a sample name and message.' },
     selected: { control: 'boolean' },
+    unread: { control: 'boolean', description: 'Light grey, a blue dot before the date, and a medium-weight date and message' },
     replied: { control: 'boolean', description: 'The reply arrow before the message. Only chat, SMS and WhatsApp show it.' },
     moreCount: { control: 'number' },
     forceState: { control: 'inline-radio', options: [undefined, 'hover', 'icon-hover'] },
@@ -44,7 +45,7 @@ type PlaygroundArgs = ConversationCardProps & { showSla: boolean; showTags: bool
 
 /** One card you can change from the Controls panel. */
 export const Playground: StoryObj<PlaygroundArgs> = {
-  args: { channel: 'chat', selected: false, replied: true, callDirection: 'incoming', showSla: false, showTags: false, moreCount: 0 },
+  args: { channel: 'chat', selected: false, unread: false, replied: true, callDirection: 'incoming', showSla: false, showTags: false, moreCount: 0 },
   argTypes: {
     callDirection: { control: 'inline-radio', options: ['incoming', 'outgoing'], name: 'call', description: 'Sets the second line of a voice card', if: { arg: 'channel', eq: 'voice' } },
     showSla: { control: 'boolean', name: 'SLA pills', description: 'Show the first response time pill' },
@@ -84,6 +85,8 @@ export const States: Story = {
       <Cell title="Unselected, hovering the card"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied forceState="hover" /></Cell>
       <Cell title="Unselected, hovering the channel icon"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied forceState="icon-hover" /></Cell>
       <Cell title="Unselected with SLA and tags"><ConversationCard channel="sms" name="Michael Scott" date="Nov 12" preview="Hi" sla={sla} tags={tags} moreCount={2} /></Cell>
+      <Cell title="Unread"><ConversationCard name="Michael Scott" date="Nov 12" preview="The subject comes here" unread sla={sla} tags={tags} moreCount={2} /></Cell>
+      <Cell title="Unread, hovering the channel icon"><ConversationCard name="Michael Scott" date="Nov 12" preview="The subject comes here" unread forceState="icon-hover" sla={sla} tags={tags} moreCount={2} /></Cell>
       <Cell title="Selected"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied selected /></Cell>
       <Cell title="Selected, hovering the channel icon"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied selected forceState="icon-hover" /></Cell>
       <Cell title="Selected with SLA and tags"><ConversationCard channel="sms" name="Michael Scott" date="Nov 12" preview="Hi" selected sla={sla} tags={tags} moreCount={2} /></Cell>

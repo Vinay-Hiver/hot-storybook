@@ -11,6 +11,11 @@ The conversation view for the Chat channel, shown next to the conversation list.
 - **Thread**: the messages, oldest first. It scrolls on its own and keeps the newest message in view. Messages from the customer (user) are on the left in pale blue, and messages from the agent are on the right in solid blue. Messages are 12px apart.
 - **Reply box**: where the agent writes a reply. Send turns on as soon as there is text, and Enter sends.
 
+## The parts
+
+- **Messages**: a message from the customer (user) is a pale blue bubble on the left with the time under it. A message from the agent is a solid blue bubble with white text on the right, with the agent's name and the time under it. Bubbles hug their text, are at most 450px wide and wrap beyond that.
+- **Reply box**: a text area with an emoji and an attachment button, and Send. Send is disabled until there is text. Enter sends, and Shift + Enter starts a new line. The hint uses the disabled text colour.
+
 In Storybook, a generic reply from the customer arrives about 2 seconds after the agent sends a message, to mimic a conversation.
 
 <Canvas of={ChatStories.Playground} />

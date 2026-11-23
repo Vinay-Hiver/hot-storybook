@@ -11,5 +11,5 @@ for (const f of folders) {
   cpSync(`src/${f}`, `starter/src/${f}`, { recursive: true, filter: keep })
 }
 for (const f of ['COMPONENTS.md', 'ICONS.md']) cpSync(`public/${f}`, `starter/${f}`)
-if (existsSync('public/hiver-favicon.png')) { mkdirSync('starter/public', { recursive: true }); cpSync('public/hiver-favicon.png', 'starter/public/hiver-favicon.png') }
+if (existsSync('public/favicon.svg')) { mkdirSync('starter/public', { recursive: true }); cpSync('public/favicon.svg', 'starter/public/favicon.svg') }
 console.log('starter/ refreshed from the components, patterns, icons, tokens and docs')

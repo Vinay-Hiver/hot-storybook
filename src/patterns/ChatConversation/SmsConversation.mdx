@@ -11,6 +11,11 @@ The conversation view for the SMS channel. The layout is the same as Chat, with 
 
 Messages from the customer are light grey on the left, the reply box is the same as in Chat, and messages are 12px apart.
 
+## The parts
+
+- **Messages**: the agent's message is a white card with a thin border, and the customer's is light grey. There are no ticks. Bubbles hug their text and are at most 450px wide.
+- **Reply box**: the same as in Chat.
+
 In Storybook, a generic reply from the customer arrives about 2 seconds after the agent sends a message, to mimic a conversation.
 
 <Canvas of={SmsStories.Playground} />

@@ -22,6 +22,10 @@
   border-bottom: 1px solid var(--slateBorderMild);
 }
 .hot-conv-list__icon { display: inline-flex; flex: none; color: var(--slateIconsSubtle); }
+/* The icon as a button: 28px, pulled in by 6px each side so the icon and the title stay where they were */
+.hot-conv-list__toggle { --btn-fg: var(--slateIconsSubtle); --btn-fg-active: var(--slateIconsSubtle); flex: none; margin: 0 calc(-1 * var(--spacing15)); }
+/* The ghost Button turns blue when pressed. Here the icon keeps its colour, and the hover grey stays while it is pressed. */
+.hot-conv-list__toggle:active:not(:disabled) { background: var(--slateSurfaceSubtle100Hover); }
 .hot-conv-list__title { margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); color: var(--slateTextBody); }
 .hot-conv-list__sub {
   box-sizing: border-box;

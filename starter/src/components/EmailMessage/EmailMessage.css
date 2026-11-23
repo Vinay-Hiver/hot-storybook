@@ -1,0 +1,33 @@
+/* HOT Design System — Email message. Values read from the "linked-conversations" prototype (ConversationDetail), mapped to tokens; no Figma frame yet. */
+.hot-email-msg {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing4);
+  padding: var(--spacing3);
+  border: 1px solid var(--slateBorderMild);
+  border-radius: var(--radius8);
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 2px 4px rgba(7, 26, 46, 0.04);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+}
+.hot-email-msg--closed { flex-direction: row; align-items: flex-start; gap: var(--spacing3); box-shadow: none; cursor: pointer; }
+.hot-email-msg--closed:focus-visible { outline: var(--spacing05) solid var(--primarySurfaceLighter); outline-offset: -2px; }
+.hot-email-msg > .hot-avatar, .hot-email-msg__head > .hot-avatar { flex: none; }
+
+/* The avatar sits at the top in both states, so it does not move when a message opens or closes. The time and buttons are centred on the avatar. */
+.hot-email-msg__head { display: flex; align-items: flex-start; gap: var(--spacing3); }
+.hot-email-msg__info { display: flex; flex: 1; flex-direction: column; gap: var(--spacing05); min-width: 0; }
+.hot-email-msg__info--button { padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; font: inherit; color: inherit; }
+.hot-email-msg__address { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); color: var(--slateTextBody); }
+.hot-email-msg__to { display: flex; align-items: center; gap: var(--spacing1); font: var(--text-body-sm-regular); color: var(--slateTextSubtle); }
+.hot-email-msg__time { flex: none; white-space: nowrap; font: var(--text-body-sm-regular); color: var(--slateTextSubtle); }
+/* In the closed card the time is centred on the avatar row too, so it stays at the same height when the message opens */
+.hot-email-msg--closed > .hot-email-msg__time { display: flex; align-items: center; height: var(--spacing8); }
+.hot-email-msg__head-actions { display: flex; align-items: center; gap: var(--spacing2); height: var(--spacing8); }
+
+.hot-email-msg__body { font: var(--text-body-md-regular); color: var(--slateTextBody); white-space: pre-line; overflow-wrap: anywhere; }
+.hot-email-msg__preview { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-regular); color: var(--slateTextBody); }
+.hot-email-msg__more { width: 24px; height: 14px; padding: 0; border: 0; border-radius: var(--radius2); background: var(--slateSurfaceSubtle100Hover); color: var(--slateTextBody); font: var(--text-body-xs-regular); line-height: 8px; cursor: pointer; }
+.hot-email-msg__actions { display: flex; gap: var(--spacing2); }

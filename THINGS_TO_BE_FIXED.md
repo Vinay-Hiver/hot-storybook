@@ -106,7 +106,7 @@ Only things that need action: something is built but needs another look, a decis
 
 - [ ] **Header values from a screenshot:** there is no Figma frame for the list header yet. The header (44px, 14px medium title, icon and title 8px apart) and the "All Conversations" bar (41px, 13px medium) were measured from the product screenshot. Share the Figma frame to check them.
 
-- [ ] **Unread badge and unread look:** the screenshot shows a blue count badge (for example "2") before the date and a bolder card for unread conversations. The Conversation card has neither yet.
+- [ ] **Unread count badge:** the first screenshot also showed a blue count badge (for example "2") before the date. The unread state built from Figma has a dot only. Ask if the count is still wanted.
 - [ ] **Other sidebar items:** My Work, Personal and the More items (Sent, Drafts and so on) show no list yet, only shared inbox views do.
 - [ ] **Opening a conversation:** pressing a card only selects it. The conversation view is not built.
 
@@ -125,6 +125,23 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Sent and delivered ticks:** Figma shows only the blue "read" ticks. Sent (one grey tick) and delivered (two grey ticks) follow the prototype's behaviour and are not in a Figma frame.
 - [ ] **Templates:** the template button does nothing yet.
 - [ ] **Agent card:** the WhatsApp agent message is 38px tall (text 20px, 8px padding, 1px border); the Figma frame draws it 36px tall. Its faint shadow (`0 0 1px rgba(7,26,46,0.04)`) has no colour token.
+
+## 15. Slack conversation
+
+- [ ] **Figma frame is old:** the Slack frame (3017:24702) still uses Hanken Grotesk and 30px photo avatars. The view uses the new Inter styles and the 24px letter Avatar. An updated frame would let me check the numbers.
+- [ ] **Avatar size:** the Slack frame draws 30px avatars (photos). The view uses the new 32px `large` Avatar, with a letter, as asked. The large size has no Figma frame yet (14px medium letter, 8px dot in the corner).
+- [ ] **Slack logo:** the design system file has no Slack brand logo. The coloured logo in the toolbar is the SVG from the Figma frame / the `linked-conversations` repo (`src/assets/slack-logo.svg`).
+- [ ] **Toolbar and picker:** the hover toolbar buttons are plain styled buttons (26px tall, 14px icons), not the Button component. The toolbar and emoji picker shadows (`rgba(51,65,85,0.25)`, `rgba(15,23,42,0.14)`) have no colour token.
+- [ ] **Left as in the Slack frame:** the time uses `--slateTextDisabled` (other channels use `--slateTextSubtle`), and the panel is white with 1px side borders and a grey top bar. Chat has neither.
+- [ ] **Not built:** the Slack hint mentions templates, but there is no templates button (kept as is). Replies, reactions and deleted messages live in the story only.
+
+## 16. Email conversation
+
+- [ ] **No Figma frame:** the Email view was built from the `linked-conversations` code (Hanken Grotesk, 24px line height) mapped to the new styles and tokens. Send a Figma frame to check the numbers.
+- [ ] **Line height:** the code's message text is 14px with a 24px line; body/md/regular has a 20px line, so messages are a little more compact.
+- [ ] **Editor controls for show:** the font, size and colour pickers, Cc, Bcc, Edit Subject, the "..." button and the forward, share, save, signature, template and attach buttons do nothing yet, as in the prototype. Align left, bold, italic, underline, strikethrough and link work.
+- [ ] **Shadows and sizes with no token:** the card shadows (`rgba(7,26,46,0.04)`, `rgba(0,0,0,0.05)`), the 24×14 "..." button and the 8px page padding stay as in the code. The editor hint uses `--slateTextDisabled`, like the other reply boxes.
+- [ ] **Tiptap added:** the editor uses Tiptap (5 packages, in `package.json` and the starter's `package.json`).
 
 ## 10. Other
 

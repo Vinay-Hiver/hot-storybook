@@ -9,7 +9,10 @@
 }
 /* The three side regions have a fixed width and never shrink. */
 .hot-page-layout__nav { flex: none; width: 50px; }
-.hot-page-layout__sidebar { flex: none; width: 240px; }
+.hot-page-layout__sidebar { flex: none; width: 240px; overflow: hidden; transition: width 250ms ease-in-out, visibility 0s; }
+/* Hiding the sidebar slides it away over 250ms, ease in and out, and the content slides over with it. Once it is gone it is hidden, so Tab skips it. */
+.hot-page-layout__sidebar--collapsed { width: 0; visibility: hidden; transition: width 250ms ease-in-out, visibility 0s linear 250ms; }
+@media (prefers-reduced-motion: reduce) { .hot-page-layout__sidebar, .hot-page-layout__sidebar--collapsed { transition: none; } }
 .hot-page-layout__sub-nav { flex: none; width: 240px; }
 .hot-page-layout__right-panel { flex: none; width: 320px; min-width: 320px; }
 .hot-page-layout__nav > *,

@@ -1,0 +1,20 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as SlackStories from './SlackConversation.stories'
+
+<Meta of={SlackStories} />
+
+# Slack
+
+The conversation view for the Slack channel. It does not look like Chat, SMS and WhatsApp: messages are full-width rows with an avatar, a name and a time, not bubbles.
+
+- **Top bar**: the customer's name, and the Slack channel they are in as a chip (for example `#support`). 44px tall, light grey.
+- **Thread**: the messages, oldest first. The agent is shown as "Mark Scout (You)". Pointing at a message shows a toolbar to add a reaction, delete your own message and open it in Slack. Reactions show under the message, and pressing one removes it.
+- **Reply box**: the same box as the other channels, with a hint about Slack templates. Send turns on as soon as there is text, and Enter sends.
+
+## The parts
+
+- **Message row**: a 32px avatar, the name and the time (in light grey), then the text. Pointing at a row turns it light grey and shows a toolbar at its top right: add a reaction (10 emoji to pick from), delete (agent messages only) and open in Slack. Reactions are small grey pills with a count, and pressing one removes it.
+
+In Storybook, a generic reply from the customer arrives about 2 seconds after the agent sends a message, to mimic a conversation.
+
+<Canvas of={SlackStories.Playground} />

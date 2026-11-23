@@ -13,6 +13,11 @@ The conversation view for the WhatsApp channel. The layout is the same as Chat, 
 
 Messages from the customer are light grey on the left, and messages are 12px apart.
 
+## The parts
+
+- **Messages**: the agent's message is a white card with a thin border, and the customer's is light grey. Under the agent's message, ticks show how far it has got: one grey tick (sent), two grey ticks (delivered) or two blue ticks (read). Bubbles hug their text and are at most 450px wide.
+- **Reply box**: the same as in Chat, with a third button that opens the WhatsApp templates (it does nothing yet). The hint mentions templates.
+
 In Storybook, a generic reply from the customer arrives about 2 seconds after the agent sends a message, to mimic a conversation.
 
 <Canvas of={WhatsAppStories.Playground} />

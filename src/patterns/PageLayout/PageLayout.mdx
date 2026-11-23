@@ -16,7 +16,7 @@ Each region has its own page: [Main nav](?path=/docs/patterns-main-nav--docs), [
 The main app page, from left to right:
 
 - **Main nav**: always 50px wide.
-- **Sidebar**: 240px wide. It is the Conversations sidebar or the Admin sidebar, depending on where the person is. Both are the same width, so swapping one for the other never moves the content.
+- **Sidebar**: 240px wide. It is the Conversations sidebar or the Admin sidebar, depending on where the person is. Both are the same width, so swapping one for the other never moves the content. On the home page the sidebar can be hidden (`sidebarCollapsed`): the Main nav stays and the content moves up next to it. It slides away over 250ms, ease in and out (no motion if the person has asked for less).
 - **Content**: takes all the space that is left, so its width follows the browser. On a 1440px screen it is 830px.
 - **Right panel**: always 320px wide.
 

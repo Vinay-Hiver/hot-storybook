@@ -1,0 +1,21 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as EmailStories from './EmailConversation.stories'
+
+<Meta of={EmailStories} />
+
+# Email
+
+The conversation view for the Email channel. Like the prototype it is built from, it is a stack of message cards rather than chat bubbles.
+
+- **Top bar**: four icon buttons (mark as unread, mailbox, print, AI). 44px tall.
+- **Subject bar**: the subject, with reply, reply all and forward on the right.
+- **Messages**: each is a card on a light grey background. The first starts open, showing the address, who it was sent to, the time, the text and Reply and Forward buttons. The others are closed to one line with the start of the text. Press a header or a closed card to open or close it.
+- **Reply**: pressing Reply opens a rich-text editor above the message, with the recipient, a formatting bar and the actions. Send turns on once there is text. A sent message joins the thread, and in Storybook a generic reply from the customer arrives about 2 seconds later.
+
+## The parts
+
+- **Message card, open**: the sender's address with who it was sent to, the time, the whole text, and Reply and Forward buttons. The reply-all and more buttons sit next to the time.
+- **Message card, closed**: the avatar, the address, the first 80 characters of the text and the time, on one line.
+- **Reply editor**: a rich-text editor (Tiptap) with a Reply header, the recipient as a chip with links for Cc, Bcc and Edit Subject, a writing area at least 180px tall, a formatting bar and the actions. Bold, italic, underline, strikethrough, align left and link work. The font, size and colour pickers are for show for now, and so are emoji, attach, signature, templates, share and save. The Text button hides and shows the formatting bar.
+
+<Canvas of={EmailStories.Playground} />

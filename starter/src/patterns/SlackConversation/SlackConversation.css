@@ -1,0 +1,30 @@
+/* HOT Design System — Slack conversation. Values read from the Figma Slack frame (3017:24702); colors use tokens only. */
+.hot-slack-conv {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  border-right: 1px solid var(--slateBorderLight);
+  border-left: 1px solid var(--slateBorderLight);
+  background: var(--slateSurfaceWhite);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+}
+.hot-slack-conv__top {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing2);
+  height: 44px;
+  padding: 0 var(--spacing5);
+  border-bottom: 1px solid var(--slateBorderLight);
+  background: var(--slateSurfaceSubtle);
+}
+.hot-slack-conv__name { min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: var(--text-body-md-medium); color: var(--slateTextTitle); }
+/* The thread has 20px of room above, so the first message's toolbar does not cover the top bar */
+.hot-slack-conv__thread { display: flex; flex: 1; flex-direction: column; min-height: 0; padding-top: var(--spacing5); overflow-y: auto; }
+.hot-slack-conv__composer { flex: none; padding: var(--spacing5); }

@@ -8,7 +8,7 @@ const meta = {
   args: { initial: 'A' },
   argTypes: {
     initial: { control: 'text' },
-    size: { control: 'inline-radio', options: ['default', 'small'] },
+    size: { control: 'inline-radio', options: ['default', 'small', 'large'] },
     showStatus: { control: 'boolean', name: 'show status', description: 'Shows the status dot' },
     status: { control: 'inline-radio', options: ['online', 'offline'], if: { arg: 'showStatus' } },
   },
@@ -39,6 +39,7 @@ export const Sizes: Story = {
     <div style={row}>
       <Avatar initial="A" />
       <Avatar initial="A" size="small" />
+      <Avatar initial="A" size="large" />
     </div>
   ),
 }
@@ -52,13 +53,15 @@ export const Statuses: Story = {
       <Avatar initial="A" showStatus status="offline" />
       <Avatar initial="A" size="small" showStatus status="online" />
       <Avatar initial="A" size="small" showStatus status="offline" />
+      <Avatar initial="A" size="large" showStatus status="online" />
+      <Avatar initial="A" size="large" showStatus status="offline" />
     </div>
   ),
 }
 
 const label: React.CSSProperties = { font: '500 12px/16px var(--fontFamily)', color: 'var(--slateTextSubtle)' }
 
-/** Both sizes, online and offline. */
+/** All sizes, online and offline. */
 export const AllVariants: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
@@ -66,7 +69,7 @@ export const AllVariants: Story = {
       <span />
       <span style={label}>Online</span>
       <span style={label}>Offline</span>
-      {(['default', 'small'] as const).map((size) => (
+      {(['default', 'small', 'large'] as const).map((size) => (
         <div key={size} style={{ display: 'contents' }}>
           <span style={{ ...label, textTransform: 'capitalize' }}>{size}</span>
           <div><Avatar initial="A" size={size} showStatus status="online" /></div>

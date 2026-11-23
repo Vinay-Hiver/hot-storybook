@@ -24,7 +24,7 @@
   color: var(--slateTextTitle);
   font: var(--text-body-md-regular);
 }
-.hot-reply-box__input::placeholder { color: var(--slateBorderDark); opacity: 1; }
+.hot-reply-box__input::placeholder { color: var(--slateTextDisabled); opacity: 1; }
 .hot-reply-box__toolbar {
   box-sizing: border-box;
   display: flex;

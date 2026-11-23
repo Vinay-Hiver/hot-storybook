@@ -1,0 +1,91 @@
+/* HOT Design System — Slack message. Values read from the Figma "Chat UI" instances of the Slack frame (3017:24702); colors use tokens only. */
+.hot-slack-msg {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing2);
+  width: 100%;
+  padding: var(--spacing3) var(--spacing5);
+  font-family: var(--fontFamily);
+  color: var(--slateTextBody);
+  transition: background-color 120ms ease;
+}
+.hot-slack-msg:hover, .hot-slack-msg--picking { background: var(--slateSurfaceSubtle); }
+.hot-slack-msg > .hot-avatar { flex: none; }
+
+.hot-slack-msg__body { display: flex; flex: 1; flex-direction: column; gap: var(--spacing1); min-width: 0; }
+.hot-slack-msg__head { display: flex; align-items: baseline; gap: var(--spacing3); }
+.hot-slack-msg__name { font: var(--text-body-md-medium); color: var(--slateTextBody); }
+.hot-slack-msg__time { font: var(--text-body-xs-regular); color: var(--slateTextDisabled); }
+.hot-slack-msg__text { font: var(--text-body-md-regular); color: var(--slateTextBody); white-space: pre-line; overflow-wrap: anywhere; }
+
+/* Reactions under a message: small grey pills */
+.hot-slack-msg__reactions { display: flex; flex-wrap: wrap; gap: var(--spacing1); }
+.hot-slack-msg__reaction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing1);
+  padding: var(--spacing1) var(--spacing15);
+  border: 0;
+  border-radius: var(--radiusFull);
+  background: var(--slateSurfaceSubtle100Hover);
+  color: var(--slateTextBody);
+  font: var(--text-body-xs-regular);
+  cursor: pointer;
+}
+.hot-slack-msg__emoji { font-size: 12px; line-height: 1; }
+.hot-slack-msg__reaction:focus-visible, .hot-slack-msg__tool:focus-visible, .hot-slack-msg__pick:focus-visible { outline: var(--spacing05) solid var(--primarySurfaceLighter); outline-offset: -2px; }
+
+/* The toolbar floats at the top right of the row and shows when the row is pointed at, focused or picking an emoji */
+.hot-slack-msg__toolbar {
+  position: absolute;
+  top: -13px;
+  right: var(--spacing25);
+  display: flex;
+  align-items: center;
+  height: 26px;
+  border: 0.5px solid var(--slateBorderLight);
+  border-radius: var(--radius6);
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 0 2px rgba(51, 65, 85, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+.hot-slack-msg:hover .hot-slack-msg__toolbar, .hot-slack-msg:focus-within .hot-slack-msg__toolbar, .hot-slack-msg--picking .hot-slack-msg__toolbar { opacity: 1; pointer-events: auto; }
+.hot-slack-msg__tool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--spacing15) var(--spacing2);
+  border: 0;
+  border-right: 1px solid var(--slateBorderLight);
+  background: transparent;
+  color: var(--slateTextBody);
+  cursor: pointer;
+}
+.hot-slack-msg__tool:last-of-type { border-right: 0; }
+.hot-slack-msg__tool:hover { background: var(--slateSurfaceSubtle100Hover); }
+
+/* The emoji picker opens under the toolbar */
+.hot-slack-msg__picker {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing05);
+  width: 180px;
+  padding: var(--spacing15);
+  border: 1px solid var(--slateBorderLight);
+  border-radius: var(--radius8);
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+}
+.hot-slack-msg__pick { padding: var(--spacing1); border: 0; border-radius: var(--radius6); background: transparent; font-size: 18px; line-height: 1; cursor: pointer; }
+.hot-slack-msg__pick:hover { background: var(--slateSurfaceSubtle100Hover); }
+@media (prefers-reduced-motion: reduce) { .hot-slack-msg, .hot-slack-msg__toolbar { transition: none; } }
