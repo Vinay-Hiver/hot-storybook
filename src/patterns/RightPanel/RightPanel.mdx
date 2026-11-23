@@ -32,3 +32,14 @@ A "Customize widgets" button sits after the last section. Clicking it opens a sm
 Pointing at a sub-section, open or closed, turns it light grey and shows a drag handle on the left, because the sections can be dragged to a new order from the handle. The closed Account section and the open Contact section below are pinned to show it.
 
 <Canvas of={PanelStories.HoverState} />
+
+## Editable custom fields
+
+The Custom fields section can hold fields the person edits right there. There are three kinds:
+
+- **Text**: press the value to turn it into a text box. Enter or leaving the box saves it, Escape drops the change.
+- **Number**: the same, but it only takes digits and one decimal point.
+- **Date**: pressing the value opens a calendar under it (the react-day-picker library, in our colours). Picking a day saves it, shown like "Nov 18, 2026", and picking the same day again clears it.
+
+An empty field shows "Empty" in the disabled text colour. In code, use `CustomFieldsList` (it keeps its own values) or a single `CustomField`.
+

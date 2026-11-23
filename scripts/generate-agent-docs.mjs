@@ -2,7 +2,7 @@
 // instead of opening component files. Run with `npm run agent-docs`; it also runs before every Storybook build.
 // Everything is read from the code (props, defaults, icon names, tokens), so it cannot go out of date. Only the
 // examples and the rules at the bottom are written by hand, in EXAMPLES and RULES below.
-import { globSync, readFileSync, writeFileSync } from 'node:fs'
+import { globSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { withCustomConfig } from 'react-docgen-typescript'
 
 // ---------- hand-written parts ----------
@@ -33,46 +33,33 @@ const EXAMPLES = {
   AssigneeField: `<AssigneeField value={who} onChange={setWho} />   // inside <RightPanelTop>, next to <StatusField />`,
 }
 
-const RULES = `## Rules
+const RULES = `RULES
+- Use only these components. Missing component/icon/behaviour: tell the user which, never draw a copy.
+- Colours/fonts: CSS vars only (\`var(--slateTextBody)\`), no hex. Spacing/radius/icon sizes: \`--spacingN\` (N=px/4), \`--radiusN\` (N=px), \`--iconSizeXs|Sm|Md|Lg\` when the value matches.
+- Icons: \`<Icon name size={14|16|24} />\` (14 marks, 16 buttons/rows). No own SVG.
+- Never start Storybook. Run \`npm run dev\` only. Each component imports its own CSS; tokens/fonts load in src/main.tsx.
+- Page shell: \`PageLayout\` variant home (nav, sidebar, content, rightPanel) | admin (nav, sidebar, subNav, content). Snippets: docs/recipes.md.
+- Before using a component read docs/<Name>.md (props, defaults, example). Do not open files in src/components or src/patterns.`
 
-- Build with the components above. If something you need is not here, say so instead of drawing a copy of it by hand.
-- Colours and fonts come from the tokens (CSS variables), never from hex values: \`color: var(--slateTextBody)\`, not \`#334155\`.
-- Icons come from \`<Icon name="…" size={14 | 16 | 24} />\` (names below). 14px is for non-clickable marks, 16px for buttons and rows, 24px is rarely used. Do not paste your own SVGs.
-- Do not start Storybook to find out what exists: this file lists it. Start the app with \`npm run dev\` only.
-- Each component imports its own CSS. Tokens and fonts load once, in \`src/main.tsx\` (\`tokens/tokens.css\`, \`tokens/typography.css\`).
-- Layout: wrap a page in \`PageLayout\` (\`variant="home"\` has Main nav, sidebar, content, right panel; \`variant="admin"\` has Main nav, Admin sidebar, Sub-nav, content). The content area fills what is left.`
+const RECIPES = `# Page recipes (only for NEW layouts; Home and Admin already exist as pages, see PRODUCT-GUIDE.md)
 
-const RECIPES = `## Page recipes
-
-**Home page** (Main nav, Conversations sidebar, content, right panel):
-
+Home layout:
 \`\`\`tsx
-import { PageLayout } from './patterns/PageLayout'
-import { MainNav } from './patterns/MainNav'
-import { ConversationsSidebar } from './patterns/ConversationsSidebar'
-import { RightPanel, RightPanelTop } from './patterns/RightPanel'
-import { navSampleItems, navSampleFooterItems, navSampleUserMenu } from './patterns/MainNav/sampleData'
-import { sampleSections } from './patterns/ConversationsSidebar/sampleData'
-
-<PageLayout
-  variant="home"
+<PageLayout variant="home"
   nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
   sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />}
-  rightPanel={<RightPanel aria-label="Details" tabs={[{ id: 'inbox', label: 'Shared Inbox', icon: 'sminbox' }]}><RightPanelTop title="Inbox name"><AssigneeField /><StatusField /></RightPanelTop></RightPanel>}
->
-  {/* the page content */}
+  rightPanel={<RightPanel aria-label="Details" tabs={[{ id: 'inbox', label: 'Shared Inbox', icon: 'sminbox' }]}><RightPanelTop title="Inbox name"><AssigneeField /><StatusField /></RightPanelTop></RightPanel>}>
+  {content}
 </PageLayout>
 \`\`\`
+imports: PageLayout, MainNav, ConversationsSidebar, RightPanel, RightPanelTop, AssigneeField, StatusField from ./patterns/<Name>; navSample* from ./patterns/MainNav/sampleData; sampleSections from ./patterns/ConversationsSidebar/sampleData.
 
-**Admin page** (Main nav, Admin sidebar, Sub-nav, content): a ready-made one is \`src/pages/SharedInboxes\` (\`<SharedInboxesPage channel="email" />\`); build a new one the same way:
-
+Admin layout:
 \`\`\`tsx
-<PageLayout variant="admin" nav={<MainNav ... value="admin" />} sidebar={<AdminSidebar sections={adminSampleSections} value="shared-inbox" />} subNav={<SubNav title="…" items={items} value={id} onChange={setId} />}>
-  {/* the page content */}
-</PageLayout>
+<PageLayout variant="admin" nav={<MainNav ... value="admin" />} sidebar={<AdminSidebar sections={adminSampleSections} value="shared-inbox" />} subNav={<SubNav title="…" items={items} value={id} onChange={setId} />}>{content}</PageLayout>
 \`\`\`
-
-The \`sample…\` data files only fill the navigation with example entries; replace them with your own items.`
+sample* data only fills navigation with example entries; replace with real items.
+`
 
 // ---------- read the code ----------
 
@@ -141,17 +128,12 @@ const propLine = (name, p, own) => {
   return `${bits.join(' ')}${d ? ` — ${d}` : ''}`
 }
 
-let out = `# HOT components for building pages
-
-Generated from the code by \`npm run agent-docs\` (do not edit by hand). Read this one file instead of opening component files.
-
-`
-out += `${RULES}\n\n`
+let out = `# HOT components (AI index, generated by npm run agent-docs)\n\n${RULES}\n\n`
 
 const used = new Set()
+let compText = ''
 for (const g of groups) {
   const exported = exportsOf(g.dir)
-  out += `## ${g.title}\n\n${g.note}\n\n`
   const mine = docs
     .filter((d) => exported.has(d.displayName) && d.filePath.includes(`/${g.dir.split('/').at(-1)}/`))
     .sort((a, b) => a.displayName.localeCompare(b.displayName))
@@ -167,16 +149,16 @@ for (const g of groups) {
     const props = Object.entries(d.props).filter(([n, p]) => !SKIP_PROPS.test(n) && declaredHere(n, p))
     if (d.displayName === 'Radio') {
       // Radio and RadioGroup share a file, and the type checker mixes their props: write Radio's by hand
-      out += `### Radio\n\`import { Radio } from './components/Radio'\` — one option inside a RadioGroup (below).\n- \`value\`: string — what this option stands for\n- \`label?\`: ReactNode\n- \`disabled?\`: boolean\n\n`
+      compText += `### Radio\n\`import { Radio } from './components/Radio'\` — one option inside a RadioGroup (below).\n- \`value\`: string — what this option stands for\n- \`label?\`: ReactNode\n- \`disabled?\`: boolean\n\n`
       continue
     }
-    out += `### ${d.displayName}\n`
+    compText += `### ${d.displayName}\n`
     const desc = firstSentence(d.description ?? '')
-    out += `\`import { ${d.displayName} } from './${g.dir.replace('src/', '')}/${folder}'\`${desc ? ` — ${desc}` : ''}\n`
-    if (props.length) out += `${props.map(([n, p]) => propLine(n, p, htmlOnly(n, p) ? ownDeclaration(source, n) : null)).join('\n')}\n`
-    else out += '(no props)\n'
-    if (EXAMPLES[d.displayName]) out += `\n\`\`\`tsx\n${EXAMPLES[d.displayName]}\n\`\`\`\n`
-    out += '\n'
+    compText += `\`import { ${d.displayName} } from './${g.dir.replace('src/', '')}/${folder}'\`${desc ? ` — ${desc}` : ''}\n`
+    if (props.length) compText += `${props.map(([n, p]) => propLine(n, p, htmlOnly(n, p) ? ownDeclaration(source, n) : null)).join('\n')}\n`
+    else compText += '(no props)\n'
+    if (EXAMPLES[d.displayName]) compText += `\n\`\`\`tsx\n${EXAMPLES[d.displayName]}\n\`\`\`\n`
+    compText += '\n'
   }
 }
 
@@ -185,7 +167,7 @@ const iconSrc = readFileSync('src/icons/iconData.ts', 'utf8')
 const iconNames = JSON.parse(iconSrc.match(/export const iconNames = (\[.*?\]) as const/s)[1])
 const iconsDoc = `# HOT icons\n\nGenerated by \`npm run agent-docs\`. \`import { Icon } from './icons'\` then \`<Icon name="mailbox" size={16} />\`. The colour is the text colour of the parent (set \`color: var(--slateTextBody)\`). If a size is not drawn for an icon, the nearest one is used. Icons starting with \`emptystate\` are for empty states only. Icons \`filepdf\`, \`filedoc\`, \`filexls\` and the other \`file…\` ones are the 30px file-type icons: use \`size={30}\`.\n\n${iconNames.length} names: ${iconNames.join(', ')}\n`
 writeFileSync('public/ICONS.md', iconsDoc)
-out += `## Icons\n\n\`<Icon name="mailbox" size={16} />\` (\`import { Icon } from './icons'\`). ${iconNames.length} icons: the names are in \`ICONS.md\` (read it only when you need to pick one). Sizes 14 (marks), 16 (buttons and rows), 24 (rare).\n\n`
+const iconsLine = `ICONS: ${iconNames.length} names in ICONS.md (read only to pick one). \`<Icon name="mailbox" size={16} />\` from './icons'.`
 
 // Tokens
 const css = readFileSync('src/tokens/tokens.css', 'utf8')
@@ -197,18 +179,30 @@ for (const n of names) {
   if (!m) continue
   ;((fam[m[1]] ??= {})[m[2]] ??= []).push(m[3] ?? 'Default')
 }
-out += `## Colour tokens\n\nUse them as \`var(--<family><Role><Variant>)\`, for example \`var(--slateTextBody)\`, \`var(--primarySurfaceDefault)\`, \`var(--slateBorderLight)\`. Roles: ${roles.join(', ')}. Families and the variants that exist:\n\n`
+// Components: an index line each here, the props and example in docs/<Name>.md (read on demand)
+rmSync('public/docs', { recursive: true, force: true })
+mkdirSync('public/docs', { recursive: true })
+const index = []
+for (const sec of compText.split(/^### /m).slice(1)) {
+  const name = sec.split('\n')[0].trim()
+  const importLine = sec.split('\n')[1] ?? ''
+  const path = importLine.match(/from '\.\/([^']+)'/)?.[1] ?? ''
+  const purpose = (importLine.split(' — ')[1] ?? '').trim()
+  writeFileSync(`public/docs/${name}.md`, `# ${name}\n${sec.split('\n').slice(1).join('\n').trim()}\n`)
+  index.push(`${name} | ${path} | ${purpose}`)
+}
+writeFileSync('public/docs/recipes.md', RECIPES)
+out += `COMPONENTS (Name | import path under src | purpose; props+example in docs/<Name>.md)\n${index.join('\n')}\n\n${iconsLine}\n\n`
+
+out += `COLOUR TOKENS: var(--<family><Role><Variant>), e.g. var(--slateTextBody). Roles: ${roles.join(', ')}.\n`
 const pastel = Object.keys(fam).filter((f) => /^pastel/.test(f))
 for (const [f, r] of Object.entries(fam)) {
   if (/^pastel/.test(f)) continue
-  const parts = roles.filter((x) => r[x]).map((x) => `${x}: ${r[x].join('/')}`)
-  out += `- ${f} — ${parts.join('; ')}\n`
+  out += `${f}: ${roles.filter((x) => r[x]).map((x) => `${x}[${r[x].join('/')}]`).join(' ')}\n`
 }
-if (pastel.length) out += `- ${pastel.join(', ')} — the accent colours; each has Surface, Text and Border in the same variants as above\n`
-out += `\nFonts: Inter 400, 500 and 600, already set on the page. Text classes follow the Figma style names, for example \`.text-body-md-medium\` (14/20) and \`.text-heading-lg\` (20/28); each also exists as a CSS variable for components, for example \`font: var(--text-body-md-medium)\`. The full list is in \`src/tokens/typography.css\`.\n\n`
-
-out += `${RECIPES}\n`
+if (pastel.length) out += `${pastel.join(',')}: Surface/Text/Border, same variants\n`
+out += `FONTS: Inter. Classes .text-<style> (e.g. .text-body-md-medium 14/20, .text-heading-lg 20/28); vars font: var(--text-body-md-medium). All styles: src/tokens/typography.css\n`
 
 writeFileSync('public/COMPONENTS.md', out)
 const chars = out.length
-console.log(`public/COMPONENTS.md: ${chars} characters, about ${Math.round(chars / 4)} tokens (${used.size} components, ${iconNames.length} icons)`)
+console.log(`public/COMPONENTS.md: ${chars} characters, about ${Math.round(chars / 4)} tokens at start (${used.size} components, ${iconNames.length} icons)`)

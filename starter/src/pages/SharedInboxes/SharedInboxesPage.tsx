@@ -28,6 +28,8 @@ export function PageBar({ title, action }: { title: string; action?: ReactNode }
 }
 
 export type SharedInboxesPageProps = {
+  /** Called with the id of the Main nav item that was pressed (for example `conversations`), so a page above can switch to it. */
+  onNavChange?: (id: string) => void
   /** Called with the id of the Admin sidebar item that was pressed (for example `schedule`), so a page above can switch to it. */
   onAdminNavigate?: (id: string) => void
   /** Which channel's inboxes show first. */
@@ -43,7 +45,7 @@ export type SharedInboxesPageProps = {
  * Pressing an inbox opens its settings: the sub-nav then lists that channel's settings pages, from the Sub-nav database.
  * Temporary: the settings pages themselves are not built yet, so the content shows a placeholder.
  */
-export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, settingsItem, onAdminNavigate }: SharedInboxesPageProps) {
+export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, settingsItem, onAdminNavigate, onNavChange }: SharedInboxesPageProps) {
   const [channelId, setChannelId] = useState<SubNavChannelId>(initialChannel)
   const [lists, setLists] = useState<Record<string, Inbox[]>>(() => Object.fromEntries(sharedInboxChannels.map((c) => [c.id, c.inboxes])))
   const found = inboxId ? sharedInboxChannels.flatMap((c) => c.inboxes.map((i) => ({ channel: c.id, inbox: i }))).find((x) => x.inbox.id === inboxId) : undefined
@@ -61,7 +63,7 @@ export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, 
     { key: 'actions', width: 100 },
   ]
 
-  const nav = <MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />
+  const nav = <MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" onChange={onNavChange} user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />
   const sidebar = <AdminSidebar sections={adminSampleSections} value="shared-inbox" onChange={onAdminNavigate} />
 
   let subNav: ReactNode

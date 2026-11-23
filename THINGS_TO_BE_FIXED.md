@@ -86,6 +86,7 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Assignee and Status:** check against Figma: the dropdown width (Assignee 260px, Status 160px, right edge lined up with the value), the row heights inside them and the avatar colour given to each example person. The trigger shows a plain person icon (no round fill) when "None" is chosen. The chosen value is only remembered while the panel is on screen.
 - [ ] **Dropdown not rechecked after the latest changes:** the country list in the phone input (its 6px flag gap is an estimate, not measured), and both right-panel dropdowns next to the Figma dropdown frames. The round icon fill (`iconBackground`) is the same colour as a row's hover fill, so it blends in when the row is hovered.
 - [ ] **Co-assignee icon at 16px:** the HOT Design System file has the Co-assignee icon at 14px only (the size the Right panel uses). A 16px version would be needed anywhere else.
+- [ ] **Custom field kinds:** text, number and date are editable (copied from the activity-notes prototype, plus a date picker built on react-day-picker). The dropdown kind is not built. The calendar's shadow colour has no token, and it has no Figma frame yet.
 
 ## 8. Input
 

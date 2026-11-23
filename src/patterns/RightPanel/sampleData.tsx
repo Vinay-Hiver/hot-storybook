@@ -5,6 +5,8 @@ import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import { RightPanel, RightPanelSection, RightPanelTop } from './RightPanel'
 import { ActivityNotes } from './ActivityNotes'
+import { CustomFieldsList } from './CustomFields'
+import type { CustomFieldValue } from './CustomFields'
 import { AssigneeField, CoAssigneeField, StatusField } from './FieldSelects'
 import { customFieldKinds, fields, samples, sections } from './data'
 import type { FieldDef, SectionDef } from './data'
@@ -19,13 +21,20 @@ function Row({ icon, label, children, link }: { icon: IconName; label: string; c
   )
 }
 
+/** The custom fields of the example panel: a number, a text and a date, all editable. */
+const sampleCustomFields: CustomFieldValue[] = [
+  { id: 'mrr', label: 'MRR', kind: 'number', value: '1200' },
+  { id: 'plan', label: 'Plan', kind: 'text', value: 'Enterprise' },
+  { id: 'date', label: 'Date', kind: 'date' },
+]
+
 const redAvatar = { '--avatar-bg': 'var(--pastelRedSurfaceDefault)' } as CSSProperties
 
 /**
  * An example right panel, shared by the Right panel and Page layout stories so both show the same thing.
- * `open` lists which sub-sections start open; `hoverSection` pins the hover look on one section's header; `coAssignee` adds the Co-assignee field, which only the Email channel has.
+ * `open` lists which sub-sections start open; `hoverSection` pins the hover look on one section's header; `coAssignee` adds the Co-assignee field, which only the Email channel has. `customFields` and `contact` replace the example custom fields and the contact's name and email.
  */
-export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee = false }: { open?: string[]; hoverSection?: string; coAssignee?: boolean }) {
+export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee = false, customFields = sampleCustomFields, contact }: { open?: string[]; hoverSection?: string; coAssignee?: boolean; customFields?: CustomFieldValue[]; contact?: { name: string; email?: string } }) {
   return (
     <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
       <RightPanelTop title="Inbox name">
@@ -42,8 +51,8 @@ export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee
       </RightPanelTop>
 
       <RightPanelSection id="contact" title="Contact" icon="contact" defaultExpanded={open.includes('contact')} forceHover={hoverSection === 'contact'}>
-        <Row icon="user" label="Name">Helly R</Row>
-        <Row icon="mailbox" label="Email">helly.r@lumon.com</Row>
+        <Row icon="user" label="Name">{contact?.name ?? 'Helly R'}</Row>
+        <Row icon="mailbox" label="Email">{contact ? (contact.email ?? '') : 'helly.r@lumon.com'}</Row>
         <Row icon="building" label="Account">Google</Row>
         <Row icon="previousconversations" label="Conversations" link>60</Row>
       </RightPanelSection>
@@ -60,8 +69,7 @@ export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee
       </RightPanelSection>
 
       <RightPanelSection id="custom" title="Custom fields" icon="text" defaultExpanded={open.includes('custom')} forceHover={hoverSection === 'custom'}>
-        <Row icon="tag" label="Plan">Enterprise</Row>
-        <Row icon="flag" label="Region">North America</Row>
+        <CustomFieldsList fields={customFields} />
       </RightPanelSection>
     </RightPanel>
   )

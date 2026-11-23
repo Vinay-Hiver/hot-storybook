@@ -1,22 +1,12 @@
-// A starting page: the HOT home layout with example content. Replace the content, or build a new page in src/pages/ and show it here.
-import { Button } from './components/Button'
-import { ConversationsSidebar } from './patterns/ConversationsSidebar'
-import { sampleSections } from './patterns/ConversationsSidebar/sampleData'
-import { MainNav } from './patterns/MainNav'
-import { navSampleFooterItems, navSampleItems, navSampleUserMenu } from './patterns/MainNav/sampleData'
-import { PageLayout } from './patterns/PageLayout'
+// Home and the Admin panel, switched from the Main nav (Conversations and Admin Panel). Both read their inboxes from data files:
+// the Home page from src/pages/HomePage/homeData.ts, the Admin panel from src/pages/SharedInboxes/data.ts.
+import { useState } from 'react'
+import { HomePage } from './pages/HomePage'
+import { SharedInboxesPage } from './pages/SharedInboxes'
 
 export default function App() {
-  return (
-    <PageLayout
-      variant="home"
-      nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
-      sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />}
-    >
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, height: '100%' }}>
-        <p style={{ margin: 0, font: 'var(--fontWeightMedium) 16px/24px var(--fontFamily)' }}>Your page goes here</p>
-        <Button size="sm">Get started</Button>
-      </div>
-    </PageLayout>
-  )
+  const [page, setPage] = useState<'home' | 'admin'>('home')
+  // Only Conversations and Admin Panel have a page; the other Main nav items stay where they are.
+  const onNavChange = (id: string) => { if (id === 'admin') setPage('admin'); else if (id === 'conversations') setPage('home') }
+  return page === 'admin' ? <SharedInboxesPage onNavChange={onNavChange} /> : <HomePage onNavChange={onNavChange} />
 }

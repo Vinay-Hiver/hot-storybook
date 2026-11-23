@@ -8,10 +8,12 @@
   min-width: 320px;
   height: 100%;
   background: var(--slateSurfaceWhite);
-  box-shadow: inset 1px 0 0 var(--slateBorderLight); /* the same line the Conversations sidebar has on its right, drawn inside so it takes no width */
+  position: relative;
   font-family: var(--fontFamily);
   color: var(--slateTextBody);
 }
+/* The line on the left, drawn over the sections so a section's hover fill does not cover it. It takes no width. It is the same line the Conversations sidebar has on its right. */
+.hot-right-panel::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; z-index: 5; width: 1px; background: var(--slateBorderLight); pointer-events: none; }
 
 /* Fields: an icon and label on the left (120px), the value on the right */
 .hot-rp-fields { display: flex; flex-direction: column; }
@@ -30,7 +32,7 @@
   box-sizing: border-box; display: flex; align-items: center; gap: var(--spacing2); width: 100%; min-height: var(--spacing8); padding: var(--spacing15);
   border: 0; border-radius: var(--radius6); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
 }
-.hot-rp-select:hover, .hot-rp-select[aria-expanded='true'] { background: var(--slateSurfaceSlate150); }
+.hot-rp-select:hover, .hot-rp-select[aria-expanded='true'] { background: var(--slateSurfaceSubtle100Hover); }
 .hot-rp-select:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -2px; }
 .hot-rp-select__text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hot-rp-select__chevron {
@@ -195,3 +197,28 @@
 
 /* Everything under the tab bar. This is the part that scrolls, and the flyout is placed against it. */
 .hot-rp-body { position: relative; flex: 1; min-height: 0; overflow-y: auto; }
+
+/* Editable custom fields (text, number, date). The value is a button that looks like plain text, with the grey hover fill. */
+.hot-rp-cf-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hot-rp-cf-value { border: 0; background: transparent; text-align: left; cursor: pointer; flex-wrap: nowrap; }
+.hot-rp-cf-value:hover, .hot-rp-cf-value:focus-visible { background: var(--slateSurfaceSubtle100Hover); outline: none; }
+.hot-rp-cf-value__text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hot-rp-cf-value__empty { color: var(--slateTextDisabled); }
+.hot-rp-cf-edit { display: flex; align-items: center; flex: 1; min-width: 0; min-height: var(--spacing9); }
+
+/* The calendar (react-day-picker), coloured with our tokens */
+.hot-rp-cf-calendar {
+  --rdp-accent-color: var(--primarySurfaceDefault);
+  --rdp-accent-background-color: var(--primarySurfaceSubtle);
+  --rdp-day-height: 32px;
+  --rdp-day-width: 32px;
+  padding: var(--spacing2);
+  border: 1px solid var(--slateBorderLight);
+  border-radius: var(--radius8);
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+  font: var(--text-body-sm-regular);
+  color: var(--slateTextBody);
+}
+.hot-rp-cf-calendar .rdp-month_caption { font: var(--text-body-md-medium); color: var(--slateTextTitle); }
+

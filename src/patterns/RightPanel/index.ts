@@ -3,4 +3,6 @@ export type { RightPanelProps, RightPanelTopProps, RightPanelSectionProps } from
 export { ActivityNotes } from './ActivityNotes'
 export type { ActivityNotesProps, ActivityDay, ActivityEvent } from './ActivityNotes'
 export { AssigneeField, CoAssigneeField, StatusField } from './FieldSelects'
+export { CustomField, CustomFieldsList } from './CustomFields'
+export type { CustomFieldValue } from './CustomFields'
 export type { AssigneeFieldProps, StatusFieldProps } from './FieldSelects'
