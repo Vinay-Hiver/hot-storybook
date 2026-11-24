@@ -129,9 +129,9 @@ export const MixedRows: Story = {
       options={[
         { value: 'none', label: 'None', icon: 'user', iconBackground: true },
         { value: 'me', label: 'Aarav Mehta (Me)', color: 'red' },
+        { value: 'emma', label: 'Emma Clarke', color: 'purple' },
         { value: 'priya', label: 'Priya Nair', color: 'yellow' },
         { value: 'rohan', label: 'Rohan Iyer', color: 'grey', status: 'offline' },
-        { value: 'emma', label: 'Emma Clarke', color: 'purple' },
       ]}
     />
   ),

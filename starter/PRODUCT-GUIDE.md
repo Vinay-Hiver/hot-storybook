@@ -23,6 +23,7 @@ This file wins over your guesses. Not covered: state your assumption in one line
 - "change look": existing component props only; tokens only; cannot => tell user what is missing.
 
 ## NAMES (the only people in the product)
+Any dropdown/list of people: "None" first, then A-Z by name (sort in code, do not rely on data order).
 Agents: Aarav Mehta (the signed-in user, "Me"/"You"), Priya Nair, Rohan Iyer, Emma Clarke, Liam Carter, Sophie Turner, Daniel Brooks.
 Customers: Kavya Reddy, Arjun Menon, Olivia Hayes, Noah Bennett, Chloe Parker, Ethan Cole, Grace Miller, Lucas Reed.
 Emails: first.last@example.com (customers), first.last@acme.com (agents). 5 of the 15 are Indian names.
@@ -37,6 +38,7 @@ Emails: first.last@example.com (customers), first.last@acme.com (agents). 5 of t
 - Tags/All Views change the sidebar only: the conversation view stays as it is.
 - Conversation list: select-all checkbox + "All Conversations" menu (Show all / Unread only; no menu in the tag view). Ticking any card shows the Bulk actions panel (Mark as unread, Assign to, Change status, Manage tags, Cancel; the four do nothing yet) in place of conversation and right panel.
 - Tags field in the right panel is editable (Add chip, remove, Apply); cards and Tags counts follow it. Edits reset on reload.
+- Right panel values (email, names, custom fields) stay on one line and end in "..." when too long (full text on hover); only Tags wrap.
 - Voice: list only, no conversation view. Customer auto-replies ~2s after agent sends (built in; keep).
 - Never edit src/components or src/patterns. Wrong behaviour there: tell user.
 

@@ -263,3 +263,6 @@ Built on this day (per the notes) and committed on 17-Oct:
 
 ## 15 names across the product
 - Replaced every person name (The Office names, Praveen Borawar, Perry, Alex, Mark Scout, Helly R, Harini, the old assignee list, john.smith/ruben/adam emails) with 15 names: agents Aarav Mehta (me), Priya Nair, Rohan Iyer, Emma Clarke, Liam Carter, Sophie Turner, Daniel Brooks; customers Kavya Reddy, Arjun Menon, Olivia Hayes, Noah Bennett, Chloe Parker, Ethan Cole, Grace Miller, Lucas Reed. 5 of the 15 are Indian (33%; exactly 30% is not possible with 15). The assignee list went from 10 to 7. Listed in PRODUCT-GUIDE under NAMES. Not browser-checked (tsc only).
+
+## Right panel: long values end in an ellipsis
+- Plain values in the right panel stay on one line and end in "..." instead of wrapping or being cut; hover shows the full text. Tags still wrap. `RightPanel.css`, `sampleData.tsx`, RightPanel Docs, PRODUCT-GUIDE.

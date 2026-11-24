@@ -18,7 +18,7 @@ function Row({ icon, label, children, link }: { icon: IconName; label: string; c
   return (
     <div className="hot-rp-field">
       <div className="hot-rp-field__label"><Icon name={icon} size={14} /><span>{label}</span></div>
-      <div className={`hot-rp-field__value${link ? ' hot-rp-field__value--link' : ''}`}>{children}</div>
+      <div className={`hot-rp-field__value${link ? ' hot-rp-field__value--link' : ''}`}>{typeof children === 'string' || typeof children === 'number' || (Array.isArray(children) && children.every((c) => typeof c === 'string' || typeof c === 'number')) ? <span className="hot-rp-field__text" title={[children].flat().join('')}>{children}</span> : children}</div>
     </div>
   )
 }
@@ -90,7 +90,7 @@ const sampleValues: Record<string, string | number> = Object.assign({}, ...Objec
 /** One field's value, drawn by its kind. */
 function FieldValue({ def }: { def: FieldDef }) {
   const value = sampleValues[def.id]
-  if (def.kind === 'avatarText') return <><Avatar initial={String(value ?? '?').charAt(0).toUpperCase()} size="small" style={redAvatar} /><span style={{ marginLeft: 4 }}>{value}</span></>
+  if (def.kind === 'avatarText') return <><Avatar initial={String(value ?? '?').charAt(0).toUpperCase()} size="small" style={redAvatar} /><span className="hot-rp-field__text" style={{ marginLeft: 4 }}>{value}</span></>
   if (value === undefined) return <>Empty</>
   return <>{value}</>
 }

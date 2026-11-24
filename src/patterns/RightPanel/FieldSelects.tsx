@@ -72,7 +72,7 @@ export function AssigneeField({ value, onChange, people = sampleAssignees, label
     >
       <Dropdown
         variant="avatar" searchable searchPlaceholder={`Search ${label}`} value={current}
-        options={[{ value: 'none', label: 'None', icon: 'user', iconBackground: true }, ...people.map((p) => ({ value: p.value, label: p.label, color: p.color, status: p.status }))]}
+        options={[{ value: 'none', label: 'None', icon: 'user', iconBackground: true }, ...[...people].sort((a, b) => a.label.localeCompare(b.label)).map((p) => ({ value: p.value, label: p.label, color: p.color, status: p.status }))]}
         onChange={(v) => { const next = String(v); setInner(next); onChange?.(next); setOpen(false) }}
       />
     </SelectValue>

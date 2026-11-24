@@ -21,6 +21,9 @@
 .hot-rp-field__label { display: flex; align-items: center; flex: none; gap: var(--spacing25); width: 108px; color: var(--slateTextSubtle); font: var(--text-body-md-regular); }
 .hot-rp-field__label svg { flex: none; }
 .hot-rp-field__value { box-sizing: border-box; display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: var(--spacing2); min-width: 0; min-height: var(--spacing9); padding: var(--spacing2); border-radius: var(--radius6); color: var(--slateTextTitle); font: var(--text-body-md-regular); }
+/* A long plain value stays on one line and ends in an ellipsis (the full text is the tooltip). Chips (Tags) still wrap. */
+.hot-rp-field__value:not(:has(.hot-tag)) { flex-wrap: nowrap; }
+.hot-rp-field__text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hot-rp-field__value--link { color: var(--primarySurfaceDefault); }
 
 /* The Status list is short, so it is 160px wide instead of the Dropdown's 260px */
