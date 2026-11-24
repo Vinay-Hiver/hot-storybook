@@ -3,7 +3,7 @@ import type { ReactNode, RefObject } from 'react'
 import { createPortal } from 'react-dom'
 import './Popover.css'
 
-export type PopoverPlacement = 'bottom-start' | 'bottom-end'
+export type PopoverPlacement = 'bottom-start' | 'bottom-end' | 'right-start'
 
 export type PopoverProps = {
   /** Whether the popover is showing. */
@@ -12,7 +12,7 @@ export type PopoverProps = {
   onClose: () => void
   /** The element the popover opens under, usually the button that opened it. A press on it does not count as "outside", so the button can toggle the popover itself. */
   anchorRef: RefObject<HTMLElement | null>
-  /** Which edge of the anchor the popover lines up with. `bottom-start` = left edges, `bottom-end` = right edges. */
+  /** Which edge of the anchor the popover lines up with. `bottom-start` = left edges, `bottom-end` = right edges. `right-start` opens beside the anchor, on its right, with the top edges lined up. */
   placement?: PopoverPlacement
   /** The space in px between the anchor and the popover. */
   gap?: number
@@ -40,11 +40,12 @@ export function Popover({ open, onClose, anchorRef, placement = 'bottom-start', 
     const below = window.innerHeight - a.bottom - gap
     const above = a.top - gap
     // Flip above the anchor when it does not fit below and there is more room above
-    const top = h > below && above > below ? Math.max(8, a.top - gap - h) : a.bottom + gap
+    const side = placement === 'right-start'
+    const top = side ? Math.max(8, Math.min(a.top, window.innerHeight - h - 8)) : h > below && above > below ? Math.max(8, a.top - gap - h) : a.bottom + gap
     setPos({
       top,
       minWidth: matchAnchorWidth ? a.width : undefined,
-      ...(placement === 'bottom-end' ? { right: window.innerWidth - a.right } : { left: a.left }),
+      ...(placement === 'bottom-end' ? { right: window.innerWidth - a.right } : side ? { left: a.right + gap } : { left: a.left }),
     })
   }, [anchorRef, gap, matchAnchorWidth, placement])
 

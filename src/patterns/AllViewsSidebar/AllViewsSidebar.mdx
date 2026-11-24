@@ -1,0 +1,17 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as AllViewsStories from './AllViewsSidebar.stories'
+
+<Meta of={AllViewsStories} />
+
+# All Views sidebar
+
+Every view of an Email inbox. It exists for the Email channel only. It is 240px wide, white, and fills the height of its container, with the same top, search field and rows as the [Tags sidebar](?path=/docs/patterns-tags-sidebar--docs). On the Home page it slides in over the Conversations sidebar (same slide as Tags) when **All Views** is chosen in an Email inbox, and slides out with the back arrow.
+
+- **My favorites:** the first group, under a small grey heading with an info icon. Each row has a filled yellow star: these are the views you starred.
+- **Line, then the other views:** Pending, Closed, Overdue and Due Soon. Pointing at one shows an empty star left of its number (with a "Add to favorites" tooltip). Pressing the star fills it with yellow and moves the view up to the bottom of My favorites. Pressing a filled star sends the view back down.
+- **Limit:** up to 5 favourites. At 5, the empty stars are dimmed and their tooltip says "You can add up to 5 favorites".
+- **Rows:** 32px tall with an icon, the view name, the star and, at the extreme right, the count. A row turns grey on hover; the selected one has a light blue background and blue medium text.
+
+Overdue uses the Timer icon (the design has an alarm clock). Marking a view as an admin (team) favourite is not part of this.
+
+<Canvas of={AllViewsStories.Default} />

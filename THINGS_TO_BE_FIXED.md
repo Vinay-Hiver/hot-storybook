@@ -149,3 +149,4 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Unexplained "Storybook published!" message** seen in the first Storybook session. Nothing was published on purpose. Ask whether anyone clicked a publish or share option.
 - [ ] **Storybook pull request** [storybookjs/storybook#36853](https://github.com/storybookjs/storybook/pull/36853) (fixes a broken link in their README) is open. Watch for maintainer comments.
 - [ ] **Commit history:** earlier commits in this repo carry a `Co-Authored-By: Claude` line. Say if they should be removed (needs a history rewrite and a force push).
+- All Views sidebar: Overdue uses Timer instead of an alarm clock (no alarm icon in the set); counts for Pending, Closed, Overdue, Due Soon are 0 (the inbox has no such views yet); the favourite yellow is a raw value (no token).

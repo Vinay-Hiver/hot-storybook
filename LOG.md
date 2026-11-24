@@ -200,3 +200,42 @@ Built on this day (per the notes) and committed on 17-Oct:
 
 ## Several inboxes of one channel on Home
 - `HomeInbox` has an optional `id`; the Home sidebar tells inboxes apart by `id` (else channel), so two Email inboxes show as two entries. PRODUCT-GUIDE updated. Not browser-checked (tsc only).
+
+## Tags sidebar
+- New pattern `TagsSidebar` (Patterns/Tags sidebar) from Figma node 3298:565. On Home, choosing Tags in an inbox slides it over the Conversations sidebar (250ms ease-in-out, reduced-motion off); back arrow slides out. Tags and counts come from the inbox conversations. Not browser-checked (tsc only). Create-tag plus and tag selection do nothing yet.
+
+## All Views sidebar
+- New pattern `AllViewsSidebar` (Patterns/All Views sidebar) from Figma node 3298:673, Email only. On Home it slides over the Conversations sidebar like Tags (250ms ease-in-out). Favourites open their view; others only highlight. Not browser-checked (tsc only).
+
+## Tags sidebar: more menu
+- Tag count is right-aligned; on hover it gives way to a vertical-dots button that opens Edit / Delete (Popover + icon Dropdown). `onEdit` / `onDelete` props; Home does not act on them yet. Not browser-checked (tsc only).
+
+## Tags / All Views keep the conversation view
+- Choosing Tags or All Views only swaps the sidebar; the open conversation view and selected conversation stay. Back arrow returns to the previous view. Tags and All Views rows now have 6px corners. Not browser-checked (tsc only).
+
+## Tag more menu: right side, narrower
+- `Popover` has a new `right-start` placement (beside the anchor). The Tags row menu opens on the right of the dots button, 140px wide; the dots button has no background. Not browser-checked (tsc only).
+
+## Menu component
+- New `Menu` component (Components/Menu) from Figma node 3302:3657: the Edit / Delete flyout. The Tags row more button opens it (Popover right-start), replacing the Dropdown. Not browser-checked (tsc only).
+
+## Smoother Tags / All Views slide
+- 300ms on cubic-bezier(0.32, 0.72, 0, 1) (was 250ms ease-in-out), panel also fades in, the sidebar under it drifts 24px right and dims; GPU-only (transform, opacity). Not browser-checked (tsc only).
+
+## Tags interactions in the right panel
+- Ported `TagsField` from Vinay-Hiver/activity-notes (only that): removable tag chips plus an Add chip that opens a searchable checkbox list with Cancel / Apply. Home keeps tags per conversation; the cards and the Tags sidebar counts follow the edits. Not browser-checked (tsc only). Not brought over: the activity log of tag changes.
+
+## Tags / All Views slide: only the panel moves
+- The Conversations sidebar behind the Tags / All Views panel no longer drifts or dims; only the panel slides (300ms, cubic-bezier(0.32, 0.72, 0, 1), fades in). Not browser-checked (tsc only).
+
+## Tags / All Views exit slower
+- Exit now 300ms ease-in-out (it reused the fast-start ease-out curve and felt abrupt); entrance unchanged. Not browser-checked.
+
+## All Views: favourite stars
+- Added a `star` icon (14px, from the fav-views prototype, same drawing as the Figma frame). Favourites show a filled yellow star; the other views show an empty star on hover that moves them up to My favorites on press (max 5, tooltip at the limit). Counts moved to the extreme right. Taken from Vinay-Hiver/fav-views: only the star interaction (no team/admin favourites, no drag reorder, no kebab). Not browser-checked (tsc only).
+
+## Email sidebar lists only favourite views
+- On Home, an Email inbox in the Conversations sidebar lists only its favourite views (starred in All Views; default Mine, Unassigned, Team, Tickets), then Tags and All Views. Starring or unstarring updates the sidebar. Other channels unchanged. Not browser-checked (tsc only).
+
+## Tag filter in the Conversation list
+- In the Tags sidebar, choosing a tag titles the Conversation list with the tag name and keeps only conversations with that tag (live with tag edits); choosing it again or going back clears it. Not browser-checked (tsc only).

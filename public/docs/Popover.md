@@ -3,7 +3,7 @@
 - `open`: boolean — Whether the popover is showing.
 - `onClose`: function
 - `anchorRef`: RefObject<HTMLElement | null> — The element the popover opens under, usually the button that opened it.
-- `placement?`: "bottom-start" | "bottom-end" (default bottom-start) — Which edge of the anchor the popover lines up with.
+- `placement?`: "bottom-start" | "bottom-end" | "right-start" (default bottom-start) — Which edge of the anchor the popover lines up with.
 - `gap?`: number (default 4) — The space in px between the anchor and the popover.
 - `matchAnchorWidth?`: boolean — Stretch to at least the width of the anchor.
 

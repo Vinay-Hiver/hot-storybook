@@ -23,7 +23,7 @@ This file wins over your guesses. Not covered: state your assumption in one line
 - "change look": existing component props only; tokens only; cannot => tell user what is missing.
 
 ## INVARIANTS
-- Co-assignee field: email only. Tags and All Views views: no list. Card 2nd line = latest message (sent = reply arrow); never an activity.
+- Co-assignee field: email only. Tags view opens the Tags sidebar (tags+counts from the inbox's conversations; choosing a tag filters the list and titles it with the tag), All Views (Email only) the All Views sidebar (stars there choose which views an Email inbox lists: only favourites, then Tags and All Views), both over the sidebar only: the conversation view stays as it is. Card 2nd line = latest message (sent = reply arrow); never an activity.
 - Voice: list only, no conversation view. Customer auto-replies ~2s after agent sends (built in; keep).
 - Never edit src/components or src/patterns. Wrong behaviour there: tell user.
 

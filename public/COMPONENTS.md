@@ -25,6 +25,7 @@ ListIcon | components/List | 14px icon centered in the 24px element area.
 ListItem | components/List | 
 ListRadio | components/List | Visual-only radio, for rows that are already a button.
 Loader | components/Loader | A 48px spinner that shows something is loading.
+Menu | components/Menu | A small action menu: rows with an icon and a label.
 Modal | components/Modal | 
 ModalNote | components/Modal | A grey note inside a modal, for extra information.
 ModalText | components/Modal | Body text for a modal: 14px, subtle.
@@ -44,6 +45,7 @@ Tooltip | components/Tooltip |
 TooltipBubble | components/Tooltip | Just the dark bubble, with no positioning.
 ActivityNotes | patterns/RightPanel | The content of the "Activity & Notes" section: an "Add a note" box, a "Show only not…
 AdminSidebar | patterns/AdminSidebar | 
+AllViewsSidebar | patterns/AllViewsSidebar | Every view of an inbox, favourites first.
 AssigneeField | patterns/RightPanel | The Assignee field: pressing the name opens a searchable list of people (with a "Non…
 ChatConversation | patterns/ChatConversation | The Chat, SMS and WhatsApp conversation: a top bar with the customer, the thread of…
 CoAssigneeField | patterns/RightPanel | The Co-assignee field: the same list as Assignee, with the Co-assignee icon, and it…
@@ -61,8 +63,10 @@ RightPanelTop | patterns/RightPanel |
 SlackConversation | patterns/SlackConversation | The Slack conversation: a top bar with the customer and the Slack channel, the threa…
 StatusField | patterns/RightPanel | The Status field: pressing it opens Open, Pending and Closed, each with its status i…
 SubNav | patterns/SubNav | 
+TagsField | patterns/RightPanel | The Tags field: the conversation's tags (each removable) and an "Add" chip.
+TagsSidebar | patterns/TagsSidebar | The list of tags of an inbox.
 
-ICONS: 200 names in ICONS.md (read only to pick one). `<Icon name="mailbox" size={16} />` from './icons'.
+ICONS: 201 names in ICONS.md (read only to pick one). `<Icon name="mailbox" size={16} />` from './icons'.
 
 COLOUR TOKENS: var(--<family><Role><Variant>), e.g. var(--slateTextBody). Roles: Text, Surface, Border, Icons.
 slate: Text[Title/Body/Subtle/Caption/Disabled] Surface[White/Subtle/Subtle100Hover/Slate150/Subtle200/Subtle300/Default/Dark500/Dark600/Darkest/Disabled] Border[Default/Dark/Light/Mild] Icons[Active/Subtle/Disabled]

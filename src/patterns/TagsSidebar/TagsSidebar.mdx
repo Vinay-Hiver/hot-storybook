@@ -1,0 +1,24 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as TagsStories from './TagsSidebar.stories'
+
+<Meta of={TagsStories} />
+
+# Tags sidebar
+
+The list of tags of one inbox. It is 240px wide, white, and fills the height of its container. On the Home page it takes the place of the Conversations sidebar, sliding in over it (300ms; in on a smooth ease-out, out on ease in and out; the sidebar behind it does not move) when **Tags** is chosen in an inbox, and slides out again with the back arrow.
+
+- **Top:** a back arrow, the heading ("Tags"), the inbox name under it in grey, and a plus button on the right to create a tag.
+- **Search:** a small search field that narrows the list as you type.
+- **Rows:** 32px tall with 6px rounded corners, a 10px square in the tag's colour, the tag name and, at the right edge, the number of conversations that have it. A row turns grey on hover and light blue when selected.
+- **Filtering (Home page):** pressing a tag titles the Conversation list with the tag's name and keeps only the conversations that have it. Pressing it again, or the back arrow, clears the filter.
+- **More menu:** pointing at a row swaps the number for a vertical-dots button. Pressing it opens a small menu under it with **Edit** and **Delete** (the row stays grey while it is open).
+
+## Default
+
+<Canvas of={TagsStories.Default} />
+
+## Colours
+
+The square uses the pastel border colour of the tag: yellow, light blue, green, purple, orange, red or violet. Without a colour it is grey.
+
+<Canvas of={TagsStories.Colours} />

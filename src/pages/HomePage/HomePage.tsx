@@ -23,13 +23,33 @@ import { ExampleRightPanel } from '../../patterns/RightPanel/sampleData'
 import { SlackConversation } from '../../patterns/SlackConversation'
 import type { SlackThreadItem } from '../../patterns/SlackConversation'
 import { addReaction, agentMessage, deleteMessage, removeReaction, scheduleSlackReply } from '../../patterns/SlackConversation/slackThread'
+import type { TagOption } from '../../patterns/RightPanel'
+import { TagsSidebar } from '../../patterns/TagsSidebar'
+import type { TagsSidebarTag } from '../../patterns/TagsSidebar'
+import { AllViewsSidebar } from '../../patterns/AllViewsSidebar'
+import type { AllViewsSidebarItem } from '../../patterns/AllViewsSidebar'
 import { homeData } from './homeData'
+import './HomePage.css'
 import type { HomeConversation, HomeData, HomeInbox } from './homeData'
 
 const avatarColors: AvatarColor[] = ['violet', 'lightBlue', 'green', 'orange', 'purple', 'red', 'yellow', 'grey']
 const channelIcons: Record<ConversationChannel, IconName> = { chat: 'chatinbox', slack: 'slack', whatsapp: 'whatsapp', sms: 'sms', email: 'mailbox', voice: 'voice' }
 /** An inbox's id in the sidebar: its own `id`, else its channel. */
 const keyOf = (i: HomeInbox) => i.id ?? i.channel
+/** The tags of an inbox with how many of its conversations have each. */
+const tagsOf = (inbox: HomeInbox): TagsSidebarTag[] => {
+  const found = new Map<string, TagsSidebarTag>()
+  inbox.conversations.forEach((c) => (c.tags ?? []).forEach((t) => { const f = found.get(t.label); if (f) f.count += 1; else found.set(t.label, { id: t.label, label: t.label, color: t.color, count: 1 }) }))
+  return [...found.values()]
+}
+/** The views of an Email inbox for the All Views sidebar: the four in its sidebar as favourites, then the rest. Counts follow the sidebar's rule (its conversations); views the inbox does not have yet show 0. */
+const allViewsOf = (inbox: HomeInbox, favIds?: string[]): { favorites: AllViewsSidebarItem[]; others: AllViewsSidebarItem[] } => {
+  const item = (key: string, icon?: IconName, count = 0): AllViewsSidebarItem => ({ id: key, label: viewLibrary[key]?.label ?? key, icon: icon ?? viewLibrary[key].icon, count })
+  const n = inbox.conversations.length
+  const list = [item('mine', undefined, n), item('unassigned', undefined, n), item('team', undefined, n), item('tickets', undefined, n), item('pending', 'pendingstatus'), item('closed'), { id: 'overdue', label: 'Overdue', icon: 'timer' as IconName, count: 0 }, { id: 'dueSoon', label: 'Due Soon', icon: 'clock' as IconName, count: 0 }]
+  const ids = favIds ?? list.slice(0, 4).map((v) => v.id)
+  return { favorites: ids.map((id) => list.find((v) => v.id === id)).filter((v): v is AllViewsSidebarItem => !!v), others: list.filter((v) => !ids.includes(v.id)) }
+}
 const hasNoList = (viewId: string) => /-(tags|allViews)$/.test(viewId)
 
 type ChatChannel = 'chat' | 'whatsapp' | 'sms'
@@ -46,23 +66,24 @@ const emailThread = (c: HomeConversation, color: AvatarColor): EmailThreadMessag
 const toListItem = (c: HomeConversation): ConversationListItem => ({ id: c.id, name: c.name, date: c.date, unread: c.unread, sla: c.sla, tags: c.tags, moreCount: c.moreCount, callDirection: c.call })
 
 /** The Shared Inbox part of the sidebar, built from the inboxes: each inbox gets its channel's views, counted by its conversations. */
-function sharedInboxItems(inboxes: HomeInbox[]) {
-  return inboxes.map((inbox) => ({
-    id: keyOf(inbox),
-    label: inbox.label,
-    icon: channelIcons[inbox.channel],
-    views: channelViews[inbox.channel].map((key) => {
-      const v = viewLibrary[key]
-      return { id: `${keyOf(inbox)}-${v.id}`, label: v.label, icon: v.icon, count: v.hasCount ? inbox.conversations.length : undefined }
-    }),
-  }))
+function sharedInboxItems(inboxes: HomeInbox[], favEdits: Record<string, string[]>) {
+  return inboxes.map((inbox) => {
+    const key = keyOf(inbox)
+    const libraryView = (k: string) => { const v = viewLibrary[k]; return { id: `${key}-${v.id}`, label: v.label, icon: v.icon, count: v.hasCount ? inbox.conversations.length : undefined } }
+    // An Email inbox lists only its favourite views (starred in All Views), then Tags and All Views. The other channels keep their own views.
+    if (inbox.channel === 'email') {
+      const favs = allViewsOf(inbox, favEdits[key]).favorites
+      return { id: key, label: inbox.label, icon: channelIcons[inbox.channel], views: [...favs.map((v) => ({ id: `${key}-${v.id}`, label: v.label, icon: v.icon, count: v.count })), libraryView('tags'), libraryView('allViews')] }
+    }
+    return { id: key, label: inbox.label, icon: channelIcons[inbox.channel], views: channelViews[inbox.channel].map(libraryView) }
+  })
 }
 
 /**
  * The Home page of Hiver: Main nav, Conversations sidebar, the Conversation list of the chosen view, the conversation next to it, and the Right panel.
  * Everything it shows comes from `data` (see homeData.ts): the inboxes (channels) in the sidebar, their conversations and messages, and the custom fields.
  * Chat, WhatsApp, SMS, Slack and Email conversations can be read and answered (the customer replies a moment later). Voice shows its list only.
- * Tags and All Views show no list.
+ * Tags and All Views (Email only) open their own sidebar over the Conversations sidebar (back arrow returns); the conversation view stays as it is while they are open.
  */
 export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /** Called with the id of the Main nav item that was pressed (for example `admin`), so a page above can switch to it. */ onNavChange?: (id: string) => void }) {
   const { inboxes, customFields } = data
@@ -76,20 +97,37 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
   const [slackThreads, setSlackThreads] = useState<Record<string, SlackThreadItem[]>>(() => Object.fromEntries(inboxes.filter((i) => i.channel === 'slack').flatMap((i) => i.conversations.map((c) => [c.id, slackThread(c)]))))
   const [emailThreads, setEmailThreads] = useState<Record<string, EmailThreadMessage[]>>(() => Object.fromEntries(inboxes.filter((i) => i.channel === 'email').flatMap((i) => i.conversations.map((c, n) => [c.id, emailThread(c, avatarColors[n % avatarColors.length])]))))
 
+  // The favourite views of each Email inbox, once changed in All Views (by inbox id; before that, the four defaults).
+  const [favEdits, setFavEdits] = useState<Record<string, string[]>>({})
   const sections = useMemo<ConversationsSidebarSection[]>(() => {
     const base = sampleSections(true, first ? [first.channel] : [])
-    return base.map((sec) => (sec.title === 'Shared Inbox' ? { ...sec, items: sharedInboxItems(inboxes).map((it) => ({ ...it, defaultExpanded: it.id === (first && keyOf(first)) })) } : sec))
-  }, [inboxes, first])
+    return base.map((sec) => (sec.title === 'Shared Inbox' ? { ...sec, items: sharedInboxItems(inboxes, favEdits).map((it) => ({ ...it, defaultExpanded: it.id === (first && keyOf(first)) })) } : sec))
+  }, [inboxes, first, favEdits])
 
   const inboxOf = (id: string) => inboxes.find((i) => keyOf(i) === id)
   // The inbox a view id belongs to (the longest matching id wins, so `email-2` beats `email`).
   const inboxOfView = (viewId: string) => [...inboxes].sort((a, b) => keyOf(b).length - keyOf(a).length).find((i) => viewId.startsWith(`${keyOf(i)}-`))
   // Going to a view selects the first conversation in it (Tags and All Views show no list).
+  // Tags and All Views only change the sidebar: the conversation view keeps showing the last view that has a list.
+  const [listView, setListView] = useState(view)
   const go = (id: string) => {
     setView(id)
+    if (!hasNoList(id)) setListView(id)
+    if (id.endsWith('-allViews')) { const t = inboxOfView(id); if (t) { setAllViewsKey(keyOf(t)); setAllViewsValue(undefined) } }
+    if (id.endsWith('-tags')) { const t = inboxOfView(id); if (t) { setTagsKey(keyOf(t)); setTagValue(undefined) } }
     const inbox = inboxOfView(id)
-    setSelected(inbox && !hasNoList(id) ? inbox.conversations[0]?.id : undefined)
+    if (!hasNoList(id)) setSelected(inbox ? inbox.conversations[0]?.id : undefined)
   }
+  // Tags opens the Tags sidebar over the Conversations sidebar. The inbox stays remembered so the panel keeps its content while it slides out.
+  const [tagsKey, setTagsKey] = useState<string>()
+  const [tagValue, setTagValue] = useState<string>()
+  const tagsOpen = view.endsWith('-tags')
+  // All Views (Email inboxes only) opens the same way.
+  const [allViewsKey, setAllViewsKey] = useState<string>()
+  const [allViewsValue, setAllViewsValue] = useState<string>()
+  const allViewsOpen = view.endsWith('-allViews')
+  const tagsInbox = tagsOpen ? inboxOfView(view) : inboxes.find((i) => keyOf(i) === tagsKey)
+  const allViewsInbox = allViewsOpen ? inboxOfView(view) : inboxes.find((i) => keyOf(i) === allViewsKey)
   // The second line of each card is the latest message of its thread, as it stands now (a message you send shows with the reply arrow).
   const latestFor = (id: string): LatestMessage | undefined => {
     const chat = threads[id]?.filter((m) => m.kind === 'message')
@@ -103,12 +141,36 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
   }
 
   // The inbox and view being shown, found from the sidebar's own data.
-  const currentView = sections.flatMap((sec) => sec.items).flatMap((item) => (item.views ?? []).map((v) => ({ inbox: inboxOf(item.id), view: v }))).find((x) => x.view.id === view && x.inbox && !hasNoList(view))
+  // The list shows the inbox of the current view. Its title comes from the sidebar; a view that is no longer a favourite keeps showing under its own name until another is chosen.
+  const shownViewId = hasNoList(view) ? listView : view
+  const shownInbox = inboxOfView(shownViewId)
+  const shownLabel = sections.flatMap((sec) => sec.items).flatMap((item) => item.views ?? []).find((v) => v.id === shownViewId)?.label ?? (shownInbox && [...allViewsOf(shownInbox).favorites, ...allViewsOf(shownInbox).others].find((v) => `${keyOf(shownInbox)}-${v.id}` === shownViewId)?.label) ?? 'Conversations'
+  const currentView = shownInbox ? { inbox: shownInbox, view: { id: shownViewId, label: shownLabel } } : undefined
   const inbox = currentView?.inbox
   const channel = inbox?.channel
   const selectedConv = inbox?.conversations.find((c) => c.id === selected)
   const selectedIndex = inbox && selected ? inbox.conversations.findIndex((c) => c.id === selected) : 0
   const color = avatarColors[Math.max(selectedIndex, 0) % avatarColors.length]
+
+  // Tags are edited in the Tags field of the right panel, per conversation. The cards and the Tags sidebar follow them.
+  const [tagEdits, setTagEdits] = useState<Record<string, string[]>>({})
+  const tagOptions = useMemo<TagOption[]>(() => {
+    const found = new Map<string, TagOption>()
+    inboxes.forEach((i) => i.conversations.forEach((c) => (c.tags ?? []).forEach((t) => { if (!found.has(t.label)) found.set(t.label, { value: t.label, label: t.label, color: t.color }) })))
+    return [...found.values()]
+  }, [inboxes])
+  const tagValuesOf = (c: HomeConversation) => tagEdits[c.id] ?? (c.tags ?? []).map((t) => t.label)
+  // In the Tags sidebar, choosing a tag titles the list with its name and keeps only the conversations that have it. Choosing it again clears the filter.
+  const activeTag = tagsOpen ? tagValue : undefined
+  const chooseTag = (id: string) => {
+    const next = tagValue === id ? undefined : id
+    setTagValue(next)
+    if (!tagsInbox) return
+    // The list is of the inbox the tags belong to.
+    if (inbox !== tagsInbox) setListView(`${keyOf(tagsInbox)}-${channelViews[tagsInbox.channel][0]}`)
+    setSelected(tagsInbox.conversations.find((c) => !next || tagValuesOf(c).includes(next))?.id)
+  }
+  const withTagEdits = (c: HomeConversation): HomeConversation => (tagEdits[c.id] ? { ...c, moreCount: undefined, tags: tagEdits[c.id].map((v) => ({ label: v, color: tagOptions.find((o) => o.value === v)?.color })) } : c)
 
   return (
     <div style={{ height: '100vh' }}>
@@ -116,19 +178,34 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
         variant="home"
         sidebarCollapsed={sidebarCollapsed}
         nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={navValue} onChange={(id) => { setNavValue(id); onNavChange?.(id) }} user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
-        sidebar={<ConversationsSidebar sections={sections} value={view}
-          onChange={go}
-          // Opening an inbox lands on its first view.
-          onExpandedChange={(id, open) => { const firstView = sections.flatMap((sec) => sec.items).find((i) => i.id === id)?.views?.[0]; if (open && firstView) go(firstView.id) }}
-        />}
-        rightPanel={<ExampleRightPanel open={['contact', 'custom']} coAssignee={channel === 'email'} customFields={customFields} contact={selectedConv ? { name: selectedConv.name, email: channel === 'email' ? customerAddress(selectedConv) : selectedConv.email } : undefined} />}
+        sidebar={
+          <div className="hot-home-sidebars">
+            <div className="hot-home-sidebars__base">
+            <ConversationsSidebar sections={sections} value={view}
+              onChange={go}
+              // Opening an inbox lands on its first view.
+              onExpandedChange={(id, open) => { const firstView = sections.flatMap((sec) => sec.items).find((i) => i.id === id)?.views?.[0]; if (open && firstView) go(firstView.id) }}
+            />
+            </div>
+            <div className="hot-home-sidebars__tags" data-open={tagsOpen} aria-hidden={!tagsOpen || undefined}>
+              {tagsInbox && <TagsSidebar subtitle={tagsInbox.label} tags={tagsOf({ ...tagsInbox, conversations: tagsInbox.conversations.map(withTagEdits) })} value={tagValue} onSelect={chooseTag} onBack={() => { setTagValue(undefined); setView(listView) }} />}
+            </div>
+            <div className="hot-home-sidebars__tags" data-open={allViewsOpen} aria-hidden={!allViewsOpen || undefined}>
+              {allViewsInbox && <AllViewsSidebar key={keyOf(allViewsInbox)} subtitle={allViewsInbox.label} {...allViewsOf(allViewsInbox, favEdits[keyOf(allViewsInbox)])} value={allViewsValue} onFavoritesChange={(ids) => setFavEdits((prev) => ({ ...prev, [keyOf(allViewsInbox)]: ids }))}
+                // A view the inbox has opens it (the panel slides away); the others only get highlighted.
+                onSelect={(id) => { if (sections.some((sec) => sec.items.some((it) => it.views?.some((v) => v.id === `${keyOf(allViewsInbox)}-${id}`)))) go(`${keyOf(allViewsInbox)}-${id}`); else setAllViewsValue(id) }}
+                onBack={() => setView(listView)} />}
+            </div>
+          </div>
+        }
+        rightPanel={<ExampleRightPanel open={['contact', 'custom']} tagOptions={tagOptions} tags={selectedConv ? tagValuesOf(selectedConv) : undefined} onTagsChange={selectedConv ? (next) => setTagEdits((prev) => ({ ...prev, [selectedConv.id]: next })) : undefined} coAssignee={channel === 'email'} customFields={customFields} contact={selectedConv ? { name: selectedConv.name, email: channel === 'email' ? customerAddress(selectedConv) : selectedConv.email } : undefined} />}
       >
         {currentView && inbox && channel && (
           <div style={{ display: 'flex', height: '100%' }}>
             <ConversationList
-              title={currentView.view.label}
+              title={activeTag ?? currentView.view.label}
               channel={channel}
-              conversations={withLatest(inbox.conversations.map(toListItem), latestFor)}
+              conversations={withLatest(inbox.conversations.filter((c) => !activeTag || tagValuesOf(c).includes(activeTag)).map((c) => toListItem(withTagEdits(c))), latestFor)}
               selectedId={selected}
               onSelect={setSelected}
               onIconClick={() => setSidebarCollapsed((c) => !c)}

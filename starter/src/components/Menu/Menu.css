@@ -1,0 +1,32 @@
+/* HOT Design System — Menu. Values read from the Figma flyout "Container" (HOT Storybook - AI Boilerplate, node 3302:3657); colors use tokens only. The two drop shadows are raw values copied from Figma. */
+.hot-menu {
+  box-sizing: border-box;
+  min-width: 200px;
+  border: 1px solid var(--slateBorderLight);
+  border-radius: var(--radius8);
+  background: var(--slateSurfaceWhite);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: var(--fontFamily);
+}
+.hot-menu__list { display: flex; flex-direction: column; gap: var(--spacing05); padding: var(--spacing1); }
+.hot-menu__item {
+  position: relative; /* with overflow hidden, keeps the press ripple inside the row */
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing2);
+  width: 100%;
+  height: var(--spacing8);
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--radius8);
+  background: transparent;
+  color: var(--slateTextBody);
+  font: var(--text-body-sm-regular);
+  text-align: left;
+  cursor: pointer;
+}
+.hot-menu__item svg { flex: none; }
+.hot-menu__item:hover { background: var(--slateSurfaceSlate150); }
+.hot-menu__item:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -2px; }

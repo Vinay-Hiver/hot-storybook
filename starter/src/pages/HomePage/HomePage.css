@@ -1,0 +1,7 @@
+/* The Conversations sidebar with the Tags or All Views sidebar sliding in over it. In: 300ms on a smooth ease-out curve (starts fast, settles softly). Out: 300ms ease in and out, so it leaves gently instead of dropping away at the start.
+   Only the panel moves (it slides in from the left and fades in); the Conversations sidebar behind it stays where it is.
+   The panel is moved by the GPU (transform and opacity only). Closed, it is hidden and skipped by Tab. */
+.hot-home-sidebars { --home-sidebar-ease: cubic-bezier(0.32, 0.72, 0, 1); position: relative; width: 240px; height: 100%; overflow: hidden; }
+.hot-home-sidebars__tags { position: absolute; inset: 0; transform: translate3d(-100%, 0, 0); opacity: 0; visibility: hidden; will-change: transform, opacity; contain: layout paint; transition: transform 300ms ease-in-out, opacity 300ms ease-in-out, visibility 0s linear 300ms; }
+.hot-home-sidebars__tags[data-open='true'] { transform: translate3d(0, 0, 0); opacity: 1; visibility: visible; transition: transform 300ms var(--home-sidebar-ease), opacity 300ms var(--home-sidebar-ease), visibility 0s; }
+@media (prefers-reduced-motion: reduce) { .hot-home-sidebars__tags { transition: none; } }

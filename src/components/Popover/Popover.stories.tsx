@@ -19,7 +19,7 @@ type PlaygroundArgs = { placement: PopoverPlacement; matchAnchorWidth: boolean }
 export const Playground: StoryObj<PlaygroundArgs> = {
   args: { placement: 'bottom-start', matchAnchorWidth: false },
   argTypes: {
-    placement: { control: 'inline-radio', options: ['bottom-start', 'bottom-end'], description: 'Which edge of the button the panel lines up with' },
+    placement: { control: 'inline-radio', options: ['bottom-start', 'bottom-end', 'right-start'], description: 'Where the panel opens: under the button (left or right edges lined up) or beside it on the right' },
     matchAnchorWidth: { control: 'boolean', description: 'Make the panel at least as wide as the button' },
   },
   render: function Render({ placement, matchAnchorWidth }) {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import { Avatar } from '../../components/Avatar'
 import { Tag } from '../../components/Tag'
@@ -7,7 +8,8 @@ import { RightPanel, RightPanelSection, RightPanelTop } from './RightPanel'
 import { ActivityNotes } from './ActivityNotes'
 import { CustomFieldsList } from './CustomFields'
 import type { CustomFieldValue } from './CustomFields'
-import { AssigneeField, CoAssigneeField, StatusField } from './FieldSelects'
+import { AssigneeField, CoAssigneeField, StatusField, TagsField } from './FieldSelects'
+import type { TagOption } from './FieldSelects'
 import { customFieldKinds, fields, samples, sections } from './data'
 import type { FieldDef, SectionDef } from './data'
 
@@ -28,26 +30,30 @@ const sampleCustomFields: CustomFieldValue[] = [
   { id: 'date', label: 'Date', kind: 'date' },
 ]
 
+/** The tags of the example panel, and which are on the example conversation to begin with. */
+export const sampleTagOptions: TagOption[] = [
+  { value: 'finance', label: 'Finance', color: 'violet' },
+  { value: 'billing', label: 'Billing', color: 'lightBlue' },
+  { value: 'high', label: 'High', color: 'red' },
+  { value: 'low', label: 'Low', color: 'green' },
+]
+
 const redAvatar = { '--avatar-bg': 'var(--pastelRedSurfaceDefault)' } as CSSProperties
 
 /**
  * An example right panel, shared by the Right panel and Page layout stories so both show the same thing.
  * `open` lists which sub-sections start open; `hoverSection` pins the hover look on one section's header; `coAssignee` adds the Co-assignee field, which only the Email channel has. `customFields` and `contact` replace the example custom fields and the contact's name and email.
  */
-export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee = false, customFields = sampleCustomFields, contact }: { open?: string[]; hoverSection?: string; coAssignee?: boolean; customFields?: CustomFieldValue[]; contact?: { name: string; email?: string } }) {
+export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee = false, customFields = sampleCustomFields, contact, tagOptions = sampleTagOptions, tags, onTagsChange }: { open?: string[]; hoverSection?: string; coAssignee?: boolean; customFields?: CustomFieldValue[]; contact?: { name: string; email?: string }; /** Every tag that can be added. */ tagOptions?: TagOption[]; /** The values of the tags on the conversation. Leave out to let the panel keep its own. */ tags?: string[]; onTagsChange?: (tags: string[]) => void }) {
+  const [ownTags, setOwnTags] = useState<string[]>(['finance'])
+  const shownTags = tags ?? ownTags
   return (
     <RightPanel aria-label="Details" tabs={[{ id: 'shared-inbox', label: 'Shared Inbox', icon: 'sminbox' }]} customizeWidgets>
       <RightPanelTop title="Inbox name">
         <AssigneeField />
         {coAssignee && <CoAssigneeField />}
         <StatusField />
-        <Row icon="tag" label="Tags">
-          <Tag color="violet" onRemove={() => {}} removeLabel="Remove Finance">Finance</Tag>
-          {/* Temporary: a clickable "Add" chip is not built, so a Tag sits inside a plain button. */}
-          <button type="button" aria-label="Add tag" style={{ padding: 0, border: 0, background: 'transparent', cursor: 'pointer' }}>
-            <Tag iconLeft={<Icon name="add" size={14} />}>Add</Tag>
-          </button>
-        </Row>
+        <TagsField options={tagOptions} value={shownTags} onChange={(next) => { setOwnTags(next); onTagsChange?.(next) }} />
       </RightPanelTop>
 
       <RightPanelSection id="contact" title="Contact" icon="contact" defaultExpanded={open.includes('contact')} forceHover={hoverSection === 'contact'}>

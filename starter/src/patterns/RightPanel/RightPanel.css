@@ -131,6 +131,13 @@
 .hot-rp-section__inner { padding: 0 var(--spacing5) var(--spacing4); } /* the padding lives inside, so it slides with the rest */
 @media (prefers-reduced-motion: reduce) { .hot-rp-section__wrap, .hot-rp-section__chevron { transition: none; } }
 
+/* Tags wrap onto more lines instead of being cut off at the panel edge (top fields are otherwise one 36px line) */
+.hot-rp-top .hot-rp-field--tags { height: auto; align-items: flex-start; }
+.hot-rp-top .hot-rp-field--tags .hot-rp-field__label { min-height: var(--spacing9); }
+.hot-rp-top .hot-rp-field--tags .hot-rp-field__value { height: auto; flex-wrap: wrap; row-gap: var(--spacing1); padding: 7px var(--spacing15); overflow: visible; }
+/* Tags: the "Add" chip is a plain button around a Tag */
+.hot-rp-tags__add { padding: 0; border: 0; background: transparent; cursor: pointer; }
+
 /* A value row that holds chips (22px tall) is 36px tall, as in Figma. */
 .hot-rp-field__value:has(.hot-tag) { padding-block: 7px; }
 

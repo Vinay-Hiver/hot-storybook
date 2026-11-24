@@ -1,0 +1,23 @@
+/* HOT Design System — All Views sidebar. Same frame as the Tags sidebar (it borrows its header, search and row styles). Values read from the Figma "Container (Hiver)" panel (HOT Storybook - AI Boilerplate, node 3298:673); colors use tokens only. */
+.hot-all-views-sidebar__groups { display: flex; flex-direction: column; margin-top: calc(var(--spacing2) * -1); overflow-y: auto; }
+.hot-all-views-sidebar__group { display: flex; flex-direction: column; }
+.hot-all-views-sidebar__label { display: flex; align-items: center; gap: var(--spacing1); height: var(--spacing8); padding: 0 var(--spacing1); font: var(--text-body-xs-regular); color: var(--slateTextSubtle); }
+.hot-all-views-sidebar__label svg { flex: none; }
+.hot-all-views-sidebar__list { margin-top: 0; }
+.hot-all-views-sidebar__divider { height: 1px; margin: var(--spacing2) 0; border: 0; background: var(--slateBorderLight); }
+/* The row leaves room at the right for the star, then the number sits at the extreme right edge. */
+.hot-all-views-sidebar__item { position: relative; }
+.hot-all-views-sidebar__row { gap: var(--spacing2); padding-right: var(--spacing2); }
+.hot-all-views-sidebar__count { flex: none; min-width: var(--spacing6); margin-left: auto; text-align: right; }
+.hot-all-views-sidebar__row[aria-current='page'] { color: var(--primaryBorderDefault); font-weight: var(--fontWeightMedium); }
+
+/* The star sits just left of the number, in an 18px slot. */
+.hot-all-views-sidebar__star-slot { position: absolute; top: 50%; right: calc(var(--spacing2) + var(--spacing6) + var(--spacing1)); display: inline-flex; width: 18px; height: 18px; transform: translateY(-50%); }
+.hot-all-views-sidebar__star { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; padding: 0; border: 0; border-radius: var(--radius4); background: transparent; color: var(--slateIconsSubtle); opacity: 0; cursor: pointer; transition: opacity 250ms ease-in-out; }
+.hot-all-views-sidebar__item:is(:hover, :focus-within) .hot-all-views-sidebar__star { opacity: 1; }
+.hot-all-views-sidebar__star:disabled { cursor: default; }
+.hot-all-views-sidebar__star:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: -1px; }
+/* A favourite: a filled yellow star, always shown. The yellow is a raw value copied from Figma; the colour tokens have no match. */
+.hot-all-views-sidebar__star[data-starred] { color: #eab308; opacity: 1; }
+.hot-all-views-sidebar__star[data-starred] path { fill: currentColor; }
+@media (prefers-reduced-motion: reduce) { .hot-all-views-sidebar__star { transition: none; } }
