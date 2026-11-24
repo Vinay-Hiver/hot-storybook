@@ -260,3 +260,6 @@ Built on this day (per the notes) and committed on 17-Oct:
 - Status tabs label size 14px -> 13px, the same as the "All Conversations" label.
 
 - Status tabs: the Unresolved arrow now sits at the far end of its tab (label and count at the start). Not browser-checked.
+
+## 15 names across the product
+- Replaced every person name (The Office names, Praveen Borawar, Perry, Alex, Mark Scout, Helly R, Harini, the old assignee list, john.smith/ruben/adam emails) with 15 names: agents Aarav Mehta (me), Priya Nair, Rohan Iyer, Emma Clarke, Liam Carter, Sophie Turner, Daniel Brooks; customers Kavya Reddy, Arjun Menon, Olivia Hayes, Noah Bennett, Chloe Parker, Ethan Cole, Grace Miller, Lucas Reed. 5 of the 15 are Indian (33%; exactly 30% is not possible with 15). The assignee list went from 10 to 7. Listed in PRODUCT-GUIDE under NAMES. Not browser-checked (tsc only).

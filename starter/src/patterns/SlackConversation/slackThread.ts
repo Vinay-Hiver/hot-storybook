@@ -4,7 +4,7 @@ import { scheduleUserReplyText } from '../ChatConversation/simulatedReply'
 export type SlackThreadItem = { id: string; from: 'user' | 'agent'; text: string; time: string; reactions?: Record<string, number> }
 
 /** The agent's name in Slack, followed by "(You)". */
-export const slackAgentName = 'Mark Scout (You)'
+export const slackAgentName = 'Aarav Mehta (You)'
 
 /** The time on a message sent right now, the way Slack shows it, for example `Nov 10, 04:11 PM`. */
 export const slackNow = () => new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(' at', ',')

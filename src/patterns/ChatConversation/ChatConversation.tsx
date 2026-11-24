@@ -8,7 +8,7 @@ import { Icon } from '../../icons/Icon'
 import type { IconName } from '../../icons/iconData'
 import './ChatConversation.css'
 
-/** One entry in the thread: a message, or a line about something that happened, such as "Jim Halpert assigned this conversation to you". */
+/** One entry in the thread: a message, or a line about something that happened, such as "Noah Bennett assigned this conversation to you". */
 export type ChatThreadItem =
   | { id: string; kind: 'message'; from: 'user' | 'agent'; text: string; time: string; agentName?: string; status?: 'sent' | 'delivered' | 'read' }
   | { id: string; kind: 'activity'; text: string; icon?: IconName }

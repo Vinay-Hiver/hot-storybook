@@ -29,7 +29,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
     if (prev !== selected) { setPrev(selected); setValue(selected) }
     return (
       <div style={{ height: 834 }}>
-        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Alex', showStatus, status }} userMenu={userMenu} />
+        <MainNav items={items} footerItems={footerItems} value={value} onChange={setValue} user={{ initial: 'A', name: 'Aarav Mehta', showStatus, status }} userMenu={userMenu} />
       </div>
     )
   },
@@ -40,14 +40,14 @@ export const Default: Story = {
   tags: ['!dev'],
   args: { items },
   parameters: { controls: { disable: true } },
-  render: (args) => <div style={{ height: 834 }}><MainNav {...args} footerItems={footerItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} /></div>,
+  render: (args) => <div style={{ height: 834 }}><MainNav {...args} footerItems={footerItems} value="conversations" user={{ initial: 'A', name: 'Aarav Mehta' }} /></div>,
 }
 
 export const Hover: Story = {
   tags: ['!dev'],
   args: { items },
   parameters: { controls: { disable: true } },
-  render: (args) => <div style={{ height: 834 }}><MainNav {...args} footerItems={footerItems} value="conversations" forceHoverId="customers" user={{ initial: 'A', name: 'Alex' }} /></div>,
+  render: (args) => <div style={{ height: 834 }}><MainNav {...args} footerItems={footerItems} value="conversations" forceHoverId="customers" user={{ initial: 'A', name: 'Aarav Mehta' }} /></div>,
 }
 
 /** The nav as drawn in Figma: one variant for each selected icon. */
@@ -58,7 +58,7 @@ export const AllVariants: Story = {
     <div style={{ display: 'flex', gap: 24 }}>
       {ids.map((id) => (
         <div key={id} style={{ height: 834 }}>
-          <MainNav {...args} footerItems={footerItems} value={id} user={{ initial: 'A', name: 'Alex' }} />
+          <MainNav {...args} footerItems={footerItems} value={id} user={{ initial: 'A', name: 'Aarav Mehta' }} />
         </div>
       ))}
     </div>

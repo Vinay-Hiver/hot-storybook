@@ -6,7 +6,7 @@ import { nowLabel, scheduleUserReply } from './simulatedReply'
 
 const start: ChatThreadItem[] = [
   { id: '1', kind: 'message', from: 'user', text: 'The chat widget is not loading on mobile', time: 'Jul 23, 10:01 AM' },
-  { id: '2', kind: 'message', from: 'agent', agentName: 'Michael Scott', text: 'Sure, happy to help with that!', time: 'Jul 23, 10:02 AM' },
+  { id: '2', kind: 'message', from: 'agent', agentName: 'Kavya Reddy', text: 'Sure, happy to help with that!', time: 'Jul 23, 10:02 AM' },
 ]
 
 const meta = {
@@ -30,7 +30,7 @@ export const Playground: Story = {
           {...args}
           items={items}
           onSend={(text) => {
-            setItems((prev) => [...prev, { id: String(prev.length + 1), kind: 'message', from: 'agent', agentName: 'Michael Scott', text, time: nowLabel() }])
+            setItems((prev) => [...prev, { id: String(prev.length + 1), kind: 'message', from: 'agent', agentName: 'Kavya Reddy', text, time: nowLabel() }])
             scheduleUserReply((reply) => setItems((prev) => [...prev, reply]))
           }}
         />

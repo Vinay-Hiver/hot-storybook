@@ -7,7 +7,7 @@ const meta = {
   tags: ['!dev'],
   component: ChatMessage,
   parameters: { layout: 'centered' },
-  args: { from: 'user', text: 'The chat widget is not loading on mobile', time: 'Jul 23, 10:01 AM', agentName: 'Michael Scott' },
+  args: { from: 'user', text: 'The chat widget is not loading on mobile', time: 'Jul 23, 10:01 AM', agentName: 'Kavya Reddy' },
   argTypes: {
     from: { control: 'inline-radio', options: ['user', 'agent'], description: 'Who sent the message' },
     channel: { control: 'inline-radio', options: ['chat', 'whatsapp', 'sms'], description: 'On WhatsApp and SMS an agent message is a white card' },
@@ -31,7 +31,7 @@ export const Senders: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 480 }}>
       <ChatMessage from="user" text="The chat widget is not loading on mobile" time="Jul 23, 10:01 AM" />
-      <ChatMessage from="agent" agentName="Michael Scott" text="Sure, happy to help with that!" time="Jul 23, 10:02 AM" />
+      <ChatMessage from="agent" agentName="Kavya Reddy" text="Sure, happy to help with that!" time="Jul 23, 10:02 AM" />
     </div>
   ),
 }
@@ -43,9 +43,9 @@ export const Ticks: Story = {
   decorators: [],
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: 480 }}>
-      <ChatMessage channel="whatsapp" from="agent" agentName="Michael Scott" text="Sent" time="Jul 23, 10:02 AM" status="sent" />
-      <ChatMessage channel="whatsapp" from="agent" agentName="Michael Scott" text="Delivered" time="Jul 23, 10:02 AM" status="delivered" />
-      <ChatMessage channel="whatsapp" from="agent" agentName="Michael Scott" text="Read" time="Jul 23, 10:02 AM" status="read" />
+      <ChatMessage channel="whatsapp" from="agent" agentName="Kavya Reddy" text="Sent" time="Jul 23, 10:02 AM" status="sent" />
+      <ChatMessage channel="whatsapp" from="agent" agentName="Kavya Reddy" text="Delivered" time="Jul 23, 10:02 AM" status="delivered" />
+      <ChatMessage channel="whatsapp" from="agent" agentName="Kavya Reddy" text="Read" time="Jul 23, 10:02 AM" status="read" />
     </div>
   ),
 }

@@ -4,10 +4,10 @@ import { getSubNav } from './data'
 const email = getSubNav('email')
 export const subNavSampleItems = email.items
 export const subNavSampleIds = subNavSampleItems.map((i) => i.id)
-export const subNavSampleHeader = { title: email.label, subtitle: 'hariniosm01@hiverhq.co.in' }
+export const subNavSampleHeader = { title: email.label, subtitle: 'support@hiverhq.co.in' }
 
 /** Two example inboxes for the switch menu (the heading's arrow). */
 export const subNavSwitchSample = [
-  { value: 'a', label: 'Hariniosm01', description: 'hariniosm01@hiverhq.co.in' },
+  { value: 'a', label: 'Support', description: 'support@hiverhq.co.in' },
   { value: 'b', label: 'otherprovider.sm02', description: 'otherprovider.sm02@forwardingaccount.hiverhq.co.in' },
 ]

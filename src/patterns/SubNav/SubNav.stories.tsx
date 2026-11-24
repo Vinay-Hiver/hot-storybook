@@ -20,7 +20,7 @@ const allItemIds = Object.keys(subNavLibrary)
 
 /** A sub-nav you can change from the Controls panel. Pick a channel to see its list, and click an item to select it. */
 export const Playground: StoryObj<PlaygroundArgs> = {
-  args: { channel: 'email', inboxEmail: 'hariniosm01@hiverhq.co.in', selected: 'default', hovered: 'none' },
+  args: { channel: 'email', inboxEmail: 'support@hiverhq.co.in', selected: 'default', hovered: 'none' },
   argTypes: {
     channel: { control: 'select', options: subNavChannelIds, description: 'Each channel has its own list' },
     inboxEmail: { control: 'text', name: 'email line', description: 'The small line under the heading (Email only)', if: { arg: 'channel', eq: 'email' } },

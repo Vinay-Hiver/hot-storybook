@@ -30,7 +30,7 @@ export function AdminSectionPage({ section, item, onAdminNavigate }: AdminSectio
   return (
     <PageLayout
       variant="admin"
-      nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
+      nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" user={{ initial: 'A', name: 'Aarav Mehta' }} userMenu={navSampleUserMenu} />}
       sidebar={<AdminSidebar sections={adminSampleSections} value={section} onChange={onAdminNavigate} />}
       subNav={<SubNav title={nav.label} items={nav.items} value={selected.id} onChange={setPage} />}
     >

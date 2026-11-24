@@ -62,7 +62,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
       case 'destructive':
         return <Modal {...props} width={w} actions={<>{cancel}<Button variant="error">Discard</Button></>}><ModalText>You and other mailbox members will lose access to this draft. This cannot be undone.</ModalText></Modal>
       case 'with note':
-        return <Modal {...props} width={w} actions={<>{cancel}<Button variant="error">Delete</Button></>}><ModalText>Use your own work email (e.g. adam@acme.com) to sign in. This will fix your setup if you previously signed up on Hiver with a shared or group email.</ModalText><ModalNote>Note: This text is meant to illustrate how the component will look with actual content.</ModalNote></Modal>
+        return <Modal {...props} width={w} actions={<>{cancel}<Button variant="error">Delete</Button></>}><ModalText>Use your own work email (e.g. aarav@acme.com) to sign in. This will fix your setup if you previously signed up on Hiver with a shared or group email.</ModalText><ModalNote>Note: This text is meant to illustrate how the component will look with actual content.</ModalNote></Modal>
       case 'with input':
         return <Modal {...props} width={w} actions={<>{cancel}<Button>Add</Button></>}><Input fullWidth placeholder="Enter" aria-label="Members" /></Modal>
       case 'with choices':
@@ -122,7 +122,7 @@ export const WithNote: Story = {
   parameters: { controls: { disable: true } },
   render: () => (
     <Modal title="Disconnect Personal Inbox" width={500} onClose={noop} actions={<>{cancel}<Button variant="error">Delete</Button></>}>
-      <ModalText>Use your own work email (e.g. adam@acme.com) to sign in. This will fix your setup if you previously signed up on Hiver with a shared or group email.</ModalText>
+      <ModalText>Use your own work email (e.g. aarav@acme.com) to sign in. This will fix your setup if you previously signed up on Hiver with a shared or group email.</ModalText>
       <ModalNote>Note: This text is meant to illustrate how the component will look with actual content.</ModalNote>
     </Modal>
   ),

@@ -10,7 +10,7 @@ import './SlackMessage.css'
 const emojis = ['👍', '❤️', '😀', '🎉', '✅', '🙏', '🔥', '👀', '😂', '💯']
 
 export type SlackMessageProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
-  /** Who wrote it, for example `Helly R` or `Mark Scout (You)`. */
+  /** Who wrote it, for example `Kavya Reddy` or `Aarav Mehta (You)`. */
   name: string
   /** When it was sent, for example `Nov 10, 04:11 PM`. Shown after the name. */
   time: string

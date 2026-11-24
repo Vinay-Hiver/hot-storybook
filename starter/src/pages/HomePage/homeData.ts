@@ -79,46 +79,46 @@ export const homeData: HomeData = {
     {
       channel: 'chat', label: 'Website Chat',
       conversations: [
-        { id: 'chat-1', name: 'Michael Scott', date: 'Nov 12', sla: frt, tags: high, moreCount: 1, messages: [customer('My dashboard is showing the wrong numbers since this morning', 'Nov 12, 10:01 AM'), agent('Thanks for reaching out. Let me take a look at your account.', 'Nov 12, 10:03 AM')] },
-        { id: 'chat-2', name: 'Dwight Schrute', date: 'Nov 12', unread: true, messages: [customer('I need to move my team to a different plan', 'Nov 12, 09:40 AM')] },
-        { id: 'chat-3', name: 'Pam Beesly', date: '09:20 AM', tags: low, messages: [customer('Is anyone there?', 'Nov 12, 09:18 AM'), agent('Hello', 'Nov 12, 09:20 AM')] },
+        { id: 'chat-1', name: 'Kavya Reddy', date: 'Nov 12', sla: frt, tags: high, moreCount: 1, messages: [customer('My dashboard is showing the wrong numbers since this morning', 'Nov 12, 10:01 AM'), agent('Thanks for reaching out. Let me take a look at your account.', 'Nov 12, 10:03 AM')] },
+        { id: 'chat-2', name: 'Arjun Menon', date: 'Nov 12', unread: true, messages: [customer('I need to move my team to a different plan', 'Nov 12, 09:40 AM')] },
+        { id: 'chat-3', name: 'Olivia Hayes', date: '09:20 AM', tags: low, messages: [customer('Is anyone there?', 'Nov 12, 09:18 AM'), agent('Hello', 'Nov 12, 09:20 AM')] },
       ],
     },
     {
       channel: 'whatsapp', label: 'WhatsApp',
       conversations: [
-        { id: 'whatsapp-1', name: 'Michael Scott', date: 'Nov 12', sla: frt, tags: high, messages: [customer('Hi, I need help with my order', 'Nov 12, 10:01 AM'), agent('Hello! Could you share the order number?', 'Nov 12, 10:03 AM', 'read')] },
-        { id: 'whatsapp-2', name: 'Darryl Philbin', date: 'Nov 12', unread: true, messages: [customer('Can you send the details again?', 'Nov 12, 09:50 AM')] },
-        { id: 'whatsapp-3', name: 'Erin Hannon', date: '10:05 AM', messages: [customer('Is anyone there?', 'Nov 12, 10:00 AM'), agent('Hello', 'Nov 12, 10:05 AM', 'delivered')] },
+        { id: 'whatsapp-1', name: 'Kavya Reddy', date: 'Nov 12', sla: frt, tags: high, messages: [customer('Hi, I need help with my order', 'Nov 12, 10:01 AM'), agent('Hello! Could you share the order number?', 'Nov 12, 10:03 AM', 'read')] },
+        { id: 'whatsapp-2', name: 'Arjun Menon', date: 'Nov 12', unread: true, messages: [customer('Can you send the details again?', 'Nov 12, 09:50 AM')] },
+        { id: 'whatsapp-3', name: 'Olivia Hayes', date: '10:05 AM', messages: [customer('Is anyone there?', 'Nov 12, 10:00 AM'), agent('Hello', 'Nov 12, 10:05 AM', 'delivered')] },
       ],
     },
     {
       channel: 'sms', label: 'SMS',
       conversations: [
-        { id: 'sms-1', name: 'Michael Scott', date: 'Nov 12', tags: high, messages: [customer('Need help resetting my account PIN', 'Nov 12, 10:00 AM'), agent('Hi', 'Nov 12, 10:02 AM')] },
-        { id: 'sms-2', name: 'Pam Beesly', date: 'Nov 12', unread: true, messages: [customer('Your code is not working', 'Nov 12, 09:30 AM')] },
-        { id: 'sms-3', name: 'Jim Halpert', date: 'Nov 11', messages: [customer('Please call me back about my ticket', 'Nov 11, 03:00 PM'), agent('Calling you now', 'Nov 11, 03:05 PM'), customer('Thanks!', 'Nov 11, 03:20 PM')] },
+        { id: 'sms-1', name: 'Kavya Reddy', date: 'Nov 12', tags: high, messages: [customer('Need help resetting my account PIN', 'Nov 12, 10:00 AM'), agent('Hi', 'Nov 12, 10:02 AM')] },
+        { id: 'sms-2', name: 'Olivia Hayes', date: 'Nov 12', unread: true, messages: [customer('Your code is not working', 'Nov 12, 09:30 AM')] },
+        { id: 'sms-3', name: 'Noah Bennett', date: 'Nov 11', messages: [customer('Please call me back about my ticket', 'Nov 11, 03:00 PM'), agent('Calling you now', 'Nov 11, 03:05 PM'), customer('Thanks!', 'Nov 11, 03:20 PM')] },
       ],
     },
     {
       channel: 'slack', label: 'Slack',
       conversations: [
-        { id: 'slack-1', name: 'Phyllis Vance', date: 'Nov 12', sla: frt, slackChannel: 'support', messages: [customer('Hey, my order #404 is missing! Please help me out!', 'Nov 12, 04:11 PM'), { from: 'agent', text: 'Checking on that for you!', time: 'Nov 12, 04:12 PM', reactions: { '✅': 1 } }] },
-        { id: 'slack-2', name: 'Creed Bratton', date: 'Nov 12', unread: true, slackChannel: 'escalations', messages: [customer('Can someone look at this today?', 'Nov 12, 11:02 AM')] },
+        { id: 'slack-1', name: 'Olivia Hayes', date: 'Nov 12', sla: frt, slackChannel: 'support', messages: [customer('Hey, my order #404 is missing! Please help me out!', 'Nov 12, 04:11 PM'), { from: 'agent', text: 'Checking on that for you!', time: 'Nov 12, 04:12 PM', reactions: { '✅': 1 } }] },
+        { id: 'slack-2', name: 'Noah Bennett', date: 'Nov 12', unread: true, slackChannel: 'escalations', messages: [customer('Can someone look at this today?', 'Nov 12, 11:02 AM')] },
       ],
     },
     {
       channel: 'email', label: 'Email',
       conversations: [
-        { id: 'email-1', name: 'Michael Scott', date: 'Nov 12', subject: 'Question about my invoice', email: 'michael.scott@example.com', sla: frt, messages: [customer('Hi Support,\n\nI was charged twice for my annual renewal. Could you check invoice #4821?', 'Nov 12, 09:20 AM'), agent('Hello Michael,\n\nThanks for flagging this. I have started a refund for the second charge.', 'Nov 12, 09:45 AM'), customer('Thank you. How long will the refund take?', 'Nov 12, 10:02 AM')] },
-        { id: 'email-2', name: 'Dwight Schrute', date: 'Nov 12', subject: 'Re: Beet farm onboarding', email: 'dwight.schrute@example.com', unread: true, messages: [customer('Hello,\n\nWhere can I find the onboarding checklist?', 'Nov 12, 08:10 AM')] },
+        { id: 'email-1', name: 'Kavya Reddy', date: 'Nov 12', subject: 'Question about my invoice', email: 'kavya.reddy@example.com', sla: frt, messages: [customer('Hi Support,\n\nI was charged twice for my annual renewal. Could you check invoice #4821?', 'Nov 12, 09:20 AM'), agent('Hello Kavya,\n\nThanks for flagging this. I have started a refund for the second charge.', 'Nov 12, 09:45 AM'), customer('Thank you. How long will the refund take?', 'Nov 12, 10:02 AM')] },
+        { id: 'email-2', name: 'Arjun Menon', date: 'Nov 12', subject: 'Re: Beet farm onboarding', email: 'arjun.menon@example.com', unread: true, messages: [customer('Hello,\n\nWhere can I find the onboarding checklist?', 'Nov 12, 08:10 AM')] },
       ],
     },
     {
       channel: 'voice', label: 'Voice',
       conversations: [
-        { id: 'voice-1', name: 'Michael Scott', date: 'Nov 12', call: 'incoming', sla: frt, messages: [] },
-        { id: 'voice-2', name: 'Dwight Schrute', date: 'Nov 12', call: 'outgoing', messages: [] },
+        { id: 'voice-1', name: 'Kavya Reddy', date: 'Nov 12', call: 'incoming', sla: frt, messages: [] },
+        { id: 'voice-2', name: 'Arjun Menon', date: 'Nov 12', call: 'outgoing', messages: [] },
       ],
     },
   ],

@@ -7,7 +7,7 @@ const meta = {
   tags: ['!dev'],
   component: EmailMessage,
   parameters: { layout: 'centered' },
-  args: { sender: 'john.smith@gmail.com', time: 'Feb 4, 01:20 PM', body: 'Hi Support,\n\nI am experiencing a blank screen after logging in to the mobile app. Can you please help?', expanded: true, avatarColor: 'red' },
+  args: { sender: 'kavya.reddy@gmail.com', time: 'Feb 4, 01:20 PM', body: 'Hi Support,\n\nI am experiencing a blank screen after logging in to the mobile app. Can you please help?', expanded: true, avatarColor: 'red' },
   argTypes: { avatarColor: { control: 'select', options: ['lightBlue', 'red', 'orange', 'yellow', 'green', 'purple', 'violet', 'grey'] }, onToggle: { control: false }, onReply: { control: false }, onForward: { control: false } },
   decorators: [(Story) => <div style={{ width: 560 }}><Story /></div>],
 } satisfies Meta<typeof EmailMessage>
@@ -25,8 +25,8 @@ export const States: Story = {
   decorators: [],
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: 560 }}>
-      <EmailMessage sender="john.smith@gmail.com" avatarColor="red" time="Feb 4, 01:20 PM" body={'Hi Support,\n\nI am experiencing a blank screen after logging in to the mobile app. Can you please help?'} expanded />
-      <EmailMessage sender="ruben@acme.com" avatarColor="lightBlue" time="Feb 4, 02:00 PM" body="Hello John, I am looking into this. Could you let me know which device you are using?" />
+      <EmailMessage sender="kavya.reddy@gmail.com" avatarColor="red" time="Feb 4, 01:20 PM" body={'Hi Support,\n\nI am experiencing a blank screen after logging in to the mobile app. Can you please help?'} expanded />
+      <EmailMessage sender="priya.nair@acme.com" avatarColor="lightBlue" time="Feb 4, 02:00 PM" body="Hello Kavya, I am looking into this. Could you let me know which device you are using?" />
     </div>
   ),
 }

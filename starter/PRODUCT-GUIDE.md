@@ -16,11 +16,16 @@ This file wins over your guesses. Not covered: state your assumption in one line
 - "boilerplate/home page": App.tsx already shows it. Only edit data.
 - "only channels X,Y": homeData.inboxes keep X,Y; data.ts sharedInboxChannels keep X,Y. Tell user channels now on both.
 - "N inboxes" / "two <channel> inboxes": Home: one HomeInbox per inbox; several of one channel = same `channel`, unique `id` (e.g. email-2), own label + conversations. Admin: N rows under the channel (SharedInboxes/data.ts), names = Home labels.
-- "N dummy convos" (none given = 2-3 per inbox, general support topics): N conversations per inbox in homeData. Names from The Office (Michael Scott, Dwight Schrute, Pam Beesly, Jim Halpert, Angela Martin...). Unique ids `<channel>-<n>`. Mix unread, some agent replies. Channel voice: sms/whatsapp short; email has `subject`,`email`, paragraph bodies; slack has `slackChannel`; voice has `call:'incoming'|'outgoing'`, no messages.
+- "N dummy convos" (none given = 2-3 per inbox, general support topics): N conversations per inbox in homeData. Names ONLY from NAMES below, never invent others. Unique ids `<channel>-<n>`. Mix unread, some agent replies. Channel voice: sms/whatsapp short; email has `subject`,`email`, paragraph bodies; slack has `slackChannel`; voice has `call:'incoming'|'outgoing'`, no messages.
 - "custom fields": homeData.customFields [{id,label,kind:'text'|'number'|'date',value?}], date value YYYY-MM-DD. Other kinds NOT BUILT: tell user.
 - "show admin": Main nav Admin Panel already opens it. Ensure data.ts matches Home.
 - "new page": src/pages/<Name>.tsx; PageLayout variant home|admin; read COMPONENTS.md then docs/<Name>.md of components used; layouts in docs/recipes.md.
 - "change look": existing component props only; tokens only; cannot => tell user what is missing.
+
+## NAMES (the only people in the product)
+Agents: Aarav Mehta (the signed-in user, "Me"/"You"), Priya Nair, Rohan Iyer, Emma Clarke, Liam Carter, Sophie Turner, Daniel Brooks.
+Customers: Kavya Reddy, Arjun Menon, Olivia Hayes, Noah Bennett, Chloe Parker, Ethan Cole, Grace Miller, Lucas Reed.
+Emails: first.last@example.com (customers), first.last@acme.com (agents). 5 of the 15 are Indian names.
 
 ## INVARIANTS
 - Only an inbox has Tags / All Views sidebars (Personal's Tags does not open one). In the tag view the "All Conversations" label has no dropdown.

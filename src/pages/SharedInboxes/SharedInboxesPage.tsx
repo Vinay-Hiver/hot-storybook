@@ -63,7 +63,7 @@ export function SharedInboxesPage({ channel: initialChannel = 'email', inboxId, 
     { key: 'actions', width: 100 },
   ]
 
-  const nav = <MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" onChange={onNavChange} user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />
+  const nav = <MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="admin" onChange={onNavChange} user={{ initial: 'A', name: 'Aarav Mehta' }} userMenu={navSampleUserMenu} />
   const sidebar = <AdminSidebar sections={adminSampleSections} value="shared-inbox" onChange={onAdminNavigate} />
 
   let subNav: ReactNode

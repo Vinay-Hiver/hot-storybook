@@ -59,7 +59,7 @@ const isChat = (c: ConversationChannel): c is ChatChannel => c === 'chat' || c =
 
 /** Turns the data of each conversation into the thread its conversation view shows. */
 const chatThread = (c: HomeConversation, channel: ConversationChannel): ChatThreadItem[] =>
-  c.messages.map((m, i) => ({ id: String(i + 1), kind: 'message', from: m.from === 'customer' ? 'user' : 'agent', text: m.text, time: m.time, agentName: m.from === 'agent' ? 'Perry' : undefined, status: channel === 'whatsapp' && m.from === 'agent' ? m.status ?? 'sent' : undefined }))
+  c.messages.map((m, i) => ({ id: String(i + 1), kind: 'message', from: m.from === 'customer' ? 'user' : 'agent', text: m.text, time: m.time, agentName: m.from === 'agent' ? 'Aarav Mehta' : undefined, status: channel === 'whatsapp' && m.from === 'agent' ? m.status ?? 'sent' : undefined }))
 const slackThread = (c: HomeConversation): SlackThreadItem[] => c.messages.map((m, i) => ({ id: String(i + 1), from: m.from === 'customer' ? 'user' : 'agent', text: m.text, time: m.time, reactions: m.reactions }))
 const customerAddress = (c: HomeConversation) => c.email ?? `${c.name.toLowerCase().replace(/[^a-z]+/g, '.')}@example.com`
 const emailThread = (c: HomeConversation, color: AvatarColor): EmailThreadMessage[] => c.messages.map((m, i) => ({ id: String(i + 1), email: m.from === 'customer' ? customerAddress(c) : emailAgentAddress, avatarColor: m.from === 'customer' ? color : 'lightBlue', time: m.time, body: m.text }))
@@ -187,7 +187,7 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
       <PageLayout
         variant="home"
         sidebarCollapsed={sidebarCollapsed}
-        nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={navValue} onChange={(id) => { setNavValue(id); onNavChange?.(id) }} user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
+        nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={navValue} onChange={(id) => { setNavValue(id); onNavChange?.(id) }} user={{ initial: 'A', name: 'Aarav Mehta' }} userMenu={navSampleUserMenu} />}
         sidebar={
           <div className="hot-home-sidebars">
             <div className="hot-home-sidebars__base">
@@ -265,7 +265,7 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
                 items={threads[selected] ?? []}
                 onSend={(text) => {
                   const id = selected
-                  setThreads((prev) => ({ ...prev, [id]: [...(prev[id] ?? []), { id: String((prev[id]?.length ?? 0) + 1), kind: 'message', from: 'agent', agentName: 'Perry', text, time: nowLabel(), status: channel === 'whatsapp' ? 'sent' : undefined }] }))
+                  setThreads((prev) => ({ ...prev, [id]: [...(prev[id] ?? []), { id: String((prev[id]?.length ?? 0) + 1), kind: 'message', from: 'agent', agentName: 'Aarav Mehta', text, time: nowLabel(), status: channel === 'whatsapp' ? 'sent' : undefined }] }))
                   // The customer answers a moment later, to mimic a conversation.
                   scheduleUserReply((reply) => setThreads((prev) => ({ ...prev, [id]: [...(prev[id] ?? []), reply] })))
                 }}

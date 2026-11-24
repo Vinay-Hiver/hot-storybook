@@ -57,15 +57,15 @@ export function ExampleRightPanel({ open = ['contact'], hoverSection, coAssignee
       </RightPanelTop>
 
       <RightPanelSection id="contact" title="Contact" icon="contact" defaultExpanded={open.includes('contact')} forceHover={hoverSection === 'contact'}>
-        <Row icon="user" label="Name">{contact?.name ?? 'Helly R'}</Row>
-        <Row icon="mailbox" label="Email">{contact ? (contact.email ?? '') : 'helly.r@lumon.com'}</Row>
+        <Row icon="user" label="Name">{contact?.name ?? 'Kavya Reddy'}</Row>
+        <Row icon="mailbox" label="Email">{contact ? (contact.email ?? '') : 'kavya.reddy@lumon.com'}</Row>
         <Row icon="building" label="Account">Google</Row>
         <Row icon="previousconversations" label="Conversations" link>60</Row>
       </RightPanelSection>
 
       <RightPanelSection id="account" title="Account" icon="building" defaultExpanded={open.includes('account')} forceHover={hoverSection === 'account'}>
         <Row icon="building" label="Name">Lumon Industries</Row>
-        <Row icon="user" label="Owner">Mark Scout</Row>
+        <Row icon="user" label="Owner">Priya Nair</Row>
         <Row icon="previousconversations" label="Conversations" link>112</Row>
       </RightPanelSection>
 

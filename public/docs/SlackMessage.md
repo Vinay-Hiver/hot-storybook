@@ -1,6 +1,6 @@
 # SlackMessage
 `import { SlackMessage } from './components/SlackMessage'` — One message in a Slack conversation: a full-width row, not a bubble.
-- `name`: string — Who wrote it, for example Helly R or Mark Scout (You).
+- `name`: string — Who wrote it, for example Kavya Reddy or Aarav Mehta (You).
 - `time`: string — When it was sent, for example Nov 10, 04:11 PM.
 - `text`: string — The message.
 - `avatarColor?`: "lightBlue" | "red" | "orange" | "yellow" | "green" | "purple" | "violet" | "grey" — The colour of the sender's avatar.

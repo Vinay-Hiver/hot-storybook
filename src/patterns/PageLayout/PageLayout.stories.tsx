@@ -50,7 +50,7 @@ export const Playground: StoryObj<PlaygroundArgs> = {
       <div style={{ height: '100vh' }}>
         <PageLayout
           variant="home"
-          nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={showAdmin ? 'admin' : navValue} onChange={setNavValue} user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />}
+          nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value={showAdmin ? 'admin' : navValue} onChange={setNavValue} user={{ initial: 'A', name: 'Aarav Mehta' }} userMenu={navSampleUserMenu} />}
           sidebar={showAdmin ? <AdminSidebar sections={adminSampleSections} value="shared-inbox" /> : <ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />}
           rightPanel={<ExampleRightPanel />}
         >
@@ -68,7 +68,7 @@ export const HomePage: Story = {
   parameters: { controls: { disable: true }, docs: { story: { inline: false, iframeHeight: 560 } } },
   render: () => (
     <div style={{ height: '100vh' }}>
-      <PageLayout variant="home" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Alex' }} userMenu={navSampleUserMenu} />} sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />} rightPanel={<ExampleRightPanel />}>
+      <PageLayout variant="home" nav={<MainNav items={navSampleItems} footerItems={navSampleFooterItems} value="conversations" user={{ initial: 'A', name: 'Aarav Mehta' }} userMenu={navSampleUserMenu} />} sidebar={<ConversationsSidebar sections={sampleSections(true, ['chat'])} value="chat-unassigned" />} rightPanel={<ExampleRightPanel />}>
         <Content />
       </PageLayout>
     </div>

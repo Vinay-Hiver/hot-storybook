@@ -7,7 +7,7 @@ const meta = {
   tags: ['!dev'],
   component: SlackMessage,
   parameters: { layout: 'centered' },
-  args: { name: 'Helly R', time: 'Nov 10, 04:11 PM', text: 'Hey, my order #404 is missing! Please help me out!', avatarColor: 'violet', canDelete: false },
+  args: { name: 'Kavya Reddy', time: 'Nov 10, 04:11 PM', text: 'Hey, my order #404 is missing! Please help me out!', avatarColor: 'violet', canDelete: false },
   argTypes: {
     avatarColor: { control: 'select', options: ['lightBlue', 'red', 'orange', 'yellow', 'green', 'purple', 'violet', 'grey'] },
     reactions: { control: false },
@@ -31,8 +31,8 @@ export const Variants: Story = {
   decorators: [],
   render: () => (
     <div style={{ width: 520, paddingTop: 24 }}>
-      <SlackMessage name="Helly R" avatarColor="violet" time="Nov 10, 04:11 PM" text="Hey, my order #404 is missing! Please help me out!" />
-      <SlackMessage name="Mark Scout (You)" avatarColor="red" time="Nov 10, 04:11 PM" text="Checking on that for you!" canDelete reactions={{ '😀': 1, '✅': 1 }} />
+      <SlackMessage name="Kavya Reddy" avatarColor="violet" time="Nov 10, 04:11 PM" text="Hey, my order #404 is missing! Please help me out!" />
+      <SlackMessage name="Aarav Mehta (You)" avatarColor="red" time="Nov 10, 04:11 PM" text="Checking on that for you!" canDelete reactions={{ '😀': 1, '✅': 1 }} />
     </div>
   ),
 }

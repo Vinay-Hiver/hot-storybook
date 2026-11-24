@@ -20,10 +20,10 @@ export const samples: Record<ChannelId, ChannelSample> = {
   slack: {
     inboxName: 'Slack Inbox 1',
     values: {
-      contactName: 'harini',
-      email: 'harini@hiverhq.co.in',
-      slackChannel: '#all-harinihiverhq4',
-      slackThread: 'https://harinihiverhq4.slack.com/archives/C0B0J7SFA3C/p1778489558529899',
+      contactName: 'Kavya Reddy',
+      email: 'kavya.reddy@hiverhq.co.in',
+      slackChannel: '#all-acme-support',
+      slackThread: 'https://acme.slack.com/archives/C0B0J7SFA3C/p1778489558529899',
       initiatedAt: 'May 11, 2026 02:22 PM',
     },
     customFields: [
@@ -33,15 +33,15 @@ export const samples: Record<ChannelId, ChannelSample> = {
       { label: 'Sample', kind: 'text' },
     ],
     previousConversations: [
-      { from: 'harini', date: 'Jun 04', preview: 'hey' },
-      { from: 'harini', date: 'Jun 04', preview: 'now?' },
-      { from: 'harini', date: 'Jun 16', preview: 'hey' },
-      { from: 'harini', date: 'Jun 11', preview: 'heyy' },
+      { from: 'Kavya Reddy', date: 'Jun 04', preview: 'hey' },
+      { from: 'Kavya Reddy', date: 'Jun 04', preview: 'now?' },
+      { from: 'Kavya Reddy', date: 'Jun 16', preview: 'hey' },
+      { from: 'Kavya Reddy', date: 'Jun 11', preview: 'heyy' },
     ],
   },
 
   whatsapp: {
-    inboxName: "Harini's WA",
+    inboxName: 'Support WhatsApp',
     values: { contactName: 'Abhinav', phone: '+918950626006', initiatedAt: 'Oct 06, 2026 10:18 AM' },
     customFields: [
       { label: 'Date', kind: 'dateInput', placeholder: 'Select a date' },
@@ -57,7 +57,7 @@ export const samples: Record<ChannelId, ChannelSample> = {
   },
 
   email: {
-    inboxName: 'Hariniosm01',
+    inboxName: 'Support',
     values: {
       ticketId: 'TKT#10',
       contactNameAvatar: 'Channels QA',
@@ -80,8 +80,8 @@ export const samples: Record<ChannelId, ChannelSample> = {
       {
         day: 'Yesterday',
         items: [
-          { text: 'Praveen Borawar self-assigned this conversation', time: '05:00 PM' },
-          { text: 'Harini L created a new ticket', time: '12:50 PM' },
+          { text: 'Aarav Mehta self-assigned this conversation', time: '05:00 PM' },
+          { text: 'Priya Nair created a new ticket', time: '12:50 PM' },
         ],
       },
     ],

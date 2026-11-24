@@ -7,7 +7,7 @@ const meta = {
   tags: ['!dev'],
   component: EmailEditor,
   parameters: { layout: 'centered' },
-  args: { recipient: 'john.smith@gmail.com' },
+  args: { recipient: 'kavya.reddy@gmail.com' },
   argTypes: { onSend: { control: false }, onDiscard: { control: false } },
   decorators: [(Story) => <div style={{ width: 720 }}><Story /></div>],
 } satisfies Meta<typeof EmailEditor>

@@ -10,19 +10,19 @@ const tags: ConversationCardProps['tags'] = [{ label: 'Low', color: 'green' }, {
 const channels: ConversationChannel[] = ['email', 'slack', 'chat', 'voice', 'sms', 'whatsapp']
 /** What a conversation looks like on each channel, used as the default text when the channel changes. */
 const samples: Record<ConversationChannel, { name: string; preview: string; replied: boolean }> = {
-  email: { name: 'Michael Scott', preview: 'Question about my invoice', replied: false },
-  slack: { name: 'Michael Scott', preview: 'Can someone look at this?', replied: false },
-  chat: { name: 'Michael Scott', preview: 'Hello', replied: true },
-  voice: { name: 'Michael Scott', preview: 'Incoming voice call started', replied: false },
-  sms: { name: 'Michael Scott', preview: 'Hi', replied: true },
-  whatsapp: { name: 'Michael Scott', preview: 'Hi', replied: true },
+  email: { name: 'Kavya Reddy', preview: 'Question about my invoice', replied: false },
+  slack: { name: 'Kavya Reddy', preview: 'Can someone look at this?', replied: false },
+  chat: { name: 'Kavya Reddy', preview: 'Hello', replied: true },
+  voice: { name: 'Kavya Reddy', preview: 'Incoming voice call started', replied: false },
+  sms: { name: 'Kavya Reddy', preview: 'Hi', replied: true },
+  whatsapp: { name: 'Kavya Reddy', preview: 'Hi', replied: true },
 }
 
 const meta = {
   title: 'Components/Conversation card',
   component: ConversationCard,
   parameters: { layout: 'centered' },
-  args: { name: 'Michael Scott', date: 'Nov 12', preview: 'Hello' },
+  args: { name: 'Kavya Reddy', date: 'Nov 12', preview: 'Hello' },
   argTypes: {
     channel: { control: 'select', options: channels, description: 'Each channel has its own icon. Changing it fills in a sample name and message.' },
     selected: { control: 'boolean' },
@@ -81,15 +81,15 @@ export const States: Story = {
   decorators: [],
   render: () => (
     <div style={grid}>
-      <Cell title="Unselected"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied /></Cell>
-      <Cell title="Unselected, hovering the card"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied forceState="hover" /></Cell>
-      <Cell title="Unselected, hovering the channel icon"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied forceState="icon-hover" /></Cell>
-      <Cell title="Unselected with SLA and tags"><ConversationCard channel="sms" name="Michael Scott" date="Nov 12" preview="Hi" sla={sla} tags={tags} moreCount={2} /></Cell>
-      <Cell title="Unread"><ConversationCard name="Michael Scott" date="Nov 12" preview="The subject comes here" unread sla={sla} tags={tags} moreCount={2} /></Cell>
-      <Cell title="Unread, hovering the channel icon"><ConversationCard name="Michael Scott" date="Nov 12" preview="The subject comes here" unread forceState="icon-hover" sla={sla} tags={tags} moreCount={2} /></Cell>
-      <Cell title="Selected"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied selected /></Cell>
-      <Cell title="Selected, hovering the channel icon"><ConversationCard name="Michael Scott" date="Nov 12" preview="Hello" replied selected forceState="icon-hover" /></Cell>
-      <Cell title="Selected with SLA and tags"><ConversationCard channel="sms" name="Michael Scott" date="Nov 12" preview="Hi" selected sla={sla} tags={tags} moreCount={2} /></Cell>
+      <Cell title="Unselected"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="Hello" replied /></Cell>
+      <Cell title="Unselected, hovering the card"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="Hello" replied forceState="hover" /></Cell>
+      <Cell title="Unselected, hovering the channel icon"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="Hello" replied forceState="icon-hover" /></Cell>
+      <Cell title="Unselected with SLA and tags"><ConversationCard channel="sms" name="Kavya Reddy" date="Nov 12" preview="Hi" sla={sla} tags={tags} moreCount={2} /></Cell>
+      <Cell title="Unread"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="The subject comes here" unread sla={sla} tags={tags} moreCount={2} /></Cell>
+      <Cell title="Unread, hovering the channel icon"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="The subject comes here" unread forceState="icon-hover" sla={sla} tags={tags} moreCount={2} /></Cell>
+      <Cell title="Selected"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="Hello" replied selected /></Cell>
+      <Cell title="Selected, hovering the channel icon"><ConversationCard name="Kavya Reddy" date="Nov 12" preview="Hello" replied selected forceState="icon-hover" /></Cell>
+      <Cell title="Selected with SLA and tags"><ConversationCard channel="sms" name="Kavya Reddy" date="Nov 12" preview="Hi" selected sla={sla} tags={tags} moreCount={2} /></Cell>
       <Cell title="Selected, email"><ConversationCard channel="email" {...samples.email} date="Nov 12" selected sla={sla} tags={tags} moreCount={2} /></Cell>
     </div>
   ),

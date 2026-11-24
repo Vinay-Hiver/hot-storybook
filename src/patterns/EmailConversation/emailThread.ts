@@ -5,7 +5,7 @@ import { scheduleUserReplyText } from '../ChatConversation/simulatedReply'
 export type EmailThreadMessage = { id: string; email: string; avatarColor?: AvatarColor; time: string; body: string }
 
 /** The agent's address, shown on the messages they send. */
-export const emailAgentAddress = 'michael.scott@acme.com'
+export const emailAgentAddress = 'aarav.mehta@acme.com'
 
 /** The time on a message sent right now, for example `Feb 4, 02:45 PM`. */
 export const emailNow = () => new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(' at', ',')

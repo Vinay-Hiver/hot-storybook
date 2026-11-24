@@ -9,7 +9,7 @@ const meta = {
   title: 'Conversation Views/Slack',
   component: SlackConversation,
   parameters: { layout: 'centered' },
-  args: { name: 'Helly R', channelName: 'support', items: sampleSlackThreads['slack-1'] },
+  args: { name: 'Kavya Reddy', channelName: 'support', items: sampleSlackThreads['slack-1'] },
   argTypes: { items: { control: false }, onSend: { control: false }, onAddReaction: { control: false }, onRemoveReaction: { control: false }, onDelete: { control: false }, avatarColor: { control: 'select', options: ['lightBlue', 'red', 'orange', 'yellow', 'green', 'purple', 'violet', 'grey'] } },
 } satisfies Meta<typeof SlackConversation>
 

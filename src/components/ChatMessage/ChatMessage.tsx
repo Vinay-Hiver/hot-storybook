@@ -11,7 +11,7 @@ export type ChatMessageProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> 
   text: ReactNode
   /** When it was sent, for example `Jul 23, 10:01 AM`. Shown under the bubble. */
   time: string
-  /** Agent messages only: the name shown before the time, for example `Michael Scott - Jul 23, 10:02 AM`. */
+  /** Agent messages only: the name shown before the time, for example `Kavya Reddy - Jul 23, 10:02 AM`. */
   agentName?: string
   /** Agent messages only, WhatsApp only: how far the message has got. Shows ticks after the time: `sent` is one grey tick, `delivered` two grey ticks, `read` two blue ticks. Leave out for no ticks (Chat). */
   status?: 'sent' | 'delivered' | 'read'

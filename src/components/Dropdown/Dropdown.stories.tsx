@@ -128,10 +128,10 @@ export const MixedRows: Story = {
       variant="avatar" searchable searchPlaceholder="Search Assignee" defaultValue="me"
       options={[
         { value: 'none', label: 'None', icon: 'user', iconBackground: true },
-        { value: 'me', label: 'Praveen Borawar (Me)', color: 'red' },
-        { value: 'abhay', label: 'Abhay', color: 'yellow' },
-        { value: 'aditya', label: 'Aditya S', color: 'grey', status: 'offline' },
-        { value: 'akash', label: 'Akash Mishra', color: 'purple' },
+        { value: 'me', label: 'Aarav Mehta (Me)', color: 'red' },
+        { value: 'priya', label: 'Priya Nair', color: 'yellow' },
+        { value: 'rohan', label: 'Rohan Iyer', color: 'grey', status: 'offline' },
+        { value: 'emma', label: 'Emma Clarke', color: 'purple' },
       ]}
     />
   ),

@@ -1,7 +1,7 @@
 import type { ChatThreadItem } from './ChatConversation'
 
 const user = (id: string, text: string, time: string): ChatThreadItem => ({ id, kind: 'message', from: 'user', text, time })
-const agent = (id: string, text: string, time: string): ChatThreadItem => ({ id, kind: 'message', from: 'agent', agentName: 'Perry', text, time })
+const agent = (id: string, text: string, time: string): ChatThreadItem => ({ id, kind: 'message', from: 'agent', agentName: 'Aarav Mehta', text, time })
 
 /** Dummy Chat threads, keyed by the id of the Chat conversation in the Conversation list (`chat-1` to `chat-8`). */
 export const sampleChatThreads: Record<string, ChatThreadItem[]> = {
@@ -41,7 +41,7 @@ export const sampleChatThreads: Record<string, ChatThreadItem[]> = {
   ],
 }
 
-const waAgent = (id: string, text: string, time: string, status: 'sent' | 'delivered' | 'read'): ChatThreadItem => ({ id, kind: 'message', from: 'agent', agentName: 'Perry', text, time, status })
+const waAgent = (id: string, text: string, time: string, status: 'sent' | 'delivered' | 'read'): ChatThreadItem => ({ id, kind: 'message', from: 'agent', agentName: 'Aarav Mehta', text, time, status })
 
 /** Dummy WhatsApp threads, keyed by the id of the WhatsApp conversation in the Conversation list (`whatsapp-1` to `whatsapp-7`). */
 export const sampleWhatsAppThreads: Record<string, ChatThreadItem[]> = {

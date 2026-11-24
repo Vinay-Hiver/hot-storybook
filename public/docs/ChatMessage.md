@@ -4,5 +4,5 @@
 - `from`: "user" | "agent" — Who sent it.
 - `text`: ReactNode — The message.
 - `time`: string — When it was sent, for example Jul 23, 10:01 AM.
-- `agentName?`: string — Agent messages only: the name shown before the time, for example Michael Scott - Jul…
+- `agentName?`: string — Agent messages only: the name shown before the time, for example Kavya Reddy - Jul 2…
 - `status?`: "sent" | "delivered" | "read" — Agent messages only, WhatsApp only: how far the message has got.
