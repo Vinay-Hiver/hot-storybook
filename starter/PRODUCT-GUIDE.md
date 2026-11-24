@@ -23,7 +23,15 @@ This file wins over your guesses. Not covered: state your assumption in one line
 - "change look": existing component props only; tokens only; cannot => tell user what is missing.
 
 ## INVARIANTS
-- Co-assignee field: email only. Tags view opens the Tags sidebar (tags+counts from the inbox's conversations; choosing a tag filters the list and titles it with the tag), All Views (Email only) the All Views sidebar (stars there choose which views an Email inbox lists: only favourites, then Tags and All Views), both over the sidebar only: the conversation view stays as it is. Card 2nd line = latest message (sent = reply arrow); never an activity.
+- Only an inbox has Tags / All Views sidebars (Personal's Tags does not open one). In the tag view the "All Conversations" label has no dropdown.
+- A list showing nothing (empty view, empty tab or filter) shows the Empty state beside it, no conversation and no right panel.
+- Ticking any conversation card in the list replaces the conversation and right panel with the bulk actions panel (Cancel clears it); its actions do nothing yet.
+- Co-assignee field: email only. Card 2nd line = latest message (sent = reply arrow); never an activity.
+- Tags view (inboxes only): Tags sidebar slides over the Conversations sidebar (tags+counts from the inbox's conversations; back arrow returns). Choosing a tag filters the list, titles it with the tag and shows Unresolved/Closed/All tabs (Unresolved arrow: Open/Pending checkboxes); conversation `status` open|pending|closed, default open. Each tag row has a more menu (Edit/Delete, not wired).
+- All Views (Email only): All Views sidebar over the Conversations sidebar. Stars choose the favourite views; an Email inbox lists only its favourites (default Mine, Unassigned, Team, Tickets), then Tags and All Views. Max 5.
+- Tags/All Views change the sidebar only: the conversation view stays as it is.
+- Conversation list: select-all checkbox + "All Conversations" menu (Show all / Unread only; no menu in the tag view). Ticking any card shows the Bulk actions panel (Mark as unread, Assign to, Change status, Manage tags, Cancel; the four do nothing yet) in place of conversation and right panel.
+- Tags field in the right panel is editable (Add chip, remove, Apply); cards and Tags counts follow it. Edits reset on reload.
 - Voice: list only, no conversation view. Customer auto-replies ~2s after agent sends (built in; keep).
 - Never edit src/components or src/patterns. Wrong behaviour there: tell user.
 

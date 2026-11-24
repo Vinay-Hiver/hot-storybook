@@ -239,3 +239,24 @@ Built on this day (per the notes) and committed on 17-Oct:
 
 ## Tag filter in the Conversation list
 - In the Tags sidebar, choosing a tag titles the Conversation list with the tag name and keeps only conversations with that tag (live with tag edits); choosing it again or going back clears it. Not browser-checked (tsc only).
+
+## Conversation list: select all and unread filter
+- Under the list title: a select-all checkbox (selects every conversation shown in the view, dash when partly selected; cleared when the view changes) and the "All Conversations" label with an arrow that opens Show all / Unread only. Works for every channel and view since they share the list. The Menu is now as wide as its content (no 200px minimum). "Unread Conversations" as the label for the unread filter, and the 176px menu width, are my guesses from the screenshot. Not browser-checked (tsc only).
+
+## Bulk actions panel
+- New pattern `BulkActionsPanel` (Patterns/Bulk actions panel) taken from Vinay-Hiver/tickets-add-merge: illustration, "N items selected", Mark as unread, Assign to, Change status, Manage tags, line, Cancel (no Merge, no Add to ticket). On Home it shows as soon as one conversation is ticked, replacing the conversation and right panel. ConversationList has new `checkedIds` / `onCheckedIdsChange`. Actions do nothing yet. Not browser-checked (tsc only).
+
+- Bulk actions panel: the Email-only restriction was undone; it shows for every channel again.
+
+## Status tabs in the tag view
+- Filtering by a tag now shows tabs right under the list title (Figma 3302:5400): Unresolved (count, arrow with Open / Pending checkboxes), Closed, All. Tabs got an optional per-tab arrow (`menu`); conversations got an optional `status` (default open). Not browser-checked (tsc only). Not built from that frame: the sort and filter icons in its header.
+
+## Tag tabs polish and empty states
+- Status tabs fill the width equally; underline on the bottom edge; the Open/Pending menu opens under the Unresolved tab, left edges lined up (gap 0, as in Figma). Empty list: grey count band + "No conversations found" (Figma 3302:5577); Home shows the Empty state (email icon, "Take a chill pill!") beside an empty list in place of the conversation and right panel. Not browser-checked (tsc only).
+
+## Tag tabs fix
+- Tabs were cut off ("Unresolved" clipped, arrow hidden): they now fill the width but are never narrower than their content. In the tag view "All Conversations" is plain text, no dropdown. Personal's Tags no longer opens an empty Tags sidebar. Checked in the browser (Storybook Home page): tab widths 148/77/47 in a 299px row, underline at the row bottom, menu left edge and top equal the tab left and bottom, menu 165px wide.
+
+- Status tabs label size 14px -> 13px, the same as the "All Conversations" label.
+
+- Status tabs: the Unresolved arrow now sits at the far end of its tab (label and count at the start). Not browser-checked.

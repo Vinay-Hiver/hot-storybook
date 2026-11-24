@@ -39,6 +39,8 @@ export type HomeConversation = {
   sla?: ConversationCardSla[]
   /** Tags on the card, for example [{ label: 'High', color: 'red' }]. */
   tags?: ConversationCardTag[]
+  /** Where the conversation stands: open (default), pending or closed. */
+  status?: 'open' | 'pending' | 'closed'
   /** How many more tags there are than shown ("+2"). */
   moreCount?: number
   /** Email only: the subject of the email conversation. */

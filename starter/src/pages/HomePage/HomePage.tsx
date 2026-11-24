@@ -26,6 +26,8 @@ import { addReaction, agentMessage, deleteMessage, removeReaction, scheduleSlack
 import type { TagOption } from '../../patterns/RightPanel'
 import { TagsSidebar } from '../../patterns/TagsSidebar'
 import type { TagsSidebarTag } from '../../patterns/TagsSidebar'
+import { EmptyState } from '../../patterns/EmptyState'
+import { BulkActionsPanel } from '../../patterns/BulkActionsPanel'
 import { AllViewsSidebar } from '../../patterns/AllViewsSidebar'
 import type { AllViewsSidebarItem } from '../../patterns/AllViewsSidebar'
 import { homeData } from './homeData'
@@ -63,7 +65,7 @@ const customerAddress = (c: HomeConversation) => c.email ?? `${c.name.toLowerCas
 const emailThread = (c: HomeConversation, color: AvatarColor): EmailThreadMessage[] => c.messages.map((m, i) => ({ id: String(i + 1), email: m.from === 'customer' ? customerAddress(c) : emailAgentAddress, avatarColor: m.from === 'customer' ? color : 'lightBlue', time: m.time, body: m.text }))
 
 /** The card of a conversation in the list. */
-const toListItem = (c: HomeConversation): ConversationListItem => ({ id: c.id, name: c.name, date: c.date, unread: c.unread, sla: c.sla, tags: c.tags, moreCount: c.moreCount, callDirection: c.call })
+const toListItem = (c: HomeConversation): ConversationListItem => ({ id: c.id, name: c.name, date: c.date, unread: c.unread, sla: c.sla, tags: c.tags, status: c.status, moreCount: c.moreCount, callDirection: c.call })
 
 /** The Shared Inbox part of the sidebar, built from the inboxes: each inbox gets its channel's views, counted by its conversations. */
 function sharedInboxItems(inboxes: HomeInbox[], favEdits: Record<string, string[]>) {
@@ -121,11 +123,12 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
   // Tags opens the Tags sidebar over the Conversations sidebar. The inbox stays remembered so the panel keeps its content while it slides out.
   const [tagsKey, setTagsKey] = useState<string>()
   const [tagValue, setTagValue] = useState<string>()
-  const tagsOpen = view.endsWith('-tags')
+  // Only an inbox has a Tags sidebar (Personal's Tags is not an inbox's, so it keeps the Conversations sidebar).
+  const tagsOpen = view.endsWith('-tags') && !!inboxOfView(view)
   // All Views (Email inboxes only) opens the same way.
   const [allViewsKey, setAllViewsKey] = useState<string>()
   const [allViewsValue, setAllViewsValue] = useState<string>()
-  const allViewsOpen = view.endsWith('-allViews')
+  const allViewsOpen = view.endsWith('-allViews') && !!inboxOfView(view)
   const tagsInbox = tagsOpen ? inboxOfView(view) : inboxes.find((i) => keyOf(i) === tagsKey)
   const allViewsInbox = allViewsOpen ? inboxOfView(view) : inboxes.find((i) => keyOf(i) === allViewsKey)
   // The second line of each card is the latest message of its thread, as it stands now (a message you send shows with the reply arrow).
@@ -151,6 +154,13 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
   const selectedConv = inbox?.conversations.find((c) => c.id === selected)
   const selectedIndex = inbox && selected ? inbox.conversations.findIndex((c) => c.id === selected) : 0
   const color = avatarColors[Math.max(selectedIndex, 0) % avatarColors.length]
+
+  // As soon as one conversation is ticked in the list, the bulk actions take the place of the conversation and the right panel.
+  const [checkedIds, setCheckedIds] = useState<string[]>([])
+  const bulk = checkedIds.length > 0
+  // When the list shows nothing (a tab or filter with no conversations), the area beside it shows an empty state instead of a conversation and the right panel.
+  const [shownIds, setShownIds] = useState<string[]>()
+  const listEmpty = shownIds?.length === 0
 
   // Tags are edited in the Tags field of the right panel, per conversation. The cards and the Tags sidebar follow them.
   const [tagEdits, setTagEdits] = useState<Record<string, string[]>>({})
@@ -198,7 +208,7 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
             </div>
           </div>
         }
-        rightPanel={<ExampleRightPanel open={['contact', 'custom']} tagOptions={tagOptions} tags={selectedConv ? tagValuesOf(selectedConv) : undefined} onTagsChange={selectedConv ? (next) => setTagEdits((prev) => ({ ...prev, [selectedConv.id]: next })) : undefined} coAssignee={channel === 'email'} customFields={customFields} contact={selectedConv ? { name: selectedConv.name, email: channel === 'email' ? customerAddress(selectedConv) : selectedConv.email } : undefined} />}
+        rightPanel={bulk || listEmpty ? undefined : <ExampleRightPanel open={['contact', 'custom']} tagOptions={tagOptions} tags={selectedConv ? tagValuesOf(selectedConv) : undefined} onTagsChange={selectedConv ? (next) => setTagEdits((prev) => ({ ...prev, [selectedConv.id]: next })) : undefined} coAssignee={channel === 'email'} customFields={customFields} contact={selectedConv ? { name: selectedConv.name, email: channel === 'email' ? customerAddress(selectedConv) : selectedConv.email } : undefined} />}
       >
         {currentView && inbox && channel && (
           <div style={{ display: 'flex', height: '100%' }}>
@@ -208,10 +218,16 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
               conversations={withLatest(inbox.conversations.filter((c) => !activeTag || tagValuesOf(c).includes(activeTag)).map((c) => toListItem(withTagEdits(c))), latestFor)}
               selectedId={selected}
               onSelect={setSelected}
+              checkedIds={checkedIds}
+              onCheckedIdsChange={setCheckedIds}
+              statusTabs={!!activeTag}
+              onShownIdsChange={setShownIds}
               onIconClick={() => setSidebarCollapsed((c) => !c)}
               iconLabel={sidebarCollapsed ? 'Show the sidebar' : 'Hide the sidebar'}
             />
-            {channel === 'email' && selectedConv && selected && (
+            {listEmpty && <div style={{ flex: 1, minWidth: 0, background: 'var(--slateSurfaceSubtle)' }}><EmptyState icon="email" title="No conversations found" description="Take a chill pill!" /></div>}
+            {!listEmpty && bulk && <BulkActionsPanel count={checkedIds.length} onCancel={() => setCheckedIds([])} />}
+            {!bulk && !listEmpty && channel === 'email' && selectedConv && selected && (
               <EmailConversation
                 key={selected}
                 subject={selectedConv.subject ?? 'No subject'}
@@ -223,7 +239,7 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
                 }}
               />
             )}
-            {channel === 'slack' && selectedConv && selected && (
+            {!bulk && !listEmpty && channel === 'slack' && selectedConv && selected && (
               <SlackConversation
                 key={selected}
                 name={selectedConv.name}
@@ -240,7 +256,7 @@ export function HomePage({ data = homeData, onNavChange }: { data?: HomeData; /*
                 onDelete={(mid) => setSlackThreads((prev) => ({ ...prev, [selected]: deleteMessage(prev[selected] ?? [], mid) }))}
               />
             )}
-            {isChat(channel) && selectedConv && selected && (
+            {!bulk && !listEmpty && isChat(channel) && selectedConv && selected && (
               <ChatConversation
                 key={selected}
                 channel={channel}

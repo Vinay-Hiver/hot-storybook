@@ -150,3 +150,7 @@ Only things that need action: something is built but needs another look, a decis
 - [ ] **Storybook pull request** [storybookjs/storybook#36853](https://github.com/storybookjs/storybook/pull/36853) (fixes a broken link in their README) is open. Watch for maintainer comments.
 - [ ] **Commit history:** earlier commits in this repo carry a `Co-Authored-By: Claude` line. Say if they should be removed (needs a history rewrite and a force push).
 - All Views sidebar: Overdue uses Timer instead of an alarm clock (no alarm icon in the set); counts for Pending, Closed, Overdue, Due Soon are 0 (the inbox has no such views yet); the favourite yellow is a raw value (no token).
+- Tags sidebar: the row more menu (Edit, Delete) and the plus (create tag) do nothing yet; selecting a tag only filters the list.
+- Bulk actions panel: Mark as unread, Assign to, Change status and Manage tags do nothing yet (Merge and Add to ticket were left out on purpose).
+- Status tabs: the sample conversations are all open, so the Closed tab is empty; no sample has `pending` or `closed`.
+- Tags, favourite views and tag edits live in the page's state and reset on reload.

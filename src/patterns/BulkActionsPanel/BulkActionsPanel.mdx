@@ -1,0 +1,16 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks'
+import * as BulkStories from './BulkActionsPanel.stories'
+
+<Meta of={BulkStories} />
+
+# Bulk actions panel
+
+What you can do with several conversations at once. On the Home page it appears as soon as even one conversation is ticked in the Conversation list, and takes the place of both the conversation and the right panel. It is centred in the space, on the subtle grey background.
+
+- **Top:** a small inbox illustration and "N items selected" ("1 item selected" for one).
+- **Actions:** Mark as unread, Assign to, Change status and Manage tags, in blue text with a 16px icon. A row turns grey on hover.
+- **Line, then Cancel:** Cancel clears the selection and brings the conversation back.
+
+The actions only report which one was pressed; they do not do anything yet. Merge conversations and Add to an existing ticket (from the prototype this was taken from) are not included.
+
+<Canvas of={BulkStories.Default} />

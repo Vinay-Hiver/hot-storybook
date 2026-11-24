@@ -32,9 +32,25 @@
   display: flex;
   flex: none;
   align-items: center;
+  gap: var(--spacing2);
   height: 41px;
   padding: 0 var(--spacing3);
   border-bottom: 1px solid var(--slateBorderMild);
   font: var(--text-body-sm-medium);
 }
+.hot-conv-list__filter { display: inline-flex; align-items: center; gap: var(--spacing1); padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.hot-conv-list__filter:focus-visible { outline: var(--spacing05) solid var(--primaryBorderDefault); outline-offset: 2px; border-radius: var(--radius4); }
+.hot-dropdown.hot-conv-list__filter-menu { width: 176px; }
 .hot-conv-list__cards { flex: 1; min-height: 0; overflow-y: auto; }
+
+/* The status tabs under the title (Figma 3302:5400): 40px tall, tabs 8px apart, 12px padding each side, on the thin line. The three tabs fill the width (each at least as wide as its own content, so nothing is cut off) and the active underline sits on the very bottom edge. */
+.hot-tabs.hot-conv-list__tabs { flex: none; gap: var(--spacing2); height: 40px; padding: 0 var(--spacing15); }
+.hot-tabs.hot-conv-list__tabs .hot-tab { flex: 1 1 auto; min-width: max-content; height: 40px; padding: 0 var(--spacing3); font-size: 13px; }
+.hot-dropdown.hot-conv-list__status-menu { width: 165px; }
+
+/* Empty list (Figma 3302:5577): a grey band that says how many, then the message in the middle of what is left. */
+.hot-conv-list__count { flex: none; box-sizing: border-box; display: flex; align-items: center; height: var(--spacing8); margin-bottom: var(--spacing1); padding: 0 var(--spacing4) 0 14px; background: var(--slateSurfaceSubtle); font: var(--text-body-md-medium); color: var(--slateTextSubtle); }
+.hot-conv-list__none { flex: 1; display: flex; align-items: center; justify-content: center; margin: 0; padding: var(--spacing6) var(--spacing4); font: var(--text-body-lg-medium); color: var(--slateTextTitle); text-align: center; }
+.hot-conv-list__filter--plain { cursor: default; }
+/* The arrow of a tab sits at the far end of the tab, the label and count at the start (Figma 3302:5577). */
+.hot-conv-list__tabs .hot-tab__menu { margin-left: auto; }

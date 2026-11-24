@@ -63,3 +63,7 @@
 }
 .hot-tabs--filled .hot-tab:is(:hover, [data-force-state='hover']) { background: var(--slateSurfaceSubtle); }
 .hot-tabs--filled .hot-tab[aria-selected='true'] { background: var(--slateSurfaceWhite); color: var(--slateTextBody); }
+
+/* A tab's small arrow (a 16px square with 4px corners): it opens a menu and does not select the tab. */
+.hot-tab__menu { display: inline-flex; flex: none; align-items: center; justify-content: center; width: var(--spacing4); height: var(--spacing4); border-radius: var(--radius4); color: var(--slateIconsSubtle); }
+.hot-tab__menu:hover { background: var(--slateSurfaceSubtle100Hover); }

@@ -7,7 +7,11 @@ import { withLatest } from './latest'
 import type { LatestMessage } from './latest'
 
 /** One conversation in the list: the props of a Conversation card, plus an id. */
-export type ConversationListItem = Pick<ConversationCardProps, 'name' | 'date' | 'preview' | 'replied' | 'callDirection' | 'unread' | 'sla' | 'tags' | 'moreCount'> & { id: string }
+export type ConversationListItem = Pick<ConversationCardProps, 'name' | 'date' | 'preview' | 'replied' | 'callDirection' | 'unread' | 'sla' | 'tags' | 'moreCount'> & {
+  id: string
+  /** Where the conversation stands. Leave out for open. Used by the status tabs (Unresolved is open and pending). */
+  status?: 'open' | 'pending' | 'closed'
+}
 
 const frtOverdue: ConversationCardProps['sla'] = [{ kind: 'frt', status: 'overdue' }]
 const frtDue: ConversationCardProps['sla'] = [{ kind: 'frt', status: 'due' }]

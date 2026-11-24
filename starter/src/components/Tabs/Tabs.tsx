@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import type { KeyboardEvent } from 'react'
 import { Badge } from '../Badge'
+import { Icon } from '../../icons/Icon'
 import { startRipple } from '../ripple'
 import './Tabs.css'
 
@@ -10,6 +11,8 @@ export type TabItem = {
   /** Outlined tabs only: a count shown in a Badge after the label. */
   count?: string
   disabled?: boolean
+  /** Outlined tabs only: a small down arrow after the label (and count). Pressing the arrow calls `onClick` with the arrow, so a menu can open under it (for example a Popover with a checkbox Dropdown). The tab itself is not selected by it. */
+  menu?: { label: string; open?: boolean; onClick: (anchor: HTMLElement) => void }
   /** Storybook only: pins hover so it can be shown without interaction. */
   forceState?: 'hover'
 }
@@ -64,6 +67,15 @@ export function Tabs({ tabs, value, onChange, variant = 'outlined', className, .
           >
             {t.label}
             {variant === 'outlined' && t.count && <Badge type="default">{t.count}</Badge>}
+            {variant === 'outlined' && t.menu && (
+              <span
+                role="button" tabIndex={-1} className="hot-tab__menu" aria-label={t.menu.label} aria-haspopup="menu" aria-expanded={t.menu.open ?? false}
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => { e.stopPropagation(); t.menu?.onClick(e.currentTarget) }}
+              >
+                <Icon name="chevrondown" size={14} />
+              </span>
+            )}
           </button>
         )
       })}

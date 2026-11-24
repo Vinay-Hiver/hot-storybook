@@ -48,7 +48,7 @@ Hiver's HOT design system as working React components, built from Figma. Prototy
 | Section in Storybook | What you find |
 |---|---|
 | Foundations | Colours, typography, spacing, radius, icons |
-| Components | Button, Input, Dropdown, Modal, Tabs, Table and more, with props and Docs |
-| Patterns | Main nav, Sub-nav, Admin sidebar, Conversations sidebar, Conversation list, Right panel |
+| Components | Button, Input, Dropdown, Menu, Modal, Tabs, Table and more, with props and Docs |
+| Patterns | Main nav, Sub-nav, Admin sidebar, Conversations sidebar, Tags sidebar, All Views sidebar, Conversation list, Bulk actions panel, Right panel |
 | Conversation Views | Chat, WhatsApp, SMS, Slack and Email conversations |
 | Pages | Home page and Admin panel |
